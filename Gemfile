@@ -25,6 +25,8 @@ group :development do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
