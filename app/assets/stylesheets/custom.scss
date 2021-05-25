@@ -1,0 +1,93 @@
+@import "bootstrap";
+
+/* mixins, variables, etc */
+
+$footer-bg: #d1d1d1;
+
+/* universal */
+
+body{
+    
+}
+
+/* typography */
+
+/* header */
+
+#logo{
+    float: left;
+    font-size: 1.7em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    &:hover{
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/* content */
+
+.content{
+    background: linear-gradient(to bottom right, rgba(250, 152, 224, 0.35), rgba(242, 111, 207, 0.35));
+    
+    /* content-header */
+    .ch{
+        font-size: 2.5em;
+        &-tit{
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        
+        }
+        &-txt{
+            
+        }
+    }
+    /* content-footer */
+    .cf{
+        font-size: 1.7em;
+        .goal{
+            padding-left: 30px;
+            &-tit{
+                
+            }
+            &-txt{
+                
+            }
+        }
+        .action{
+            
+        }
+    }
+}
+
+/* main */
+.main{
+    
+    /* side-navigation */
+    .snav{
+        background: linear-gradient(to bottom right, rgba(108, 240, 235, 0.5), rgba(79, 209, 204, 0.5));
+        &-list{
+            
+        }
+        &-item{
+            
+        }
+    }
+    /* thread */
+    .thread{
+        
+    }
+}
+
+
+
+/* footer */
+
+.footer{
+    margin-top: 45px;
+    text-align: center;
+    background-color: $footer-bg;
+}
