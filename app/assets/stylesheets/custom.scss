@@ -31,6 +31,7 @@ body{
 
 .content{
     background: linear-gradient(to bottom right, rgba(250, 152, 224, 0.35), rgba(242, 111, 207, 0.35));
+    margin: 0 200px;
     
     /* content-header */
     .ch{
@@ -42,7 +43,7 @@ body{
         
         }
         &-txt{
-            
+            font-size: 0.8em;
         }
     }
     /* content-footer */
@@ -65,6 +66,7 @@ body{
 
 /* main */
 .main{
+    margin: 0 200px;
     
     /* side-navigation */
     .snav{

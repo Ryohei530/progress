@@ -3,37 +3,26 @@ require 'rails_helper'
 RSpec.describe "StaticPages", type: :request do
   describe "GET /home" do
     it "returns http success" do
-      get "/"
+      get root_path
       expect(response).to have_http_status(:success)
+    end
+    
+    it "has the title 'ホーム | Progress'" do
+      get root_path
+      expect(response.body).to include "ホーム | Progress"
     end
   end
 
   describe "GET /rank" do
     it "returns http success" do
-      get "/rank"
+      get rank_path
       expect(response).to have_http_status(:success)
     end
-  end
-
-end
-
-RSpec.describe "練習" do 
-  it "1 + 1 は 2になる" do
-    expect(1 + 1).to eq 2
-  end
-end
-
-RSpec.describe User do
-  describe '#greet' do
-    let(:user){ User.new(name: "たろう", age: age) }
-    subject { user.greet }
-    context "12いかの場合" do
-      let(:age){ 12 }
-      it { is_expected.to eq "ぼくはたろうだよ" }
-    end
-    context '13歳以上の場合' do
-      let(:age){ 13 }
-      it { is_expected.to eq '僕はたろうです。' }
+    
+    it "has the title 'ランキング | Progress'" do
+      get rank_path
+      expect(response.body).to include "ランキング | Progress"
     end
   end
+
 end
