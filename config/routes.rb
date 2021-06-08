@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get '/rank', to: 'static_pages#rank'
   get '/signup', to: 'users#new'
+  resources :users
 end
