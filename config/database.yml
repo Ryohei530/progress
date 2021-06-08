@@ -24,4 +24,6 @@ test:
 
 production:
   <<: *default
-  database: production_test
+  database: progress_production
+  username: progress
+  password: <%= ENV['PROGRESS_DATABASE_PASSWORD'] %>
