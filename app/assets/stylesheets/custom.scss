@@ -1,4 +1,9 @@
 @import "bootstrap";
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/brands';
 
 /* mixins, variables, etc */
 
@@ -19,6 +24,12 @@ body{
 
 /* typography */
 
+/* tmp */
+.login{
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* header */
 
 #logo{
@@ -38,7 +49,7 @@ body{
 
 .content{
     background: linear-gradient(to bottom right, rgba(250, 152, 224, 0.35), rgba(242, 111, 207, 0.35));
-    margin: 0 200px;
+    margin: 0 50px;
     
     /* content-header */
     .ch{
@@ -73,7 +84,7 @@ body{
 
 /* main */
 .main{
-    margin: 0 200px;
+    margin: 0 50px;
     
     /* side-navigation */
     .snav{

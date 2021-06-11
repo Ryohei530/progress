@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
   
   it "is valid with a name" do
     user.valid?
-    expect(user.name).to eq "Example User"
+    expect(user.name).to eq "brian"
   end
   
   it "is invalid without a name" do
@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
   
   it "is invalid with a duplicate email address" do
     user
-    user2 = FactoryBot.build(:user, email: "USER@EXAMPLE.COM")
+    user2 = FactoryBot.build(:user, email: "BRIAN@EXAMPLE.COM")
     user2.valid?
     expect(user2.errors[:email]).to include("has already been taken")
   end
