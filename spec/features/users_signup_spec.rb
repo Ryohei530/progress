@@ -32,5 +32,8 @@ RSpec.feature "UsersSignup", type: :feature do
     
     expect(page).to have_content "登録が完了しました！"
     expect(page).to have_content "brian"
+    
+    expect(page).to_not have_content "ログイン" 
+    expect(page).to have_content "アカウント" 
   end
 end
