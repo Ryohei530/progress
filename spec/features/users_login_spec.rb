@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "UsersLogin", type: :feature do
-  scenario "user login the app", js: true do
+  scenario "user login and logout the app", js: true do
     user = FactoryBot.create(:user)
     expect(user).to be_valid
     
