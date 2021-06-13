@@ -16,7 +16,7 @@ RSpec.feature "UsersLogin", type: :feature do
     
     visit login_path
     fill_in "Email", with: user.email
-    fill_in "Password", with: "012345"
+    fill_in "Password", with: user.password
     click_button "ログイン"
     
     expect(page).to have_content "brian"
