@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "UsersLogin", type: :feature do
-  scenario "user login the app", js: true do
+  scenario "user login and logout the app", js: true do
     user = FactoryBot.create(:user)
     expect(user).to be_valid
     
@@ -16,7 +16,7 @@ RSpec.feature "UsersLogin", type: :feature do
     
     visit login_path
     fill_in "Email", with: user.email
-    fill_in "Password", with: "012345"
+    fill_in "Password", with: user.password
     click_button "ログイン"
     
     expect(page).to have_content "brian"
