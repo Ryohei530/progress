@@ -12,7 +12,7 @@ RSpec.feature "UsersSignup", type: :feature do
       fill_in "Password", with: "foo"
       fill_in "Confirmation", with: "bar"
       
-      click_button "Create my account"
+      click_button "アカウント作成"
     }.to_not change(User.all,  :count)
     
     expect(page).to have_content "The form contains"
@@ -27,7 +27,7 @@ RSpec.feature "UsersSignup", type: :feature do
       fill_in "Password", with: "012345"
       fill_in "Confirmation", with: "012345"
       
-      click_button "Create my account"
+      click_button "アカウント作成"
     }.to change(User.all, :count).by(1)
     
     expect(page).to have_content "登録が完了しました！"

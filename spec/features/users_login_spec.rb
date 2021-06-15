@@ -14,23 +14,22 @@ RSpec.feature "UsersLogin", type: :feature do
     visit root_path
     expect(page).to_not have_content "invalid email or password"
     
-    visit login_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "ログイン"
+    log_in_as(user)
     
     expect(page).to have_content "brian"
     expect(page).to_not have_content "ログイン"
     expect(page).to have_content "アカウント"
     
-    find(".dropdown-toggle").click
+    find(".dropdown-toggle.nav-link").click
     expect(page).to have_link "プロフィール"
     expect(page).to have_link "ログアウト"
     
     find('a', text: 'プロフィール').click
     expect(current_path).to eq user_path(user)
     
-    find(".dropdown-toggle").click
+    find(".dropdown-toggle.nav-link").click
+    expect(page).to have_link "ログアウト"
+    
     find('a', text: 'ログアウト').click
     
     expect(current_path).to eq root_path
