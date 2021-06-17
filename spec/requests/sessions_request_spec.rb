@@ -47,5 +47,17 @@ RSpec.describe "Sessions", type: :request do
       expect(cookies[:remember_token]).to eq ""
     end
   end
+  
+  describe "forwarding url" do
+    it "redirects to forwarding url only first time" do
+      user_params = FactoryBot.attributes_for(:user)
+      
+      get edit_user_path(user)
+      post login_path(user), params: { session: user_params }
+      
+      expect(response).to redirect_to edit_user_url(user)
+      expect(session[:forwarding_url]).to be_falsey
+    end
+  end
 
 end

@@ -30,6 +30,10 @@ body{
   margin-top: 20px;
 }
 
+.alert{
+  margin-top: 20px;
+}
+
 /* header */
 
 #logo{
@@ -163,4 +167,11 @@ input {
 
 #session_remember_me {
   width: auto;
+}
+
+/* Users index */
+
+.users{
+  list-style: none;
+  margin: 0;
 }

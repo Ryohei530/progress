@@ -1,0 +1,9 @@
+<% provide(:title, "All users") %>
+
+<h1>All user</h1>
+
+<div class="users">
+  <%= render @users %>
+</div>
+
+<%= paginate @users %>
