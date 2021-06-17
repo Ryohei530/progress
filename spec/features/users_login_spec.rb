@@ -20,21 +20,24 @@ RSpec.feature "UsersLogin", type: :feature do
     expect(page).to_not have_content "ログイン"
     expect(page).to have_content "アカウント"
     
-    find(".dropdown-toggle.nav-link").click
+    find(".dropdown-toggle").click
     expect(page).to have_link "プロフィール"
     expect(page).to have_link "ログアウト"
     
     find('a', text: 'プロフィール').click
     expect(current_path).to eq user_path(user)
     
-    find(".dropdown-toggle.nav-link").click
-    expect(page).to have_link "ログアウト"
+    # find(".dropdown-toggle").click
+    click_link "アカウント"
+    expect(page).to have_link "ランキング"
     
-    find('a', text: 'ログアウト').click
-    
-    expect(current_path).to eq root_path
+    click_link "ログアウト"
+    sleep 4
+    # find(:xpath, "//a[@href='/logout']").click
+    # find('.dropdown-item', text: 'ログアウト').click
     expect(page).to have_content "ログイン"
     expect(page).to_not have_content "アカウント"
+    # expect(current_path).to eq root_path
     
   end
   

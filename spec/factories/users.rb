@@ -4,6 +4,7 @@ FactoryBot.define do
     email { "brian@example.com" }
     password { "012345" }
     password_confirmation { "012345" }
+    admin { true }
   end
   
   factory :user2, class: User do
@@ -14,8 +15,8 @@ FactoryBot.define do
   end
   
   factory :users, class: User do
-    name { Faker::Name.name }
-    sequence(:email) { |n| "test-#{n}@example.com" }
+    sequence(:name) { |n| "Test#{n + 1}" }
+    sequence(:email) { |n| "test-#{n + 1}@example.com" }
     password { "012345" }
     password_confirmation { "012345" }
   end
