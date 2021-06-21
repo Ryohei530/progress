@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) } 
   
+  
   it "is a valid user" do
     user.valid?
     expect(user).to be_valid
@@ -88,5 +89,12 @@ RSpec.describe User, type: :model do
       auth = user.authenticated?('')
       expect(auth).to be false
     end
+  end
+  
+  it "destroys asscoiated posts" do
+    user.posts.create!(content: "Lorem Ipsum")
+    expect{
+      user.destroy
+    }.to change(Post.all, :count).by(-1)
   end
 end
