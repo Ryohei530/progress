@@ -13,6 +13,9 @@ gem 'bootsnap',   '1.4.5', require: false
 gem 'mysql2'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug',  '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
