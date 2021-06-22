@@ -1,6 +1,9 @@
 <li id="post-<%= post.id %>" class="post-count">
   <span class="user"><%= link_to post.user.name, post.user %></span>
-  <span class="content"><%= post.content %></span>
+  <span class="content">
+    <%= post.content %>
+    <%= image_tag post.display_image if post.image.attached? %>
+  </span>
   <span class="timestamp">
     <%= time_ago_in_words(post.created_at) %>
     <% if current_user?(post.user) %>

@@ -32,7 +32,7 @@ RSpec.feature "UsersLogin", type: :feature do
     expect(page).to have_link "ランキング"
     
     click_link "ログアウト"
-    sleep 4
+    sleep 5
     # find(:xpath, "//a[@href='/logout']").click
     # find('.dropdown-item', text: 'ログアウト').click
     expect(page).to have_content "ログイン"

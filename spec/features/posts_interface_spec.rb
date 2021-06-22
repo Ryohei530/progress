@@ -13,6 +13,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     visit root_path
     
     expect(page).to have_css '.pagination'
+    expect(page).to have_selector 'input#post_image'
     expect{
       click_button '投稿'
     }.to change(Post, :count).by(0)
@@ -21,12 +22,15 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     
     
     content = "異議あり！　くらえ！　待った！　アマいな！"
+    image_path = "#{Rails.root}/spec/fixtures/Cosmos01.jpg"
     expect{
       fill_in 'post[content]', with: content
+      attach_file 'post[image]', image_path
       click_button '投稿'
     }.to change(Post, :count).by(1)
     expect(page).to have_title 'ホーム | Progress'
     expect(page).to have_content content
+    expect(page).to have_selector "img[src$='Cosmos01.jpg']"
     
     expect{
       accept_alert do
