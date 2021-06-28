@@ -6,18 +6,20 @@ RSpec.describe Post, type: :model do
     @post = @user.posts.build(content: "Lorem Ipsum")
   end
   
-  it "be valid" do
-    expect(@post).to be_valid
-  end
-  
-  it "is valid with user_id" do
-    @post.user_id = nil
-    expect(@post).to_not be_valid
-  end
-  
-  it "is valid with content" do
-    @post.content = " "
-    expect(@post).to_not be_valid
+  describe "presence" do
+    it "is valid" do
+      expect(@post).to be_valid
+    end
+    
+    it "is invalid without user_id" do
+      @post.user_id = nil
+      expect(@post).to_not be_valid
+    end
+    
+    it "is invalid without content" do
+      @post.content = " "
+      expect(@post).to_not be_valid
+    end
   end
   
   it "is too long post with over 141 chars" do

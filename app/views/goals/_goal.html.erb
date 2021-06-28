@@ -1,0 +1,28 @@
+<li id="goal-<%= goal.id %>" class="goal-count">
+  <span class="user"><%= link_to goal.user.name, goal.user %></span>
+  <span class="content">
+    <%= goal.aim %>
+    <%= goal.indicator %>
+    <%= goal.monthly_aim %>
+    <%= goal.monthly_indicator %>
+    <%= goal.term_start %>
+    <%= goal.term_end %>
+    <div class="actions">
+      <% goal.goal_actions.each do |action| %>
+          <% #byebug %> 
+          <%= action.content %>
+          <%= action.number %>
+      <% end %>
+    </div>
+    
+    
+  </span>
+  <span class="timestamp">
+    <%= time_ago_in_words(goal.created_at) %>
+    <% if current_user?(goal.user) %>
+      <%= link_to "削除", goal, method: :delete,
+                                data: { confirm: "本当に削除しますか？" },
+                                class: "dlt-goal-#{goal.id}" %>
+    <% end %>
+  </span>
+</li>

@@ -14,12 +14,12 @@
       <%= link_to "つぶやき", tweet_user_path(@user) %>
       <%= link_to "Posts(#{@user.posts.count})", '#' %>
     </div>
-    <% if @user.posts.any? %>
+    <% if @user.goals.any? %>
     
-    <ol class="posts">
-      <%= render @posts %>
-    </ol>
-    <%= paginate @posts %>
+    <ul class="goals">
+      <%= render @goals %>
+    </ul>
     <% end %>
+    <%= link_to "目標を作成する", new_goal_path, class: 'btn btn-primary' %>
   </div>
 </div>

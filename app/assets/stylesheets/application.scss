@@ -1,15 +1,209 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "bootstrap";
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/brands';
+
+/* mixins, variables, etc */
+
+$footer-bg: #d1d1d1;
+$state-danger-text: #DD5555;
+$gray-light: #b7bdb8;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* universal */
+
+body{
+    
+}
+
+/* typography */
+
+/* tmp */
+.login{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.alert{
+  margin-top: 20px;
+}
+
+/* header */
+
+#logo{
+    float: left;
+    font-size: 1.7em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    &:hover{
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/* content */
+
+.content{
+    background: linear-gradient(to bottom right, rgba(250, 152, 224, 0.35), rgba(242, 111, 207, 0.35));
+    margin: 0 50px;
+    
+    /* content-header */
+    .ch{
+        font-size: 2.5em;
+        &-tit{
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        
+        }
+        &-txt{
+            font-size: 0.8em;
+        }
+    }
+    /* content-footer */
+    .cf{
+        font-size: 1.7em;
+        .goal{
+            padding-left: 30px;
+            &-tit{
+                
+            }
+            &-txt{
+                
+            }
+        }
+        .action{
+            
+        }
+    }
+}
+
+/* main */
+.main{
+    margin: 0 50px;
+    
+    /* side-navigation */
+    .snav{
+        background: linear-gradient(to bottom right, rgba(108, 240, 235, 0.5), rgba(79, 209, 204, 0.5));
+        &-list{
+            
+        }
+        &-item{
+            
+        }
+    }
+    /* thread */
+    .thread{
+        
+    }
+}
+
+
+
+/* footer */
+
+.footer{
+    margin-top: 45px;
+    text-align: center;
+    background-color: $footer-bg;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  background-color: antiquewhite;
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  padding-left: 10px;
+  @include box_sizing;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  display: block;
+  .form-control {
+    color: $state-danger-text;
+    @extend .is-invalid;
+  }
+}
+
+.checkbox {
+  margin-bottom: 10px;
+  span {
+    margin-left: 5px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+}
+
+/* Users index */
+
+.users{
+  list-style: none;
+  margin: 0;
+}
+
+/* Posts */
+
+.posts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .content {
+    display: block;
+    margin-left: 60px;
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+}
+  
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}

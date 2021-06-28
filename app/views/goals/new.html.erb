@@ -1,0 +1,37 @@
+<% provide(:title, '目標作成') %>
+<h1>目標作成</h1>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <%= form_with(model: @goal, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: @goal %>
+      
+      <%= f.label :aim, "目的、得たい結果" %>
+      <%= f.text_area :aim, class: 'form-control' %>
+      
+      <%= f.label :indicator, "目標数値、指標" %>
+      <%= f.text_area :indicator, class: 'form-control' %>
+      
+      <%= f.label :monthly_aim, "月間の目的" %>
+      <%= f.text_area :monthly_aim, class: 'form-control' %>
+      
+      <%= f.label :monthly_indicator, "月間の目標数値、指標" %>
+      <%= f.text_area :monthly_indicator, class: 'form-control' %>
+      
+      <%= f.label :term_start, "開始日" %>
+      <%= f.date_field :term_start, class: 'form-control' %>
+      
+      <%= f.label :term_end, "終了日" %>
+      <%= f.date_field :term_end, class: 'form-control' %>
+      
+        <%= f.fields_for :goal_actions, @goal.goal_actions.build do |act| %>
+          <%= act.label :content, "月間アクション" %>
+          <%= act.text_field :content, class: 'form-control' %>
+          
+          <%= act.label :number, "数値" %>
+          <%= act.number_field :number, class: 'form-control' %>
+        <% end %>
+      <%= f.submit "投稿", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

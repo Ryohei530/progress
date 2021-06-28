@@ -1,4 +1,22 @@
 <div class="row">
+    <h1 class="col-md-12">
+        <%= current_user.goals.find(9).aim %>
+        <%= current_user.goals.find(9).indicator %>
+    </h1>
+    <div class="col-md-6">
+        <%= current_user.goals.find(9).monthly_aim %>
+        <%= current_user.goals.find(9).monthly_indicator %>
+    </div>
+    <div class="col-md-6">
+        <%= current_user.goals.find(9).goal_actions.first.content %>
+        <%= current_user.goals.find(9).goal_actions.first.number %>
+    </div>
+</div>
+<div class="row">
+    <%= link_to "目標を作成", new_goal_path, class: "btn btn-primary" %>
+    <%= link_to "目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
+</div>
+<div class="row">
     <aside class="col-md-4">
         <section class="user_info">
             <%= render 'shared/user_info' %>

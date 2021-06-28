@@ -47,6 +47,21 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def goal 
+    @user = User.find(params[:id])
+    @goals = @user.goals.all
+  end
+  
+  def report
+    @user = User.find(params[:id])
+    @reports = @user.reports.all
+  end
+  
+  def tweet
+    @user = User.find(params[:id])
+    @tweets = @user.tweets.all
+  end
+  
     private
       
       def user_params
