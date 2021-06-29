@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get '/rank', to: 'static_pages#rank'
@@ -11,9 +12,10 @@ Rails.application.routes.draw do
     member do
      get 'goal'
      get 'report'
-     get 'tweet'
+     get 'post'
     end
   end
   resources :posts, only: [:index, :create, :destroy]
-  resources :goals 
+  resources :goals
+  resources :reports
 end

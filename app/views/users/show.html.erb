@@ -11,8 +11,7 @@
     <div class="tabs">
       <%= link_to "目標一覧", goal_user_path(@user) %>
       <%= link_to "日報", report_user_path(@user) %>
-      <%= link_to "つぶやき", tweet_user_path(@user) %>
-      <%= link_to "Posts(#{@user.posts.count})", '#' %>
+      <%= link_to "つぶやき", user_path(@user) %>
     </div>
     <% if @user.posts.any? %>
     

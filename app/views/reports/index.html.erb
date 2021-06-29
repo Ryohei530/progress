@@ -1,7 +1,8 @@
-<% provide(:controller, :static_pages) %>
-<% provide(:action, :home) %>
-<% provide(:pluralize, current_user.posts.count) %>
-<% provide(:feed, "post") %>
+<% provide(:title, "日報") %>
+<% provide(:controller, :reports) %>
+<% provide(:action, :index) %>
+<% provide(:pluralize, current_user.reports.count) %>
+<% provide(:feed, "report") %>
 <div class="row">
     <h1 class="col-md-12">
         <%= current_user.goals.find(9).aim %>
@@ -29,10 +30,10 @@
         <section class="user_info">
             <%= render 'shared/user_info' %>
         </section>
-        <section class="post_form">
-            <%= render 'shared/post_form' %>
+        <section class="report_form">
+            <%= render 'shared/report_form' %>
         </section>
-        <p>Post Feed</p>
+        <p>report Feed</p>
         <%= render 'shared/feed' %>
     </div>
 </div>

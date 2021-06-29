@@ -13,12 +13,12 @@
       <%= link_to "日報", report_user_path(@user) %>
       <%= link_to "つぶやき", user_path(@user) %>
     </div>
-    <% if @user.goals.any? %>
+    <% if @user.reports.any? %>
     
-    <ul class="goals">
-      <%= render @goals %>
+    <ul class="reports">
+      <%= render @reports %>
     </ul>
     <% end %>
-    <%= link_to "目標を作成する", new_goal_path, class: 'btn btn-primary' %>
+    <%= link_to "日報を作成する", new_report_path, class: 'btn btn-primary' %>
   </div>
 </div>

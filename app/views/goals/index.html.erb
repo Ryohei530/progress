@@ -1,2 +1,9 @@
-<h1>Goals#index</h1>
-<p>Find me in app/views/goals/index.html.erb</p>
+<% provide(:title, "みんなの目標") %>
+
+<h1>みんなの目標</h1>
+
+<div class="goals">
+  <%= render @goals %>
+</div>
+
+<%= paginate @goals %>

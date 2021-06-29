@@ -57,11 +57,6 @@ class UsersController < ApplicationController
     @reports = @user.reports.all
   end
   
-  def tweet
-    @user = User.find(params[:id])
-    @tweets = @user.tweets.all
-  end
-  
     private
       
       def user_params

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :goal_actions, through: :goals
+  has_many :reports, dependent: :destroy
+  has_one_attached :avatar
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }

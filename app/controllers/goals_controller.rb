@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
+  
   def index
+    @goals = Goal.page(params[:page]).per(20)
   end
 
   def new

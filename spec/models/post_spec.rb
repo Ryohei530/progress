@@ -27,7 +27,7 @@ RSpec.describe Post, type: :model do
     expect(@post).to_not be_valid
   end
   
-  it "orders by most recently" do
+  it "is ordered by most recently" do
     FactoryBot.create(:post)
     most_recent = FactoryBot.create(:most_recent)
     expect(most_recent).to eq Post.first
