@@ -1,0 +1,42 @@
+<% provide(:button_text, "投稿") %>
+
+<div class="row">
+  <div class="col-md-3">
+    
+  </div>
+  <div class="col-md-6">
+    <p><%= @article.user.name %></p>
+    <p><%= @article.title %></p>
+    <p><%= @article.content %></p>
+    <span>
+      ブックマーク
+      <% if @article.bookmarked_by?(current_user) %>
+        <% bookmark = @article.bookmarks.find_by(user_id: current_user.id) %>
+        <%= link_to article_bookmark_path(@article, bookmark), method: :delete do %>
+        <i class="fas fa-bookmark"></i>
+        <% end %>
+      <% else %>
+        <%= link_to  article_bookmarks_path(@article), method: :post do %>
+        <i class="far fa-bookmark"></i>
+        <% end %>
+      <% end %>
+    </span>
+  </div>
+</div>
+<div class="row justify-content-around">
+  <%= link_to "編集", edit_article_path, class: "btn btn-primary" %>
+  <%= link_to "削除", article_path, class: "btn btn-danger",
+                                    method: :delete,
+                                    data: { confirm: "本当に削除しますか？" } %>
+</div>
+<div class="row">
+  <div class="col-6 offset-3">
+    <%= render 'article_comments/comment_form' %>
+    
+    <% @article.article_comments.each do |comment| %>
+      <p><%= comment.user.name %></p>
+      <p><%= comment.content %></p>
+      <p><%= time_ago_in_words(comment.created_at) %></p>
+    <% end %>
+  </div>
+</div>

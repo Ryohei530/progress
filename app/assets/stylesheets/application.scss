@@ -5,11 +5,18 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/brands';
 
+/* scss files */
+// @import ''
+@import 'static_pages';
+@import 'goals';
+@import 'reports';
+
 /* mixins, variables, etc */
 
 $footer-bg: #d1d1d1;
 $state-danger-text: #DD5555;
 $gray-light: #b7bdb8;
+$container-bg: #EEEEEE;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -23,6 +30,19 @@ body{
     
 }
 
+.main{
+  margin: 0;
+  background-color: $container-bg;
+  &-inner{
+    background-color: #fff;
+    padding: 30px 0;
+  }
+}
+
+.container{
+  
+}
+
 /* typography */
 
 /* tmp */
@@ -33,6 +53,10 @@ body{
 
 .alert{
   margin-top: 20px;
+}
+
+.user_info{
+  margin-left: 20px;
 }
 
 /* header */
@@ -52,69 +76,22 @@ body{
 
 /* content */
 
-.content{
-    background: linear-gradient(to bottom right, rgba(250, 152, 224, 0.35), rgba(242, 111, 207, 0.35));
-    margin: 0 50px;
-    
-    /* content-header */
-    .ch{
-        font-size: 2.5em;
-        &-tit{
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-        
-        }
-        &-txt{
-            font-size: 0.8em;
-        }
-    }
-    /* content-footer */
-    .cf{
-        font-size: 1.7em;
-        .goal{
-            padding-left: 30px;
-            &-tit{
-                
-            }
-            &-txt{
-                
-            }
-        }
-        .action{
-            
-        }
-    }
-}
 
-/* main */
-.main{
-    margin: 0 50px;
-    
+/* main *
+
     /* side-navigation */
-    .snav{
-        background: linear-gradient(to bottom right, rgba(108, 240, 235, 0.5), rgba(79, 209, 204, 0.5));
-        &-list{
-            
-        }
-        &-item{
-            
-        }
-    }
+    
     /* thread */
-    .thread{
-        
-    }
-}
+    
 
 
 
 /* footer */
 
 .footer{
-    margin-top: 45px;
     text-align: center;
     background-color: $footer-bg;
+    padding: 90px 0;
 }
 
 /* miscellaneous */
@@ -124,8 +101,8 @@ body{
   clear: both;
   float: left;
   width: 100%;
-  margin-top: 45px;
-  padding-left: 10px;
+  padding: 20px;
+  margin: 0;
   @include box_sizing;
 }
 

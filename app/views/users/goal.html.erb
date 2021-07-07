@@ -8,14 +8,20 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <div class="tabs">
-      <%= link_to "目標一覧", goal_user_path(@user) %>
-      <%= link_to "日報", report_user_path(@user) %>
-      <%= link_to "つぶやき", user_path(@user) %>
-    </div>
+    <ul class="tab nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to "目標一覧", goal_user_path(@user), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "つぶやき", user_path(@user), class: "nav-link" %>
+      </li>
+    </ul>
     <% if @user.goals.any? %>
     
-    <ul class="goals">
+    <ul class="goal">
       <%= render @goals %>
     </ul>
     <% end %>

@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :post_likes, dependent: :destroy
+  has_many :liked_users, through: :post_likes, source: :user
   has_one_attached :image
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
@@ -13,4 +15,5 @@ class Post < ApplicationRecord
   def display_image
     image.variant(resize_to_limit: [500, 500])
   end
+  
 end

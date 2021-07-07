@@ -54,7 +54,17 @@ class UsersController < ApplicationController
   
   def report
     @user = User.find(params[:id])
-    @reports = @user.reports.all
+    @reports = @user.reports.page(params[:page])
+  end
+  
+  def liked_posts
+    @user = User.find(params[:id])
+    @liked_posts = @user.liked_posts.page(params[:page])
+  end
+  
+  def liked_reports
+    @user = User.find(params[:id])
+    @liked_reports = @user.liked_reports.page(params[:page])
   end
   
     private
@@ -69,7 +79,4 @@ class UsersController < ApplicationController
         redirect_to(root_url) unless current_user?(@user)
       end
       
-      def admin_user
-        redirect_to(root_url) unless current_user.admin?
-      end
 end

@@ -1,3 +1,33 @@
 // Place all the styles related to the Goals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.goal{
+  &-count{
+    list-style: none;
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  &-user{
+    font-size: 1.6em;
+  }
+  a{
+    color: black;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  &-content{
+    &:hover{
+      background-color: #f7f7f7;
+    }
+  }
+  &-tit{
+   font-size: 1.5em;
+   margin: 15px 0 0;
+  }
+}
+
+._index{
+  padding: 0 200px;
+}

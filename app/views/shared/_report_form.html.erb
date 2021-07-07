@@ -10,11 +10,6 @@
     <p>今月の目標指標</p>
     <%= current_user.goals.find(9).monthly_indicator %>
   </div>
-  
-  <div class="field">
-    <% f.label :content, "感想、気付き" %>
-    <%= f.text_area :content, placeholder: "今日の成果を報告しよう！" %>
-  </div>
     
     <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
     <div class="action">
@@ -24,11 +19,16 @@
     </div>
     <% end %>
     
+  <div class="field">
+    <% f.label :content, "感想、気付き" %>
+    <%= f.text_area :content, placeholder: "今日の成果を報告しよう！" %>
+  </div>
+  
   <span class="image">
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %> 
   </span>
   
-  <%= f.submit "投稿", class: "btn btn-primary" %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
 
 <script type="text/javascript">
