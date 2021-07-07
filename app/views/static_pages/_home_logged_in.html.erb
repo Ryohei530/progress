@@ -1,14 +1,45 @@
-<div class="row">
-    <aside class="col-md-4">
-        <section class="user_info">
-            <%= render 'shared/user_info' %>
-        </section>
-        <section class="post_form">
-            <%= render 'shared/post_form' %>
-        </section>
+<% provide(:controller, :static_pages) %>
+<% provide(:action, :home) %>
+<% pos = current_user.posts.count.to_s %>
+<% provide(:pluralize, pos) %>
+<% provide(:feed, "post") %>
+<div class="top row">
+    <h1 class="top-h1 col-md-12">
+        <p class="top-tit">目的、得たい結果</p>
+        <%= current_user.goals.find(9).aim %>
+        <p class="top-tit">目標数値、指標</p>
+        <%= current_user.goals.find(9).indicator %>
+    </h1>
+    <div class="top-item col-md-6">
+        <p class="top-tit">１ヶ月間の目的</p>
+        <%= current_user.goals.find(9).monthly_aim %>
+        <p class="top-tit">１ヶ月間の目標数値、指標</p>
+        <%= current_user.goals.find(9).monthly_indicator %>
+    </div>
+    <div class="top-item col-md-6">
+        <p class="top-tit">1ヶ月間のアクション</p>
+        <%= current_user.goals.find(9).goal_actions.first.content %>
+        <%= current_user.goals.find(9).goal_actions.first.number %>
+    </div>
+</div>
+<div class="row justify-content-around">
+    <%= link_to "目標を作成", new_goal_path, class: "btn btn-primary" %>
+    <%= link_to "目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
+    <%= link_to "記事を作成", new_article_path, class: "btn btn-primary" %>
+</div>
+<div class="sec row">
+    <aside class="snav col-md-4 list-group">
+        <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
+        <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>
     </aside>
-    <div class="col-md-8">
-        <h3>Post Feed</h3>
+    <div class="content col-md-8">
+        <div class="ch user_info">
+            <%= render 'shared/user_info' %>
+        </div>
+        <div class="cf post_form">
+            <%= render 'shared/post_form' %>
+        </div>
+        <p class="content-tit">Post Feed</p>
         <%= render 'shared/feed' %>
     </div>
 </div>

@@ -1,6 +1,18 @@
 class User < ApplicationRecord
   
   has_many :posts, dependent: :destroy
+  has_many :goals, dependent: :destroy
+  has_many :goal_actions, through: :goals
+  has_many :reports, dependent: :destroy
+  has_many :articles, dependent: :destroy
+  has_many :boards, dependent: :destroy
+  has_many :article_comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :post_likes, dependent: :destroy
+  has_many :liked_posts, through: :post_likes, source: :post 
+  has_many :report_likes, dependent: :destroy
+  has_many :liked_reports, through: :report_likes, source: :report
+  has_one_attached :avatar
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -37,6 +49,14 @@ class User < ApplicationRecord
   
   def feed
     Post.where("user_id = ?", id)
+  end
+  
+  def post_liked?(post)
+    self.post_likes.exists?(post_id: post.id)
+  end
+  
+  def report_liked?(report)
+    self.report_likes.exists?(report_id: report.id)
   end
   
   private

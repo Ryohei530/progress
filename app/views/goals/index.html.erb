@@ -1,0 +1,9 @@
+<% provide(:title, "みんなの目標") %>
+
+<h1 class="text-center">みんなの目標</h1>
+
+<div class="goal _index">
+  <%= render @goals %>
+</div>
+
+<%= paginate @goals %>

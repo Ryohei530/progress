@@ -1,0 +1,2 @@
+module ReportLikesHelper
+end
