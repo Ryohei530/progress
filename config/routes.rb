@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :goals
   resources :reports do
     resources :report_likes, only: [:create, :destroy]
+    resources :report_comments, only: [:create, :destroy]
   end
   resources :articles do
     resources :article_comments, only: :create
@@ -30,9 +31,16 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
-  resources :boards 
-  resources :tags do
+  resources :boards do
+    resources :board_comments, only: [:create, :destroy]
+    collection do
+      get 'search'
+    end
+  end
+  resources :tags, only: :index do
     get 'articles', to: 'articles#tag'
+    get 'boards', to: 'boards#tag'
+    
   end
   resources :bookmarks, only: :index
 end

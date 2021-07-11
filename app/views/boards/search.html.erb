@@ -1,22 +1,14 @@
-<% provide(:title, "掲示板一覧") %>
+<% provide(:title, "検索結果") %>
 <% provide(:button_text, "検索") %>
 <div class="row">
-  <div class="col-md-3">
-    <div class="tag">
-      
-    </div>
-    <div class="fav-articles">
-      
-    </div>
-  </div>
   <div class="col-md-6">
-    <div class="serach">
+    <div class="search">
       <%= form_with(url: search_boards_path, method: :get, local: true) do |f| %>
         <%= f.text_field :search, class: 'form-control' %>
         <%= f.submit yield(:button_text), class: "btn btn-primary"  %>
       <% end %>
     </div>
-    <div class="boards">
+    <div class="board">
       <%= render @boards %>
     </div>
   </div>

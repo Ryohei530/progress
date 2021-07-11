@@ -25,6 +25,10 @@ class ReportsController < ApplicationController
   
   def show
     @report = Report.find(params[:id])
+    @comment = ReportComment.new
+    @comments = ReportComment.includes(:user).where(report_id: params[:id]).where(reply_id: nil)
+    @replies = ReportComment.includes(:user).where(report_id: params[:id]).where.not(reply_id: nil)
+    #@comment_reply = 
   end
   
   def edit

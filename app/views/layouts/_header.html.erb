@@ -4,7 +4,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item"><%= link_to "みんなの目標", goals_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "お悩み相談（掲示板）", '#', class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "お悩み相談（掲示板）", boards_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "英語学習法特集", articles_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "ランキング", rank_path, class: "nav-link" %></li>
         <% if logged_in? %>

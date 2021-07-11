@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :post_likes, source: :post 
   has_many :report_likes, dependent: :destroy
   has_many :liked_reports, through: :report_likes, source: :report
+  has_many :report_comments, dependent: :destroy
+  has_many :board_comments, dependent: :destroy
   has_one_attached :avatar
   attr_accessor :remember_token
   before_save :downcase_email

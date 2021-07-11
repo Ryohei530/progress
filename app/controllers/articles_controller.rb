@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
-    @tags = Tag.all
+    @tags = Tag.joins(:article_tags).distinct
   end
   
   def create
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
   end
   
   def tag
-    @tags = Tag.all
+    @tags = Tag.joins(:article_tags).distinct
     @tag = Tag.find(params[:tag_id])
     @articles = @tag.articles.all
   end
