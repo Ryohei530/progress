@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_10_074159) do
+ActiveRecord::Schema.define(version: 2021_07_15_092109) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -184,6 +184,17 @@ ActiveRecord::Schema.define(version: 2021_07_10_074159) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
+  create_table "running_days", charset: "utf8mb3", force: :cascade do |t|
+    t.date "start_date"
+    t.date "date"
+    t.boolean "s_or_c"
+    t.integer "r_days"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_running_days_on_user_id"
+  end
+
   create_table "tags", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -226,4 +237,5 @@ ActiveRecord::Schema.define(version: 2021_07_10_074159) do
   add_foreign_key "report_likes", "reports"
   add_foreign_key "report_likes", "users"
   add_foreign_key "reports", "users"
+  add_foreign_key "running_days", "users"
 end

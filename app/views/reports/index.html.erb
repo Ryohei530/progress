@@ -7,50 +7,67 @@
     <% provide(:pluralize, rep) %>
     <% provide(:feed, "report") %>
     <% provide(:button_text, "投稿") %>
+    <% goal = current_user.goals.find(9) %>
     
     <div class="top row">
-    <h1 class="top-h1 col-md-12">
-        <p class="top-tit">目的、得たい結果</p>
-        <%= current_user.goals.find(9).aim %>
-        <p class="top-tit">目標数値、指標</p>
-        <%= current_user.goals.find(9).indicator %>
-    </h1>
-    <div class="top-item col-md-6">
-        <p class="top-tit">１ヶ月間の目的</p>
-        <%= current_user.goals.find(9).monthly_aim %>
-        <p class="top-tit">１ヶ月間の目標数値、指標</p>
-        <%= current_user.goals.find(9).monthly_indicator %>
-    </div>
-    <div class="top-item col-md-6">
-        <p class="top-tit">1ヶ月間のアクション</p>
-        <%= current_user.goals.find(9).goal_actions.first.content %>
-        <%= current_user.goals.find(9).goal_actions.first.number %>
-    </div>
+        <h1 class="top-h1 col-md-10">
+            <p class="top-tit">目的、得たい結果</p>
+            <%= goal.aim %>
+            <p class="top-tit">目標数値、指標</p>
+            <%= goal.indicator %>
+        </h1>
+        <div class="top-item col-md-5">
+            <p class="top-tit">１ヶ月間の目的</p>
+            <%= goal.monthly_aim %>
+            <p class="top-tit">１ヶ月間の目標数値、指標</p>
+            <%= goal.monthly_indicator %>
+        </div>
+        <div class="top-item _action col-md-5">
+            <div class="tnav">
+                <div class="tnav-inner nav nav-tabs nav-fill">
+                    <%= link_to "月間", "#", class: 'tnav-link nav-link' %>
+                    <%= link_to "週間", "#", class: 'tnav-link nav-link' %>
+                    <%= link_to "日間", "#", class: 'tnav-link nav-link' %>
+                </div>
+            </div>
+            <div class="top-wrap">
+                <p class="top-tit">1ヶ月間のアクション</p>
+                <%= goal.goal_actions.first.content %>
+                <%= goal.goal_actions.first.number %>    
+            </div>
+        </div>
     </div>
     <div class="row justify-content-around">
         <%= link_to "目標を作成", new_goal_path, class: "btn btn-primary" %>
         <%= link_to "目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
+        <%= link_to "記事を作成", new_article_path, class: "btn btn-primary" %>
+        <%= link_to "掲示板を作成", new_board_path, class: "btn btn-primary" %>
     </div>
 <% end %>
 
 <div class="sec row">
     
     <% if logged_in?  %>
-    <aside class="snav col-md-4 list-group">
-        <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
-        <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>
-    </aside>
+        <aside class="snav col-md-4 list-group list-group-flush">
+            <div class="snav-wrap">
+                <span class="list-group-item">メニュー</span>
+                <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
+                <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
+            </div>
+        </aside>
     <% end %>
     <div class="content col-md-8">
         <% if logged_in?  %>
-            <section class="ch user_info">
-                <%= render 'shared/user_info' %>
-            </section>
-            <section class="cf report_form">
-                <%= render 'shared/report_form' %>
-            </section>
+            <div class="content-inner">
+                <div class="ch">
+                    <%= render 'shared/user_info' %>
+                </div>
+                <section class="cf">
+                    <%= render 'shared/report_form' %>
+                </section>
+            </div>
         <% end %>
-        <p class="content-tit">Report Feed</p>
+        <p class="content-tit">日報</p>
         <%= render 'shared/feed' %>
     </div>
 </div>

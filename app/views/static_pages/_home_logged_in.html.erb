@@ -3,23 +3,33 @@
 <% pos = current_user.posts.count.to_s %>
 <% provide(:pluralize, pos) %>
 <% provide(:feed, "post") %>
+<% goal = current_user.goals.find(9) %>
 <div class="top row">
-    <h1 class="top-h1 col-md-12">
+    <h1 class="top-h1 col-md-10">
         <p class="top-tit">目的、得たい結果</p>
-        <%= current_user.goals.find(9).aim %>
+        <%= goal.aim %>
         <p class="top-tit">目標数値、指標</p>
-        <%= current_user.goals.find(9).indicator %>
+        <%= goal.indicator %>
     </h1>
-    <div class="top-item col-md-6">
+    <div class="top-item col-md-5">
         <p class="top-tit">１ヶ月間の目的</p>
-        <%= current_user.goals.find(9).monthly_aim %>
+        <%= goal.monthly_aim %>
         <p class="top-tit">１ヶ月間の目標数値、指標</p>
-        <%= current_user.goals.find(9).monthly_indicator %>
+        <%= goal.monthly_indicator %>
     </div>
-    <div class="top-item col-md-6">
-        <p class="top-tit">1ヶ月間のアクション</p>
-        <%= current_user.goals.find(9).goal_actions.first.content %>
-        <%= current_user.goals.find(9).goal_actions.first.number %>
+    <div class="top-item _action col-md-5">
+        <div class="tnav">
+            <div class="tnav-inner nav nav-tabs nav-fill">
+                <%= link_to "月間", "#", class: 'tnav-link nav-link' %>
+                <%= link_to "週間", "#", class: 'tnav-link nav-link' %>
+                <%= link_to "日間", "#", class: 'tnav-link nav-link' %>
+            </div>
+        </div>
+        <div class="top-wrap">
+            <p class="top-tit">1ヶ月間のアクション</p>
+            <%= goal.goal_actions.first.content %>
+            <%= goal.goal_actions.first.number %>    
+        </div>
     </div>
 </div>
 <div class="row justify-content-around">
@@ -29,18 +39,23 @@
     <%= link_to "掲示板を作成", new_board_path, class: "btn btn-primary" %>
 </div>
 <div class="sec row">
-    <aside class="snav col-md-4 list-group">
-        <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
-        <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>
+    <aside class="snav col-md-4 list-group list-group-flush">
+        <div class="snav-wrap">
+            <span class="list-group-item">メニュー</span>
+            <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
+            <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
+        </div>
     </aside>
     <div class="content col-md-8">
-        <div class="ch user_info">
-            <%= render 'shared/user_info' %>
+        <div class="content-inner">
+            <div class="ch">
+                <%= render 'shared/user_info' %>
+            </div>
+            <div class="cf">
+                <%= render 'shared/post_form' %>
+            </div>
         </div>
-        <div class="cf post_form">
-            <%= render 'shared/post_form' %>
-        </div>
-        <p class="content-tit">Post Feed</p>
+        <p class="content-tit">つぶやき</p>
         <%= render 'shared/feed' %>
     </div>
 </div>

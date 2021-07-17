@@ -10,13 +10,22 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'static_pages';
 @import 'goals';
 @import 'reports';
+@import 'posts';
+@import 'shared';
+@import 'articles';
+@import 'boards';
+@import 'users';
 
 /* mixins, variables, etc */
 
-$footer-bg: #d1d1d1;
-$state-danger-text: #DD5555;
-$gray-light: #b7bdb8;
-$container-bg: #EEEEEE;
+@import 'variables';
+
+// $theme-color: #dc3545;
+// $footer-bg: #d1d1d1;
+// $state-danger-text: #DD5555;
+// $gray-light: #b7bdb8;
+// $container-bg: #EEEEEE;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -53,10 +62,6 @@ body{
 
 .alert{
   margin-top: 20px;
-}
-
-.user_info{
-  margin-left: 20px;
 }
 
 /* header */
@@ -152,35 +157,4 @@ input {
 .users{
   list-style: none;
   margin: 0;
-}
-
-/* Posts */
-
-.posts {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .content {
-    display: block;
-    margin-left: 60px;
-  }
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-}
-  
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
 }

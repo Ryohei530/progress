@@ -1,3 +1,82 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'variables';
+
+._art-ml{
+  margin-left: 80px;
+}
+
+.tag{
+  border: 1px solid $theme-color;
+  &-header{
+    background-color: $theme-color;
+    color: #fff;
+    padding: 7px 15px;
+  }
+  &-list{
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+  }
+  &-item{
+    margin-left: 10px;
+  }
+  &-link{
+    
+  }
+}
+
+.favorite{
+  border: 1px solid $theme-color;
+  margin-top: 50px;
+  &-header{
+    background-color: $theme-color;
+    color: #fff;
+    padding: 7px 15px;
+  }
+  &-list{
+    list-style: none;
+  }
+  &-item{
+    
+  }
+}
+
+.search{
+  &-inner{
+    input{
+      margin: 0;
+      border-radius: 0;
+    }
+    button{
+      border-radius: 0;
+      width: 80px;
+    }
+  }
+}
+
+.articles{
+  margin-top: 30px;
+}
+
+.article{
+  &-li{
+    list-style: none;
+    border: 2px solid #e8e8e8;
+    padding: 20px;
+  }
+  &-link{
+    color: black;
+    &:hover{
+      color: black;
+    }
+  }
+  &-content{
+    
+  }
+  &-tit{
+    font-size: 1.3em;
+    
+  }
+}

@@ -1,15 +1,32 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+@mixin border {
+  border: 2px solid #DC3545;
+  // border-radius: 10px;
+}
+
 
 .top{
-  margin: 0 10px 10px;
-  border: 2px solid;
+  margin: 30px 30px 80px;
+  // border: 2px solid #D8D8DB;
+  // border-radius: 10px;
+  justify-content: space-around;
   &-h1{
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    font-size: 1.5em;
+    @include border;
+    padding: 10px 20px 20px;
   }
   &-item{
     font-size: 1.5em;
+    @include border;
+    padding: 30px;
+  }
+  ._action{
+    padding: 0;
   }
   &-tit{
     margin-top: 20px;
@@ -18,20 +35,48 @@
       content: '○';
     }
   }
+  &-wrap{
+    padding: 20px;
+  }
+  .tnav{
+    background-color: $theme-color;
+    &-inner{
+      
+    }
+    &-link{
+      color: #fff;
+      &:hover{
+        opacity: 0.5;
+      }
+    }
+  }
 }
 
 .sec{
   margin: 10px;
   .snav{
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 40px;
+    margin-top: 40px;
+      
+    &-wrap{
+      span{
+        color: #fff;  
+        background-color: $theme-color;
+      }
+    }
     &-link{
       font-size: 1.2em;
     }
   }
   .content{
+    padding: 40px;
+    &-inner{
+      border: 1px solid #e8e8e8;
+      padding: 20px 30px;
+      margin-bottom: 20px;
+    }
     .ch{
-      
+      margin-left: 20px;
     }
     .cf{
       
@@ -39,5 +84,15 @@
     &-tit{
       font-size: 2.2em;
     }
+  }
+}
+
+/* rank */
+.rank{
+  &-list{
+    font-size: 1.7em;
+  }
+  &-item{
+    padding: 10px;
   }
 }

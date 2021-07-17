@@ -1,11 +1,10 @@
-<li class="article-<%= article.id %> article-count">
+<li class="article-<%= article.id %> article-li">
   <div class="article-user">
     <%= article.user.name %>
   </div>
-  <%= link_to article do %>
+  <%= link_to article, class: "article-link" do %>
     <div class="article-content">
-      <p><%= article.title %></p>
-      <p><%= article.content %></p>
+      <p class="article-tit"><%= article.title %></p>
     </div>
   <% end %>
 </li>

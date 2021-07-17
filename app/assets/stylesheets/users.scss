@@ -1,3 +1,45 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.user{
+  &-aside{
+    margin-left: 40px;
+  }
+  &-sec{
+    padding: 50px 30px;
+    border: 1px solid;
+    a{
+      margin-left: 50px;
+    }
+  }
+  &-avatar{
+    padding: 50px;
+    border: 1px solid;
+    border-radius: 50px;
+    margin: 0px 100px;
+  }
+  &-content{
+    margin-left: 20px;
+    .tnav{
+      background-color: $theme-color;
+      &-item{
+        a{
+          color: #fff;
+          &:hover{
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+    .unav{
+      margin-top: 20px;
+    }
+  }
+}
+
+.posts{
+  list-style: none;
+  padding: 0;
+}

@@ -1,3 +1,76 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'variables';
+
+.posts{
+  // list-style: none;
+  // padding: 0;
+}
+
+.post{
+  &-link{
+    display: block;
+    padding-bottom: 20px;
+    &:hover{
+      background-color: #f7f7f7;
+      text-decoration: none;
+    }
+  }
+  &-li{
+    padding: 0px;
+    border: 1px solid #e8e8e8;
+    a{
+      color: black;
+    }
+  }
+  &-wrap{
+    display: flex;
+    padding: 20px;
+    font-size: 1.5em;
+  }
+  &-avatar{
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  &-user{
+      margin-left: 20px;
+    }
+  &-inner{
+    margin-left: 60px;
+    padding: 0 20px 0;
+  }
+  &-content{
+    display: block;
+  }
+  &-image{
+    
+  }
+  &-text{
+    
+  }
+  &-timestamp{
+    color: $gray-light;
+    display: block;
+  }
+  &-box{
+    // display: flex;
+    padding: 10px;
+    border-top: 1px solid #e8e8e8;
+    // justify-content: flex-end;
+  }
+  &-comment{
+    margin-right: 20px;
+  }
+  &-like{
+    margin-right: 20px;
+    a{
+      color: $theme-color;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+}

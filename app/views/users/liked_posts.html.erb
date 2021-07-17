@@ -1,38 +1,39 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= @user.name %>
-      </h1>
+  <aside class="user-aside col-md-4">
+    <section class="user-sec">
+      <div class="user-avatar"></div>
+      <h1 class="text-center"><%= @user.name %></h1>
     </section>
   </aside>
-  <div class="col-md-8">
-    <ul class="tab nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "目標一覧", goal_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "つぶやき", user_path(@user), class: "nav-link" %>
-      </li>
-    </ul>
-    <ul class="tab nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "つぶやき", goal_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "いいねしたつぶやき", liked_posts_user_path(@user), class: "nav-link" %>
-      </li>
-    </ul>
-    <% if @user.posts.any? %>
-    
-    <ol class="posts">
-      <%= render @liked_posts %>
-    </ol>
-    <%= paginate @liked_posts %>
-    <% end %>
+  <div class="user-content col-md-7">
+    <div class="user-inner">
+      <ul class="tnav nav nav-tabs">
+        <li class="tnav-item nav-item">
+          <%= link_to "目標一覧", goal_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "つぶやき", user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="unav nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to "つぶやき", goal_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいねしたつぶやき", liked_posts_user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <% if @user.posts.any? %>
+      
+      <ol class="posts">
+        <%= render @liked_posts %>
+      </ol>
+      <%= paginate @liked_posts %>
+      <% end %>
+    </div>
   </div>
 </div>

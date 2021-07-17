@@ -1,50 +1,78 @@
-<li id="report-<%= report.id %>" class="report-count">
-  <span class="report-user"><%= link_to report.user.name, report.user %></span>
-  <%= link_to(report_path(report)) do %>
-    <div class="report-content">
-      <div class="aim">
-        <p>今月の目的</p>
-        <%= report.user.goals.find(9).monthly_aim %>
-      </div>
-    
-      <div class="indicator">
-        <p>今月の目標指標</p>
-        <%= report.user.goals.find(9).monthly_indicator %>
-      </div>
+<li id="report-<%= report.id %>" class="report-li">
+  <div class="report-wrap">
+    <div class="report-avatar"></div>
+    <span class="report-user"><%= link_to report.user.name, report.user %></span>
+    <button class="report-rdays btn btn-success"><%= @running_day.r_days %>日目</button>
+  </div>
+  <%= link_to(report_path(report), class: "report-link") do %>
+    <div class="report-inner">
+      <div class="report-content">
+        <div class="aim">
+          <p class="aim-tit">今月の目的</p>
+          <p class="aim-txt"><%= report.user.goals.find(9).monthly_aim %></p>
+          <p class="aim-tit">今月の目標指標</p>
+          <p class="aim-txt"><%= report.user.goals.find(9).monthly_indicator %></p>
+        </div>
       
-      
-      <div class="action">
-        <p>今日のアクション</p>
-        <%= report.user.goals.find(9).goal_actions.first.content %>
-        <%= report.report_actions.first.number %>
-        /<%= report.user.goals.find(9).goal_actions.first.number %>
+        <div class="action">
+          <p class="action-tit">今日達成したアクション</p>
+          <ul class="action-list">
+            <% rep_acts = report.report_actions %>
+            <% actions = report.user.goals.find(9).goal_actions %>
+            <%= actions.zip(rep_acts) do |action, rep_act| %>
+            <li class="action-item">
+              <div class="action-inner">
+                <div class="action-wrap">
+                  <%= action.content %>
+                </div>
+                <div class="action-box">
+                  <%= rep_act.number %> / <%= action.number %>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="realize">
+          <p class="realize-tit">感想、気付き</p>
+          <p><%= report.content %></p>
+        </div>
+        <%= image_tag report.images.display if report.images.attached? %>
       </div>
-      <div class="reflect">
-        <p>感想、気付き</p>
-        <%= report.content %>
-      </div>
-      <%= image_tag report.images.display if report.images.attached? %>
     </div>
   <% end %>
-  <span class="timestamp">
-    <%= time_ago_in_words(report.created_at) %>
-  </span>
-  <div>
-    <% like = report.report_likes.find_by(user_id: current_user.id) %>
-    <% if current_user.report_liked?(report) %>
-      <%= link_to report_report_like_path(report, like), method: :delete do %>
-        <span>
-          <i class="fas fa-heart"></i>
-          <%= report.report_likes.count %>
+  
+  <div class="report-box">
+    <div class="row">
+      <div class="col d-flex">
+        <span class="report-timestamp">
+          <%= time_ago_in_words(report.created_at) %> ago
         </span>
-      <% end %>
-    <% else %>
-      <%= link_to report_report_likes_path(report), method: :post do %>
-        <span>
-          <i class="far fa-heart"></i>
-          <%= report.report_likes.count %>
-        </span>
-      <% end %>
-    <% end %>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <div class="post-comment">
+          <i class="far fa-comment"></i>
+        </div>
+        <div class="report-like">
+          <% like = report.report_likes.find_by(user_id: current_user.id) %>
+          <% if current_user.report_liked?(report) %>
+            <%= link_to report_report_like_path(report, like), method: :delete do %>
+              <span>
+                <i class="fas fa-heart"></i>
+                <%= report.report_likes.count %>
+              </span>
+            <% end %>
+          <% else %>
+            <%= link_to report_report_likes_path(report), method: :post do %>
+              <span>
+                <i class="far fa-heart"></i>
+                <%= report.report_likes.count %>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+  
 </li>

@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   def index
     @boards = Board.page(params[:page])
+    @tags = Tag.joins(:board_tags).distinct
   end
   
   def new

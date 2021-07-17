@@ -1,22 +1,44 @@
 <% provide(:title, "記事一覧") %>
-<% provide(:button_text, "検索") %>
+
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 _art-ml">
     <div class="tag">
-      
+      <div class="tag-header">
+        <i class="fas fa-tags"></i> タグ
+      </div>
+      <ul class="tag-list d-flex flex-wrap">
+        <% @tags.each do |tag| %>
+          <li class="tag-item">
+            <%= link_to tag_articles_path(tag), class: "tag-link badge badge-pill badge-info" do %>
+              <%= tag.name %> <span class="badge badge-light"><%= tag.articles.count %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="fav-articles">
-      
+    <div class="favorite">
+      <div class="favorite-header">
+        人気記事
+      </div>
+      <ul class="favorite-list">
+        <li class="favorite-item">
+          人気
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 _art-ml">
     <div class="serach">
       <%= form_with(url: search_articles_path, method: :get, local: true) do |f| %>
-        <%= f.text_field :search, class: 'form-control' %>
-        <%= f.submit yield(:button_text), class: "btn btn-primary"  %>
+        <div class="search-inner d-flex">
+          <%= f.text_field :search, class: 'form-control' %>
+          <%= button_tag type: "submit", class: "btn btn-primary" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+        </div>
       <% end %>
     </div>
-    <div class="article">
+    <div class="articles">
       <%= render @articles %>
     </div>
   </div>

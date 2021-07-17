@@ -1,11 +1,12 @@
-<li class="board-<%= board.id %> board-count">
+<li class="board-<%= board.id %> board-li">
   <div class="board-user">
     <%= board.user.name %>
   </div>
-  <%= link_to board do %>
+  <%= link_to board, class: "board-link" do %>
     <div class="board-content">
-      <p><%= board.title %></p>
-      <p><%= board.content %></p>
+      <div class="board-tit">
+        <p><%= board.title %></p>
+      </div>
     </div>
   <% end %>
 </li>

@@ -1,29 +1,114 @@
 // Place all the styles related to the Reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'variables';
+
+.reports{
+  padding: 0;
+  list-style: none;
+}
+
 .report{
-  &-count{
-    list-style: none;
-    border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-  }
-  &-user{
-    font-size: 1.6em;
-  }
-  a{
-    color: black;
+  &-link{
+    display: block;
+    padding-bottom: 20px;
     &:hover{
+      background-color: #f7f7f7;
       text-decoration: none;
     }
   }
-  &-content{
-    &:hover{
-      background-color: #f7f7f7;
+  &-li{
+    padding: 0px;
+    border: 1px solid #e8e8e8;
+    a{
+      color: black;
     }
   }
-  &-tit{
-   font-size: 1.5em;
-   margin: 15px 0 0;
+  &-wrap{
+    display: flex;
+    padding: 10px;
+    font-size: 1.5em;
   }
+  &-avatar{
+    
+  }
+  &-user{
+      margin-left: 70px;
+    }
+  &-rdays{
+    margin-left: 370px;
+  }
+  &-inner{
+    margin-left: 60px;
+    padding: 0 20px 0;
+  }
+  &-content{
+    display: block;
+    .aim{
+      &-tit{
+        @include title;
+        @include aim-color;
+      }
+    }
+    .action{
+      margin-bottom: 15px;
+      &-tit{
+        @include title;
+        @include aim-color;
+      }
+      &-list{
+        padding-left: 20px;
+      }
+      &-item{
+      
+      }
+      &-inner{
+        display: flex;
+        justify-content: space-between;
+      }
+      &-wrap{
+        
+      }
+      &-box{
+      }
+    }
+    .realize{
+      &-tit{
+        @include title;
+        @include aim-color;
+        margin-bottom: 1rem;
+      }
+    }
+    
+  }
+  &-image{
+    
+  }
+  &-text{
+    
+  }
+  &-timestamp{
+    color: $gray-light;
+    display: block;
+  }
+  &-box{
+    // display: flex;
+    padding: 10px;
+    border-top: 1px solid #e8e8e8;
+    // justify-content: flex-end;
+  }
+  &-comment{
+    margin-right: 20px;
+  }
+  &-like{
+    margin-right: 20px;
+    a{
+      color: $theme-color;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+  
+  
 }

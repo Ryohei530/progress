@@ -1,3 +1,29 @@
 // Place all the styles related to the Boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'variables';
+
+.boards{
+  margin-top: 30px;
+}
+
+.board{
+  &-li{
+    list-style: none;
+    border: 2px solid #e8e8e8;
+    padding: 20px;
+  }
+  &-link{
+    color: black;
+    &:hover{
+      color: black;
+    }
+  }
+  &-content{
+    
+  }
+  &-tit{
+    font-size: 1.3em;
+    
+  }
+}

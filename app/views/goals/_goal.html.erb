@@ -1,34 +1,68 @@
-<li id="goal-<%= goal.id %>" class="goal-count">
-  <span class="goal-user"><%= link_to goal.user.name, goal.user %></span>
-  <%= link_to(goal) do %>
-    <div class="goal-content">
-      <p class="goal-tit">目的、得たい結果</p>
-      <%= goal.aim %>
-      <p class="goal-tit">目標数値、指標</p>
-      <%= goal.indicator %>
-      <p class="goal-tit">１ヶ月間の目的</p>
-      <%= goal.monthly_aim %>
-      <p class="goal-tit">１ヶ月間の目標数値、指標</p>
-      <%= goal.monthly_indicator %>
-      <p class="goal-tit">開始日</p>
-      <%= goal.term_start %>
-      <p class="goal-tit">終了日</p>
-      <%= goal.term_end %>
-      <div class="goal-actions">
-        <p class="goal-tit">1ヶ月間のアクション</p>
-        <% goal.goal_actions.each do |action| %>
-            <%= action.content %>
-            <%= action.number %>
-        <% end %>
+<li id="goal-<%= goal.id %>" class="goal-li">
+  <div class="goal-wrap">
+    <div class="goal-avatar"></div>
+    <span class="goal-user"><%= link_to goal.user.name, goal.user %></span>
+  </div>
+  <%= link_to(goal, class: "goal-link") do %>
+    <div class="goal-inner">
+      <div class="goal-content">
+        <div class="aim">
+          <p class="aim-tit">目的、得たい結果</p>
+          <p class="aim-txt"><%= goal.aim %></p>
+          <p class="aim-tit">目標数値、指標</p>
+          <p class="aim-txt"><%= goal.indicator %></p>
+          <p class="aim-tit">１ヶ月間の目的</p>
+          <p class="aim-txt"><%= goal.monthly_aim %></p>
+          <p class="aim-tit">１ヶ月間の目標数値、指標</p>
+          <p class="aim-txt"><%= goal.monthly_indicator %></p>
+          <div class="row">
+            <div class="col">
+              <p class="aim-tit">開始日</p>
+              <p class="aim-txt"><%= goal.term_start %></p>
+            </div>
+            <div class="col">
+              <p class="aim-tit">終了日</p>
+              <p class="aim-txt"><%= goal.term_end %></p>
+            </div>
+          </div>
+        </div>
+        <div class="action">
+          <p class="action-tit">1ヶ月間のアクション</p>
+          <ul class="action-list">
+            <% goal.goal_actions.each do |action| %>
+              <li class="action-item">
+                <div class="action-inner">
+                  <div class="action-wrap">
+                    <%= action.content %>
+                  </div>
+                  <div class="action-box">
+                    <%= action.number %> / <%= action.number %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   <% end %>
-  <span class="timestamp">
-    <%= time_ago_in_words(goal.created_at) %>
-    <% if current_user?(goal.user) %>
-      <%= link_to "削除", goal, method: :delete,
-                                data: { confirm: "本当に削除しますか？" },
-                                class: "dlt-goal-#{goal.id}" %>
-    <% end %>
-  </span>
+  <div class="goal-box">
+    <div class="row">
+      <div class="col d-flex align-items-center">
+        <span class="goal-timestamp">
+          <%= time_ago_in_words(goal.created_at) %> ago
+        </span>
+        <% if current_user?(goal.user) %>
+          <%= link_to "削除", goal, method: :delete,
+                                    data: { confirm: "本当に削除しますか？" },
+                                    class: "goal-dlt dlt-goal-#{goal.id} btn btn-outline-danger btn-sm" %>
+        <% end %>
+      </div>
+      <div class="col d-flex justify-content-end align-items-center">
+        <div class="goal-comment">
+          <i class="far fa-comment"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </li>
