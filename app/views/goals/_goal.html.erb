@@ -1,35 +1,32 @@
 <li id="goal-<%= goal.id %>" class="goal-li">
   <div class="goal-wrap">
-    <div class="goal-avatar"></div>
+    <div class="goal-avatar">
+      <%= link_to goal.user do %>
+        <%= image_tag goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+      <% end %> 
+    </div>
     <span class="goal-user"><%= link_to goal.user.name, goal.user %></span>
   </div>
+  <% monthly_goal = goal.user.monthly_goals.last %>
   <%= link_to(goal, class: "goal-link") do %>
     <div class="goal-inner">
       <div class="goal-content">
         <div class="aim">
+          <p class="aim-tit">期間</p>
+          <p class="aim-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
           <p class="aim-tit">目的、得たい結果</p>
           <p class="aim-txt"><%= goal.aim %></p>
           <p class="aim-tit">目標数値、指標</p>
           <p class="aim-txt"><%= goal.indicator %></p>
           <p class="aim-tit">１ヶ月間の目的</p>
-          <p class="aim-txt"><%= goal.monthly_aim %></p>
+          <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
           <p class="aim-tit">１ヶ月間の目標数値、指標</p>
-          <p class="aim-txt"><%= goal.monthly_indicator %></p>
-          <div class="row">
-            <div class="col">
-              <p class="aim-tit">開始日</p>
-              <p class="aim-txt"><%= goal.term_start %></p>
-            </div>
-            <div class="col">
-              <p class="aim-tit">終了日</p>
-              <p class="aim-txt"><%= goal.term_end %></p>
-            </div>
-          </div>
+          <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
         </div>
         <div class="action">
           <p class="action-tit">1ヶ月間のアクション</p>
           <ul class="action-list">
-            <% goal.goal_actions.each do |action| %>
+            <% monthly_goal.goal_actions.each do |action| %>
               <li class="action-item">
                 <div class="action-inner">
                   <div class="action-wrap">

@@ -18,7 +18,18 @@ module ReportsHelper
   def r_days_params(date)
     latest_r_day = current_user.running_days.last
     
-    if latest_r_day.date == date.yesterday
+    if latest_r_day.nil?
+      r_days_params_vars(false, date)
+    elsif latest_r_day.date == date.yesterday
+      r_days_params_vars(true, date)
+    else
+      r_days_params_vars(false, date)
+    end
+  end
+  
+  def r_days_params_vars(s_or_c, date)
+    latest_r_day = current_user.running_days.last
+    if s_or_c
       params[:report][:start_date] = latest_r_day.start_date
       params[:report][:date] = date
       params[:report][:s_or_c] = true

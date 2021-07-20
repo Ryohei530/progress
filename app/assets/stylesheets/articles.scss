@@ -66,6 +66,16 @@
     border: 2px solid #e8e8e8;
     padding: 20px;
   }
+  &-inner{
+    display: flex;
+  }
+  &-avatar{
+    
+  }
+  &-user{
+   font-size: 1.7em;
+   margin-left: 10px;
+  }
   &-link{
     color: black;
     &:hover{

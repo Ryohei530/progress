@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   
   has_many :posts, dependent: :destroy
-  has_many :goals, dependent: :destroy
-  has_many :goal_actions, through: :goals
+  has_one :goal, dependent: :destroy
+  has_many :goal_actions, through: :monthly_goals
   has_many :reports, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :boards, dependent: :destroy
@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :report_comments, dependent: :destroy
   has_many :board_comments, dependent: :destroy
   has_many :running_days, dependent: :destroy
+  has_many :monthly_goals, dependent: :destroy
   has_one_attached :avatar
   attr_accessor :remember_token
   before_save :downcase_email
@@ -25,6 +26,10 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_secure_password
+  validates :avatar, content_type: { in: %w[image/jpeg image/gif image/png],
+                                     message: "jpeg, gif, png形式のみアップロード可能です" },
+                     size:         { less_than: 5.megabytes,
+                                     message: "5MBを超える画像はアップロードできません" }
    
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -60,6 +65,12 @@ class User < ApplicationRecord
   
   def report_liked?(report)
     self.report_likes.exists?(report_id: report.id)
+  end
+  
+  def default_image
+    unless self.avatar.attached?
+      self.avatar.attach(io: File.open('./app/assets/images/default.png'), filename: 'default.png', content_type: 'image/png')
+    end
   end
   
   private

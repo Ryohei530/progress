@@ -1,6 +1,10 @@
 <li id="report-<%= report.id %>" class="report-li">
   <div class="report-wrap">
-    <div class="report-avatar"></div>
+    <div class="report-avatar">
+      <%= link_to report.user do %>
+        <%= image_tag report.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+      <% end %> 
+    </div>
     <span class="report-user"><%= link_to report.user.name, report.user %></span>
     <button class="report-rdays btn btn-success"><%= @running_day.r_days %>日目</button>
   </div>
@@ -9,16 +13,16 @@
       <div class="report-content">
         <div class="aim">
           <p class="aim-tit">今月の目的</p>
-          <p class="aim-txt"><%= report.user.goals.find(9).monthly_aim %></p>
+          <p class="aim-txt"><%= report.monthly_goal.monthly_aim %></p>
           <p class="aim-tit">今月の目標指標</p>
-          <p class="aim-txt"><%= report.user.goals.find(9).monthly_indicator %></p>
+          <p class="aim-txt"><%= report.monthly_goal.monthly_indicator %></p>
         </div>
       
         <div class="action">
           <p class="action-tit">今日達成したアクション</p>
           <ul class="action-list">
             <% rep_acts = report.report_actions %>
-            <% actions = report.user.goals.find(9).goal_actions %>
+            <% actions = report.monthly_goal.goal_actions %>
             <%= actions.zip(rep_acts) do |action, rep_act| %>
             <li class="action-item">
               <div class="action-inner">

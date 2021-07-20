@@ -3,19 +3,22 @@
 <% pos = current_user.posts.count.to_s %>
 <% provide(:pluralize, pos) %>
 <% provide(:feed, "post") %>
-<% goal = current_user.goals.find(9) %>
+<% goal = current_user.goal %>
+<% monthly_goal = current_user.monthly_goals.last %>
 <div class="top row">
     <h1 class="top-h1 col-md-10">
+        <p class="top-tit">期間</p>
+        <p class="top-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
         <p class="top-tit">目的、得たい結果</p>
-        <%= goal.aim %>
+        <p class="top-txt"><%= simple_format(goal.aim) %></p>
         <p class="top-tit">目標数値、指標</p>
-        <%= goal.indicator %>
+        <p class="top-txt"><%= simple_format(goal.indicator) %></p>
     </h1>
     <div class="top-item col-md-5">
         <p class="top-tit">１ヶ月間の目的</p>
-        <%= goal.monthly_aim %>
+        <p class="top-txt"><%= monthly_goal.monthly_aim %></p>
         <p class="top-tit">１ヶ月間の目標数値、指標</p>
-        <%= goal.monthly_indicator %>
+        <p class="top-txt"><%= monthly_goal.monthly_indicator %></p>
     </div>
     <div class="top-item _action col-md-5">
         <div class="tnav">
@@ -27,14 +30,17 @@
         </div>
         <div class="top-wrap">
             <p class="top-tit">1ヶ月間のアクション</p>
-            <%= goal.goal_actions.first.content %>
-            <%= goal.goal_actions.first.number %>    
+            <p class="top-txt">
+                <%= monthly_goal.goal_actions.first.content %>
+                <%= monthly_goal.goal_actions.first.number %>
+            </p>
         </div>
     </div>
 </div>
 <div class="row justify-content-around">
-    <%= link_to "目標を作成", new_goal_path, class: "btn btn-primary" %>
-    <%= link_to "目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
+    <%= link_to "長期目標を設定", edit_goal_path(goal), class: "btn btn-primary" %>
+    <%= link_to "1ヶ月間の目標を作成", new_monthly_goal_path, class: "btn btn-primary" %>
+    <%= link_to "1ヶ月の目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
     <%= link_to "記事を作成", new_article_path, class: "btn btn-primary" %>
     <%= link_to "掲示板を作成", new_board_path, class: "btn btn-primary" %>
 </div>

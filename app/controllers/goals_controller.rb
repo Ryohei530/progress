@@ -5,35 +5,37 @@ class GoalsController < ApplicationController
   end
 
   def new
-    @goal = current_user.goals.build
-    @goal_action = @goal.goal_actions.build
   end
 
   def create
-    @user = current_user
-    @goal = @user.goals.build(goal_params)
-    if @goal.save
-      flash[:success] = "目標を作成しました"
-      redirect_to goal_user_url(@user)
-    else
-      render 'new'
-    end
   end
 
   def show
+    @goal = Goal.find(params[:id])
+  end
+  
+  def edit
+    @goal = Goal.find(params[:id])
+  end
+  
+  def update
+    @goal = Goal.find(params[:id])
+    if @goal.update(goal_params)
+      flash[:success] = "長期目標を設定しました"
+      redirect_to root_path
+    else
+      render 'edit'
+    end
   end
   
     private
     
     def goal_params
       params.require(:goal).permit(
-        :aim, 
+        :aim,
         :indicator, 
-        :monthly_aim,
-        :monthly_indicator, 
         :term_start, 
         :term_end, 
-        goal_actions_attributes: [:content, :number, :_destroy, :id]
         )
     end
 end

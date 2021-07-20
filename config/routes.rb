@@ -14,12 +14,15 @@ Rails.application.routes.draw do
      get 'post'
      get 'liked_posts'
      get 'liked_reports'
+     get 'email'
+     get 'password'
     end
   end
   resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
   end
   resources :goals
+  resources :monthly_goals
   resources :reports do
     resources :report_likes, only: [:create, :destroy]
     resources :report_comments, only: [:create, :destroy]

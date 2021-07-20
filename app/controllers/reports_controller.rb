@@ -16,11 +16,16 @@ class ReportsController < ApplicationController
     @report = current_user.reports.build(report_params)
     @report.images.attach(params[:report][:images])
     if @report.save
-      @latest_r_day = current_user.running_days.last.date
+      r_days = current_user.running_days
       
+      unless r_days.first.nil?
+        @latest_r_day = r_days.last.date 
+      end
+      
+      #その日既に日報が投稿されている時、running_daysを作らない
       unless @latest_r_day == @report.created_at.to_date
         set_rdays_params
-        @running_day = current_user.running_days.build(running_days_params)
+        @running_day = r_days.build(running_days_params)
         @running_day.save
       end
       
@@ -67,6 +72,7 @@ class ReportsController < ApplicationController
       params.require(:report).permit(
         :content, 
         :images,
+        :monthly_goal_id,
         report_actions_attributes: [:number, :_destroy, :id]
         )
     end

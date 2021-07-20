@@ -30,10 +30,12 @@
     font-size: 1.5em;
   }
   &-avatar{
-    
+    img{
+      border-radius: 30px;
+    }
   }
   &-user{
-      margin-left: 70px;
+      margin-left: 20px;
     }
   &-rdays{
     margin-left: 370px;

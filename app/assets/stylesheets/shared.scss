@@ -7,8 +7,17 @@
 
 .content{
   /* user_info */
-  &-h1{
+  .ch{
+    &-inner{
+      display: flex;
+    }
+    &-avatar{
       
+    }
+    &-h1{
+      margin-left: 20px;
+      padding-top: 10px;
+    }
   }
   /* post_form */
   &-form{

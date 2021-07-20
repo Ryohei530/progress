@@ -1,6 +1,13 @@
 <li class="board-<%= board.id %> board-li">
-  <div class="board-user">
-    <%= board.user.name %>
+  <div class="board-inner">
+    <div class="board-avatar">
+      <%= link_to board.user do %>
+        <%= image_tag board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
+      <% end %> 
+    </div>
+    <div class="board-user">
+      <%= board.user.name %>
+    </div>
   </div>
   <%= link_to board, class: "board-link" do %>
     <div class="board-content">

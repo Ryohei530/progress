@@ -1,40 +1,111 @@
 <% provide(:title, @user.name) %>
+
 <div class="user row">
   <aside class="user-aside col-md-4">
     <section class="user-sec">
-      <div class="user-avatar"></div>
+      <div class="user-avatar">
+        <%= link_to @user do %>
+          <%= image_tag @user.avatar.variant(gravity: :center, resize: "160x160^", crop: "160x160+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
       <h1 class="text-center"><%= @user.name %></h1>
       <%= link_to "プロフィールを編集する", edit_user_path(@user), class: "btn btn-outline-primary" %>
+    </section>
+    <section class="user-calendar">
+      <%= month_calendar do |date| %>
+        <%= date.day %>
+      <% end %>
     </section>
   </aside>
   <div class="user-content col-md-7">
     <div class="user-inner">
       <ul class="tnav nav nav-tabs">
         <li class="tnav-item nav-item">
-          <%= link_to "目標一覧", goal_user_path(@user), class: "nav-link" %>
+          <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
         </li>
         <li class="tnav-item nav-item">
           <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
         </li>
         <li class="tnav-item nav-item">
-          <%= link_to "つぶやき", user_path(@user), class: "nav-link" %>
+          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
         </li>
       </ul>
-      <ul class="unav nav nav-tabs">
-        <li class="nav-item">
-          <%= link_to "つぶやき", goal_user_path(@user), class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "いいねしたつぶやき", liked_posts_user_path(@user), class: "nav-link" %>
-        </li>
-      </ul>
-      <% if @user.posts.any? %>
-      
-      <ol class="posts">
-        <%= render @posts %>
-      </ol>
-      <%= paginate @posts %>
-      <% end %>
+    </div>
+    <div class="user-progress">
+      <div class="action">
+        <div class="action-month">
+          <p class="action-tit">月間</p>
+          <ul class="action-list">
+            <% monthly_actions = @user.monthly_goals.last.goal_actions %>
+            <% sum_of_monthly_actions %>
+            <% monthly_actions.each do |m_act| %>
+              <li class="action-item">
+                <div class="action-inner row">
+                  <div class="action-wrap col-4">
+                    <%= m_act.content %>
+                  </div>
+                  <div class="action-box col-2">
+                    <%= @sum1 %> / <%= m_act.number %>
+                    <% ratio = (@sum1.to_f / m_act.number) * 100 %>
+                  </div>
+                  <div class="action-progress col-6">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="action-week">
+          <p class="action-tit">週間</p>
+          <ul class="action-list">
+            <% monthly_actions.each do |m_act| %>
+              <li class="action-item">
+                <div class="action-inner row">
+                  <div class="action-wrap col-4">
+                    <%= m_act.content %>
+                  </div>
+                  <div class="action-box col-2">
+                    <%= m_act.number %> / <%= m_act.number %>
+                  </div>
+                  <div class="action-progress col-6">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="action-day">
+          <p class="action-tit">日間</p>
+          <ul class="action-list">
+            <% monthly_actions.each do |m_act| %>
+              <li class="action-item">
+                <div class="action-inner row">
+                  <div class="action-wrap col-4">
+                    <%= m_act.content %>
+                  </div>
+                  <div class="action-box col-2">
+                    <%= m_act.number %> / <%= m_act.number %>
+                  </div>
+                  <div class="action-progress col-6">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

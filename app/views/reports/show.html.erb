@@ -5,24 +5,37 @@
   <span class="content">
     <div class="aim">
       <p>今月の目的</p>
-      <%= @report.user.goals.find(9).monthly_aim %>
+      <%= @report.monthly_goal.monthly_aim %>
     </div>
   
     <div class="indicator">
       <p>今月の目標指標</p>
-      <%= @report.user.goals.find(9).monthly_indicator %>
+      <%= @report.monthly_goal.monthly_indicator %>
     </div>
-    
     
     <div class="action">
-      <p>今日のアクション</p>
-      <%= @report.user.goals.find(9).goal_actions.first.content %>
-      <%= @report.report_actions.first.number %>
-      /<%= @report.user.goals.find(9).goal_actions.first.number %>
+      <p class="action-tit">今日達成したアクション</p>
+      <ul class="action-list">
+        <% rep_acts = @report.report_actions %>
+        <% actions = @report.monthly_goal.goal_actions %>
+        <%= actions.zip(rep_acts) do |action, rep_act| %>
+        <li class="action-item">
+          <div class="action-inner">
+            <div class="action-wrap">
+              <%= action.content %>
+            </div>
+            <div class="action-box">
+              <%= rep_act.number %> / <%= action.number %>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="reflect">
-      <p>感想、気付き</p>
-      <%= @report.content %>
+    
+    <div class="realize">
+      <p class="realize-tit">感想、気付き</p>
+      <p><%= @report.content %></p>
     </div>
     <%= image_tag @report.images.display if @report.images.attached? %>
   </span>

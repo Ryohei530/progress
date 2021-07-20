@@ -8,6 +8,7 @@ class Report < ApplicationRecord
   has_many :replies, class_name: "ReportComment",
                      foreign_key: :reply_id,
                      dependent: :destroy
+  belongs_to :monthly_goal
   
   accepts_nested_attributes_for :report_actions, allow_destroy: true
   default_scope -> { order(created_at: :desc) }

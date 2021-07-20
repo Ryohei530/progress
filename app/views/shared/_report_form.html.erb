@@ -1,11 +1,13 @@
 <%= form_with(model: @report, local: true, class: "content-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   
+  <% monthly_goal = current_user.monthly_goals.last %>
+  <%= f.hidden_field :monthly_goal_id, value: monthly_goal.id %>
   <div class="aim">
     <p class="aim-tit">今月の目的</p>
-    <p class="aim-txt"><%= current_user.goals.find(9).monthly_aim %></p>
+    <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
     <p class="aim-tit">今月の目標指標</p>
-    <p class="aim-txt"><%= current_user.goals.find(9).monthly_indicator %></p>
+    <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
   </div>
   
   <div class="action">
@@ -15,10 +17,10 @@
       <li class="action-item">
         <div class="action-inner">
           <div class="action-wrap">
-            <%= rep.label :number, current_user.goals.find(9).goal_actions.first.content %>
+            <%= rep.label :number, monthly_goal.goal_actions.first.content %>
           </div>
           <div class="action-box">
-            <%= rep.number_field :number %> / <%= current_user.goals.find(9).goal_actions.first.number %>
+            <%= rep.number_field :number %> / <%= monthly_goal.goal_actions.first.number %>
           </div>
         </div>
       </li>

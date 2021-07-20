@@ -1,6 +1,10 @@
 <li id="post-<%= post.id %>" class="post-li">
   <div class="post-wrap">
-    <div class="post-avatar"></div>
+    <div class="post-avatar">
+      <%= link_to post.user do %>
+        <%= image_tag post.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+      <% end %>
+    </div>
     <span class="post-user"><%= link_to post.user.name, post.user %></span>
   </div>
   <%= link_to(post_path(post), class: "post-link") do %>

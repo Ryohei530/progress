@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'variables';
 
+._rounded{
+  border-radius: 50%;  
+}
+
 .user{
   &-aside{
     margin-left: 40px;
@@ -15,10 +19,11 @@
     }
   }
   &-avatar{
-    padding: 50px;
-    border: 1px solid;
-    border-radius: 50px;
-    margin: 0px 100px;
+    padding: 0 20px;
+    
+  }
+  &-calendar{
+    
   }
   &-content{
     margin-left: 20px;
@@ -37,7 +42,46 @@
       margin-top: 20px;
     }
   }
+  &-inner{
+    
+  }
+  &-progress{
+    .action{
+      &-month{
+        margin-top: 20px;
+      }
+      &-week{
+        margin-top: 20px;
+      }
+      &-day{
+        margin-top: 20px;
+      }
+      &-tit{
+        @include title;
+        @include aim-color;
+      }
+      &-list{
+        padding-left: 20px;
+      }
+      &-item{
+      
+      }
+      &-inner{
+      }
+      &-wrap{
+        
+      }
+      &-box{
+        
+      }
+      &-progress{
+        transform: translateY(25%);
+      }
+      
+    }
+  }
 }
+
 
 .posts{
   list-style: none;

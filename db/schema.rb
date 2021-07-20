@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_092109) do
+ActiveRecord::Schema.define(version: 2021_07_20_061851) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -111,23 +111,32 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
   create_table "goal_actions", charset: "utf8mb3", force: :cascade do |t|
     t.string "content"
     t.integer "number"
-    t.bigint "goal_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["goal_id"], name: "index_goal_actions_on_goal_id"
+    t.bigint "monthly_goal_id", null: false
+    t.index ["monthly_goal_id"], name: "index_goal_actions_on_monthly_goal_id"
   end
 
   create_table "goals", charset: "utf8mb3", force: :cascade do |t|
     t.string "aim"
     t.string "indicator"
-    t.string "monthly_aim"
-    t.string "monthly_indicator"
     t.date "term_start"
     t.date "term_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "monthly_goals", charset: "utf8mb3", force: :cascade do |t|
+    t.string "monthly_aim"
+    t.string "monthly_indicator"
+    t.date "term_start"
+    t.date "term_end"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_monthly_goals_on_user_id"
   end
 
   create_table "post_likes", charset: "utf8mb3", force: :cascade do |t|
@@ -158,11 +167,11 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
 
   create_table "report_comments", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
+    t.integer "reply_id"
     t.bigint "user_id", null: false
     t.bigint "report_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "reply_id"
     t.index ["report_id"], name: "index_report_comments_on_report_id"
     t.index ["user_id"], name: "index_report_comments_on_user_id"
   end
@@ -181,6 +190,8 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "monthly_goal_id", null: false
+    t.index ["monthly_goal_id"], name: "index_reports_on_monthly_goal_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
@@ -209,6 +220,7 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -226,8 +238,9 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
   add_foreign_key "boards", "users"
   add_foreign_key "bookmarks", "articles"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "goal_actions", "goals"
+  add_foreign_key "goal_actions", "monthly_goals"
   add_foreign_key "goals", "users"
+  add_foreign_key "monthly_goals", "users"
   add_foreign_key "post_likes", "posts"
   add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "users"
@@ -236,6 +249,7 @@ ActiveRecord::Schema.define(version: 2021_07_15_092109) do
   add_foreign_key "report_comments", "users"
   add_foreign_key "report_likes", "reports"
   add_foreign_key "report_likes", "users"
+  add_foreign_key "reports", "monthly_goals"
   add_foreign_key "reports", "users"
   add_foreign_key "running_days", "users"
 end
