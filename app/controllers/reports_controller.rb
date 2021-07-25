@@ -29,6 +29,9 @@ class ReportsController < ApplicationController
         @running_day.save
       end
       
+      @report.r_days = @running_day.r_days
+      @report.save
+      
       flash[:success] = "投稿しました"
       redirect_to reports_url
     else

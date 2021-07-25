@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
+    resources :post_comments, only: [:create, :destroy]
   end
   resources :goals
   resources :monthly_goals

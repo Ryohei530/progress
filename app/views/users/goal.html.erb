@@ -2,7 +2,11 @@
 <div class="row">
   <aside class="user-aside col-md-4">
     <section class="user-sec">
-      <div class="user-avatar"></div>
+      <div class="user-avatar">
+        <%= link_to @user do %>
+          <%= image_tag @user.avatar.variant(gravity: :center, resize: "160x160^", crop: "160x160+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
       <h1 class="text-center"><%= @user.name %></h1>
       <%= link_to "プロフィールを編集する", edit_user_path(@user), class: "btn btn-outline-primary" %>
     </section>

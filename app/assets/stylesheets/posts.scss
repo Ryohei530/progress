@@ -61,6 +61,12 @@
   }
   &-comment{
     margin-right: 20px;
+    a{
+      color: blue;
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
   &-like{
     margin-right: 20px;

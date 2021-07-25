@@ -1,4 +1,5 @@
 <% provide(:title, "つぶやき") %>
+<% provide(:button_text, "投稿") %>
 <li id="post-<%= @post.id %>" class="post-count">
   <span class="user"><%= link_to @post.user.name, @post.user %></span>
   <span class="content">
@@ -30,5 +31,50 @@
         </span>
       <% end %>
     <% end %>
+  </div>
+  <div class="row">
+    <div class="col-6 offset-3">
+      <%= render 'post_comments/comment_form' %>
+      
+      <% @comments.each do |comment| %>
+        <p><%= comment.user.name %></p>
+        <p><%= comment.content %></p>
+        <p><%= time_ago_in_words(comment.created_at) %></p>
+        <% if comment.user_id == current_user.id %>
+            <%= link_to "削除", post_post_comment_path(@post, comment), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+        <div>
+          <% if replies_to_comment = @replies.where(reply_id: comment.id) %>
+            <% replies_to_comment.each do |reply| %>
+              <div class="ml-2">
+                <%= reply.user.name %>
+                <%= reply.content %>
+                
+                <% if reply.user_id == current_user.id %>
+                  <%= link_to "削除", post_post_comment_path(@post, reply), method: :delete, class: "btn btn-danger" %>
+                <% end %>
+                <%= render 'post_comments/reply_form', comment: reply %>
+                
+                <% if replies_to_reply = @replies.where(reply_id: reply.id) %>
+                  <% replies_to_reply.each do |rep| %>
+                    <div class="ml-2">
+                      <%= rep.user.name %>
+                      <%= rep.content %>
+                      
+                      <% if rep.user_id == current_user.id %>
+                        <%= link_to "削除", post_post_comment_path(@post, rep), method: :delete, class: "btn btn-danger" %>
+                      <% end %>
+                      <%= render 'post_comments/reply_form', comment: rep %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <%= render 'post_comments/reply_form', comment: comment %>
+      <% end %>
+    </div>
   </div>
 </li>

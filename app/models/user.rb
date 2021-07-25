@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :running_days, dependent: :destroy
   has_many :monthly_goals, dependent: :destroy
   has_one_attached :avatar
+  has_many :post_comments, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -30,6 +31,7 @@ class User < ApplicationRecord
                                      message: "jpeg, gif, png形式のみアップロード可能です" },
                      size:         { less_than: 5.megabytes,
                                      message: "5MBを超える画像はアップロードできません" }
+  before_create :default_image
    
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

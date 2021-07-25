@@ -1,18 +1,25 @@
 <% provide(:title, "掲示板作成") %>
 <% provide(:button_text, "投稿") %>
 
-<h1 class="text-center">掲示板作成</h1>
-
 <div class="row">
-    <% @tags.each do |tag| %>
-    <span>
-      <%= link_to tag.name, tag_boards_path(tag) %>
-      <%= "(#{tag.boards.count})" %>
-    </span>
-  <% end %>
-</div>
-<div class="row">
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-3 ml-5">
+    <div class="tag">
+      <div class="tag-header">
+        <i class="fas fa-tags"></i> タグ
+      </div>
+      <ul class="tag-list d-flex flex-wrap">
+        <% @tags.each do |tag| %>
+          <li class="tag-item">
+            <%= link_to tag_boards_path(tag), class: "tag-link badge badge-pill badge-info" do %>
+              <%= tag.name %> <span class="badge badge-light"><%= tag.boards.count %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6 ml-2">
+    <h1 class="text-center">掲示板作成</h1>
     <%= render 'board_form' %>
   </div>
 </div>

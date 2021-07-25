@@ -67,49 +67,49 @@
     <% end %>
   </div>
   <div class="row">
-  <div class="col-6 offset-3">
-    <%= render 'report_comments/comment_form' %>
-    
-    <% @comments.each do |comment| %>
-      <p><%= comment.user.name %></p>
-      <p><%= comment.content %></p>
-      <p><%= time_ago_in_words(comment.created_at) %></p>
-      <% if comment.user_id == current_user.id %>
-          <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-danger" %>
-      <% end %>
-      <div>
-        <% if replies_to_comment = @replies.where(reply_id: comment.id) %>
-          <% replies_to_comment.each do |reply| %>
-            <div class="ml-2">
-              <%= reply.user.name %>
-              <%= reply.content %>
-              
-              <% if reply.user_id == current_user.id %>
-                <%= link_to "削除", report_report_comment_path(@report, reply), method: :delete, class: "btn btn-danger" %>
-              <% end %>
-              <%= render 'report_comments/reply_form', comment: reply %>
-              
-              <% if replies_to_reply = @replies.where(reply_id: reply.id) %>
-                <% replies_to_reply.each do |rep| %>
-                  <div class="ml-2">
-                    <%= rep.user.name %>
-                    <%= rep.content %>
-                    
-                    <% if rep.user_id == current_user.id %>
-                      <%= link_to "削除", report_report_comment_path(@report, rep), method: :delete, class: "btn btn-danger" %>
-                    <% end %>
-                    <%= render 'report_comments/reply_form', comment: rep %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+    <div class="col-6 offset-3">
+      <%= render 'report_comments/comment_form' %>
       
-      <%= render 'report_comments/reply_form', comment: comment %>
-    <% end %>
+      <% @comments.each do |comment| %>
+        <p><%= comment.user.name %></p>
+        <p><%= comment.content %></p>
+        <p><%= time_ago_in_words(comment.created_at) %></p>
+        <% if comment.user_id == current_user.id %>
+            <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+        <div>
+          <% if replies_to_comment = @replies.where(reply_id: comment.id) %>
+            <% replies_to_comment.each do |reply| %>
+              <div class="ml-2">
+                <%= reply.user.name %>
+                <%= reply.content %>
+                
+                <% if reply.user_id == current_user.id %>
+                  <%= link_to "削除", report_report_comment_path(@report, reply), method: :delete, class: "btn btn-danger" %>
+                <% end %>
+                <%= render 'report_comments/reply_form', comment: reply %>
+                
+                <% if replies_to_reply = @replies.where(reply_id: reply.id) %>
+                  <% replies_to_reply.each do |rep| %>
+                    <div class="ml-2">
+                      <%= rep.user.name %>
+                      <%= rep.content %>
+                      
+                      <% if rep.user_id == current_user.id %>
+                        <%= link_to "削除", report_report_comment_path(@report, rep), method: :delete, class: "btn btn-danger" %>
+                      <% end %>
+                      <%= render 'report_comments/reply_form', comment: rep %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <%= render 'report_comments/reply_form', comment: comment %>
+      <% end %>
+    </div>
   </div>
-</div>
   <p><%= link_to "日報一覧へ", reports_path %></p>
 </li>

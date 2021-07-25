@@ -28,7 +28,10 @@
       </div>
       <div class="col d-flex justify-content-end">
         <div class="post-comment">
-          <i class="far fa-comment"></i>
+          <%= link_to post do %>
+            <i class="far fa-comment"></i>
+            <span><%= post.post_comments.count %></span>
+          <% end %>
         </div>
         <div class="post-like">
           <% like = post.post_likes.find_by(user_id: current_user.id) %>

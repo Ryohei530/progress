@@ -1,6 +1,8 @@
 <li id="goal-<%= monthly_goal.id %>" class="goal-li">
   <div class="goal-wrap">
-    <div class="goal-avatar"></div>
+    <div class="goal-avatar">
+      <%= image_tag monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+    </div>
     <span class="goal-user"><%= link_to monthly_goal.user.name, monthly_goal.user %></span>
   </div>
   <%= link_to(monthly_goal, class: "goal-link") do %>

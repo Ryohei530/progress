@@ -8,6 +8,19 @@
   // border-radius: 10px;
 }
 
+@mixin rank-img {
+  content: '';
+  display: inline-block;
+  background-size: contain;
+  vertical-align: middle;
+  margin-left: -85px;
+}
+
+@mixin rank1-3 {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+
 
 .top{
   margin: 30px 30px 80px;
@@ -18,15 +31,17 @@
     margin-bottom: 50px;
     font-size: 1.5em;
     @include border;
-    padding: 10px 20px 20px;
+    padding: 0px;
+  }
+  &-btit{
+    background-color: $theme-color;
+    color: #fff;
+    padding: 0.5rem 1rem;
   }
   &-item{
     font-size: 1.5em;
     @include border;
-    padding: 30px;
-  }
-  ._action{
-    padding: 0;
+    padding: 0px;
   }
   &-tit{
     @include title;
@@ -38,6 +53,24 @@
   }
   &-wrap{
     padding: 20px;
+  }
+  &-btn{
+    border-radius: 100vh;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    &._cubic{
+      border-bottom: 5px solid #9f000c;
+      &:hover{
+        margin-top: 3px;
+        border-bottom: 2px solid #9f000c;
+      }
+    }
+  }
+
+  .fa-position-right {
+    position: absolute;
+    top: calc(50% - .5em);
+    right: 1rem;
   }
   .tnav{
     background-color: $theme-color;
@@ -92,8 +125,44 @@
 .rank{
   &-list{
     font-size: 1.7em;
+    padding: 0;
+    margin-left: 150px;
   }
   &-item{
-    padding: 10px;
+    padding: 30px;
+    img{
+      margin: 0 80px 0 40px;
+    }
+    span{
+      margin-left: 80px;
+      float: right;
+    }
+  }
+  &-1{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 80px;
+      height: 80px;
+      background-image: url(" <%= asset_path('rank1.png') %>");
+    }
+  }
+  &-2{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 80px;
+      height: 70px;
+      background-image: url(" <%= asset_path('rank2.png') %>");
+      }
+  }
+  &-3{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 75px;
+      height: 68px;
+      background-image: url(" <%= asset_path('rank3.png') %>");
+      }
   }
 }

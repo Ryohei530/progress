@@ -1,12 +1,14 @@
 <li id="report-<%= report.id %>" class="report-li">
   <div class="report-wrap">
-    <div class="report-avatar">
-      <%= link_to report.user do %>
-        <%= image_tag report.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
-      <% end %> 
+    <div class="report-ubox">
+      <div class="report-avatar">
+        <%= link_to report.user do %>
+          <%= image_tag report.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <span class="report-user"><%= link_to report.user.name, report.user %></span>
     </div>
-    <span class="report-user"><%= link_to report.user.name, report.user %></span>
-    <button class="report-rdays btn btn-success"><%= @running_day.r_days %>日目</button>
+    <button class="report-rdays btn btn-success"><%= report.r_days %>日目</button>
   </div>
   <%= link_to(report_path(report), class: "report-link") do %>
     <div class="report-inner">
@@ -54,8 +56,11 @@
         </span>
       </div>
       <div class="col d-flex justify-content-end">
-        <div class="post-comment">
-          <i class="far fa-comment"></i>
+        <div class="report-comment">
+          <%= link_to report do %>
+            <i class="far fa-comment"></i>
+            <span><%= report.report_comments.count %></span>
+          <% end %>
         </div>
         <div class="report-like">
           <% like = report.report_likes.find_by(user_id: current_user.id) %>

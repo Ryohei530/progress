@@ -20,6 +20,9 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @comment = PostComment.new
+    @comments = PostComment.includes(:user).where(post_id: params[:id]).where(reply_id: nil)
+    @replies = PostComment.includes(:user).where(post_id: params[:id]).where.not(reply_id: nil)
   end
   
   def destroy

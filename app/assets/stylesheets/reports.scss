@@ -9,14 +9,6 @@
 }
 
 .report{
-  &-link{
-    display: block;
-    padding-bottom: 20px;
-    &:hover{
-      background-color: #f7f7f7;
-      text-decoration: none;
-    }
-  }
   &-li{
     padding: 0px;
     border: 1px solid #e8e8e8;
@@ -28,6 +20,10 @@
     display: flex;
     padding: 10px;
     font-size: 1.5em;
+    justify-content: space-between;
+  }
+  &-ubox{
+    display: flex;
   }
   &-avatar{
     img{
@@ -38,7 +34,15 @@
       margin-left: 20px;
     }
   &-rdays{
-    margin-left: 370px;
+    
+  }
+  &-link{
+    display: block;
+    padding-bottom: 20px;
+    &:hover{
+      background-color: #f7f7f7;
+      text-decoration: none;
+    }
   }
   &-inner{
     margin-left: 60px;
@@ -101,6 +105,12 @@
   }
   &-comment{
     margin-right: 20px;
+    a{
+      color: blue;
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
   &-like{
     margin-right: 20px;

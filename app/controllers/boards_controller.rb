@@ -36,7 +36,9 @@ class BoardsController < ApplicationController
   
   def update
     @board = Board.find(params[:id])
+    tag_list = params[:board][:name].split(nil)
     if @board.update(board_params)
+      @board.save_tag(tag_list)
       flash[:success] = "更新しました"
       redirect_to @board
     else

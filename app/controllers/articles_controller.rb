@@ -37,7 +37,9 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
+    tag_list = params[:article][:name].split(nil)
     if @article.update(article_params)
+      @article.save_tag(tag_list)
       flash[:success] = "記事が更新されました"
       redirect_to @article
     else

@@ -15,9 +15,9 @@
           <p class="aim-tit">期間</p>
           <p class="aim-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
           <p class="aim-tit">目的、得たい結果</p>
-          <p class="aim-txt"><%= goal.aim %></p>
+          <p class="aim-txt"><%= simple_format(goal.aim) %></p>
           <p class="aim-tit">目標数値、指標</p>
-          <p class="aim-txt"><%= goal.indicator %></p>
+          <p class="aim-txt"><%= simple_format(goal.indicator) %></p>
           <p class="aim-tit">１ヶ月間の目的</p>
           <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
           <p class="aim-tit">１ヶ月間の目標数値、指標</p>
