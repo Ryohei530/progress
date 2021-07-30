@@ -3,43 +3,75 @@
 <% pos = current_user.posts.count.to_s %>
 <% provide(:pluralize, pos) %>
 <% provide(:feed, "post") %>
+<% goal = current_user.goal %>
+<% monthly_goal = current_user.monthly_goals.last %>
 <div class="top row">
-    <h1 class="top-h1 col-md-12">
-        <p class="top-tit">目的、得たい結果</p>
-        <%= current_user.goals.find(9).aim %>
-        <p class="top-tit">目標数値、指標</p>
-        <%= current_user.goals.find(9).indicator %>
-    </h1>
-    <div class="top-item col-md-6">
-        <p class="top-tit">１ヶ月間の目的</p>
-        <%= current_user.goals.find(9).monthly_aim %>
-        <p class="top-tit">１ヶ月間の目標数値、指標</p>
-        <%= current_user.goals.find(9).monthly_indicator %>
+  <h1 class="top-h1 col-md-10">
+    <div class="top-btit">長期目標</div>
+    <div class="top-wrap">
+      <p class="top-tit">期間</p>
+      <p class="top-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
+      <p class="top-tit">目的、得たい結果</p>
+      <p class="top-txt"><%= simple_format(goal.aim) %></p>
+      <p class="top-tit">目標数値、指標</p>
+      <p class="top-txt"><%= simple_format(goal.indicator) %></p>
+      <%= link_to edit_goal_path(goal), class: "top-btn btn btn-danger _cubic" do %>
+          長期目標を設定<i class="fas fa-angle-right fa-position-right"></i>
+      <% end %>
     </div>
-    <div class="top-item col-md-6">
-        <p class="top-tit">1ヶ月間のアクション</p>
-        <%= current_user.goals.find(9).goal_actions.first.content %>
-        <%= current_user.goals.find(9).goal_actions.first.number %>
+  </h1>
+  <div class="top-item col-md-5">
+    <div class="top-btit">月間目標</div>
+    <div class="top-wrap">
+      <p class="top-tit">期間</p>
+      <p class="top-txt"><%= monthly_goal.term_start %> 〜 <%= monthly_goal.term_end %></p>
+      <p class="top-tit">今月の目的</p>
+      <p class="top-txt"><%= monthly_goal.monthly_aim %></p>
+      <p class="top-tit">今月の目標数値、指標</p>
+      <p class="top-txt"><%= monthly_goal.monthly_indicator %></p>
+      <%= link_to new_monthly_goal_path, class: "top-btn btn btn-danger _cubic" do %>
+          月間目標作成<i class="fas fa-angle-right fa-position-right"></i>
+      <% end %>
+      <%= link_to goal_user_path(current_user), class: "top-btn btn btn-danger _cubic" do %>
+          月間目標一覧<i class="fas fa-angle-right fa-position-right"></i>
+      <% end %>
     </div>
-</div>
-<div class="row justify-content-around">
-    <%= link_to "目標を作成", new_goal_path, class: "btn btn-primary" %>
-    <%= link_to "目標一覧", goal_user_path(current_user), class: "btn btn-primary" %>
-    <%= link_to "記事を作成", new_article_path, class: "btn btn-primary" %>
+  </div>
+  <div class="top-item _action col-md-5">
+    <div class="tnav">
+      <div class="tnav-inner nav nav-tabs nav-fill">
+          <%= link_to "月間", "#", class: 'tnav-link nav-link' %>
+          <%= link_to "週間", "#", class: 'tnav-link nav-link' %>
+          <%= link_to "日間", "#", class: 'tnav-link nav-link' %>
+      </div>
+    </div>
+    <div class="top-wrap">
+      <p class="top-tit">1ヶ月間のアクション</p>
+      <p class="top-txt">
+          <%= monthly_goal.goal_actions.first.content %>
+          <%= monthly_goal.goal_actions.first.number %>
+      </p>
+    </div>
+  </div>
 </div>
 <div class="sec row">
-    <aside class="snav col-md-4 list-group">
-        <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
-        <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>
-    </aside>
-    <div class="content col-md-8">
-        <div class="ch user_info">
-            <%= render 'shared/user_info' %>
-        </div>
-        <div class="cf post_form">
-            <%= render 'shared/post_form' %>
-        </div>
-        <p class="content-tit">Post Feed</p>
-        <%= render 'shared/feed' %>
+  <aside class="snav col-md-4 list-group list-group-flush">
+    <div class="snav-wrap">
+      <span class="list-group-item">メニュー</span>
+      <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
+      <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
     </div>
+  </aside>
+  <div class="content col-md-8">
+    <div class="content-inner">
+      <div class="ch">
+          <%= render 'shared/user_info' %>
+      </div>
+      <div class="cf">
+          <%= render 'shared/post_form' %>
+      </div>
+    </div>
+    <p class="content-tit">つぶやき</p>
+    <%= render 'shared/feed' %>
+  </div>
 </div>

@@ -1,11 +1,17 @@
-<li class="article-<%= article.id %> article-count">
-  <div class="article-user">
-    <%= article.user.name %>
+<li class="article-<%= article.id %> article-li">
+  <div class="article-inner">
+    <div class="article-avatar">
+      <%= link_to article.user do %>
+        <%= image_tag article.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
+      <% end %> 
+    </div>
+    <div class="article-user">
+      <%= article.user.name %>
+    </div>
   </div>
-  <%= link_to article do %>
+  <%= link_to article, class: "article-link" do %>
     <div class="article-content">
-      <p><%= article.title %></p>
-      <p><%= article.content %></p>
+      <p class="article-tit"><%= article.title %></p>
     </div>
   <% end %>
 </li>

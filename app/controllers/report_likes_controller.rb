@@ -1,4 +1,6 @@
 class ReportLikesController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :correct_user, only: :destroy
   
   def create
     @report = Report.find(params[:report_id])
@@ -20,4 +22,11 @@ class ReportLikesController < ApplicationController
       redirect_to request.referer
     end
   end
+  
+    private
+    
+    def correct_user
+      @user = ReportLike.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
+    end
 end

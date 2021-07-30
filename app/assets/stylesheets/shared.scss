@@ -1,0 +1,99 @@
+@import 'variables';
+
+.feeds{
+  list-style: none;
+  padding: 0;
+}
+
+.content{
+  /* user_info */
+  .ch{
+    &-inner{
+      display: flex;
+    }
+    &-avatar{
+      
+    }
+    &-h1{
+      margin-left: 20px;
+      padding-top: 10px;
+    }
+  }
+  /* post_form */
+  &-form{
+      
+  }
+  &-txta{
+    textarea{
+      height: 100px;
+      margin-bottom: 10px; 
+    }
+  }
+  &-wrap{
+    display: flex;
+    justify-content: space-between;
+  }
+  &-image{
+    label{
+      font-size: 1.5em;
+      color: #007bff;
+      cursor: pointer;
+      &:hover{
+        opacity: 0.5;
+      }
+    }
+    input{
+      display: none;
+    }
+  }
+  &-btn{
+    width: 80px;
+  }
+  /* report_form */
+  .aim{
+    &-tit{
+      @include title;
+      @include aim-color;
+    }
+    &-txt{
+      
+    }
+  }
+  
+  .action{
+    &-tit{
+      @include title;
+      @include aim-color;
+    }
+    &-list{
+      padding-left: 20px;
+    }
+    &-item{
+      
+    }
+    &-inner{
+      display: flex;
+      justify-content: space-between;
+    }
+    &-wrap{
+      
+    }
+    &-box{
+      input{
+        width: 60px;
+      }
+    }
+  }
+  
+  .realize{
+    &-label{
+      @include title;
+      @include aim-color;
+      margin-bottom: 1rem;
+    }
+    textarea{
+     height: 100px; 
+    }
+  }
+}
+

@@ -1,0 +1,13 @@
+<% provide(:title, "#{@tag.name} タグを含む掲示板一覧") %>
+<h1 class="text-center">記事一覧</h1>
+
+<% @tags.each do |tag| %>
+  <span>
+    <%= link_to tag.name, tag_boards_path(tag) %>
+    <%= "(#{tag.boards.count})" %>
+  </span>
+<% end %>
+<p><%= "#{@tag.name}" %> タグを含む記事一覧</p>
+<% @boards.each do |board| %>
+  <%= link_to board.title, board %>
+<% end %>

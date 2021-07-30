@@ -1,39 +1,47 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= @user.name %>
-      </h1>
+  <aside class="user-aside col-md-4">
+    <section class="user-sec">
+      <div class="user-avatar">
+        <%= link_to @user do %>
+          <%= image_tag @user.avatar.variant(gravity: :center, resize: "160x160^", crop: "160x160+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <h1 class="text-center"><%= @user.name %></h1>
     </section>
   </aside>
-  <div class="col-md-8">
-    <ul class="tab nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "目標一覧", goal_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "つぶやき", user_path(@user), class: "nav-link" %>
-      </li>
-    </ul>
-    <ul class="tab nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "いいねした日報", liked_reports_user_path(@user), class: "nav-link" %>
-      </li>
-    </ul>
-    <% if @user.reports.any? %>
-    
-    <ul class="report">
-      <%= render @liked_reports %>
-    </ul>
-    <%= paginate @liked_reports %>
-    <% end %>
-    <%= link_to "日報を作成する", new_report_path, class: 'btn btn-primary ml-4' %>
+  <div class="user-content col-md-7">
+    <div class="user-inner">
+      <ul class="tnav nav nav-tabs">
+        <li class="tnav-item nav-item">
+          <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="unav nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいねした日報", liked_reports_user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <% if @user.reports.any? %>
+      
+      <ul class="reports">
+        <%= render @liked_reports %>
+      </ul>
+      <%= paginate @liked_reports %>
+      <% end %>
+      <%= link_to "日報を作成する", new_report_path, class: 'btn btn-primary ml-4' %>
+    </div>
   </div>
 </div>

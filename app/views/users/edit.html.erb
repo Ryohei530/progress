@@ -1,9 +1,33 @@
 <% provide(:title, "Edit User") %>
 <% provide(:button_text, "編集") %>
-<h1 class="text-center">プロフィールの編集</h1>
 
 <div class="row">
-  <div class="col-md-6 offset-md-3">
-    <%= render 'form' %>
+  <div class="col-md-3 ml-3">
+    <nav class="nav nav-pills flex-column">
+      <%= link_to "プロフィール", edit_user_path(@user), class: 'snav-link nav-item nav-link active' %>
+      <%= link_to "メールアドレス", email_user_path(@user), class: 'snav-link nav-item nav-link' %>
+      <%= link_to "パスワード", password_user_path(@user), class: 'snav-link nav-item nav-link' %>
+    </nav>
+  </div>
+  <div class="col-md-6">
+    <h1 class="text-center">プロフィール</h1>
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: @user %>
+      
+      <div class="row justify-content-center mb-3">
+        <%= image_tag @user.avatar.variant(gravity: :center, resize: "100x100^", crop: "100x100+0+0").processed, class: "_rounded" %>
+      </div>
+      <div class="d-block text-center">
+        <%= f.label :avatar, "画像を編集する", class: 'btn btn-outline-primary' %>
+      </div>
+      <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'd-none' %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+      
+      <%= f.label :bio , "自己紹介" %>
+      <%= f.text_area :bio, class: 'form-control' %>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>

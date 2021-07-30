@@ -10,13 +10,24 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'static_pages';
 @import 'goals';
 @import 'reports';
+@import 'posts';
+@import 'shared';
+@import 'articles';
+@import 'boards';
+@import 'users';
+@import 'simple_calendar';
+@import 'bookmarks';
 
 /* mixins, variables, etc */
 
-$footer-bg: #d1d1d1;
-$state-danger-text: #DD5555;
-$gray-light: #b7bdb8;
-$container-bg: #EEEEEE;
+@import 'variables';
+
+// $theme-color: #dc3545;
+// $footer-bg: #d1d1d1;
+// $state-danger-text: #DD5555;
+// $gray-light: #b7bdb8;
+// $container-bg: #EEEEEE;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -35,7 +46,7 @@ body{
   background-color: $container-bg;
   &-inner{
     background-color: #fff;
-    padding: 30px 0;
+    padding: 40px 0;
   }
 }
 
@@ -55,10 +66,6 @@ body{
   margin-top: 20px;
 }
 
-.user_info{
-  margin-left: 20px;
-}
-
 /* header */
 
 #logo{
@@ -73,17 +80,6 @@ body{
         text-decoration: none;
     }
 }
-
-/* content */
-
-
-/* main *
-
-    /* side-navigation */
-    
-    /* thread */
-    
-
 
 
 /* footer */
@@ -154,33 +150,47 @@ input {
   margin: 0;
 }
 
-/* Posts */
+/* comment */
 
-.posts {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+.comment{
+  &-inner{
+    
   }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
+  &-list{
+    list-style-type: none;
+    border: 1px solid #e8e8e8;
+    padding: 20px 30px;
+    margin-bottom: 50px;
   }
-  .content {
-    display: block;
-    margin-left: 60px;
+  &-item{
+    
   }
-  .timestamp {
+  &-avatar{
+    margin-bottom: 10px;
+  }
+  &-user{
+    font-size: 1.2em;
+    margin-left: 10px;
+  }
+  &-content{
+    
+  }
+  &-date{
     color: $gray-light;
-    display: block;
-    margin-left: 60px;
+    margin-bottom: 30px;
   }
-}
   
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
+  
+  &-btn{
+    
+  }
+  &-form{
+    border: 1px solid #e8e8e8;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    textarea{
+      height: 100px;
+      margin-bottom: 10px;
+    }
   }
 }

@@ -1,34 +1,46 @@
-<%= form_with(model: @report, local: true) do |f| %>
+<%= form_with(model: @report, local: true, class: "content-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   
+  <% monthly_goal = current_user.monthly_goals.last %>
+  <%= f.hidden_field :monthly_goal_id, value: monthly_goal.id %>
   <div class="aim">
-    <p>今月の目的</p>
-    <%= current_user.goals.find(9).monthly_aim %>
+    <p class="aim-tit">今月の目的</p>
+    <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+    <p class="aim-tit">今月の目標指標</p>
+    <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
   </div>
   
-  <div class="indicator">
-    <p>今月の目標指標</p>
-    <%= current_user.goals.find(9).monthly_indicator %>
+  <div class="action">
+    <p class="action-tit">今日達成したアクション</p>
+    <ul class="action-list">
+      <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
+      <li class="action-item">
+        <div class="action-inner">
+          <div class="action-wrap">
+            <%= rep.label :number, monthly_goal.goal_actions.first.content %>
+          </div>
+          <div class="action-box">
+            <%= rep.number_field :number %> / <%= monthly_goal.goal_actions.first.number %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
   </div>
     
-    <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
-    <div class="action">
-      <%= rep.label :number, current_user.goals.find(9).goal_actions.first.content %>
-      <%= rep.number_field :number %>
-      /<%= current_user.goals.find(9).goal_actions.first.number %>
-    </div>
-    <% end %>
-    
-  <div class="field">
-    <% f.label :content, "感想、気付き" %>
+  <div class="content-texa realize">
+    <%= f.label :content, "感想、気付き", class: "realize-label" %>
     <%= f.text_area :content, placeholder: "今日の成果を報告しよう！" %>
   </div>
-  
-  <span class="image">
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %> 
-  </span>
-  
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <div class="content-wrap">
+    <span class="content-image">
+      <%= f.label :image do %>
+        <i class="far fa-image"></i>
+      <% end %>
+      <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %> 
+    </span>
+    <%= f.submit yield(:button_text), class: "content-btn btn btn-primary" %>
+  </div>
 <% end %>
 
 <script type="text/javascript">

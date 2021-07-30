@@ -1,9 +1,18 @@
 <% provide(:title, "ランキング") %>
 <h1 class="text-center">継続日数ランキング</h1>
-<ol>
-    <li>アンパンマン　１０日目</li>
-    <li>ジョジョ　７日目</li>
-    <li>トノサマン　５日目</li>
-    <li>WOL ４日目</li>
-    <li>ブライアン　２日目</li>
-</ol>
+
+<div class="rank row justify-content-center">
+    <ol class="rank-list">
+      <% @rank_rdays.take(10).each.with_index(1) do |rank_rday, n| %>
+        <li class="rank-item rank-<%= n %>">
+        <% if n <= 3 %>  
+           <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "90x90^", crop: "90x90+0+0").processed, class: '_rounded' %>
+        <% else %>  
+           <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
+        <% end %>  
+          <%= rank_rday.user.name %>
+          <span><%= rank_rday.r_days %>日</span>
+        </li>
+      <% end %>
+    </ol>
+</div>

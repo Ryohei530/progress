@@ -1,0 +1,221 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+@mixin border {
+  border: 2px solid #DC3545;
+  // border-radius: 10px;
+}
+
+@mixin rank-img {
+  content: '';
+  display: inline-block;
+  background-size: contain;
+  vertical-align: middle;
+  margin-left: -85px;
+}
+
+@mixin rank1-3 {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+
+
+.top{
+  margin: 30px 30px 80px;
+  // border: 2px solid #D8D8DB;
+  // border-radius: 10px;
+  justify-content: space-around;
+  &-h1{
+    margin-bottom: 50px;
+    font-size: 1.5em;
+    @include border;
+    padding: 0px;
+  }
+  &-btit{
+    background-color: $theme-color;
+    color: #fff;
+    padding: 0.5rem 1rem;
+  }
+  &-item{
+    font-size: 1.5em;
+    @include border;
+    padding: 0px;
+  }
+  &-tit{
+    @include title;
+    @include aim-color;
+    font-size: 1em;
+    padding: 0.675rem 0.75rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &-wrap{
+    padding: 20px;
+  }
+  &-btn{
+    border-radius: 100vh;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    &._cubic{
+      border-bottom: 5px solid #9f000c;
+      &:hover{
+        margin-top: 3px;
+        border-bottom: 2px solid #9f000c;
+      }
+    }
+  }
+
+  .fa-position-right {
+    position: absolute;
+    top: calc(50% - .5em);
+    right: 1rem;
+  }
+  .tnav{
+    background-color: $theme-color;
+    &-inner{
+      
+    }
+    &-link{
+      color: #fff;
+      &:hover{
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.sec{
+  margin: 10px;
+  .snav{
+    padding-left: 40px;
+    margin-top: 40px;
+      
+    &-wrap{
+      span{
+        color: #fff;  
+        background-color: $theme-color;
+      }
+    }
+    &-link{
+      font-size: 1.2em;
+    }
+  }
+  .content{
+    padding: 40px;
+    &-inner{
+      border: 1px solid #e8e8e8;
+      padding: 20px 30px;
+      margin-bottom: 20px;
+    }
+    .ch{
+      
+    }
+    .cf{
+      
+    }
+    &-tit{
+      font-size: 2.2em;
+    }
+  }
+}
+
+/* rank */
+.rank{
+  &-list{
+    font-size: 1.7em;
+    padding: 0;
+    margin-left: 150px;
+  }
+  &-item{
+    padding: 30px;
+    img{
+      margin: 0 80px 0 40px;
+    }
+    span{
+      margin-left: 80px;
+      float: right;
+    }
+  }
+  &-1{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 80px;
+      height: 80px;
+      background-image: url(" <%= asset_path('rank1.png') %>");
+    }
+  }
+  &-2{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 80px;
+      height: 70px;
+      background-image: url("<%= asset_path('rank2.png') %>");
+      }
+  }
+  &-3{
+    @include rank1-3;
+    &:before{
+      @include rank-img;
+      width: 75px;
+      height: 68px;
+      background-image: url("<%= asset_path('rank3.png') %>");
+      }
+  }
+}
+
+/* home not logged in */
+
+.nltop{
+  color: #fff;
+  background-image: url("<%= asset_path('ppl-discussion.jpg') %>");
+  background-size: cover;
+  margin-top: -40px;
+  &-inner{
+    background-color: rgba(220, 53, 70, 0.4);
+    padding: 30px 0;
+  }
+  &-tit{
+    font-family: 'Holtwood One SC', serif;
+  }
+  &-txt{
+    font-family: 'Kosugi Maru', sans-serif;
+    
+  }
+  &-wrap{
+    margin: 20px auto;
+  }
+  &-btn{
+    &._btn-green{
+      background-color: rgba(108, 217, 154, 1);
+      &:hover{
+        background-color: #218838;
+      }
+    }
+    &._btn-red{
+      background-color: rgba(255, 102, 133, 1);
+      &:hover{
+        background-color: #dc3545;
+      }
+    }
+    &._ml-btn{
+      margin-left: 10px;
+    }
+  }
+  .form{
+    margin: 0 auto;
+    &-header{
+      padding: 10px;
+      background-color: rgba(111, 196, 252, 1);
+      border-radius: 5px 5px 0 0;
+      border: 1px solid rgba(111, 196, 252, 1);
+    }
+    &-main{
+      background-color: rgba(217, 208, 208, 0.4);
+      padding: 20px 40px;
+    }
+  }
+}

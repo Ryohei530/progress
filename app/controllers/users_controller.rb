@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
   
+  
   def index
     @users = User.page(params[:page]).per(20)
   end
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
   end
 
   def new
@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.goal.build.save
       log_in @user
       flash[:success] = "登録が完了しました！"
       redirect_to @user
@@ -31,11 +32,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  def email
+    @user = User.find(params[:id])
+  end
+  
+  def password
+    @user = User.find(params[:id])
+  end
+  
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "プロフィールが更新されました"
-      redirect_to @user
+      redirect_to request.referrer
     else
       render 'edit'
     end
@@ -49,12 +58,18 @@ class UsersController < ApplicationController
   
   def goal 
     @user = User.find(params[:id])
-    @goals = @user.goals.all
+    @monthly_goals = @user.monthly_goals.all
   end
   
   def report
     @user = User.find(params[:id])
     @reports = @user.reports.page(params[:page])
+    @running_day = RunningDay.last
+  end
+  
+  def post
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page])
   end
   
   def liked_posts
@@ -65,18 +80,18 @@ class UsersController < ApplicationController
   def liked_reports
     @user = User.find(params[:id])
     @liked_reports = @user.liked_reports.page(params[:page])
+    @running_day = RunningDay.last
   end
   
     private
       
       def user_params
         params.require(:user).permit(:name, :email, :password,
-          :password_confirmation)
+          :password_confirmation, :avatar)
       end
       
       def correct_user
         @user = User.find(params[:id])
         redirect_to(root_url) unless current_user?(@user)
       end
-      
 end

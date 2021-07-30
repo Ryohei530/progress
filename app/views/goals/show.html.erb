@@ -1,2 +1,73 @@
-<h1>Goals#show</h1>
-<p>Find me in app/views/goals/show.html.erb</p>
+<div class="goal-outer">
+  <div class="goal-head">
+    <%= link_to goals_path do %>
+      <i class="fas fa-arrow-left"></i> 
+    <% end %>  
+      長期目標
+  </div>
+  <li id="goal-<%= @goal.id %>" class="goal-li">
+    <div class="goal-wrap">
+      <div class="goal-avatar">
+        <%= link_to @goal.user do %>
+          <%= image_tag @goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <span class="goal-user"><%= link_to @goal.user.name, @goal.user %></span>
+    </div>
+    <% monthly_goal = @goal.user.monthly_goals.last %>
+    <div class="goal-inner">
+      <div class="goal-content">
+        <div class="aim">
+          <p class="aim-tit">期間</p>
+          <p class="aim-txt"><%= @goal.term_start %> 〜 <%= @goal.term_end %></p>
+          <p class="aim-tit">目的、得たい結果</p>
+          <p class="aim-txt"><%= @goal.aim %></p>
+          <p class="aim-tit">目標数値、指標</p>
+          <p class="aim-txt"><%= @goal.indicator %></p>
+          <p class="aim-tit">１ヶ月間の目的</p>
+          <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+          <p class="aim-tit">１ヶ月間の目標数値、指標</p>
+          <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+        </div>
+        <div class="action">
+          <p class="action-tit">1ヶ月間のアクション</p>
+          <ul class="action-list">
+            <% monthly_goal.goal_actions.each do |action| %>
+              <li class="action-item">
+                <div class="action-inner">
+                  <div class="action-wrap">
+                    <%= action.content %>
+                  </div>
+                  <div class="action-box">
+                    <%= action.number %> / <%= action.number %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="goal-box">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <span class="goal-timestamp">
+            <%= time_ago_in_words(@goal.created_at) %> ago
+          </span>
+          <% if current_user?(@goal.user) %>
+            <%= link_to "削除", @goal, method: :delete,
+                                      data: { confirm: "本当に削除しますか？" },
+                                      class: "goal-dlt dlt-goal-#{@goal.id} btn btn-outline-danger btn-sm" %>
+          <% end %>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center">
+          <div class="goal-comment">
+            <%= link_to @goal do %>
+              <i class="far fa-comment"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</div>

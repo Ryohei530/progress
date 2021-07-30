@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :refresh_redirect, only: [:index]
-  before_action :correct_user, only: [:destroy]
+  before_action :refresh_redirect, only: :index
+  before_action :correct_user, only: :destroy
   
   def index
   end
@@ -20,6 +20,9 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @comment = PostComment.new
+    @comments = PostComment.includes(:user).where(post_id: params[:id]).where(reply_id: nil)
+    @replies = PostComment.includes(:user).where(post_id: params[:id]).where.not(reply_id: nil)
   end
   
   def destroy

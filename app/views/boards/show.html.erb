@@ -1,2 +1,104 @@
-<h1>Boards#show</h1>
-<p>Find me in app/views/boards/show.html.erb</p>
+<% provide(:title, "掲示板") %>
+<% provide(:button_text, "投稿") %>
+
+<div class="board row">
+  <div class="col-md-3">
+    
+  </div>
+  <div class="board-main col-md-6">
+    <div class="board-inner">
+      <div class="board-avatar">
+        <%= link_to @board.user do %>
+          <%= image_tag @board.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+        <% end %>
+        <span class="board-user"><%= @board.user.name %></span>
+      </div>
+      <div class="board-config">
+        <%= link_to "編集", edit_board_path, class: "btn btn-outline-primary" %>
+        <%= link_to "削除", board_path, class: "btn btn-outline-danger",
+                                          method: :delete,
+                                          data: { confirm: "本当に削除しますか？" } %>
+      </div>
+    </div>
+    <p class="board-stit"><%= @board.title %></p>
+    <p class="board-content"><%= @board.content %></p>
+  </div>
+</div>
+<div class="row justify-content-around">
+</div>
+<div class="comment row">
+  <div class="comment-inner col-6 offset-3">
+    <h3>コメント</h3>
+    <% if @comments.present? %>  
+      <ul class="comment-list">
+        <% @comments.each do |comment| %>
+          <li class="comment-item">
+            <div class="comment-avatar">
+              <%= link_to comment.user do %>
+                <%= image_tag comment.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
+              <% end %> 
+              <span class="comment-user"><%= comment.user.name %></span>
+              <% if logged_in? %>
+                <% if comment.user_id == current_user.id %>
+                    <%= link_to "削除", board_board_comment_path(@board, comment), method: :delete, class: "btn btn-outline-danger" %>
+                <% end %>
+              <% end %> 
+            </div>
+            <p class="comment-content"><%= comment.content %></p>
+            <p class="comment-date"><%= time_ago_in_words(comment.created_at) %></p>
+            <% replies_to_comment = @replies.where(reply_id: comment.id) %>
+            <% if replies_to_comment %>
+              <ul class="comment-list ml-3">
+                <% replies_to_comment.each do |reply| %>
+                  <li class="comment-item">
+                    <div class="comment-avatar">
+                      <%= link_to reply.user do %>
+                        <%= image_tag reply.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
+                      <% end %> 
+                      <span class="comment-user"><%= reply.user.name %></span>
+                      <% if logged_in? %>
+                        <% if reply.user_id == current_user.id %>
+                          <%= link_to "削除", board_board_comment_path(@board, reply), method: :delete, class: "btn btn-outline-danger" %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <p class="comment-content"><%= reply.content %></p>
+                    
+                    <%= render 'board_comments/reply_form', comment: reply %>
+                    
+                    <% replies_to_reply = @replies.where(reply_id: reply.id) %>
+                    <% if replies_to_reply.present? %>
+                      <ul class="comment-list ml-3">
+                        <% replies_to_reply.each do |rep| %>
+                          <li class="comment-item">
+                            <div class="comment-avatar">
+                              <%= link_to rep.user do %>
+                                <%= image_tag rep.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
+                              <% end %> 
+                              <span class="comment-user"><%= rep.user.name %></span>
+                              <% if logged_in? %>
+                                <% if reply.user_id == current_user.id %>
+                                  <%= link_to "削除", board_board_comment_path(@board, rep), method: :delete, class: "btn btn-outline-danger" %>
+                                <% end %>
+                              <% end %>
+                            </div>
+                            <p class="comment-content"><%= rep.content %></p>
+                            <%= render 'board_comments/reply_form', comment: rep %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                    
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+            
+            <%= render 'board_comments/reply_form', comment: comment %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %> 
+    <%= render 'board_comments/comment_form' %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class GoalAction < ApplicationRecord
-  belongs_to :goal
-  validates :content, presence: true
-  validates :number, presence: true
-  #validates :goal_id, presence: true 
+  belongs_to :monthly_goal
+  # validates :content, presence: true
+  # validates :number, presence: true
+  #validates :monthly_goal_id, presence: true 
 end

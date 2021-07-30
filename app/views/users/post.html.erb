@@ -1,0 +1,47 @@
+<% provide(:title, @user.name) %>
+<div class="user row">
+  <aside class="user-aside col-md-4">
+    <section class="user-sec">
+      <div class="user-avatar">
+        <%= link_to @user do %>
+          <%= image_tag @user.avatar.variant(gravity: :center, resize: "160x160^", crop: "160x160+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <h1 class="text-center"><%= @user.name %></h1>
+      <%= link_to "プロフィールを編集する", edit_user_path(@user), class: "btn btn-outline-primary" %>
+    </section>
+  </aside>
+  <div class="user-content col-md-7">
+    <div class="user-inner">
+      <ul class="tnav nav nav-tabs">
+        <li class="tnav-item nav-item">
+          <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="tnav-item nav-item">
+          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="unav nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいねしたつぶやき", liked_posts_user_path(@user), class: "nav-link" %>
+        </li>
+      </ul>
+      <% if @user.posts.any? %>
+      
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= paginate @posts %>
+      <% end %>
+    </div>
+  </div>
+</div>
