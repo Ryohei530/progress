@@ -1,10 +1,12 @@
 <% provide(:title, "1ヶ月の目標") %>
-<li id="goal-<%= @monthly_goal.id %>" class="goal-li">
-  <div class="goal-wrap">
-    <div class="goal-avatar"></div>
-    <span class="goal-user"><%= link_to @monthly_goal.user.name, @monthly_goal.user %></span>
-  </div>
-  <%= link_to(@monthly_goal, class: "goal-link") do %>
+<div class="goal-outer">
+  <li id="goal-<%= @monthly_goal.id %>" class="goal-li">
+    <div class="goal-wrap">
+      <div class="goal-avatar">
+        <%= image_tag @monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+      </div>
+      <span class="goal-user"><%= link_to @monthly_goal.user.name, @monthly_goal.user %></span>
+    </div>
     <div class="goal-inner">
       <div class="goal-content">
         <div class="aim">
@@ -34,25 +36,20 @@
         </div>
       </div>
     </div>
-  <% end %>
-  <div class="goal-box">
-    <div class="row">
-      <div class="col d-flex align-items-center">
-        <span class="goal-timestamp">
-          <%= time_ago_in_words(@monthly_goal.created_at) %> ago
-        </span>
-        <% if current_user?(@monthly_goal.user) %>
-          <%= link_to "削除", @monthly_goal, method: :delete,
-                                    data: { confirm: "本当に削除しますか？" },
-                                    class: "goal-dlt dlt-goal-#{@monthly_goal.id} btn btn-outline-danger btn-sm" %>
-          <%= link_to "編集", edit_monthly_goal_path(@monthly_goal) %>
-        <% end %>
-      </div>
-      <div class="col d-flex justify-content-end align-items-center">
-        <div class="goal-comment">
-          <i class="far fa-comment"></i>
+    <div class="goal-box">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <span class="goal-timestamp">
+            <%= time_ago_in_words(@monthly_goal.created_at) %> ago
+          </span>
+          <% if current_user?(@monthly_goal.user) %>
+            <%= link_to "削除", @monthly_goal, method: :delete,
+                                      data: { confirm: "本当に削除しますか？" },
+                                      class: "goal-dlt dlt-goal-#{@monthly_goal.id} btn btn-outline-danger btn-sm" %>
+            <%= link_to "編集", edit_monthly_goal_path(@monthly_goal), class: 'goal-edit btn btn-outline-danger btn-sm' %>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
-</li>
+  </li>
+</div>

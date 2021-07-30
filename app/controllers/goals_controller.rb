@@ -1,13 +1,9 @@
 class GoalsController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def index
     @goals = Goal.page(params[:page]).per(20)
-  end
-
-  def new
-  end
-
-  def create
   end
 
   def show
@@ -37,5 +33,10 @@ class GoalsController < ApplicationController
         :term_start, 
         :term_end, 
         )
+    end
+    
+    def correct_user
+      @user = Goal.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end

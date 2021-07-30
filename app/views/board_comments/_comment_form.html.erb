@@ -1,8 +1,10 @@
-<%= form_with(model: [@board, @comment], local: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-
-  <%= f.label :content, "コメント" %>
-  <%= f.text_area :content, class: 'form-control' %>
+<div class="comment-form">
+  <%= form_with(model: [@board, @comment], local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
   
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+    <%= f.label :content, "コメント" %>
+    <%= f.text_area :content, class: 'form-control' %>
+    
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>
+</div>

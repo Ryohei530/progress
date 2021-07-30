@@ -22,14 +22,14 @@ Rails.application.routes.draw do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  resources :goals
+  resources :goals, except: [:new, :create]
   resources :monthly_goals
   resources :reports do
     resources :report_likes, only: [:create, :destroy]
     resources :report_comments, only: [:create, :destroy]
   end
   resources :articles do
-    resources :article_comments, only: :create
+    resources :article_comments, only: [:create, :destroy]
     resources :bookmarks, only: [:create, :destroy]
     collection do
       get 'search'

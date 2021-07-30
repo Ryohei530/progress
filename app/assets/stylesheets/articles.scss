@@ -61,6 +61,7 @@
 }
 
 .article{
+  margin-bottom: 30px;
   &-main{
     
   }
@@ -71,6 +72,7 @@
   }
   &-inner{
     display: flex;
+    margin-bottom: 20px;
   }
   &-avatar{
     
@@ -84,7 +86,7 @@
     padding-top: 10px;
   }
   &-bookmark{
-    padding: 16px 0;
+    padding: 5px 0;
     .bookbtn{
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
@@ -121,7 +123,7 @@
         left: 0;
       
         width: 50px;
-        padding: 0.7rem 0;
+        padding: 0.9rem 0;
       
         text-align: center;
         letter-spacing: 0;
@@ -153,11 +155,14 @@
       color: black;
     }
   }
-  &-content{
-    
-  }
   &-tit{
     font-size: 1.3em;
     
+  }
+  &-stit{
+    font-size: 1.8em;
+  }
+  &-content{
+    font-size: 1.3em;
   }
 }

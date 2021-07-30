@@ -17,6 +17,22 @@
 }
 
 .goal{
+  &-outer{
+    padding: 0 100px;
+  }
+  &-head{
+    font-size: 1.6em;
+    border-top: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    padding: 20px;
+    a{
+      text-decoration: none;
+    }
+    i{
+      margin-right: 20px;
+    }
+  }
   &-li{
     list-style: none;
     border: 1px solid #e8e8e8;
@@ -82,6 +98,9 @@
     display: block;
   }
   &-dlt{
+    margin-left: 20px;
+  }
+  &-edit{
     margin-left: 20px;
   }
   &-comment{

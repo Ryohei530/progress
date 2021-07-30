@@ -8,6 +8,10 @@
 }
 
 .board{
+  margin-bottom: 30px;
+  &-main{
+    
+  }
   &-li{
     list-style: none;
     border: 2px solid #e8e8e8;
@@ -15,6 +19,7 @@
   }
   &-inner{
     display: flex;
+    margin-bottom: 20px;
   }
   &-avatar{
     
@@ -23,17 +28,24 @@
     font-size: 1.7em;
     margin-left: 10px;
   }
+  &-config{
+    margin: 0 30px 0 20px;
+    padding-top: 10px;
+  }
   &-link{
     color: black;
     &:hover{
       color: black;
     }
   }
-  &-content{
-    
-  }
   &-tit{
     font-size: 1.3em;
     
+  }
+  &-stit{
+    font-size: 1.8em;
+  }
+  &-content{
+    font-size: 1.3em;
   }
 }

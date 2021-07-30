@@ -9,9 +9,13 @@
 }
 
 .report{
+  &-outer{
+    padding: 0 180px;
+  }
   &-li{
     padding: 0px;
     border: 1px solid #e8e8e8;
+    list-style-type: none;
     a{
       color: black;
     }
@@ -32,6 +36,7 @@
   }
   &-user{
       margin-left: 20px;
+      padding-top: 10px;
     }
   &-rdays{
     
@@ -46,7 +51,7 @@
   }
   &-inner{
     margin-left: 60px;
-    padding: 0 20px 0;
+    padding: 0 30px 0px;
   }
   &-content{
     display: block;

@@ -1,4 +1,6 @@
 class PostCommentsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :correct_user, only: :destroy
   
   def create
     @post = PostComment.new(post_comment_params)
@@ -22,5 +24,9 @@ class PostCommentsController < ApplicationController
                                            :post_id).merge(user_id: current_user.id,
                                                            post_id: params[:post_id])
     end
-  
+    
+    def correct_user
+      @user = PostComment.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
+    end
 end

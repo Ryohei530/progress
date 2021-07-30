@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  
   def index
     @articles = Article.page(params[:page])
     @tags = Tag.joins(:article_tags).distinct
@@ -26,8 +29,10 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find(params[:id])
-    @comment = current_user.article_comments.build
-    @comment.article_id = params[:id]
+    if logged_in?
+      @comment = current_user.article_comments.build
+      @comment.article_id = params[:id]
+    end
     @article_tags = @article.tags
   end
 
@@ -67,5 +72,10 @@ class ArticlesController < ApplicationController
     
     def article_params
       params.require(:article).permit(:title, :content)
+    end
+    
+    def correct_user
+      @user = Article.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end

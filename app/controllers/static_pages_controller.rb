@@ -1,9 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
-    @post = current_user.posts.build
-    @feed_items = current_user.feed.page(params[:page])
+      @post = current_user.posts.build
     end
+    
+    @feed_items = Post.all.page(params[:page])
   end
 
   def rank

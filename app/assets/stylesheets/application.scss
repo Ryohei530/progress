@@ -16,6 +16,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'boards';
 @import 'users';
 @import 'simple_calendar';
+@import 'bookmarks';
 
 /* mixins, variables, etc */
 
@@ -45,7 +46,7 @@ body{
   background-color: $container-bg;
   &-inner{
     background-color: #fff;
-    padding: 30px 0;
+    padding: 40px 0;
   }
 }
 
@@ -79,17 +80,6 @@ body{
         text-decoration: none;
     }
 }
-
-/* content */
-
-
-/* main *
-
-    /* side-navigation */
-    
-    /* thread */
-    
-
 
 
 /* footer */
@@ -158,4 +148,49 @@ input {
 .users{
   list-style: none;
   margin: 0;
+}
+
+/* comment */
+
+.comment{
+  &-inner{
+    
+  }
+  &-list{
+    list-style-type: none;
+    border: 1px solid #e8e8e8;
+    padding: 20px 30px;
+    margin-bottom: 50px;
+  }
+  &-item{
+    
+  }
+  &-avatar{
+    margin-bottom: 10px;
+  }
+  &-user{
+    font-size: 1.2em;
+    margin-left: 10px;
+  }
+  &-content{
+    
+  }
+  &-date{
+    color: $gray-light;
+    margin-bottom: 30px;
+  }
+  
+  
+  &-btn{
+    
+  }
+  &-form{
+    border: 1px solid #e8e8e8;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    textarea{
+      height: 100px;
+      margin-bottom: 10px;
+    }
+  }
 }

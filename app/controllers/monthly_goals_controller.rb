@@ -1,4 +1,6 @@
 class MonthlyGoalsController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def new
     @monthly_goal = current_user.monthly_goals.build
@@ -50,5 +52,10 @@ class MonthlyGoalsController < ApplicationController
         :term_end, 
         goal_actions_attributes: [:content, :number, :_destroy, :id]
         )
+    end
+    
+    def correct_user
+      @user = MonthlyGoal.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end

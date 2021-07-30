@@ -1,4 +1,7 @@
 class BoardsController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  
   def index
     @boards = Board.page(params[:page])
     @tags = Tag.joins(:board_tags).distinct
@@ -66,5 +69,10 @@ class BoardsController < ApplicationController
     
     def board_params
       params.require(:board).permit(:title, :content)
+    end
+    
+    def correct_user
+      @user = Board.find(params[:id]).user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end

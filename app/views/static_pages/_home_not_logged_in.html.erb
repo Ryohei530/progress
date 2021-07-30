@@ -1,40 +1,63 @@
-<div class="content">
-    <div class="ch row">
-        <p class="ch-tit col-3">長期目標</p>
-        <p class="ch-txt col-9">2021年○月○日までにららいララらいからのららららららららいかららいからいけいけゴーゴーIELTS7.0を達成する</p>    
+<% provide(:controller, :static_pages) %>
+<% provide(:action, :home) %>
+<% provide(:feed, "post") %>
+
+<div class="nltop jumbotron jumbotron-fluid">
+  <div class="nltop-inner">
+    <h1 class="nltop-tit display-4 text-center">Progress</h1>
+    <p class="nltop-txt lead text-center">
+      みんなと目標を共有して、刺激をもらおう！<br>
+      継続できないを克服する目標達成アプリです
+    </p>
+  </div>
+  <div class="nltop-wrap col-6">
+    <%= link_to "新規登録", new_user_path, class: 'btn btn-success nltop-btn _btn-green' %>
+    <%= link_to "ゲストログイン", new_user_path, class: 'btn btn-danger nltop-btn _btn-red _ml-btn' %>
+  </div>
+  <div class="form col-6">
+    <div class="form-header">
+      ログイン
     </div>
-    
-    <div class="cf row">
-        <div class="goal col-xl-6">
-            <p class="goal-tit">今月の目標</p>
-            <p class="goal-txt">TOEIC700点達成</p>
-        </div>
-        <div class="action col-xl-6">
-            <p class="action-tit">今月のアクション</p>
-            <ul class="action-list">
-                <li class="action-item">アクション１</li>
-                <li class="action-item">アクション２</li>
-                <li class="action-item">アクション３</li>
-            </ul>
-        </div>
-    </div>
+    <div class="form-main">
+      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+        
+        <%= f.label :remember_me, class: "checkbox inline" do %>
+          <%= f.check_box :remember_me %>
+          <span>ログインしたままにする</span>
+        <% end %>
+        
+        <%= f.submit "ログイン", class: "btn btn-primary" %>
+      <% end %>
+    </div> 
+  </div>
 </div>
-<div class="snav-wrapper row">
-    <div class="snav col-6">
-        <ul class="snav-list nav flex-column">
-            <li class="snav-item nav-item">
-                <%= link_to "日報", "#", class: "nav-link" %>
-            </li>
-            <li class="snav-item nav-item">
-                <%= link_to "つぶやき", "#", class: "nav-link" %>
-            </li>
-            <li class="snav-item nav-item">
-                <%= link_to "みんなの目標", "#", class: "nav-link" %>
-            </li>
-        </ul>
+
+<div class="sec row">
+  <aside class="snav col-md-4 list-group list-group-flush">
+    <div class="snav-wrap">
+      <span class="list-group-item">メニュー</span>
+      <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
+      <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
     </div>
-    <div class="thread col-6">
-        <p>投稿する</p>
-        <p>スレッド</p>
+  </aside>
+  <div class="content col-md-8">
+    <% if logged_in? %>
+    <div class="content-inner">
+      <div class="ch">
+          <%= render 'shared/user_info' %>
+      </div>
+      <div class="cf">
+          <%= render 'shared/post_form' %>
+      </div>
     </div>
+    <% end %>
+    <p class="content-tit">つぶやき</p>
+    <%= render 'shared/feed' %>
+  </div>
+</div>
 </div>

@@ -34,22 +34,30 @@
           <% end %>
         </div>
         <div class="post-like">
-          <% like = post.post_likes.find_by(user_id: current_user.id) %>
-          <% if current_user.post_liked?(post) %>
-            <%= link_to post_post_like_path(post, like), method: :delete do %>
-              <span>
-                <i class="fas fa-heart"></i>
-                <%= post.post_likes.count %>
-              </span>
+          <% if logged_in? %>
+            <% like = post.post_likes.find_by(user_id: current_user.id) %>
+            <% if current_user.post_liked?(post) %>
+              <%= link_to post_post_like_path(post, like), method: :delete do %>
+                <span>
+                  <i class="fas fa-heart"></i>
+                  <%= post.post_likes.count %>
+                </span>
+              <% end %>
+            <% else %>
+              <%= link_to post_post_likes_path(post), method: :post do %>
+                <span>
+                  <i class="far fa-heart"></i>
+                  <%= post.post_likes.count %>
+                </span>
+              <% end %>
             <% end %>
           <% else %>
-            <%= link_to post_post_likes_path(post), method: :post do %>
-              <span>
-                <i class="far fa-heart"></i>
-                <%= post.post_likes.count %>
-              </span>
-            <% end %>
+            <span>
+              <i class="far fa-heart"></i>
+              <%= post.post_likes.count %>
+            </span>
           <% end %>
+          
         </div>
       </div>
     </div>

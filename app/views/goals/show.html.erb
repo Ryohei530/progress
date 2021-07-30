@@ -1,10 +1,20 @@
-<li id="goal-<%= @goal.id %>" class="goal-li">
-  <div class="goal-wrap">
-    <div class="goal-avatar"></div>
-    <span class="goal-user"><%= link_to @goal.user.name, @goal.user %></span>
+<div class="goal-outer">
+  <div class="goal-head">
+    <%= link_to goals_path do %>
+      <i class="fas fa-arrow-left"></i> 
+    <% end %>  
+      長期目標
   </div>
-  <% monthly_goal = @goal.user.monthly_goals.last %>
-  <%= link_to(@goal, class: "goal-link") do %>
+  <li id="goal-<%= @goal.id %>" class="goal-li">
+    <div class="goal-wrap">
+      <div class="goal-avatar">
+        <%= link_to @goal.user do %>
+          <%= image_tag @goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <span class="goal-user"><%= link_to @goal.user.name, @goal.user %></span>
+    </div>
+    <% monthly_goal = @goal.user.monthly_goals.last %>
     <div class="goal-inner">
       <div class="goal-content">
         <div class="aim">
@@ -38,24 +48,26 @@
         </div>
       </div>
     </div>
-  <% end %>
-  <div class="goal-box">
-    <div class="row">
-      <div class="col d-flex align-items-center">
-        <span class="goal-timestamp">
-          <%= time_ago_in_words(@goal.created_at) %> ago
-        </span>
-        <% if current_user?(@goal.user) %>
-          <%= link_to "削除", @goal, method: :delete,
-                                    data: { confirm: "本当に削除しますか？" },
-                                    class: "goal-dlt dlt-goal-#{@goal.id} btn btn-outline-danger btn-sm" %>
-        <% end %>
-      </div>
-      <div class="col d-flex justify-content-end align-items-center">
-        <div class="goal-comment">
-          <i class="far fa-comment"></i>
+    <div class="goal-box">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <span class="goal-timestamp">
+            <%= time_ago_in_words(@goal.created_at) %> ago
+          </span>
+          <% if current_user?(@goal.user) %>
+            <%= link_to "削除", @goal, method: :delete,
+                                      data: { confirm: "本当に削除しますか？" },
+                                      class: "goal-dlt dlt-goal-#{@goal.id} btn btn-outline-danger btn-sm" %>
+          <% end %>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center">
+          <div class="goal-comment">
+            <%= link_to @goal do %>
+              <i class="far fa-comment"></i>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</li>
+  </li>
+</div>
