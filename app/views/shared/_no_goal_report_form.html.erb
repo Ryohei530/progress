@@ -1,45 +1,35 @@
 <%= form_with(model: @report, local: true, class: "content-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= hidden_field :running, :start_date %>
-  <% monthly_goal = current_user.monthly_goals.last %>
-  <%= f.hidden_field :monthly_goal_id, value: monthly_goal.id %>
   <div class="aim">
     <p class="aim-tit">今月の目的</p>
-    <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+    <p class="aim-txt">未設定</p>
     <p class="aim-tit">今月の目標指標</p>
-    <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+    <p class="aim-txt">未設定</p>
   </div>
   
   <div class="action">
     <p class="action-tit">今日達成したアクション</p>
     <ul class="action-list">
-      <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
       <li class="action-item">
         <div class="action-inner">
-          <div class="action-wrap">
-            <%= rep.label :number, monthly_goal.goal_actions.first.content %>
-          </div>
-          <div class="action-box">
-            <%= rep.number_field :number %> / <%= monthly_goal.goal_actions.first.number %>
-          </div>
+          <p class="action-txt">未設定</p>
         </div>
       </li>
-      <% end %>
     </ul>
   </div>
     
   <div class="content-texa realize">
     <%= f.label :content, "感想、気付き", class: "realize-label" %>
-    <%= f.text_area :content, placeholder: "今日の成果を報告しよう！" %>
+    <%= f.text_area :content, placeholder: "月間目標が未設定です。目標を設定して日報を投稿しよう！", readonly: true %>
   </div>
   <div class="content-wrap">
     <span class="content-image">
       <%= f.label :image do %>
         <i class="far fa-image"></i>
       <% end %>
-      <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %> 
+      <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", disabled: 'true' %> 
     </span>
-    <%= f.submit yield(:button_text), class: "content-btn btn btn-primary" %>
+    <%= f.submit yield(:button_text), class: "content-btn btn btn-primary", disabled: 'true' %>
   </div>
 <% end %>
 

@@ -1,17 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.create(:user) } 
+  let(:user) { FactoryBot.build(:user) } 
   
   
   it "is a valid user" do
-    user.valid?
     expect(user).to be_valid
   end
   
   describe "name validation" do
     it "is valid with a name" do
-      user.valid?
       expect(user.name).to eq "brian"
     end
     
@@ -56,7 +54,7 @@ RSpec.describe User, type: :model do
     end
     
     it "is invalid with a duplicate email address" do
-      user
+      user.save
       user2 = FactoryBot.build(:user, email: "BRIAN@EXAMPLE.COM")
       user2.valid?
       expect(user2.errors[:email]).to include("has already been taken")
@@ -92,6 +90,7 @@ RSpec.describe User, type: :model do
   end
   
   it "destroys asscoiated posts" do
+    user.save
     user.posts.create!(content: "Lorem Ipsum")
     expect{
       user.destroy

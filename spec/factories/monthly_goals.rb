@@ -3,7 +3,6 @@ FactoryBot.define do
     monthly_aim { "MyString" }
     monthly_indicator { "MyString" }
     term_start { "2021-07-17" }
-    term_end { "2021-07-17" }
-    user { nil }
+    term_end { "2021-08-17" }
   end
 end

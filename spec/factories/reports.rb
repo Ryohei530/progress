@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :report do
     content { "MyText" }
-    user { nil }
+    r_days { 1 }
   end
 end
