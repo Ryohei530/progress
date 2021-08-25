@@ -44,9 +44,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "プロフィールが更新されました"
-      redirect_to request.referrer
+      redirect_to request.referer
     else
-      render 'edit'
+      if request.referer == edit_user_url(@user)
+        render 'edit'
+      elsif request.referer == email_user_url(@user)
+        render 'email'
+      elsif request.referer == password_user_url(@user)
+        render 'password'
+      else
+        render 'edit'
+      end
     end
   end
   

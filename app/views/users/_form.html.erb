@@ -15,13 +15,13 @@
   <%= f.label :email %>
   <%= f.email_field :email, class: 'form-control' %>
   
-  <%= f.label :bio , "自己紹介" %>
+  <%= f.label :bio  %>
   <%= f.text_area :bio, class: 'form-control' %>
   
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
   
-  <%= f.label :password_confirmation, "Confirmation" %>
+  <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>

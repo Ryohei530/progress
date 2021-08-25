@@ -13,12 +13,12 @@ RSpec.describe ArticleTag, type: :model do
   it "is invalid without article_id" do
     article_tag.article_id = nil
     article_tag.valid?
-    expect(article_tag.errors[:article_id]).to include("can't be blank")
+    expect(article_tag.errors[:article_id]).to include("を入力してください")
   end
   
   it "is invalid without tag_id" do
     article_tag.tag_id = nil
     article_tag.valid?
-    expect(article_tag.errors[:tag_id]).to include("can't be blank")
+    expect(article_tag.errors[:tag_id]).to include("を入力してください")
   end
 end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "UsersLogin", type: :feature do
+  let(:user) { FactoryBot.create(:user) }
+  let!(:goal) { user.create_goal }
+  
   scenario "user login and logout the app", js: true do
-    user = FactoryBot.create(:user)
-    expect(user).to be_valid
-    
     visit login_path
     
     expect(page).to have_content "ログイン"
@@ -16,37 +16,36 @@ RSpec.feature "UsersLogin", type: :feature do
     
     log_in_as(user)
     
-    expect(page).to have_content "brian"
+    expect(page).to have_content "#{user.name}"
     expect(page).to_not have_content "ログイン"
-    expect(page).to have_content "アカウント"
     
-    find(".dropdown-toggle").click
-    expect(page).to have_link "プロフィール"
+    within '.navbar-dark' do
+      find(".dropdown-toggle").click
+    end
     expect(page).to have_link "ログアウト"
     
-    find('a', text: 'プロフィール').click
+    find('a', text: 'マイページ').click
     expect(current_path).to eq user_path(user)
     
-    # find(".dropdown-toggle").click
-    click_link "アカウント"
-    expect(page).to have_link "ランキング"
+    within '.navbar-dark' do
+      find(".dropdown-toggle").click
+    end
+    expect(page).to have_link "ブックマーク一覧"
     
     click_link "ログアウト"
     sleep 5
     # find(:xpath, "//a[@href='/logout']").click
     # find('.dropdown-item', text: 'ログアウト').click
+    expect(page).to have_content "みんなと目標を共有して"
     expect(page).to have_content "ログイン"
-    expect(page).to_not have_content "アカウント"
     # expect(current_path).to eq root_path
     
   end
   
   scenario "login with a valid email and a invalid password" do
-    user = FactoryBot.create(:user)
-    
     visit login_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: "invalid"
+    fill_in "メールアドレス", with: user.email
+    fill_in "パスワード", with: "invalid"
     
     click_button "ログイン"
     

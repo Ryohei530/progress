@@ -22,6 +22,16 @@ FactoryBot.define do
       name { "ミツルギ" }
       email { "mitsu_igiari@example.com" }
     end
+    
+    factory :user5 do
+      name { "ヒカル" }
+      email { "maeda_keita@example.com" }
+    end
+    
+    factory :user6 do
+      name { "ナルト" }
+      email { "ramen@example.com" }
+    end
   end
   
   factory :users, class: User do

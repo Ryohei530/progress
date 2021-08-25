@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to reports_url
     else
-      @feed_items = Report.all
+      @feed_items = Report.all.page(params[:page])
       render 'reports/index'
     end
   end

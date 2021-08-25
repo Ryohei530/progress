@@ -16,7 +16,7 @@ RSpec.describe Article, type: :model do
   it "is invalid without a title" do
     article.title = nil
     article.valid?
-    expect(article.errors[:title]).to include("can't be blank")
+    expect(article.errors[:title]).to include("を入力してください")
   end
   
   it "is valid with content" do
@@ -26,7 +26,7 @@ RSpec.describe Article, type: :model do
   it "is invalid without a content" do
     article.content =nil
     article.valid?
-    expect(article.errors[:content]).to include("can't be blank")
+    expect(article.errors[:content]).to include("を入力してください")
   end
   
   it "is invalid without user_id" do

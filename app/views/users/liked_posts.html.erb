@@ -1,31 +1,11 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="user-aside col-md-4">
-    <section class="user-sec">
-      <div class="user-avatar">
-        <%= link_to @user do %>
-          <%= image_tag @user.avatar.variant(gravity: :center, resize: "160x160^", crop: "160x160+0+0").processed, class: '_rounded' %>
-        <% end %> 
-      </div>
-      <h1 class="text-center"><%= @user.name %></h1>
-    </section>
+    <%= render 'user_sec' %>
   </aside>
   <div class="user-content col-md-7">
     <div class="user-inner">
-      <ul class="tnav nav nav-tabs">
-        <li class="tnav-item nav-item">
-          <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
-        </li>
-        <li class="tnav-item nav-item">
-          <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
-        </li>
-        <li class="tnav-item nav-item">
-          <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
-        </li>
-        <li class="tnav-item nav-item">
-          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
-        </li>
-      </ul>
+      <%= render 'tnav' %>
       <ul class="unav nav nav-tabs">
         <li class="nav-item">
           <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>

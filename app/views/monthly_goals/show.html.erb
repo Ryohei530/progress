@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col d-flex align-items-center">
           <span class="goal-timestamp">
-            <%= time_ago_in_words(@monthly_goal.created_at) %> ago
+            <%= time_ago_in_words(@monthly_goal.created_at) %>前
           </span>
           <% if current_user?(@monthly_goal.user) %>
             <%= link_to "削除", @monthly_goal, method: :delete,

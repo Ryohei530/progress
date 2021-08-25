@@ -16,7 +16,7 @@ RSpec.describe Board, type: :model do
   it "is invalid without a title" do
     board.title = nil
     board.valid?
-    expect(board.errors[:title]).to include("can't be blank")
+    expect(board.errors[:title]).to include("を入力してください")
   end
   
   it "is valid with content" do
@@ -26,7 +26,7 @@ RSpec.describe Board, type: :model do
   it "is invalid without a content" do
     board.content =nil
     board.valid?
-    expect(board.errors[:content]).to include("can't be blank")
+    expect(board.errors[:content]).to include("を入力してください")
   end
   
   it "is invalid without user_id" do

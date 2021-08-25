@@ -16,13 +16,13 @@ RSpec.describe User, type: :model do
     it "is invalid without a name" do
       user.name = nil
       user.valid?
-      expect(user.errors[:name]).to include("can't be blank")
+      expect(user.errors[:name]).to include("を入力してください")
     end
     
     it "is too long name with over 51 chars" do
       user.name = "a"*51
       user.valid?
-      expect(user.errors[:name]).to include("is too long (maximum is 50 characters)")
+      expect(user.errors[:name]).to include("は50文字以内で入力してください")
     end
   end
   
@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
     it "is too long email with over 256 chars" do
       user.email = "a"*256
       user.valid?
-      expect(user.errors[:email]).to include("is too long (maximum is 255 characters)")
+      expect(user.errors[:email]).to include("は255文字以内で入力してください")
     end
     
     it "accepts valid addresses" do
@@ -49,7 +49,7 @@ RSpec.describe User, type: :model do
       invalid_addresses.each do |invalid_address|
         user.email = invalid_address
         user.valid?
-        expect(user.errors[:email]).to include("is invalid")
+        expect(user.errors[:email]).to include("は不正な値です")
       end
     end
     
@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
       user.save
       user2 = FactoryBot.build(:user, email: "BRIAN@EXAMPLE.COM")
       user2.valid?
-      expect(user2.errors[:email]).to include("has already been taken")
+      expect(user2.errors[:email]).to include("はすでに存在します")
     end
     
     it "is saved as lower-case" do
@@ -72,13 +72,13 @@ RSpec.describe User, type: :model do
     it "is invalid without a password" do
       user.password = user.password_confirmation = " "*6
       user.valid?
-      expect(user.errors[:password]).to include("can't be blank")
+      expect(user.errors[:password]).to include("を入力してください")
     end
     
     it "is invalid less than a minimum length" do
       user.password = user.password_confirmation = "a"*5
       user.valid?
-      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
+      expect(user.errors[:password]).to include("は6文字以上で入力してください")
     end
   end
   

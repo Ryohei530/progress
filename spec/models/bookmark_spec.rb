@@ -9,7 +9,7 @@ RSpec.describe Bookmark, type: :model do
   
   it "is invalid with multiple bookmarks by same user an article" do
     bookmark2.valid?
-    expect(bookmark2.errors[:user_id]).to include("has already been taken")
+    expect(bookmark2.errors[:user_id]).to include("はすでに存在します")
   end
   
   it "is valid with multiple bookmarks by each user an article" do

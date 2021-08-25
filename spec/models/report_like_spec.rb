@@ -10,7 +10,7 @@ RSpec.describe ReportLike, type: :model do
   
   it "is invalid with multiple likes by same user a report" do
     like2.valid?
-    expect(like2.errors[:user_id]).to include("has already been taken")
+    expect(like2.errors[:user_id]).to include("はすでに存在します")
   end
   
   it "is valid with multiple likes by each user a report" do

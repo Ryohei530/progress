@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to root_url
     else
-      @feed_items = current_user.feed.page(params[:page])
+      @feed_items = Post.all.page(params[:page])
       render 'static_pages/home'
     end
   end

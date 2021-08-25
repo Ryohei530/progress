@@ -13,12 +13,12 @@ RSpec.describe BoardTag, type: :model do
   it "is invalid without board_id" do
     board_tag.board_id = nil
     board_tag.valid?
-    expect(board_tag.errors[:board_id]).to include("can't be blank")
+    expect(board_tag.errors[:board_id]).to include("を入力してください")
   end
   
   it "is invalid without tag_id" do
     board_tag.tag_id = nil
     board_tag.valid?
-    expect(board_tag.errors[:tag_id]).to include("can't be blank")
+    expect(board_tag.errors[:tag_id]).to include("を入力してください")
   end
 end
