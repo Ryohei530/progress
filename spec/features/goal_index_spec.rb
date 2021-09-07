@@ -22,7 +22,9 @@ RSpec.feature "GoalIndexes", type: :feature do
     expect(page).to have_content "aim"
     expect(page).to have_content "indicator"
     
-    click_link "goal-link", href: goal_path(goal)
+    within "#goal-#{goal.id}" do
+      find(".goal-link").click
+    end
     within ".goal-box" do
       expect(page).to have_content "削除"
     end
@@ -34,11 +36,13 @@ RSpec.feature "GoalIndexes", type: :feature do
     expect(page).to have_content "indicator"
     
     within ".goal-head" do
-      find(".fa-arrow-left").click
+      find(".goal-back").click
     end
     expect(current_path).to eq goals_path
     
-    click_link "goal-link", href: goal_path(goal2)
+    within "#goal-#{goal2.id}" do
+      find(".goal-link").click
+    end
     within ".goal-box" do
       expect(page).to_not have_content "削除"
     end

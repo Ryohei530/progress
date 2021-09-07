@@ -31,6 +31,8 @@ RSpec.feature "UsersProfiles", type: :feature do
     expect(page).to have_content "test action"
     expect(page).to have_content "2021-07-17"
     expect(page).to have_css '.simple-calendar'
+    
+    visit "/users/#{user.id}?start_date=2021-08-17"
     expect(page).to have_content "目標締切日"
   end
   

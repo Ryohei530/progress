@@ -35,7 +35,7 @@ RSpec.feature "UsersReports", type: :feature do
     expect(page).to have_content "report1"
     expect(page).to have_content "report2"
     expect(page).to have_content "test action"
-    within ".report-#{report.id}" do
+    within "#report-#{report.id}" do
       expect(page).to have_content "1"
     end
     

@@ -30,15 +30,15 @@ RSpec.feature "UsersLogin", type: :feature do
     within '.navbar-dark' do
       find(".dropdown-toggle").click
     end
-    expect(page).to have_link "ブックマーク一覧"
     
-    click_link "ログアウト"
-    sleep 5
-    # find(:xpath, "//a[@href='/logout']").click
-    # find('.dropdown-item', text: 'ログアウト').click
+    within ".dropdown-menu" do
+      find(".logout").click
+      sleep 5
+    end
+    
     expect(page).to have_content "みんなと目標を共有して"
     expect(page).to have_content "ログイン"
-    # expect(current_path).to eq root_path
+    expect(current_path).to eq root_path
     
   end
   

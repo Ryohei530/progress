@@ -8,9 +8,9 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     let!(:post2) { user2.posts.create(content: "test") }
     let!(:goal) { user.create_goal }
     let!(:goal2) { user2.create_goal }
+    let!(:post3) { user.posts.create(content: "test") }
   
-  
-  skip "post interface" do
+  scenario "post interface" do
     log_in_as(user)
     visit root_path
     
@@ -26,7 +26,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     image_path = "#{Rails.root}/spec/fixtures/Cosmos01.jpg"
     expect{
       fill_in 'post[content]', with: content
-      attach_file(image_path, make_visible: true)
+      attach_file "post[image]", image_path, make_visible: true
       click_button '投稿'
     }.to change(Post, :count).by(1)
     expect(page).to have_title 'ホーム | Progress'
@@ -44,9 +44,24 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
       sleep 3
     }.to change(Post, :count).by(-1)
     
+    expect(current_path).to eq root_path
+    
     visit user_path(user2)
     click_link "つぶやき"
     find(".post-link-#{post2.id}").click
     expect(page).to_not have_content '削除'
+    
+    visit user_path(user)
+    click_link "つぶやき"
+    find(".post-link-#{post3.id}").click
+    
+    accept_alert do
+      within ".post-box" do
+        find(".post-dlt", text: "削除").click
+      end
+    end
+    sleep 3
+    
+    expect(current_path).to eq post_user_path(user)
   end
 end
