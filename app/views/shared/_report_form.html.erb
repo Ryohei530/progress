@@ -1,6 +1,6 @@
 <%= form_with(model: @report, local: true, class: "content-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  
+  <%= hidden_field :running, :start_date %>
   <% monthly_goal = current_user.monthly_goals.last %>
   <%= f.hidden_field :monthly_goal_id, value: monthly_goal.id %>
   <div class="aim">

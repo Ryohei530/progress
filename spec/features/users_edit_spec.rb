@@ -2,20 +2,35 @@ require 'rails_helper'
 
 RSpec.feature "UsersEdits", type: :feature do
   let(:user) { FactoryBot.create(:user) }
+  let!(:goal) { user.create_goal }
   
   scenario "unsuccessful edit" do
     log_in_as(user)
     visit edit_user_path(user)
-    expect(page).to have_content "プロフィールの編集"
+    expect(page).to have_content "プロフィール"
     
-    fill_in "Name", with: ""
-    fill_in "Email", with: "foo@invalid"
-    fill_in "Password", with: "foo"
-    fill_in "Confirmation", with: "bar"
+    fill_in "名前", with: ""
+    fill_in "自己紹介", with: "invalidです"
     
     click_button "編集"
-    expect(page).to have_content "プロフィールの編集"
-    expect(page).to have_content "errors"
+    expect(page).to have_content "プロフィール"
+    expect(page).to have_content "error"
+    
+    click_link "メールアドレス"
+    fill_in "メールアドレス", with: ""
+    click_button "編集"
+    
+    expect(page).to have_content "メールアドレス"
+    expect(page).to have_content "error"
+    
+    click_link "パスワード"
+    fill_in "パスワード", with: "123"
+    fill_in "確認用", with: ""
+    click_button "編集"
+    
+    expect(page).to have_content "パスワード"
+    expect(page).to have_content "error"
+    
   end
   
   scenario "seccessful edit" do
@@ -26,13 +41,24 @@ RSpec.feature "UsersEdits", type: :feature do
     name = "Foo Bar"
     email = "foo@bar.com"
     
-    fill_in "Name", with: name
-    fill_in "Email", with: email
-    fill_in "Password", with: ""
-    fill_in "Confirmation", with: ""
+    fill_in "名前", with: name
+    fill_in "自己紹介", with: "validです"
     click_button "編集"
+    expect(page).to have_css '.alert-success'
     
-    expect(page).to have_css '.alert'
+    click_link "メールアドレス"
+    
+    fill_in "メールアドレス", with: email
+    click_button "編集"
+    expect(page).to have_css '.alert-success'
+    
+    click_link "パスワード"
+    
+    fill_in "パスワード", with: ""
+    fill_in "確認用", with: ""
+    click_button "編集"
+    expect(page).to have_css '.alert-success'
+    
     user.reload
     
     expect(name).to eq user.name

@@ -1,6 +1,7 @@
 class MonthlyGoalsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :get_location, only: :new 
   
   def new
     @monthly_goal = current_user.monthly_goals.build
@@ -12,7 +13,7 @@ class MonthlyGoalsController < ApplicationController
     @monthly_goal = @user.monthly_goals.build(monthly_goal_params)
     if @monthly_goal.save
       flash[:success] = "目標を作成しました"
-      redirect_to goal_user_url(@user)
+      redirect_back_or root_url
     else
       render 'new'
     end

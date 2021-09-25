@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :report_action do
-    number { 1 }
-    report { nil }
+    sequence(:number) { |n| n + 1 }
+    association :report, factory: :reports
   end
 end

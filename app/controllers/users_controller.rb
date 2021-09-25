@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.goal.build.save
+      @user.build_goal.save
       log_in @user
       flash[:success] = "登録が完了しました！"
       redirect_to @user
@@ -44,9 +44,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "プロフィールが更新されました"
-      redirect_to request.referrer
+      redirect_to request.referer
     else
-      render 'edit'
+      if request.referer == edit_user_url(@user)
+        render 'edit'
+      elsif request.referer == email_user_url(@user)
+        render 'email'
+      elsif request.referer == password_user_url(@user)
+        render 'password'
+      else
+        render 'edit'
+      end
     end
   end
   
@@ -86,8 +94,12 @@ class UsersController < ApplicationController
     private
       
       def user_params
-        params.require(:user).permit(:name, :email, :password,
-          :password_confirmation, :avatar)
+        params.require(:user).permit(:name, 
+                                     :email, 
+                                     :bio,
+                                     :password,
+                                     :password_confirmation, 
+                                     :avatar)
       end
       
       def correct_user

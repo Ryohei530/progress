@@ -6,7 +6,6 @@ class ReportsController < ApplicationController
   def index
     @report = current_user.reports.build if logged_in?
     @feed_items = Report.all.page(params[:page])
-    @running_day = RunningDay.last
   end
   
   def new
@@ -27,6 +26,8 @@ class ReportsController < ApplicationController
         set_rdays_params
         @running_day = r_days.build(running_days_params)
         @running_day.save
+      else
+        @running_day = r_days.last
       end
       
       @report.r_days = @running_day.r_days
@@ -35,7 +36,7 @@ class ReportsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to reports_url
     else
-      @feed_items = Report.all
+      @feed_items = Report.all.page(params[:page])
       render 'reports/index'
     end
   end
@@ -91,12 +92,12 @@ class ReportsController < ApplicationController
     end
     
     def running_days_params
-      params.require(:report).permit(
+      params.require(:running).permit(
         :start_date, 
         :date,
         :s_or_c,
         :r_days
-        )
+      )
     end
     
     

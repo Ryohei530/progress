@@ -1,19 +1,27 @@
 <%= form_with(model: @user, local: true) do |f| %>
   <%= render 'shared/error_messages', object: @user %>
   
+  <div class="row justify-content-center mb-3">
+    <%= image_tag 'default.png', size: '100x100', class: "_rounded" %>
+  </div>
+  <div class="d-block text-center">
+    <%= f.label :avatar, "画像をアップロードする", class: 'btn btn-outline-primary' %>
+  </div>
+  <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'd-none' %>
+  
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' %>
 
   <%= f.label :email %>
   <%= f.email_field :email, class: 'form-control' %>
   
-  <%= f.label :bio , "自己紹介" %>
+  <%= f.label :bio  %>
   <%= f.text_area :bio, class: 'form-control' %>
   
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
   
-  <%= f.label :password_confirmation, "Confirmation" %>
+  <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>

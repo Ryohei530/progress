@@ -24,8 +24,13 @@
       <div class="row">
         <div class="col d-flex">
           <span class="post-timestamp">
-            <%= time_ago_in_words(@post.created_at) %> ago
+            <%= time_ago_in_words(@post.created_at) %>前
           </span>
+          <% if current_user?(@post.user) %>
+            <%= link_to "削除", @post, method: :delete,
+                                      data: { confirm: "本当に削除しますか？" },
+                                      class: "post-dlt dlt-post-#{@post.id} btn btn-outline-danger btn-sm" %>
+          <% end %>
         </div>
         <div class="col d-flex justify-content-end">
           <div class="post-comment">

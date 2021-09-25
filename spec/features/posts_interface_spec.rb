@@ -1,31 +1,32 @@
 require 'rails_helper'
 
 RSpec.feature "PostsInterfaces", type: :feature, js: true do
-  before do
-    @user = FactoryBot.create(:user)
-    @user2 = FactoryBot.create(:user2)
-    @post = FactoryBot.create(:post)
-    @posts = create_list(:brians, 30)
-  end
+  
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:user2) { FactoryBot.create(:user2) }
+    let!(:post) { FactoryBot.create(:post) }
+    let!(:post2) { user2.posts.create(content: "test") }
+    let!(:goal) { user.create_goal }
+    let!(:goal2) { user2.create_goal }
+    let!(:post3) { user.posts.create(content: "test") }
   
   scenario "post interface" do
-    log_in_as(@user)
+    log_in_as(user)
     visit root_path
     
-    expect(page).to have_css '.pagination'
-    expect(page).to have_selector 'input#post_image'
+    expect(page).to have_css '.content-inner'
     expect{
       click_button '投稿'
     }.to change(Post, :count).by(0)
     expect(page).to have_selector 'div#error_explanation'
-    expect(page).to have_link '2', href: '/?page=2&post%5Bcontent%5D='
+    expect(page).to have_content 'つぶやきを入力してください'
     
     
-    content = "異議あり！　くらえ！　待った！　アマいな！"
+    content = "異議あり！"
     image_path = "#{Rails.root}/spec/fixtures/Cosmos01.jpg"
     expect{
       fill_in 'post[content]', with: content
-      attach_file 'post[image]', image_path
+      attach_file "post[image]", image_path, make_visible: true
       click_button '投稿'
     }.to change(Post, :count).by(1)
     expect(page).to have_title 'ホーム | Progress'
@@ -33,13 +34,34 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     expect(page).to have_selector "img[src$='Cosmos01.jpg']"
     
     expect{
+      find(".post-link-#{post.id}").click
+      expect(page).to have_link "削除"
       accept_alert do
-        find(".dlt-post-#{@post.id}", text: "削除").click
+        within ".post-box" do
+          find(".post-dlt", text: "削除").click
+        end
       end
       sleep 3
     }.to change(Post, :count).by(-1)
     
-    visit user_path(@user2)
+    expect(current_path).to eq root_path
+    
+    visit user_path(user2)
+    click_link "つぶやき"
+    find(".post-link-#{post2.id}").click
     expect(page).to_not have_content '削除'
+    
+    visit user_path(user)
+    click_link "つぶやき"
+    find(".post-link-#{post3.id}").click
+    
+    accept_alert do
+      within ".post-box" do
+        find(".post-dlt", text: "削除").click
+      end
+    end
+    sleep 3
+    
+    expect(current_path).to eq post_user_path(user)
   end
 end

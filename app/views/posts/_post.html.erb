@@ -7,7 +7,7 @@
     </div>
     <span class="post-user"><%= link_to post.user.name, post.user %></span>
   </div>
-  <%= link_to(post_path(post), class: "post-link") do %>
+  <%= link_to(post_path(post), class: "post-link post-link-#{post.id}") do %>
     <div class="post-inner">
       <div class="post-content">
           <div class="post-text">

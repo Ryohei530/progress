@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :refresh_redirect, only: :index
   before_action :correct_user, only: :destroy
+  before_action :get_location, only: :show
   
   def index
   end
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to root_url
     else
-      @feed_items = current_user.feed.page(params[:page])
+      @feed_items = Post.all.page(params[:page])
       render 'static_pages/home'
     end
   end
@@ -26,9 +27,9 @@ class PostsController < ApplicationController
   end
   
   def destroy
-    @post.destroy
+    Post.find(params[:id]).destroy
     flash[:success] = "削除しました"
-    redirect_to request.referrer || root_url
+    redirect_back_or root_url
   end
   
   private

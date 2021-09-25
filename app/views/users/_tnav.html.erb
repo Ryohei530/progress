@@ -1,0 +1,14 @@
+<ul class="tnav nav nav-tabs">
+  <li class="tnav-item nav-item">
+    <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
+  </li>
+  <li class="tnav-item nav-item">
+    <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
+  </li>
+  <li class="tnav-item nav-item">
+    <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
+  </li>
+  <li class="tnav-item nav-item">
+    <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
+  </li>
+</ul>

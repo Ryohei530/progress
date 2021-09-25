@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :get_location, only: :edit
   
   def index
     @goals = Goal.page(params[:page]).per(20)
@@ -18,7 +19,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     if @goal.update(goal_params)
       flash[:success] = "長期目標を設定しました"
-      redirect_to root_path
+      redirect_back_or root_url
     else
       render 'edit'
     end

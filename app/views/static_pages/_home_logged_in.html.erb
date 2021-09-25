@@ -10,11 +10,23 @@
     <div class="top-btit">長期目標</div>
     <div class="top-wrap">
       <p class="top-tit">期間</p>
-      <p class="top-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
+      <% if goal.term_start.present? || goal.term_end.present? %>
+        <p class="top-txt"><%= goal.term_start %> 〜 <%= goal.term_end %></p>
+      <% else %>
+        <p class="top-txt">未設定</p>
+      <% end %>
       <p class="top-tit">目的、得たい結果</p>
-      <p class="top-txt"><%= simple_format(goal.aim) %></p>
+      <% if goal.aim.present? %>
+        <p class="top-txt"><%= simple_format(goal.aim) %></p>
+      <% else %>
+        <p class="top-txt">未設定</p>
+      <% end %>
       <p class="top-tit">目標数値、指標</p>
-      <p class="top-txt"><%= simple_format(goal.indicator) %></p>
+      <% if goal.indicator.present? %>
+        <p class="top-txt"><%= simple_format(goal.indicator) %></p>
+      <% else %>
+        <p class="top-txt">未設定</p>
+      <% end %>
       <%= link_to edit_goal_path(goal), class: "top-btn btn btn-danger _cubic" do %>
           長期目標を設定<i class="fas fa-angle-right fa-position-right"></i>
       <% end %>
@@ -23,17 +35,29 @@
   <div class="top-item col-md-5">
     <div class="top-btit">月間目標</div>
     <div class="top-wrap">
-      <p class="top-tit">期間</p>
-      <p class="top-txt"><%= monthly_goal.term_start %> 〜 <%= monthly_goal.term_end %></p>
-      <p class="top-tit">今月の目的</p>
-      <p class="top-txt"><%= monthly_goal.monthly_aim %></p>
-      <p class="top-tit">今月の目標数値、指標</p>
-      <p class="top-txt"><%= monthly_goal.monthly_indicator %></p>
-      <%= link_to new_monthly_goal_path, class: "top-btn btn btn-danger _cubic" do %>
-          月間目標作成<i class="fas fa-angle-right fa-position-right"></i>
-      <% end %>
-      <%= link_to goal_user_path(current_user), class: "top-btn btn btn-danger _cubic" do %>
-          月間目標一覧<i class="fas fa-angle-right fa-position-right"></i>
+      <% if monthly_goal.present? %>
+        <p class="top-tit">期間</p>
+        <p class="top-txt"><%= monthly_goal.term_start %> 〜 <%= monthly_goal.term_end %></p>
+        <p class="top-tit">今月の目的</p>
+        <p class="top-txt"><%= monthly_goal.monthly_aim %></p>
+        <p class="top-tit">今月の目標数値、指標</p>
+        <p class="top-txt"><%= monthly_goal.monthly_indicator %></p>
+        <%= link_to new_monthly_goal_path, class: "top-btn btn btn-danger _cubic" do %>
+            月間目標作成<i class="fas fa-angle-right fa-position-right"></i>
+        <% end %>
+        <%= link_to goal_user_path(current_user), class: "top-btn btn btn-danger _cubic" do %>
+            月間目標一覧<i class="fas fa-angle-right fa-position-right"></i>
+        <% end %>
+      <% else %>
+        <p class="top-tit">期間</p>
+        <p class="top-txt">未設定</p>
+        <p class="top-tit">今月の目的</p>
+        <p class="top-txt">未設定</p>
+        <p class="top-tit">今月の目標数値、指標</p>
+        <p class="top-txt">未設定</p>
+        <%= link_to new_monthly_goal_path, class: "top-btn btn btn-danger _cubic" do %>
+            月間目標作成<i class="fas fa-angle-right fa-position-right"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -47,10 +71,14 @@
     </div>
     <div class="top-wrap">
       <p class="top-tit">1ヶ月間のアクション</p>
-      <p class="top-txt">
-          <%= monthly_goal.goal_actions.first.content %>
-          <%= monthly_goal.goal_actions.first.number %>
-      </p>
+      <% if monthly_goal.present? %>
+        <p class="top-txt">
+            <%= monthly_goal.goal_actions.first.content %>
+            <%= monthly_goal.goal_actions.first.number %>
+        </p>
+      <% else %>
+        <p class="top-txt">未設定</p>
+      <% end %>
     </div>
   </div>
 </div>

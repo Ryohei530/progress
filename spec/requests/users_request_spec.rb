@@ -93,9 +93,10 @@ RSpec.describe "Users", type: :request do
       post login_path, params: { session: @other_user_params }
       expect(@other_user.admin).to be_falsey
       
-      patch user_path(@other_user), params: { user: { password: "012345",
+      patch user_url(@other_user), params: { user: { password: "012345",
                                                       password_confirmation: "012345",
-                                                      admin: true} }
+                                                      admin: true} },
+                                   headers: {'HTTP_REFERER' => edit_user_url(@other_user)}
       expect(@other_user.admin).to be_falsey
     end
     

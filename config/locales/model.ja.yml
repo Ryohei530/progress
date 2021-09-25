@@ -1,0 +1,64 @@
+# モデルは全て activerecord 以下に記述する。
+# これにより、User.model_name.human / User.human_attribute_name({attr_name})で使用可能。
+
+ja:
+  activerecord:
+    models:
+      # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
+      article: 記事
+      article_comment: コメント
+      article_tag: タグ
+      board: 掲示板
+      board_comment: コメント
+      board_tag: タグ
+      bookmark: ブックマーク
+      goal: 目標
+      goal_action: アクション
+      monthly_goal: 月間目標
+      post: つぶやき
+      post_comment: コメント
+      post_like: いいね
+      report: 日報
+      report_action: アクション
+      report_comment: コメント
+      report_like: いいね
+      running_day: 継続日数
+      tag: タグ
+      user: ユーザー 
+    # model毎に定義したいattributesを記述
+    attributes:
+        user:
+          id: ID
+          # view側： User.human_attribute_name :name => "名前" /　t("activerecord.attributes.user.name")と同じ
+          name: 名前
+          bio: 自己紹介
+          email: メールアドレス
+          avatar: プロフィール画像
+          password: パスワード
+          password_confirmation: 確認用
+        goal:
+          aim: 目的、得たい結果
+          indicator: 目標数値、指標
+          term_start: 開始日
+          term_end : 終了日
+        goal_action:
+          content: 月間アクション
+          number: 数値
+        monthly_goal:
+          monthly_aim: 月間の目的
+          monthly_indicator: 月間の目標数値、指標
+          term_start: 開始日
+          term_end : 終了日
+        monthly_goal/goal_actions:
+          content: 月間アクション
+          number: 数値
+        post:
+          content: つぶやき
+        report:
+          content: 感想、気付き
+        report/report_actions:
+          number: 数値
+  # 全てのmodelで共通して使用するattributesを定義
+  attributes:
+    created_at: 作成日
+    updated_at: 更新日

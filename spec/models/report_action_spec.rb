@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ReportAction, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:report) { user.reports.create(content: "test report") }
+  let(:monthly_goal) { FactoryBot.create(:monthly_goal, user_id: user.id) }
+  let(:report) { FactoryBot.create(:report, user_id: user.id, monthly_goal_id: monthly_goal.id) }
   let(:report_action) { report.report_actions.build(number: 123) }
   let(:most_recent) { report.report_actions.create(number: 100) }
   

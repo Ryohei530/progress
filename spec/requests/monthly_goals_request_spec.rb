@@ -1,25 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe "MonthlyGoals", type: :request do
+  
+  let(:user) { FactoryBot.create(:user) }
+  let(:user_params) { FactoryBot.attributes_for(:user) }
+  let!(:goal) { FactoryBot.create(:goal, user_id: user.id) }
+  let!(:monthly_goal) { FactoryBot.create(:monthly_goal, user_id: user.id) }
+  let!(:goal_action) { monthly_goal.goal_actions.create(content: "test action", number: 500) }
 
   describe "GET /new" do
     it "returns http success" do
-      get "/monthly_goals/new"
-      expect(response).to have_http_status(:success)
+      post login_path , params: { session: user_params } 
+      get new_monthly_goal_path
+      expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /show" do
     it "returns http success" do
-      get "/monthly_goals/show"
-      expect(response).to have_http_status(:success)
+      get monthly_goal_path(monthly_goal)
+      expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /edit" do
     it "returns http success" do
-      get "/monthly_goals/edit"
-      expect(response).to have_http_status(:success)
+      post login_path , params: { session: user_params } 
+      get edit_monthly_goal_path(monthly_goal)
+      expect(response).to have_http_status(200)
     end
   end
 
