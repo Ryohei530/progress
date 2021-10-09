@@ -20,6 +20,9 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'simple_calendar', '~> 2.0'
 gem 'rails-i18n', '~> 6.0'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
