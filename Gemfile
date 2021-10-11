@@ -20,12 +20,12 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'simple_calendar', '~> 2.0'
 gem 'rails-i18n', '~> 6.0'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0'
   gem 'factory_bot_rails'
-  gem 'faker'
 end
 
 group :development do
