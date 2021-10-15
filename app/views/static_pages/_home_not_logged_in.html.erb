@@ -12,7 +12,14 @@
   </div>
   <div class="nltop-wrap col-6">
     <%= link_to "新規登録", new_user_path, class: 'btn btn-success nltop-btn _btn-green' %>
-    <%= link_to "ゲストログイン", new_user_path, class: 'btn btn-danger nltop-btn _btn-red _ml-btn' %>
+    <div class="nltop-guest">
+      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+        <%= f.hidden_field :email, value: 'brian@example.com' %>
+        <%= f.hidden_field :password, value: '012345' %>
+        
+        <%= f.submit "ゲストログイン", class: "btn btn-danger nltop-btn _btn-red _ml-btn" %>
+      <% end %>
+    </div>
   </div>
   <div class="form col-6">
     <div class="form-header">

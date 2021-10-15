@@ -19,5 +19,13 @@
     <% end %>
     
     <p>アカウントをお持ちでないですか？<%= link_to "アカウント作成", signup_path %></p>
+    
+    
+    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+      <%= f.hidden_field :email, value: 'brian@example.com' %>
+      <%= f.hidden_field :password, value: '012345' %>
+      
+      <%= f.submit "ゲストログイン", class: "btn btn-danger nltop-btn _btn-red" %>
+    <% end %>
   </div>
 </div>
