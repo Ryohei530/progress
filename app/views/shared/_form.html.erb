@@ -1,0 +1,18 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  
+  <%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+
+  <% if devise_mapping.rememberable? %>
+    <%= f.label :remember_me, class: "checkbox inline" do %>
+      <%= f.check_box :remember_me %>
+      <span>ログインしたままにする</span>
+    <% end %>
+  <% end %>
+
+  <%= f.submit "ログイン", class: "btn btn-primary" %>
+<% end %>

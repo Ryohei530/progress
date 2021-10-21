@@ -20,6 +20,9 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'simple_calendar', '~> 2.0'
 gem 'rails-i18n', '~> 6.0'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem 'faker'
 
 group :development, :test do

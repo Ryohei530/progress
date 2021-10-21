@@ -14,10 +14,12 @@
         <span class="board-user"><%= @board.user.name %></span>
       </div>
       <div class="board-config">
-        <%= link_to "編集", edit_board_path, class: "btn btn-outline-primary" %>
-        <%= link_to "削除", board_path, class: "btn btn-outline-danger",
-                                          method: :delete,
-                                          data: { confirm: "本当に削除しますか？" } %>
+        <% if current_user?(@board.user) %>
+          <%= link_to "編集", edit_board_path, class: "btn btn-outline-primary" %>
+          <%= link_to "削除", board_path, class: "btn btn-outline-danger",
+                                            method: :delete,
+                                            data: { confirm: "本当に削除しますか？" } %>
+        <% end %>
       </div>
     </div>
     <p class="board-stit"><%= @board.title %></p>
@@ -47,7 +49,7 @@
             <p class="comment-content"><%= comment.content %></p>
             <p class="comment-date"><%= time_ago_in_words(comment.created_at) %></p>
             <% replies_to_comment = @replies.where(reply_id: comment.id) %>
-            <% if replies_to_comment %>
+            <% if replies_to_comment.present? %>
               <ul class="comment-list ml-3">
                 <% replies_to_comment.each do |reply| %>
                   <li class="comment-item">

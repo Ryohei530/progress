@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
   
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
+  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
+  post '/static_pages/guest_sign_in', to: 'static_pages#guest_sign_in'
   get '/rank', to: 'static_pages#rank'
-  get '/signup', to: 'users#new'
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  # get '/signup', to: 'users#new'
+  # get '/login', to: 'sessions#new'
+  # post '/login', to: 'sessions#create'
+  # delete '/logout', to: 'sessions#destroy'
   resources :users do
     member do
      get 'goal'
@@ -14,8 +20,8 @@ Rails.application.routes.draw do
      get 'post'
      get 'liked_posts'
      get 'liked_reports'
-     get 'email'
-     get 'password'
+    # get 'email'
+    # get 'password'
     end
   end
   resources :posts, only: [:index, :create, :show, :destroy] do

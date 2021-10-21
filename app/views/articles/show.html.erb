@@ -14,10 +14,12 @@
         <span class="article-user"><%= @article.user.name %></span>
       </div>
       <div class="article-config">
-        <%= link_to "編集", edit_article_path, class: "btn btn-outline-primary" %>
-        <%= link_to "削除", article_path, class: "btn btn-outline-danger",
-                                          method: :delete,
-                                          data: { confirm: "本当に削除しますか？" } %>
+        <% if current_user?(@article.user) %>
+          <%= link_to "編集", edit_article_path, class: "btn btn-outline-primary" %>
+          <%= link_to "削除", article_path, class: "btn btn-outline-danger",
+                                            method: :delete,
+                                            data: { confirm: "本当に削除しますか？" } %>
+        <% end %>
       </div>
       <div class="article-bookmark">
         <% if logged_in? %>

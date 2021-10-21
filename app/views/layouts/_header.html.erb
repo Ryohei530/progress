@@ -7,7 +7,7 @@
         <li class="nav-item"><%= link_to "お悩み相談（掲示板）", boards_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "英語学習法特集", articles_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "ランキング", rank_path, class: "nav-link" %></li>
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <%= image_tag current_user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed, class: '_rounded' %> 
@@ -20,14 +20,13 @@
               <li><%= link_to "ブックマーク一覧", bookmarks_path, class: "dropdown-item" %></li>
               <li class="dropdown-divider"></li>
               <li>
-                <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item logout" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item logout" %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to "ログイン", login_path, class: "nav-link" %></li> 
+          <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class: "nav-link" %></li> 
         <% end %>
-        
       </ul>
     </nav>
   </div>

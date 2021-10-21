@@ -1,0 +1,12 @@
+<%= provide(:title, "ログイン") %>
+<h1 class="_hd-m">ログイン</h1>
+
+<div class="login row">
+  <div class="col-md-6 offset-md-3">
+    <%= render 'shared/form' %>
+    <%= render "devise/shared/links" %>
+    <%= link_to "ゲストログイン（閲覧用）", static_pages_guest_sign_in_path, method: :post, class: 'login-guest btn btn-danger' %>
+  </div>
+</div>
+
+
