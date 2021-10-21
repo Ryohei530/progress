@@ -63,6 +63,7 @@ class BoardsController < ApplicationController
   
   def search
     @boards = Board.search(params[:search])
+    @tags = Tag.joins(:board_tags).distinct
   end
   
     private

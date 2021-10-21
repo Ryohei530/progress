@@ -18,6 +18,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'simple_calendar';
 @import 'bookmarks';
 @import 'my_simple_calendar';
+@import 'sessions';
 
 /* mixins, variables, etc */
 
@@ -58,14 +59,12 @@ body{
 /* typography */
 
 /* tmp */
-.login{
+
+._hd-m{
   text-align: center;
   margin-top: 20px;
 }
 
-.alert{
-  margin-top: 20px;
-}
 
 /* header */
 
@@ -82,6 +81,21 @@ body{
     }
 }
 
+/* flash message */
+.alert {
+  margin-bottom: 0;
+  text-align: center;
+  &-notice{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  &-alert{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+}
 
 /* footer */
 

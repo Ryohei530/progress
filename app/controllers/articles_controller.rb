@@ -66,6 +66,7 @@ class ArticlesController < ApplicationController
   
   def search
     @articles = Article.search(params[:search])
+    @tags = Tag.joins(:article_tags).distinct
   end
   
     private

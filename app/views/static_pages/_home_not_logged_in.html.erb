@@ -11,28 +11,15 @@
     </p>
   </div>
   <div class="nltop-wrap col-6">
-    <%= link_to "新規登録", new_user_path, class: 'btn btn-success nltop-btn _btn-green' %>
-    <%= link_to "ゲストログイン", new_user_path, class: 'btn btn-danger nltop-btn _btn-red _ml-btn' %>
+    <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-success nltop-btn _btn-green' %>
+    <%= link_to "ゲストログイン（閲覧用）", static_pages_guest_sign_in_path, method: :post, class: 'btn btn-danger nltop-btn _btn-red _ml-btn' %>
   </div>
   <div class="form col-6">
     <div class="form-header">
       ログイン
     </div>
     <div class="form-main">
-      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control' %>
-        
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control' %>
-        
-        <%= f.label :remember_me, class: "checkbox inline" do %>
-          <%= f.check_box :remember_me %>
-          <span>ログインしたままにする</span>
-        <% end %>
-        
-        <%= f.submit "ログイン", class: "btn btn-primary" %>
-      <% end %>
+      <%= render 'shared/form' %>
     </div> 
   </div>
 </div>

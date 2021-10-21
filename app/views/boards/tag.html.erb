@@ -1,13 +1,41 @@
 <% provide(:title, "#{@tag.name} タグを含む掲示板一覧") %>
-<h1 class="text-center">記事一覧</h1>
-
-<% @tags.each do |tag| %>
-  <span>
-    <%= link_to tag.name, tag_boards_path(tag) %>
-    <%= "(#{tag.boards.count})" %>
-  </span>
-<% end %>
-<p><%= "#{@tag.name}" %> タグを含む記事一覧</p>
-<% @boards.each do |board| %>
-  <%= link_to board.title, board %>
-<% end %>
+<div class="row">
+  <div class="col-md-3 _art-ml">
+    <%= link_to new_board_path, class: 'btn btn-outline-success mb-4' do %>
+      掲示板を作成 <i class="fas fa-pen"></i>
+    <% end %>
+    <div class="tag">
+      <div class="tag-header">
+        <i class="fas fa-tags"></i> タグ
+      </div>
+      <ul class="tag-list d-flex flex-wrap">
+        <% @tags.each do |tag| %>
+          <li class="tag-item">
+            <%= link_to tag_boards_path(tag), class: "tag-link badge badge-pill badge-info" do %>
+              <%= tag.name %> <span class="badge badge-light"><%= tag.boards.count %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="fav-articles">
+      
+    </div>
+  </div>
+  <div class="col-md-6 _art-ml">
+    <div class="search">
+      <%= form_with(url: search_boards_path, method: :get, local: true) do |f| %>
+        <div class="search-inner d-flex">
+          <%= f.text_field :search, class: 'form-control' %>
+          <%= button_tag type: "submit", class: "btn btn-primary" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="boards">
+      <h4><%= "#{@tag.name}" %> タグを含む記事一覧</h4>
+      <%= render @boards %>
+    </div>
+  </div>
+</div>

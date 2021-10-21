@@ -11,7 +11,24 @@ brian = User.create!(name: "brian",
              password_confirmation: "012345",
              admin: true)
              
-99.times do |n|
+guest = User.create!(name: "ゲスト",
+             email: "guest@example.com",
+             password: "012345",
+             password_confirmation: "012345",
+             )
+mary = User.create!(name: "メアリー",
+             email: "mary@example.com",
+             password: "012345",
+             password_confirmation: "012345",
+             )
+             
+naru = User.create!(name: "ナルホド",
+             email: "naru@example.com",
+             password: "012345",
+             password_confirmation: "012345",
+             )
+             
+96.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@example.com"
   password = "012345"
@@ -238,6 +255,33 @@ TOEFL 100
   term_end: Date.today.next_month(6)
   )
   
+guest.create_goal!(
+  aim: "目的を書きましょう",
+  indicator: "その目的を達成するために必要な行動、
+  行動の数値、その他得たいゴールに近づいているか
+  を評価できる指標を書きましょう",
+  term_start: Date.today,
+  term_end: Date.today.next_month(6)
+  )
+  
+mary.create_goal!(
+  aim: "キャビンアテンダントになる！",
+  indicator: "TOEIC750 
+英会話レッスン 60回
+英単語3000個覚える
+シャドーイング合計180時間",
+
+  term_start: Date.today,
+  term_end: Date.today.next_month(6)
+  )
+  
+naru.create_goal!(
+  aim: "資格が欲しい！",
+  indicator: "TOEIC600",
+  term_start: Date.today,
+  term_end: Date.today.next_month(6)
+  )
+  
 # user.monthly_goals.create!(
 #   monthly_aim: "基礎を固める",
 #   monthly_indicator: "単語300個",
@@ -256,10 +300,37 @@ TOEFL 100
 #   ]
 # )
 
-brian.articles.create!(
-  title: "ナダル参戦",
-  content: "ナダルリバースエボリューチョン"
+brian.posts.create!(
+  content: "よろしく〜"
 )
+
+guest.posts.create!(
+  content: "よろしくお願いします"
+)
+
+mary.posts.create!(
+  content: "メアリーです！よろしく〜"
+)
+
+naru.posts.create!(
+  content: "異議あり！"
+)
+
+
+tag_name = ["英語", "単語", "英単語", "暗記", "英会話", "シャドーイング", "スピーキング"]
+
+tag_name.each do |name|
+  Tag.create!(name: name)
+end
+
+article = brian.articles.create!(
+  title: "シャドーイングとは？",
+  content: "シャドーイングとはテキストを見ずに、音声を後から追いかけるように真似をするトレーニング法です"
+)
+
+4.times do |n|
+  article.article_tags.create!(tag_id: 1 + n )
+end
 
 # tag [
 #   "ナダル",
@@ -268,10 +339,21 @@ brian.articles.create!(
 #   "藤崎マーケット"
 #   ]
 
-brian.boards.create!(
-  title: "ティーダ緑にするか迷っています",
-  content: "ティーダかノクティスで迷っています　みなさんどうしますか？"
+board = brian.boards.create!(
+  title: "単語が覚えられません",
+  content: "単語がなかなか覚えられません。何かコツとかありませんか？"
 )
+
+mary.board_comments.create!(
+  board_id: 1,
+  content: "具体例をいくつか見てどういった文脈で使われる単語なのかイメージをを頭に入れると覚えやすくなりますよ！"
+)
+
+board.board_tags.create!(tag_id: 1 )
+
+3.times do |n|
+  board.board_tags.create!(tag_id: 5 + n )
+end
 
 # User.all.each do |user|
 #   user.running_days.create!(

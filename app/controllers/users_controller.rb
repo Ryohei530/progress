@@ -12,33 +12,33 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
   
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      @user.build_goal.save
-      log_in @user
-      flash[:success] = "登録が完了しました！"
-      redirect_to @user
-    else
-      render 'new'
-    end
-  end
+  # def create
+  #   @user = User.new(user_params)
+  #   if @user.save
+  #     @user.build_goal.save
+  #     log_in @user
+  #     flash[:success] = "登録が完了しました！"
+  #     redirect_to @user
+  #   else
+  #     render 'new'
+  #   end
+  # end
   
   def edit
     @user = User.find(params[:id])
   end
   
-  def email
-    @user = User.find(params[:id])
-  end
+  # def email
+  #   @user = User.find(params[:id])
+  # end
   
-  def password
-    @user = User.find(params[:id])
-  end
+  # def password
+  #   @user = User.find(params[:id])
+  # end
   
   def update
     @user = User.find(params[:id])
@@ -46,15 +46,16 @@ class UsersController < ApplicationController
       flash[:success] = "プロフィールが更新されました"
       redirect_to request.referer
     else
-      if request.referer == edit_user_url(@user)
-        render 'edit'
-      elsif request.referer == email_user_url(@user)
-        render 'email'
-      elsif request.referer == password_user_url(@user)
-        render 'password'
-      else
-        render 'edit'
-      end
+      render 'edit'
+      # if request.referer == edit_user_url(@user)
+      #   render 'edit'
+      # elsif request.referer == email_user_url(@user)
+      #   render 'email'
+      # elsif request.referer == password_user_url(@user)
+      #   render 'password'
+      # else
+      #   render 'edit'
+      # end
     end
   end
   

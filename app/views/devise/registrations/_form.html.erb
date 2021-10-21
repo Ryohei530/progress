@@ -18,10 +18,10 @@
   <%= f.label :bio  %>
   <%= f.text_area :bio, class: 'form-control' %>
   
-  <%= f.label :password %>
   <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-  <% end %><br />
+    <% mini_pass = @minimum_password_length %>
+  <% end %>
+  <%= f.label :password, "パスワード(#{mini_pass} 文字以上)" %>
   <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
   
   <%= f.label :password_confirmation %>
@@ -30,5 +30,3 @@
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
   
 <% end %>
-
-<%= render "devise/shared/links" %>
