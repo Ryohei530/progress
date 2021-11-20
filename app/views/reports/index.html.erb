@@ -93,23 +93,31 @@
   <aside class="snav col-md-4 list-group list-group-flush">
     <div class="snav-wrap">
       <span class="list-group-item">メニュー</span>
-      <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
-      <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
+      <%= link_to reports_path, class: "snav-link list-group-item list-group-item-action" do %>
+        <i class="material-icons align-middle">feedback</i>
+        <div class="d-inline">日報</div>
+      <% end %>
+      <%= link_to  root_path, class: "snav-link list-group-item list-group-item-action" do %>    
+        <i class="far fa-comment-dots"></i>
+        <div class="d-inline">つぶやき</div>
+      <% end %>
     </div>
   </aside>
   <div class="content col-md-8">
     <% if logged_in?  %>
-      <div class="content-inner">
-        <div class="ch">
-          <%= render 'shared/user_info' %>
+      <div class="content-inner mb-5">
+        <div class="card">
+          <div class="card-header">
+            <%= render 'shared/user_info' %>
+          </div>
+          <section class="card-body">
+            <% if monthly_goal.present? %>
+              <%= render 'shared/report_form' %>
+            <% else %>
+              <%= render 'shared/no_goal_report_form' %>
+            <% end %>
+          </section>
         </div>
-        <section class="cf">
-          <% if monthly_goal.present? %>
-            <%= render 'shared/report_form' %>
-          <% else %>
-            <%= render 'shared/no_goal_report_form' %>
-          <% end %>
-        </section>
       </div>
     <% end %>
     <p class="content-tit">日報</p>

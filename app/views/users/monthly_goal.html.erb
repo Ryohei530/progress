@@ -1,0 +1,19 @@
+<% provide(:title, @user.name) %>
+<div class="user">
+  <div class="row">
+    <div class="d-flex col-12 mb-3 justify-content-between">
+      <div class="d-flex">
+        <h2>1ヶ月の目標一覧</h2>
+      </div>
+      <%= render 'tnav' %>
+    </div>
+  </div>
+</div>
+
+<% if @user.monthly_goals.any? %>
+  <ul class="goals row">
+    <%= render @monthly_goals %>
+  </ul>
+<% end %>
+
+<%= link_to "1ヶ月の目標を作成する", new_monthly_goal_path, class: 'btn btn-outline-primary' %>

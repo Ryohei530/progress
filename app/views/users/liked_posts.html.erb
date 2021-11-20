@@ -1,26 +1,28 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="user-aside col-md-4">
-    <%= render 'user_sec' %>
-  </aside>
-  <div class="user-content col-md-7">
-    <div class="user-inner">
+<% provide(:title, @user.name) %>
+<div class="user">
+  <div class="row">
+    <div class="d-flex col-12 mb-3 justify-content-between">
+      <div class="d-flex">
+        <h2>つぶやき</h2>
+        <div class="term ml-3">
+          <%= link_to  post_user_path(@user), class: "term-link" do %>
+            <button class="btn">つぶやき</button>
+          <% end %>
+          <%= link_to  liked_posts_user_path(@user), class: "term-link" do %>
+            <button class="btn">いいねしたつぶやき</button>
+          <% end %>
+        </div>
+      </div>
       <%= render 'tnav' %>
-      <ul class="unav nav nav-tabs">
-        <li class="nav-item">
-          <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "いいねしたつぶやき", liked_posts_user_path(@user), class: "nav-link" %>
-        </li>
-      </ul>
-      <% if @user.posts.any? %>
-      
-      <ol class="posts">
-        <%= render @liked_posts %>
-      </ol>
-      <%= paginate @liked_posts %>
-      <% end %>
     </div>
   </div>
 </div>
+  
+<% if @user.posts.any? %>
+
+<ol class="posts row">
+  <%= render partial: 'users/post', collection: @liked_posts %>
+</ol>
+<%= paginate @liked_posts %>
+<% end %>

@@ -1,10 +1,10 @@
 <% provide(:title, "ブックマーク一覧") %>
 
-<div class="bookmark row">
-  <div class="bookmark-inner col-md-6 offset-md-3">
-    <h1 class="text-center">ブックマーク一覧</h1>
-    <ul class="bookmark-list">
+<div class="bookmark">
+  <h2 class="text-center mb-4">ブックマーク一覧</h2>
+  <ul class="bookmark-list">
+    <div class="row">
       <%= render @bookmarks %>
-    </ul>
-  </div>
+    </div>
+  </ul>
 </div>

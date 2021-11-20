@@ -30,7 +30,7 @@ class BoardsController < ApplicationController
     @comment = BoardComment.new
     @comments = BoardComment.includes(:user).where(board_id: params[:id]).where(reply_id: nil)
     @replies = BoardComment.includes(:user).where(board_id: params[:id]).where.not(reply_id: nil)
-    #@board_tags = @board.tags
+    @board_tags = @board.board_tags
   end
 
   def edit
@@ -64,6 +64,7 @@ class BoardsController < ApplicationController
   def search
     @boards = Board.search(params[:search])
     @tags = Tag.joins(:board_tags).distinct
+    @search = params[:search]
   end
   
     private

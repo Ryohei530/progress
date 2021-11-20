@@ -1,8 +1,24 @@
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="card  border-0 mb-0 bg-form">
+  <div class="card-body px-lg-5 py-lg-3 border-bottom">
+    <div class="text-center text-muted mb-4">
+      <small>reset your password</small>
+    </div>
+    
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  
-  <%= f.submit "再設定用のメールを送る", class: "btn btn-primary"%>
-<% end %>
+      <div class="form-group">
+        <%= f.label :email, class: "text-muted" %>
+        <div class="input-group input-group-merge input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="material-icons">email</i></span>
+          </div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <%= f.submit "再設定用のメールを送る", class: "btn btn-primary my-4" %>
+      </div>
+    <% end %>
+  </div>

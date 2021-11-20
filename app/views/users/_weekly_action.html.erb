@@ -1,0 +1,33 @@
+<% monthly_actions = @user.monthly_goals.last.goal_actions %>
+<% sum_of_monthly_actions %>
+
+<% if @user.monthly_goals.first.present? %>
+  <div class="action-week">
+    <p class="action-tit">週間</p>
+    <ul class="action-list">
+      <% monthly_actions.each do |m_act| %>
+        <li class="action-item">
+          <div class="action-inner row">
+            <div class="action-wrap col-4">
+              <%= m_act.content %>
+            </div>
+            <div class="action-box col-2">
+              <%= @sum1 %> / <%= m_act.number %>
+              <% ratio = (@sum1.to_f / m_act.number) * 100 %>
+            </div>
+            <div class="action-progress col-6">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% else %>  
+  <div class="action-week">
+    <p class="action-tit">週間</p>
+    <p>未設定</p>
+  </div>
+<% end %>

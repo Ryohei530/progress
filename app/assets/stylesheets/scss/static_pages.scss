@@ -93,6 +93,9 @@
     margin-top: 40px;
       
     &-wrap{
+      border: 0;
+      border-radius: .5rem;
+      box-shadow: 0 0 20px 0 #f9f8f5;
       span{
         color: #fff;  
         background-color: $theme-color;
@@ -105,14 +108,6 @@
   .content{
     padding: 40px;
     &-inner{
-      border: 1px solid #e8e8e8;
-      padding: 20px 30px;
-      margin-bottom: 20px;
-    }
-    .ch{
-      
-    }
-    .cf{
       
     }
     &-tit{
@@ -124,46 +119,68 @@
 /* rank */
 .rank{
   &-list{
-    font-size: 1.7em;
-    padding: 0;
-    margin-left: 150px;
+    font-size: 1.3em;
   }
   &-item{
-    padding: 30px;
     img{
-      margin: 0 80px 0 40px;
-    }
-    span{
-      margin-left: 80px;
-      float: right;
+      width: 50px;
+      height: 50px;
     }
   }
-  &-1{
-    @include rank1-3;
-    &:before{
-      @include rank-img;
-      width: 80px;
-      height: 80px;
-      background-image: url(" <%= asset_path('rank1.png') %>");
-    }
-  }
-  &-2{
-    @include rank1-3;
-    &:before{
-      @include rank-img;
-      width: 80px;
+  &-1, &-2, &-3{
+    font-size: 1.5em;
+    img {
+      width: 70px;
       height: 70px;
-      background-image: url("<%= asset_path('rank2.png') %>");
-      }
+    }
+    td {
+      vertical-align: middle;
+    }
   }
-  &-3{
-    @include rank1-3;
-    &:before{
-      @include rank-img;
-      width: 75px;
-      height: 68px;
-      background-image: url("<%= asset_path('rank3.png') %>");
+  .card {
+    @include card;
+    &-header {
+      border: 0 solid;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -webkit-align-items: stretch;
+      align-items: stretch;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      min-height: 70px;
+      padding: 0 2.25rem;
+      background-color: transparent;
+      &:first-child {
+        border-radius: calc(.65rem - 1px) calc(.65rem - 1px) 0 0;
       }
+    }
+  }
+  
+  .table {
+    .w-100px {
+      width: 100px;
+    }
+    .w-120px {
+      width: 120px;
+    }
+    .w-140px {
+      width: 140px;
+    }
+    .min-w-260px {
+      min-width: 260px;
+    }
+    tbody {
+      border: 0 solid;
+    }
+    th {
+      border: 0 solid;
+    }
+    td {
+      border: 0 solid;
+    }
+    
   }
 }
 
@@ -171,12 +188,16 @@
 
 .nltop{
   color: #fff;
-  background-image: url("<%= asset_path('ppl-discussion.jpg') %>");
+  // background: linear-gradient(-45deg, rgba(246, 255, 0, .8), rgba(255, 0, 161, .8)), url("<%= asset_path('ppl-discussion.png') %>");
+  
+  background: linear-gradient(-45deg, rgba(204, 149, 192, .6), rgba(219, 212, 180, .6), rgba(122, 161, 210, .6)), image-url("ppl-discussion.png");
+  
   background-size: cover;
-  margin-top: -40px;
+  padding: 0;
+  height: 93vh;
+  
   &-inner{
-    background-color: rgba(220, 53, 70, 0.4);
-    padding: 30px 0;
+    padding: 260px 0 0 3%;
   }
   &-tit{
     font-family: 'Holtwood One SC', serif;
@@ -221,8 +242,7 @@
       border: 1px solid #007bff;
     }
     &-main{
-      background-color: rgba(217, 208, 208, 0.4);
-      padding: 20px 40px;
+      padding: 40px;
     }
   }
 }

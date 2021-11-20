@@ -67,6 +67,11 @@ class UsersController < ApplicationController
   
   def goal 
     @user = User.find(params[:id])
+    @goal = @user.goal
+  end
+  
+  def monthly_goal 
+    @user = User.find(params[:id])
     @monthly_goals = @user.monthly_goals.all
   end
   

@@ -1,0 +1,50 @@
+@import 'variables';
+
+.feeds{
+  list-style: none;
+  padding: 0;
+}
+
+.content{
+  &-inner {
+    .card {
+      /* user_info */
+      &-avatar {
+        
+      }
+      &-user {
+        font-size: 1.8em;
+        color: $def-font;
+        margin-left: 20px;
+        padding-top: 10px;
+      }
+      /* post_form */
+      &-form{
+      }
+      &-txta {
+        textarea {
+          height: 100px; 
+          margin-bottom: 10px; 
+          width: 100%;
+          padding: 4px 16px;
+          border-radius: 4px;
+          border: none;
+          box-shadow: 0 0 0 1px #ccc inset;
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          resize: vertical;
+          
+          &:focus {
+            outline: 0;
+            box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+          }
+        }
+        
+      }
+      
+    }
+    
+  }
+}
+

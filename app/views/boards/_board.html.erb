@@ -1,19 +1,39 @@
-<li class="board-<%= board.id %> board-li">
-  <div class="board-inner">
-    <div class="board-avatar">
-      <%= link_to board.user do %>
-        <%= image_tag board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
-      <% end %> 
-    </div>
-    <div class="board-user">
-      <%= board.user.name %>
-    </div>
-  </div>
-  <%= link_to board, class: "board-link" do %>
-    <div class="board-content">
-      <div class="board-tit">
-        <p><%= board.title %></p>
+<% comments = board.board_comments %>
+
+<tr class="board-<%= board.id %> table-tr">
+  <th>
+    <div class="d-flex">
+      <div class="table-avatar">
+        <%= link_to board.user do %>
+          <%= image_tag board.user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed, class: '_rounded' %>
+        <% end %> 
+      </div>
+      <div class="table-user">
+        <%= link_to board.user do %>
+          <%= board.user.name %>
+        <% end %> 
       </div>
     </div>
-  <% end %>
-</li>
+  </th>
+  <td>
+    <%= link_to board, class: "table-link" do %>
+      <%= board.title %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to board do %>
+      <i class="far fa-comment"></i>
+      <span><%= comments.count %></span>
+    <% end %>
+  </td>
+  <td>
+    解決済み
+  </td>
+  <td>
+    <i class="far fa-clock"></i>
+    <%= board.created_at.strftime('%Y/%m/%d %H:%M') %>
+  </td>
+  <td>
+    
+  </td>
+</tr>

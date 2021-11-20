@@ -1,18 +1,48 @@
 <% provide(:title, "ランキング") %>
-<h1 class="text-center">継続日数ランキング</h1>
-
-<div class="rank row justify-content-center">
-    <ol class="rank-list">
-      <% @rank_rdays.take(10).each.with_index(1) do |rank_rday, n| %>
-        <li class="rank-item rank-<%= n %>">
-        <% if n <= 3 %>  
-           <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "90x90^", crop: "90x90+0+0").processed, class: '_rounded' %>
-        <% else %>  
-           <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
-        <% end %>  
-          <%= rank_rday.user.name %>
-          <span><%= rank_rday.r_days %>日</span>
-        </li>
-      <% end %>
-    </ol>
+<div class="d-flex justify-content-center">
+  <div class="rank col-8">
+    <div class="card">
+      <div class="card-header pt-5">
+        <h1 class="card-title text-center">継続日数ランキング</h1>
+        <div class="card-toolber">
+          
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="p-0 w-120px"></th>
+              <th class="p-0 w-140px"></th>
+              <th class="p-0 min-w-260px"></th>
+              <th class="p-0 w-100px"></th>
+            </tr>
+          </thead>
+          <tbody class="rank-list">
+            <% @rank_rdays.take(10).each.with_index(1) do |rank_rday, n| %>
+              <tr class="rank-item rank-<%= n %>">
+                <td>
+                  <img src="<%= "assets/rank#{n}.png" %>">
+                </td>
+                <td>
+                  <% if n <= 3 %>  
+                     <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "90x90^", crop: "90x90+0+0").processed, class: '_rounded' %>
+                  <% else %>  
+                     <%= image_tag rank_rday.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
+                  <% end %>  
+                  
+                </td>
+                <td>
+                  <%= rank_rday.user.name %>
+                </td>
+                <td>
+                  <%= rank_rday.r_days %>日
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

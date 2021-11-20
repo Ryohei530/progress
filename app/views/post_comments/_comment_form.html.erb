@@ -2,7 +2,16 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.label :content, "コメント" %>
-  <%= f.text_area :content, class: 'form-control' %>
+  <% if logged_in? %>
+    <%= f.text_area :content, class: 'form-control' %>
+  <% else %>
+    <%= f.text_area :content, class: 'form-control', placeholder:"コメントするにはログインが必要です" %>
+  <% end %>
   
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  
+  <% if logged_in? %>
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% else %>
+    <div class="btn btn-primary disabled"><%= yield(:button_text) %></div>
+  <% end %>
 <% end %>

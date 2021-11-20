@@ -1,24 +1,39 @@
-<%= form_with(model: @goal, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: @goal %>
-  
-  <p>期間</p>
-  <div class="row">
-    <div class="col">
-      <%= f.label :term_start, "開始日" %>
-      <%= f.date_field :term_start, class: 'form-control' %>
-    </div>
-    <div class="col">
-      <%= f.label :term_end, "終了日" %>
-      <%= f.date_field :term_end, class: 'form-control' %>
-    </div> 
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: @goal, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: @goal %>
+      
+      
+      <div class="aim">
+        <p class="aim-tit"><i class="far fa-calendar-alt"></i> 期間</p>
+        <div class="row">
+          <div class="col">
+            <%= f.label :term_start, class: "aim-tit mb-3" do %>
+              <i class="fas fa-hourglass-start"></i> 開始日
+            <% end %>
+            <%= f.date_field :term_start, class: 'form-control' %>
+          </div>
+          <div class="col">
+            <%= f.label :term_end, class: "aim-tit mb-3" do %>
+              <i class="fas fa-hourglass-end"></i> 終了日
+            <% end %>
+            <%= f.date_field :term_end, class: 'form-control' %>
+          </div> 
+        </div>
+        
+        <%= f.label :aim, class: "aim-tit my-3" do %>
+          <i class="far fa-flag"></i> 目的、得たい結果
+        <% end %>
+        <%= f.text_area :aim, class: 'form-control min-h130' %>
+        
+        <%= f.label :indicator, class: "aim-tit my-3" do %>
+          <i class="far fa-chart-bar"></i>  目標数値、指標
+        <% end %>
+        <%= f.text_area :indicator, class: 'form-control mb-3 min-h130' %>
+      </div>
+      
+      
+      <%= f.submit yield(:button_text) , class: "btn btn-primary" %>
+    <% end %>
   </div>
-  
-  <%= f.label :aim, "目的、得たい結果" %>
-  <%= f.text_area :aim, class: 'form-control' %>
-  
-  <%= f.label :indicator, "目標数値、指標" %>
-  <%= f.text_area :indicator, class: 'form-control' %>
-  
-  
-  <%= f.submit yield(:button_text) , class: "btn btn-primary" %>
-<% end %>
+</div>

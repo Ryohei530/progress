@@ -1,24 +1,81 @@
-<%= form_with(model: @monthly_goal, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: @monthly_goal %>
-  
-  <%= f.label :monthly_aim, "月間の目的" %>
-  <%= f.text_area :monthly_aim, class: 'form-control' %>
-  
-  <%= f.label :monthly_indicator, "月間の目標数値、指標" %>
-  <%= f.text_area :monthly_indicator, class: 'form-control' %>
-  
-  <%= f.label :term_start, "開始日" %>
-  <%= f.date_field :term_start, class: 'form-control' %>
-  
-  <%= f.label :term_end, "終了日" %>
-  <%= f.date_field :term_end, class: 'form-control' %>
-  
-    <%= f.fields_for :goal_actions do |act| %>
-      <%= act.label :content, "月間アクション" %>
-      <%= act.text_field :content, class: 'form-control' %>
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: @monthly_goal, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: @monthly_goal %>
       
-      <%= act.label :number, "数値" %>
-      <%= act.number_field :number, class: 'form-control' %>
+      <div class="aim">
+        <p class="aim-tit"><i class="far fa-calendar-alt"></i> 期間</p>
+        <div class="row">
+          <div class="col">
+            <%= f.label :term_start, class: "aim-tit my-3"  do %>
+              <i class="fas fa-hourglass-start"></i> 開始日
+            <% end %>
+            <%= f.date_field :term_start, class: 'form-control' %>
+          </div>
+          <div class="col">
+            <%= f.label :term_end, class: "aim-tit my-3"  do %>
+              <i class="fas fa-hourglass-end"></i> 終了日
+            <% end %>
+            <%= f.date_field :term_end, class: 'form-control' %>
+          </div>
+        </div>
+        
+        
+        <%= f.label :monthly_aim, class: "aim-tit my-3" do %>
+          <i class="fas fa-crosshairs"></i> 月間の目的
+        <% end %>
+        <%= f.text_area :monthly_aim, class: 'form-control min-h130' %>
+        
+        <%= f.label :monthly_indicator, class: "aim-tit my-3" do %>
+          <i class="fas fa-tachometer-alt"></i> 月間の目標数値、指標
+        <% end %>
+        <%= f.text_area :monthly_indicator, class: 'form-control min-h130' %>
+        
+      </div>
+      <div class="action">
+        <%= f.fields_for :goal_actions do |act| %>
+        <div class="js-file-group" id="goal_action_<%= act.index %>">
+          <div class="row">
+            <div class="col-8">
+              <%= act.label :content, class: "action-tit my-3" do %>
+                <i class="fas fa-clipboard-list"></i> 月間アクション
+              <% end %>
+            </div>
+            <div class="col-3">
+              <%= act.label :number, class: "action-tit my-3" do %>
+                <i class="fas fa-sort-numeric-up-alt"></i> 数値
+              <% end %>  
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-8">
+              <%= act.text_field :content, class: 'form-control' %>
+            </div>
+            <div class="col-3">
+              <%= act.number_field :number, class: 'form-control' %>
+            </div>
+            <div class="col-1 px-0 pt-1">
+              <% if @monthly_goal.persisted? %>
+                <%= act.check_box :_destroy, class: "d-none" %>
+              <% end %>
+              <span class="btn btn-outline-danger delete-form-btn" data-id="<%= act.index %>" data-default="default">
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <% end %>
+      </div>
+      <div class="text-center mt-3">
+        <span class="btn btn-outline-success add-form-btn">
+          <i class="fas fa-plus"></i>
+        </span>
+      </div>
+      
+    
+      <%= f.submit yield(:button_text), class: "btn btn-primary mt-3" %>
     <% end %>
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+  </div>
+</div>

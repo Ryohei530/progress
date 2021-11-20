@@ -1,0 +1,53 @@
+<% goal = @user.goal %>
+
+<div class="col-xl-4 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex">
+        <!--<div class="symbol"></div>-->
+        <h4><i class="far fa-calendar-alt"></i> 期間</h4>
+      </div>
+      <% if goal.term_start.present? %>
+        <p><%= goal.term_start.strftime('%Y年%m月%d日') %> から</p>
+      <% end %>
+      
+      <% if goal.term_end.present? %>
+        <p><%= goal.term_end.strftime('%Y年%m月%d日') %> <br>までに目標を達成する</p>
+      <% end %>
+      <div class="remaining">
+        <i class="fas fa-hourglass-half"></i> 
+        残り日数　
+        <% remaining = (goal.term_end - Date.today).to_i %>
+        <% if remaining.negative? %>
+          0日
+        <% else %>
+          <%= remaining %>日
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-4 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><i class="far fa-flag"></i> 目的</h4>
+      <% if goal.aim.present? %>
+        <p class="ugoal-txt"><%= simple_format(goal.aim) %></p>
+      <% else %>
+        <p class="ugoal-txt">未設定</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-xl-4 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><i class="far fa-chart-bar"></i> 目標数値</h4>
+      <% if goal.indicator.present? %>
+        <p class="ugoal-txt"><%= simple_format(goal.indicator) %></p>
+      <% else %>
+        <p class="ugoal-txt">未設定</p>
+      <% end %>
+    </div>
+  </div>
+</div>

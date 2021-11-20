@@ -1,0 +1,44 @@
+@import 'scss/variables';
+
+.comment{
+  &-header{
+    margin-top: 20px;
+  }
+  &-list{
+    list-style-type: none;
+    padding: 20px 30px;
+  }
+  &-item{
+    background-color: rgba(236,64,108, 0.03);
+    padding: 10px;
+    border-radius: .65rem;
+    margin-bottom: 20px;
+  }
+  &-avatar{
+    margin-bottom: 10px;
+  }
+  &-user{
+    font-size: 1.2em;
+    margin-left: 10px;
+  }
+  &-content{
+    
+  }
+  &-date{
+    color: $gray-light;
+    margin-bottom: 30px;
+  }
+  
+  
+  &-btn{
+    
+  }
+  &-form{
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    textarea{
+      height: 100px;
+      margin-bottom: 10px;
+    }
+  }
+}

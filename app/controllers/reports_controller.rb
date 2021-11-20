@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
   
   def create
     @report = current_user.reports.build(report_params)
-    @report.images.attach(params[:report][:images])
+    
     if @report.save
       r_days = current_user.running_days
       
@@ -75,8 +75,8 @@ class ReportsController < ApplicationController
     def report_params
       params.require(:report).permit(
         :content, 
-        :images,
         :monthly_goal_id,
+        images: [],
         report_actions_attributes: [:number, :_destroy, :id]
         )
     end

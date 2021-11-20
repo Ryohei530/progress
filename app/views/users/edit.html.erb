@@ -21,10 +21,10 @@
       </div>
       <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'd-none' %>
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control mb-3' %>
       
       <%= f.label :bio %>
-      <%= f.text_area :bio, class: 'form-control' %>
+      <%= f.text_area :bio, class: 'form-control mb-3 min-h180' %>
       
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     <% end %>

@@ -1,53 +1,58 @@
-<li id="goal-<%= monthly_goal.id %>" class="goal-li">
-  <div class="goal-wrap">
-    <div class="goal-avatar">
-      <%= image_tag monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
-    </div>
-    <span class="goal-user"><%= link_to monthly_goal.user.name, monthly_goal.user %></span>
-  </div>
-  <%= link_to(monthly_goal, class: "goal-link") do %>
-    <div class="goal-inner">
-      <div class="goal-content">
-        <div class="aim">
-          <p class="aim-tit">期間</p>
-          <p class="aim-txt"><%= monthly_goal.term_start %> 〜 <%= monthly_goal.term_end %></p>
-          <p class="aim-tit">１ヶ月間の目的</p>
-          <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
-          <p class="aim-tit">１ヶ月間の目標数値、指標</p>
-          <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+<div class="col-xl-6 mb-3">
+  <li id="goal-<%= monthly_goal.id %>" class="card mb-3">
+    <div class="card-body">
+      <div class="card-wrap">
+        <div class="card-avatar">
+          <%= image_tag monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
         </div>
-        <div class="action">
-          <p class="action-tit">1ヶ月間のアクション</p>
-          <ul class="action-list">
-            <% monthly_goal.goal_actions.each do |action| %>
-              <li class="action-item">
-                <div class="action-inner">
-                  <div class="action-wrap">
-                    <%= action.content %>
-                  </div>
-                  <div class="action-box">
-                    <%= action.number %> / <%= action.number %>
-                  </div>
-                </div>
-              </li>
+        <span class="card-user"><%= link_to monthly_goal.user.name, monthly_goal.user %></span>
+      </div>
+      <%= link_to(monthly_goal, class: "card-link") do %>
+        <div class="card-inner">
+          <div class="card-content">
+            <div class="aim">
+              <p class="aim-tit"><i class="far fa-calendar-alt"></i> 期間</p>
+              <p class="aim-txt"><%= monthly_goal.term_start %> 〜 <%= monthly_goal.term_end %></p>
+              <p class="aim-tit"><i class="fas fa-crosshairs"></i>１ヶ月間の目的</p>
+              <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+              <p class="aim-tit"><i class="fas fa-tachometer-alt"></i>１ヶ月間の目標数値、指標</p>
+              <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+            </div>
+            <div class="action">
+              <p class="action-tit"><i class="fas fa-clipboard-list"></i> 1ヶ月間のアクション</p>
+              <ul class="action-list">
+                <% monthly_goal.goal_actions.each do |action| %>
+                  <li class="action-item">
+                    <div class="action-inner">
+                      <div class="action-wrap">
+                        <%= action.content %>
+                      </div>
+                      <div class="action-box">
+                        <%= action.number %> / <%= action.number %>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="card-box">
+        <div class="row">
+          <div class="col d-flex align-items-center">
+            <span class="card-timestamp">
+              <i class="far fa-clock"></i>
+              <%= time_ago_in_words(monthly_goal.created_at) %>前
+            </span>
+            <% if current_user?(monthly_goal.user) %>
+              <%= link_to "削除", monthly_goal, method: :delete,
+                                        data: { confirm: "本当に削除しますか？" },
+                                        class: "card-dlt dlt-card-#{monthly_goal.id} btn btn-outline-danger btn-sm" %>
             <% end %>
-          </ul>
+          </div>
         </div>
       </div>
     </div>
-  <% end %>
-  <div class="goal-box">
-    <div class="row">
-      <div class="col d-flex align-items-center">
-        <span class="goal-timestamp">
-          <%= time_ago_in_words(monthly_goal.created_at) %> ago
-        </span>
-        <% if current_user?(monthly_goal.user) %>
-          <%= link_to "削除", monthly_goal, method: :delete,
-                                    data: { confirm: "本当に削除しますか？" },
-                                    class: "goal-dlt dlt-goal-#{monthly_goal.id} btn btn-outline-danger btn-sm" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</li>
+  </li>
+</div>

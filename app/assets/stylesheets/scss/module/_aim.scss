@@ -1,0 +1,8 @@
+@import '/scss/variables';
+
+.aim {
+  &-tit {
+    @include title;
+    @include aim-color;
+  }
+}

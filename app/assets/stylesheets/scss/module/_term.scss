@@ -1,0 +1,20 @@
+@import '/scss/variables';
+
+.term {
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  button {
+    color: $gray;
+    border-radius: .65rem;
+    &:hover {
+      background-color: $bg-btn-red;
+      text-decoration: none;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

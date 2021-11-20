@@ -1,172 +1,150 @@
 <% provide(:title, "日報") %>
 <% provide(:button_text, "投稿") %>
-<div class="report-outer">
-  <li id="report-<%= @report.id %>" class="report-li">
-    <div class="report-wrap">
-      <div class="report-ubox">
-        <div class="report-avatar">
-          <%= link_to @report.user do %>
-            <%= image_tag @report.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
-          <% end %> 
-        </div>
-        <span class="report-user"><%= link_to @report.user.name, @report.user %></span>
-      </div>
-      <button class="report-rdays btn btn-success"><%= @report.r_days %>日目</button>
-    </div>
-  
-    <div class="report-inner">
-      <div class="report-content">
-        <div class="aim">
-          <p class="aim-tit">今月の目的</p>
-          <p class="aim-txt"><%= @report.monthly_goal.monthly_aim %></p>
-          <p class="aim-tit">今月の目標指標</p>
-          <p class="aim-txt"><%= @report.monthly_goal.monthly_indicator %></p>
+<div class="reports row justify-content-center">
+  <div class="col-8">
+    <div id="report-<%= @report.id %>" class="card mb-5">
+      <div class="card-body">
+        <div class="card-wrap">
+          <div class="card-ubox">
+            <div class="card-avatar">
+              <%= link_to @report.user do %>
+                <%= image_tag @report.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+              <% end %> 
+            </div>
+            <span class="card-user"><%= link_to @report.user.name, @report.user %></span>
+          </div>
+          <button class="card-rdays btn btn-success"><%= @report.r_days %>日目</button>
         </div>
       
-        <div class="action">
-          <p class="action-tit">今日達成したアクション</p>
-          <ul class="action-list">
-            <% rep_acts = @report.report_actions %>
-            <% actions = @report.monthly_goal.goal_actions %>
-            <%= actions.zip(rep_acts) do |action, rep_act| %>
-            <li class="action-item">
-              <div class="action-inner">
-                <div class="action-wrap">
-                  <%= action.content %>
-                </div>
-                <div class="action-box">
-                  <%= rep_act.number %> / <%= action.number %>
-                </div>
-              </div>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="realize">
-          <p class="realize-tit">感想、気付き</p>
-          <p><%= @report.content %></p>
-        </div>
-        <%= image_tag @report.images.display if @report.images.attached? %>
-      </div>
-    </div>
-    
-    <div class="report-box">
-      <div class="row">
-        <div class="col d-flex">
-          <span class="report-timestamp">
-            <%= time_ago_in_words(@report.created_at) %>前
-          </span>
-          <% if current_user?(@report.user) %>
-            <%= link_to "削除", @report, method: :delete,
-                                      data: { confirm: "本当に削除しますか？" },
-                                      class: "report-dlt dlt-report-#{@report.id} btn btn-outline-danger btn-sm" %>
-            <%= link_to "編集", edit_report_path(@report), class: 'report-edit btn btn-outline-danger btn-sm' %>
-          <% end %>
-        </div>
-        <div class="col d-flex justify-content-end">
-          <div class="report-comment">
-            <i class="far fa-comment"></i>
-            <span><%= @report.report_comments.count %></span>
-          </div>
-          <div class="report-like">
-            <% if logged_in? %>
-              <% like = @report.report_likes.find_by(user_id: current_user.id) %>
-              <% if current_user.report_liked?(@report) %>
-                <%= link_to report_report_like_path(@report, like), method: :delete do %>
-                  <span>
-                    <i class="fas fa-heart"></i>
-                    <%= @report.report_likes.count %>
-                  </span>
+        <div class="card-inner">
+          <div class="card-content">
+            <div class="aim">
+              <p class="aim-tit"><i class="fas fa-crosshairs"></i> 今月の目的</p>
+              <p class="aim-txt"><%= @report.monthly_goal.monthly_aim %></p>
+              <p class="aim-tit"><i class="fas fa-tachometer-alt"></i> 今月の目標指標</p>
+              <p class="aim-txt"><%= @report.monthly_goal.monthly_indicator %></p>
+            </div>
+          
+            <div class="action">
+              <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
+              <ul class="action-list">
+                <% rep_acts = @report.report_actions %>
+                <% actions = @report.monthly_goal.goal_actions %>
+                <%= actions.zip(rep_acts) do |action, rep_act| %>
+                <li class="action-item">
+                  <div class="action-inner">
+                    <div class="action-wrap">
+                      <%= action.content %>
+                    </div>
+                    <div class="action-box">
+                      <%= rep_act.number %> / <%= action.number %>
+                    </div>
+                  </div>
+                </li>
                 <% end %>
-              <% else %>
-                <%= link_to report_report_likes_path(@report), method: :post do %>
+              </ul>
+            </div>
+            <div class="realize">
+              <p class="realize-tit"><i class="far fa-lightbulb"></i> 感想、気付き</p>
+              <p><%= @report.content %></p>
+            </div>
+            <div class="images">
+              <% if @report.images.attached? %>
+                <div class="row">
+                  <%  @report.images.each do |image| %>
+                    <div class="col-6">
+                      <%= image_tag image.variant(resize: "240x180!") %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-box">
+          <div class="row">
+            <div class="col d-flex">
+              <span class="card-timestamp">
+                <i class="far fa-clock"></i>
+                <%= time_ago_in_words(@report.created_at) %>前
+              </span>
+              <% if current_user?(@report.user) %>
+                <%= link_to "削除", @report, method: :delete,
+                                          data: { confirm: "本当に削除しますか？" },
+                                          class: "card-dlt dlt-card-#{@report.id} btn btn-outline-danger btn-sm" %>
+                <%= link_to "編集", edit_report_path(@report), class: 'card-edit btn btn-outline-danger btn-sm' %>
+              <% end %>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <div class="card-comment">
+                <a href="#comment">
+                  <i class="far fa-comment"></i>
+                  <span><%= @report.report_comments.count %></span>
+                </a>
+              </div>
+              <div class="card-like">
+                <% if logged_in? %>
+                  <% like = @report.report_likes.find_by(user_id: current_user.id) %>
+                  <% if current_user.report_liked?(@report) %>
+                    <%= link_to report_report_like_path(@report, like), method: :delete do %>
+                      <span>
+                        <i class="fas fa-heart"></i>
+                        <%= @report.report_likes.count %>
+                      </span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to report_report_likes_path(@report), method: :post do %>
+                      <span>
+                        <i class="far fa-heart"></i>
+                        <%= @report.report_likes.count %>
+                      </span>
+                    <% end %>
+                  <% end %>
+                <% else %>
                   <span>
                     <i class="far fa-heart"></i>
                     <%= @report.report_likes.count %>
                   </span>
                 <% end %>
-              <% end %>
-            <% else %>
-              <span>
-                <i class="far fa-heart"></i>
-                <%= @report.report_likes.count %>
-              </span>
-            <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </li>
-  <div class="comment">
-    <div class="comment-inner">
+    <div id="comment" class="comment">
       <% if @comments.present? %>
-        <ul class="comment-list">
-          <% @comments.each do |comment| %>
-            <li class="comment-item">
-              <div class=" comment-avatar">
-                <%= link_to comment.user do %>
-                  <%= image_tag comment.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
-                <% end %> 
-                <span class="comment-user"><%= comment.user.name %></span>
-                <% if comment.user_id == current_user.id %>
-                    <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-outline-danger" %>
-                <% end %>
-              </div>
-              <p class="comment-content"><%= comment.content %></p>
-              <p class="comment-date"><%= time_ago_in_words(comment.created_at) %></p>
-            </li>
-            <% replies_to_comment = @replies.where(reply_id: comment.id) %>
-            <% if replies_to_comment.present? %>
+        <div class="card mb-5">
+          <div class="card-header">
+            <h4 class="comment-header"><i class="far fa-comment"></i> コメント</h4>
+          </div>
+          <div class="card-body">
               <ul class="comment-list">
-                <% replies_to_comment.each do |reply| %>
-                  <li class="comment-item ml-2">
+                <% @comments.each do |comment| %>
+                  <li class="comment-item">
                     <div class=" comment-avatar">
-                      <%= link_to reply.user do %>
-                        <%= image_tag reply.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
+                      <%= link_to comment.user do %>
+                        <%= image_tag comment.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
                       <% end %> 
-                      <span class="comment-user"><%= reply.user.name %></span>
-                      <% if reply.user_id == current_user.id %>
-                          <%= link_to "削除", report_report_comment_path(@report, reply), method: :delete, class: "btn btn-outline-danger" %>
+                      <span class="comment-user"><%= comment.user.name %></span>
+                      <% if current_user != nil && comment.user_id == current_user.id %>
+                          <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-outline-danger" %>
                       <% end %>
                     </div>
-                    <p class="comment-content"><%= reply.content %></p>
-                    <p class="comment-date"><%= time_ago_in_words(reply.created_at) %></p>
-                    
-                    <%= render 'report_comments/reply_form', comment: reply %>
-                    
-                    <% replies_to_reply = @replies.where(reply_id: reply.id) %>
-                    <% if replies_to_reply.present? %>
-                      <ul class="comment-list">
-                        <% replies_to_reply.each do |rep| %>
-                          <li class="comment-item ml-2">
-                            <div class=" comment-avatar">
-                              <%= link_to rep.user do %>
-                                <%= image_tag rep.user.avatar.variant(gravity: :center, resize: "45x45^", crop: "45x45+0+0").processed, class: '_rounded' %>
-                              <% end %> 
-                              <span class="comment-user"><%= rep.user.name %></span>
-                              <% if rep.user_id == current_user.id %>
-                                  <%= link_to "削除", report_report_comment_path(@report, rep), method: :delete, class: "btn btn-outline-danger" %>
-                              <% end %>
-                            </div>
-                            <p class="comment-content"><%= rep.content %></p>
-                            <p class="comment-date"><%= time_ago_in_words(rep.created_at) %></p>
-                            <%= render 'report_comments/reply_form', comment: rep %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    <% end %>  
+                    <p class="comment-content"><%= comment.content %></p>
+                    <p class="comment-date"><%= time_ago_in_words(comment.created_at) %></p>
                   </li>
                 <% end %>
               </ul>
-            <% end %>
-            
-            <%= render 'report_comments/reply_form', comment: comment %>
-          <% end %>
-        </ul>
+          </div>
+        </div>
       <% end %>
       
-      <div class="comment-form">
-        <%= render 'report_comments/comment_form' %>
+      <div class="card comment-form">
+        <div class="card-body">
+          <%= render 'report_comments/comment_form' %>
+        </div>
       </div>
     </div>
   </div>

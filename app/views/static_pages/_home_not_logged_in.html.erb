@@ -1,45 +1,31 @@
 <% provide(:controller, :static_pages) %>
 <% provide(:action, :home) %>
-<% provide(:feed, "post") %>
 
-<div class="nltop jumbotron jumbotron-fluid">
-  <div class="nltop-inner">
-    <h1 class="nltop-tit display-4 text-center">Progress</h1>
-    <p class="nltop-txt lead text-center">
-      みんなと目標を共有して、刺激をもらおう！<br>
-      継続できないを克服する目標達成アプリです
-    </p>
-  </div>
-  <div class="nltop-wrap col-6">
-    <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-success nltop-btn _btn-green' %>
-    <%= link_to "ゲストログイン（閲覧用）", static_pages_guest_sign_in_path, method: :post, class: 'btn btn-danger nltop-btn _btn-red _ml-btn' %>
-  </div>
-  <div class="form col-6">
-    <div class="form-header">
-      ログイン
-    </div>
-    <div class="form-main">
-      <%= render 'shared/form' %>
-    </div> 
-  </div>
-</div>
 
 <div class="sec row">
   <aside class="snav col-md-4 list-group list-group-flush">
     <div class="snav-wrap">
       <span class="list-group-item">メニュー</span>
-      <%= link_to "日報", reports_path, class: "snav-link list-group-item list-group-item-action" %>
-      <%= link_to "つぶやき", root_path, class: "snav-link list-group-item list-group-item-action" %>    
+      <%= link_to reports_path, class: "snav-link list-group-item list-group-item-action" do %>
+        <i class="material-icons align-middle">feedback</i>
+        <div class="d-inline">日報</div>
+      <% end %>
+      <%= link_to  root_path, class: "snav-link list-group-item list-group-item-action" do %>    
+        <i class="far fa-comment-dots"></i>
+        <div class="d-inline">つぶやき</div>
+      <% end %>
     </div>
   </aside>
   <div class="content col-md-8">
     <% if logged_in? %>
-    <div class="content-inner">
-      <div class="ch">
-          <%= render 'shared/user_info' %>
-      </div>
-      <div class="cf">
-          <%= render 'shared/post_form' %>
+    <div class="content-inner mb-5">
+      <div class="card">
+        <div class="card-header">
+            <%= render 'shared/user_info' %>
+        </div>
+        <div class="card-body">
+            <%= render 'shared/post_form' %>
+        </div>
       </div>
     </div>
     <% end %>

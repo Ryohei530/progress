@@ -1,0 +1,23 @@
+@import '/scss/variables';
+
+.tag{
+  @include card;
+  background-color: $component-bg;
+  
+  &-header{
+    background-color: $theme-color;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: .5rem .5rem 0 0;
+  }
+  &-list{
+    list-style: none;
+    padding: 15px 0;
+  }
+  &-item{
+    margin-left: 10px;
+  }
+  &-link{
+    
+  }
+}
