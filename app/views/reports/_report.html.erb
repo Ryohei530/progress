@@ -24,7 +24,7 @@
           <div class="action">
             <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
             <ul class="action-list">
-              <% rep_acts = report.report_actions %>
+              <% rep_acts = report.report_actions.reverse %>
               <% actions = report.monthly_goal.goal_actions %>
               <%= actions.zip(rep_acts) do |action, rep_act| %>
               <li class="action-item">

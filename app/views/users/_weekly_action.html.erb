@@ -1,19 +1,23 @@
 <% monthly_actions = @user.monthly_goals.last.goal_actions %>
-<% sum_of_monthly_actions %>
+<% sum_of_weekly_actions # @week_sums %>
+<% days_of_month # @days_of_month %>
+<% days_of_week # @days_of_week, @nth_week %>
 
 <% if @user.monthly_goals.first.present? %>
   <div class="action-week">
     <p class="action-tit">週間</p>
+    <p><%= @nth_week %></p>
     <ul class="action-list">
-      <% monthly_actions.each do |m_act| %>
+      <% monthly_actions.zip(@week_sums.reverse) do |m_act, sum| %>
+        <% week_act_number = (m_act.number / @days_of_month) * @days_of_week %>
         <li class="action-item">
           <div class="action-inner row">
             <div class="action-wrap col-4">
               <%= m_act.content %>
             </div>
             <div class="action-box col-2">
-              <%= @sum1 %> / <%= m_act.number %>
-              <% ratio = (@sum1.to_f / m_act.number) * 100 %>
+              <%= sum %> / <%= (week_act_number).round %>
+              <% ratio = ((sum.to_f / week_act_number) * 100).round(1) %>
             </div>
             <div class="action-progress col-6">
               <div class="progress">

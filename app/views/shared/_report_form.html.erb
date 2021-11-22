@@ -13,17 +13,20 @@
   <div class="action">
     <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
     <ul class="action-list">
-      <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
-      <li class="action-item">
-        <div class="action-inner">
-          <div class="action-wrap">
-            <%= rep.label :number, monthly_goal.goal_actions.first.content %>
+      <% actions = monthly_goal.goal_actions %>
+      <% actions.each do |action| %>
+        <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
+        <li class="action-item">
+          <div class="action-inner">
+            <div class="action-wrap">
+              <%= rep.label :number, action.content %>
+            </div>
+            <div class="action-box">
+              <%= rep.number_field :number %> / <%= action.number %>
+            </div>
           </div>
-          <div class="action-box">
-            <%= rep.number_field :number %> / <%= monthly_goal.goal_actions.first.number %>
-          </div>
-        </div>
-      </li>
+        </li>
+        <% end %>
       <% end %>
     </ul>
   </div>

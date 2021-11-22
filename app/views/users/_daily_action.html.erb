@@ -1,27 +1,52 @@
 <% monthly_actions = @user.monthly_goals.last.goal_actions %>
-<% sum_of_monthly_actions %>
+<% report = @user.monthly_goals.last.reports.where(created_at: Date.today).last %>
+<% report_actions = report.report_actions if report.present? %>
+<% days_of_month # @days_of_month %>
 
 <% if @user.monthly_goals.first.present? %>
   <div class="action-day">
     <p class="action-tit">日間</p>
     <ul class="action-list">
-      <% monthly_actions.each do |m_act| %>
-        <li class="action-item">
-          <div class="action-inner row">
-            <div class="action-wrap col-4">
-              <%= m_act.content %>
-            </div>
-            <div class="action-box col-2">
-              <%= @sum1 %> / <%= m_act.number %>
-              <% ratio = (@sum1.to_f / m_act.number) * 100 %>
-            </div>
-            <div class="action-progress col-6">
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+      <% if report.present? %>
+        <% monthly_actions.zip(report_actions) do |m_act, rep_act| %>
+          <% day_act_number = m_act.number.to_f / @days_of_month %>
+          <li class="action-item">
+            <div class="action-inner row">
+              <div class="action-wrap col-4">
+                <%= m_act.content %>
+              </div>
+              <div class="action-box col-2">
+                <%= rep_act.number %> / <%= day_act_number.to_i %>
+                <% ratio = ((rep_act.number.to_f / day_act_number) * 100).round(1) %>
+              </div>
+              <div class="action-progress col-6">
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
+          </li>
+        <% end %>
+      <% else %>
+        <% monthly_actions.each do |m_act| %>
+          <% day_act_number = m_act.number.to_f / @days_of_month %>
+          <li class="action-item">
+            <div class="action-inner row">
+              <div class="action-wrap col-4">
+                <%= m_act.content %>
+              </div>
+              <div class="action-box col-2">
+                0 / <%= day_act_number.to_i %>
+                <% ratio = 0 %>
+              </div>
+              <div class="action-progress col-6">
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
