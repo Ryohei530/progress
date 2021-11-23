@@ -3,6 +3,8 @@
 <% monthly_goal = @user.monthly_goals.last %>
 <% rday_dates = @user.running_days.filter_map { |rday| rday.date } %>
 <% post = @user.posts.first %>
+<% sum_of_monthly_actions # @monthly_ratio %>
+
 <div class="user">
   <div class="row">
     <div class="d-flex col-12 mb-3 justify-content-between">
@@ -116,13 +118,18 @@
       <div class="card">
         <div class="card-body">
           <canvas id="myChart" width="400px" height="400px"></canvas>
+          <script>
+            var ratios = <%= @monthly_ratios.reverse %>;
+          </script>
+          <script>my_chart();</script>
         </div>
       </div>
     </div>
     <div class="col-xl-6 mb-5">
       <div class="card ">
         <div class="card-body">
-          coming soon
+          <canvas id="myChart2" width="400px" height="400px"></canvas>
+          <script>my_chart2();</script>
         </div>
       </div>
     </div>

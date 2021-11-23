@@ -17,6 +17,7 @@ import '../src/custom';
 import Chart from 'chart.js/auto';
 global.Chart = Chart;
 import '../src/components/mychart';
+import '../src/components/mychart2';
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

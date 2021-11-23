@@ -1,7 +1,7 @@
 /* global Chart */
-window.my_chart = function() {
+window.my_chart2 = function() {
   document.addEventListener('turbolinks:load', () => {
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChart2");
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -9,12 +9,12 @@ window.my_chart = function() {
         datasets: [
           {
             label: '達成',
-            data: ratios,
+            data: [62, 65, 93, 85, 51, 66, 47],
             backgroundColor: "rgba(97,213,138, 1)"
-            // backgroundColor: "rgba(219,39,91,0.5)"
-            // backgroundColor: "rgba(227,253,244, 1)"
-            // backgroundColor: "rgba(130,201,169,0.5)"
-            // backgroundColor: "rgba(255,183,76,0.5)"
+          },{
+            label: '目標',
+            data: [55, 45, 73, 75, 41, 45, 58],
+            backgroundColor: "rgba(130,201,169,0.5)"
           }
         ]
       },
@@ -22,7 +22,7 @@ window.my_chart = function() {
         plugins: {
           title: {
             display: true,
-            text: '達成度'
+            text: '実績'
           }
         },
         scales: {
@@ -32,7 +32,7 @@ window.my_chart = function() {
               suggestedMin: 0,
               stepSize: 10,
               callback: function(value, index, values){
-                return  value +  '%';
+                return  value +  '回'
               }
             }
           }

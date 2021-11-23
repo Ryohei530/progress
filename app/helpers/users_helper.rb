@@ -2,19 +2,62 @@ module UsersHelper
   
   
   def sum_of_monthly_actions
-    monthly_goal = @user.monthly_goals.last
-    count = monthly_goal.goal_actions.length
-    num = (1..count).to_a
-    @sums = []
+    # monthly_goal = @user.monthly_goals.last
+    # count = monthly_goal.goal_actions.length
+    # num = (1..count).to_a
+    # @sums = []
     
-    num.each do |n|
-      sum = 0
-      monthly_goal.reports.each do |report|
-        sum += report.report_actions[n-1].number
-      end
-      @sums[n-1] = sum
-    end
+    # num.each do |n|
+    #   sum = 0
+    #   monthly_goal.reports.each do |report|
+    #     sum += report.report_actions[n-1].number
+    #   end
+    #   @sums[n-1] = sum
+    # end
    
+    
+    # ratios = 0
+    # m_actions = monthly_goal.goal_actions
+    
+    # m_actions.zip(@sums.reverse) do |m_act, sum|
+    #   ratios += ((sum.to_f / m_act.number) * 100).round(1) 
+    # end
+    
+    # @monthly_ratios = []
+    
+    # monthly_ratio = (ratios / count).rounnd(1)
+    
+    
+    monthly_goals = @user.monthly_goals
+    @monthly_ratios = []
+    @monthly_sums = []
+    
+    monthly_goals.each do |monthly_goal|
+      
+      count = monthly_goal.goal_actions.length
+      num = (1..count).to_a
+      @sums = []
+      
+      num.each do |n|
+        sum = 0
+        monthly_goal.reports.each do |report|
+          sum += report.report_actions[n-1].number
+        end
+        @sums[n-1] = sum
+        
+      end
+      @monthly_sums += @sums 
+      
+      
+      ratio_sum = 0
+      m_actions = monthly_goal.goal_actions
+      
+      m_actions.zip(@sums.reverse) do |m_act, sum|
+        ratio_sum += ((sum.to_f / m_act.number) * 100).round(1) 
+      end
+      @monthly_ratios << (ratio_sum / count).round(1)
+    end
+    
     
     # @sum1 = 0
     # monthly_goal.reports.each do |report|
