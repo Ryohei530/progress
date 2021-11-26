@@ -1,14 +1,12 @@
-<% monthly_actions = @user.monthly_goals.last.goal_actions %>
 <% report = @user.monthly_goals.last.reports.where(created_at: Date.today).last %>
 <% report_actions = report.report_actions if report.present? %>
-<% days_of_month # @days_of_month %>
 
 <% if @user.monthly_goals.first.present? %>
   <div class="action-day">
     <p class="action-tit">日間</p>
     <ul class="action-list">
       <% if report.present? %>
-        <% monthly_actions.zip(report_actions) do |m_act, rep_act| %>
+        <% @monthly_actions.zip(report_actions) do |m_act, rep_act| %>
           <% day_act_number = m_act.number.to_f / @days_of_month %>
           <li class="action-item">
             <div class="action-inner row">
@@ -28,7 +26,7 @@
           </li>
         <% end %>
       <% else %>
-        <% monthly_actions.each do |m_act| %>
+        <% @monthly_actions.each do |m_act| %>
           <% day_act_number = m_act.number.to_f / @days_of_month %>
           <li class="action-item">
             <div class="action-inner row">

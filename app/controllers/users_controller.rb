@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @monthly_actions = @user.monthly_goals.last.goal_actions
+    sum_of_monthly_actions # @sums @monthly_ratio
+    sum_of_weekly_actions # @week_sums
+    days_of_month # @days_of_month
+    days_of_week # @days_of_week, @nth_week
   end
 
   # def new
@@ -112,4 +117,5 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         redirect_to(root_url) unless current_user?(@user)
       end
+
 end

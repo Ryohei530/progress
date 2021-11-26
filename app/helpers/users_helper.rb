@@ -1,7 +1,7 @@
 module UsersHelper
-  
-  
+
   def sum_of_monthly_actions
+    
     # monthly_goal = @user.monthly_goals.last
     # count = monthly_goal.goal_actions.length
     # num = (1..count).to_a
@@ -25,7 +25,8 @@ module UsersHelper
     
     # @monthly_ratios = []
     
-    # monthly_ratio = (ratios / count).rounnd(1)
+    # monthly_ratio = (ratios / count).round(1)
+    
     
     
     monthly_goals = @user.monthly_goals
@@ -114,36 +115,45 @@ module UsersHelper
     # end
   end
   
-    def sum_of_weekly_actions
-      monthly_goal = @user.monthly_goals.last
-      term_start = monthly_goal.term_start
-      term_end = monthly_goal.term_end
-      
-      count = monthly_goal.goal_actions.length
-      num = (1..count).to_a
-      @week_sums = []
-      now = Date.current
+  def sum_of_weekly_actions
+    monthly_goal = @user.monthly_goals.last
+    term_start = monthly_goal.term_start
+    term_end = monthly_goal.term_end
     
-      reports = monthly_goal.reports.where(created_at: 
-        if now.between?(term_start, (term_start + 6.days))
-          [term_start..(term_start + 6.days)]
-        elsif now.between?((term_start + 7.days), (term_start + 13.days))
-          [(term_start + 7.days)..(term_start + 13.days)]
-        elsif now.between?((term_start + 14.days), (term_start + 20.days))
-          [(term_start + 14.days)..(term_start + 20.days)]
-        elsif now.between?((term_start + 21.days), term_end)
-          [(term_start + 21.days)..term_end]
-        end
-        )
-      
-      num.each do |n|
-        sum = 0
-        reports.each do |report|
-          sum += report.report_actions[n-1].number
-        end
-        @week_sums[n-1] = sum
+    count = monthly_goal.goal_actions.length
+    num = (1..count).to_a
+    @week_sums = []
+    now = Date.current
+  
+    reports = monthly_goal.reports.where(created_at: 
+      if now.between?(term_start, (term_start + 6.days))
+        [term_start..(term_start + 6.days)]
+      elsif now.between?((term_start + 7.days), (term_start + 13.days))
+        [(term_start + 7.days)..(term_start + 13.days)]
+      elsif now.between?((term_start + 14.days), (term_start + 20.days))
+        [(term_start + 14.days)..(term_start + 20.days)]
+      elsif now.between?((term_start + 21.days), term_end)
+        [(term_start + 21.days)..term_end]
       end
+      )
+    
+    num.each do |n|
+      sum = 0
+      reports.each do |report|
+        sum += report.report_actions[n-1].number
+      end
+      @week_sums[n-1] = sum
     end
+    
+    
+    @day_date = []
+    @day_done = []
+    reports.each do |report|
+      @day_date << report.created_at.strftime('%m月%d日')
+      @day_done << report.report_actions.first.number
+    end
+
+  end
   
   def days_of_month
     monthly_goal = @user.monthly_goals.last
@@ -164,14 +174,16 @@ module UsersHelper
       end
       )
       
-    @nth_week = if now.between?(term_start, (term_start + 6.days))
-                  term_start.strftime('%m月%d日') + "〜" + (term_start + 6.days).strftime('%m月%d日')
-                elsif now.between?((term_start + 7.days), (term_start + 13.days))
-                  (term_start + 7.days).strftime('%m月%d日') + "〜" + (term_start + 13.days).strftime('%m月%d日')
-                elsif now.between?((term_start + 14.days), (term_start + 20.days))
-                  (term_start + 14.days).strftime('%m月%d日') + "〜" + (term_start + 20.days).strftime('%m月%d日')
-                elsif now.between?((term_start + 21.days), term_end)
-                  (term_start + 21.days).strftime('%m月%d日') + "〜" + term_end.strftime('%m月%d日')
-                end
+    @nth_week = 
+      if now.between?(term_start, (term_start + 6.days))
+        term_start.strftime('%m月%d日') + "〜" + (term_start + 6.days).strftime('%m月%d日')
+      elsif now.between?((term_start + 7.days), (term_start + 13.days))
+        (term_start + 7.days).strftime('%m月%d日') + "〜" + (term_start + 13.days).strftime('%m月%d日')
+      elsif now.between?((term_start + 14.days), (term_start + 20.days))
+        (term_start + 14.days).strftime('%m月%d日') + "〜" + (term_start + 20.days).strftime('%m月%d日')
+      elsif now.between?((term_start + 21.days), term_end)
+        (term_start + 21.days).strftime('%m月%d日') + "〜" + term_end.strftime('%m月%d日')
+      end
   end
+
 end

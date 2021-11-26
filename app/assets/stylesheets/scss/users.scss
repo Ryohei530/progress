@@ -172,6 +172,32 @@
       }
     }
   }
+  
+  .chart {
+    &-header {
+      padding: 20px 30px 10px;
+    }
+    &-wrap {
+      width: 30%;
+    }
+    &-content {
+      width: 70%;
+    }
+    
+    .chnav {
+      .nav-item {
+      }
+      .nav-link {
+        color: $gray;
+        border-radius: .65rem;
+        &:hover {
+          background-color: $bg-btn-gray;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
 }
   
 .posts{

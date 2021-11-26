@@ -1,11 +1,8 @@
-<% monthly_actions = @user.monthly_goals.last.goal_actions %>
-<% sum_of_monthly_actions # @sums %>
-
 <% if @user.monthly_goals.first.present? %>
   <div class="action-month">
     <p class="action-tit">月間</p>
     <ul class="action-list">
-      <% monthly_actions.zip(@sums.reverse) do |m_act, sum| %>
+      <% @monthly_actions.zip(@sums.reverse) do |m_act, sum| %>
         <li class="action-item">
           <div class="action-inner row">
             <div class="action-wrap col-5">
