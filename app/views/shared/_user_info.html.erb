@@ -1,10 +1,8 @@
 <%= link_to current_user do %>
-  <div class="ch-inner">
-    <div class="ch-avatar">
-      <%= image_tag current_user.avatar.variant(gravity: :center, resize: "75x75^", crop: "75x75+0+0").processed, class: '_rounded' %>
+  <div class="d-flex">
+    <div class="card-avatar">
+      <%= image_tag current_user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
     </div>
-    <h1 class="ch-h1"><%= current_user.name %></h1>
+    <span class="card-user"><%= current_user.name %></span>
   </div>
 <% end %>
-<span><%= link_to "プロフィール", current_user %></span>
-<span><%= pluralize(yield(:pluralize), yield(:feed)) %></span>

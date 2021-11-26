@@ -1,14 +1,17 @@
-<ul class="tnav nav nav-tabs">
-  <li class="tnav-item nav-item">
-    <%= link_to "ホーム", user_path(@user), class: "nav-link" %>
-  </li>
-  <li class="tnav-item nav-item">
-    <%= link_to "月間目標一覧", goal_user_path(@user), class: "nav-link" %>
-  </li>
-  <li class="tnav-item nav-item">
-    <%= link_to "日報", report_user_path(@user), class: "nav-link" %>
-  </li>
-  <li class="tnav-item nav-item">
-    <%= link_to "つぶやき", post_user_path(@user), class: "nav-link" %>
-  </li>
-</ul>
+<div class="tnav">
+  <%= link_to user_path(@user), class: "tnav-link"  do %>
+    <button class="btn"><i class="fas fa-home"></i></button>
+  <% end %>
+  <%= link_to goal_user_path(@user), class: "tnav-link"  do %>
+    <button class="btn"><i class="far fa-flag"></i></button>
+  <% end %>
+  <%= link_to monthly_goal_user_path(@user), class: "tnav-link"  do %>
+    <button class="btn"><i class="fas fa-crosshairs"></i></button>
+  <% end %>
+  <%= link_to report_user_path(@user), class: "tnav-link"  do %>
+    <button class="btn"><i class="material-icons align-middle">feedback</i></button>
+  <% end %>
+  <%= link_to post_user_path(@user), class: "tnav-link"  do %>
+    <button class="btn"><i class="far fa-comment-dots"></i></button>
+  <% end %>
+</div>

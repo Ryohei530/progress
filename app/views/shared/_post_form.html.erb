@@ -1,16 +1,16 @@
-<%= form_with(model: @post, local: true, class: "content-form") do |f| %>
+<%= form_with(model: @post, local: true, class: "card-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="content-txta">
+  <div class="card-txta">
     <%= f.text_area :content, placeholder: "つぶやきを投稿しよう！" %>
   </div>
-  <div class="content-wrap">
-    <div class="content-image">
-      <%= f.label :image do %>
+  <div class="d-flex justify-content-between">
+    <div class="card-image">
+      <%= f.label :images do %>
         <i class="far fa-image"></i>
       <% end %>
-      <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %> 
+      <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png" %> 
     </div>
-    <%= f.submit "投稿", class: "content-btn btn btn-primary" %>
+    <%= f.submit "投稿", class: "card-btn btn btn-primary" %>
   </div>
 <% end %>
 

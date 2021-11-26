@@ -1,0 +1,195 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'variables';
+
+.articles{
+  &-create {
+    padding: 0.575rem 0.55rem;
+  }
+  .card{
+    height: 100%;
+    &-li{
+      list-style: none;
+      margin-bottom: 30px;
+    }
+    &-img {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      &::before {
+        content: "";
+        display: block;
+        padding-top: 80%;
+      }
+      img {
+        will-change: transform;
+        -webkit-transition: -webkit-transform .3s ease-in-out;
+        transition: -webkit-transform .3s ease-in-out;
+        -o-transition: transform .3s ease-in-out;
+        transition: transform .3s ease-in-out;
+        transition: transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "object-fit: cover";
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+    }
+    
+    &-body {
+     
+    }
+    
+    &-title {
+      color: $def-font;
+      display: block;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+    
+    &-text {
+      font-size: 0.9em;
+      color: rgba(24, 28, 50, 0.5);
+    }
+    &-box {
+      padding-top: 3px;
+      &:hover {
+        a {
+          color: rgba(24, 28, 50, 0.5);
+          text-decoration: none;
+        }
+      }
+    }  
+    &-btn {
+      color: $def-font;
+    }
+    
+    &-inner{
+      display: flex;
+    }
+    &-avatar{
+     
+    }
+    &-user{
+      font-size: 1em;
+      padding-top: 3px;
+      margin-left: 10px;
+      a {
+        color: $def-font;
+      }
+    }
+    
+    
+    
+    &-config{
+      margin: 0 30px 0 20px;
+      padding-top: 10px;
+    }
+    
+    &-link{
+      color: black;
+      &:hover{
+        color: black;
+      }
+    }
+    &-tit{
+      font-size: 1.3em;
+      
+    }
+    &-stit{
+      font-size: 1.8em;
+    }
+    &-content{
+      font-size: 1.3em;
+    }
+  }
+}
+
+
+.article{
+  .min-h600 {
+      min-height: 600px;
+  }
+  .card{
+    &-header {
+      
+    }
+    &-title {
+      color: $def-font;
+      padding: 10px;
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+    &-inner {
+      color: $gray-light;
+    }
+    &-avatar{
+      padding: 10px; 
+      span {
+        vertical-align: middle;
+      }
+    }
+    &-user{
+     font-size: 1em;
+     padding-top: 12px;
+     a {
+       color: $gray-light;
+     }
+    }
+    
+    &-config{
+      margin: 0 30px 0 20px;
+      padding-top: 10px;
+      a {
+        padding: 0.175rem 0.35rem 0.175rem 0.45rem;
+        font-size: 0.8em;
+      }
+    }
+    &-bookmark {
+      padding-top: 9px;
+      a {
+        padding: 0.075rem 0.35rem 0.075rem 0.45rem;
+      }
+      i {
+        color: $yellow;
+        margin-right: 5px;
+      }
+      span {
+        font-size: 0.8em;
+        vertical-align: text-top;
+      }
+      &:hover {
+        a {
+          border: 1px solid $yellow;
+        }
+        .book {
+          &-off {
+            font-weight: 300;
+          }
+          &-on {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    &-date {
+      padding: 10px;
+    }
+    &-body {
+      padding: 1.25rem 25px;
+    }
+    &-content{
+      font-size: 1em;
+      padding: 0 10px;
+    }
+  }
+}
+

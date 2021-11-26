@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
      get 'goal'
+     get 'monthly_goal'
      get 'report'
      get 'post'
      get 'liked_posts'

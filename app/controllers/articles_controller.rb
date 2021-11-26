@@ -34,6 +34,7 @@ class ArticlesController < ApplicationController
       @comment.article_id = params[:id]
     end
     @article_tags = @article.tags
+    @tags = Tag.joins(:article_tags).distinct
   end
 
   def edit
@@ -67,6 +68,7 @@ class ArticlesController < ApplicationController
   def search
     @articles = Article.search(params[:search])
     @tags = Tag.joins(:article_tags).distinct
+    @search = params[:search]
   end
   
     private

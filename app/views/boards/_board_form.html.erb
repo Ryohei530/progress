@@ -1,17 +1,19 @@
 <%= form_with(model: @board, local: true) do |f| %>
   <%= render 'shared/error_messages', object: @board %>
   
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title, class: 'form-control mb-3' %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'form-control' %>
+  <%= f.label :content, "相談内容" %>
+  <%= f.text_area :content, class: 'form-control mb-3 min-h180' %>
   
-  <p>スペースを入力することで複数のタグを付けることができます。</p>
-  <p>例：音楽 文芸 スポーツ</p>
-
+  
   <%= f.label :name, "タグ" %>
-  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.text_field :name, class: 'form-control mb-3' %>
   
+  <p class="text-gray">
+    スペース（半角）を入力することで複数のタグを付けることができます。<br>
+    例：音楽 文芸 スポーツ
+  </p>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

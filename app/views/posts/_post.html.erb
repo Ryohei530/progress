@@ -1,63 +1,69 @@
-<li id="post-<%= post.id %>" class="post-li">
-  <div class="post-wrap">
-    <div class="post-avatar">
-      <%= link_to post.user do %>
-        <%= image_tag post.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
-      <% end %>
-    </div>
-    <span class="post-user"><%= link_to post.user.name, post.user %></span>
-  </div>
-  <%= link_to(post_path(post), class: "post-link post-link-#{post.id}") do %>
-    <div class="post-inner">
-      <div class="post-content">
-          <div class="post-text">
-            <%= post.content %>
-          </div>
-          <div class="post-image">
-            <%= image_tag post.display_image if post.image.attached? %>
-          </div>
+<li id="post-<%= post.id %>" class="card mb-4">
+  <div class="card-body">
+    <div class="card-wrap d-flex">
+      <div class="card-avatar">
+        <%= link_to post.user do %>
+          <%= image_tag post.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+        <% end %>
       </div>
+      <div class="card-title"><%= link_to post.user.name, post.user %></div>
     </div>
-  <% end %>
-  <div class="post-box">
-    <div class="row">
-      <div class="col d-flex">
-        <span class="post-timestamp">
-          <%= time_ago_in_words(post.created_at) %> ago
-        </span>
-      </div>
-      <div class="col d-flex justify-content-end">
-        <div class="post-comment">
-          <%= link_to post do %>
-            <i class="far fa-comment"></i>
-            <span><%= post.post_comments.count %></span>
+    <%= link_to(post_path(post), class: "card-link card-link-#{post.id}") do %>
+      <div class="card-inner">
+        <div class="card-text"><%= post.content %></div>
+        <div class="images">
+          <% if post.images.attached? %>
+            <div class="row">
+              <%  post.images.each do |image| %>
+                <div class="col-6">
+                  <%= image_tag image.variant(resize: "280x180!") %>
+                </div>
+              <% end %>
+            </div>
           <% end %>
         </div>
-        <div class="post-like">
-          <% if logged_in? %>
-            <% like = post.post_likes.find_by(user_id: current_user.id) %>
-            <% if current_user.post_liked?(post) %>
-              <%= link_to post_post_like_path(post, like), method: :delete do %>
-                <span>
-                  <i class="fas fa-heart"></i>
-                  <%= post.post_likes.count %>
-                </span>
+      </div>
+    <% end %>  
+    <div class="card-box">
+      <div class="row">
+        <div class="col d-flex">
+          <span class="card-timestamp">
+            <%= time_ago_in_words(post.created_at) %>前
+          </span>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <div class="card-comment">
+            <%= link_to post do %>
+              <i class="far fa-comment"></i>
+              <span><%= post.post_comments.count %></span>
+            <% end %>
+          </div>
+          <div class="card-like">
+            <% if logged_in? %>
+              <% like = post.post_likes.find_by(user_id: current_user.id) %>
+              <% if current_user.post_liked?(post) %>
+                <%= link_to post_post_like_path(post, like), method: :delete do %>
+                  <span>
+                    <i class="fas fa-heart"></i>
+                    <%= post.post_likes.count %>
+                  </span>
+                <% end %>
+              <% else %>
+                <%= link_to post_post_likes_path(post), method: :post do %>
+                  <span>
+                    <i class="far fa-heart"></i>
+                    <%= post.post_likes.count %>
+                  </span>
+                <% end %>
               <% end %>
             <% else %>
-              <%= link_to post_post_likes_path(post), method: :post do %>
-                <span>
-                  <i class="far fa-heart"></i>
-                  <%= post.post_likes.count %>
-                </span>
-              <% end %>
+              <span>
+                <i class="far fa-heart"></i>
+                <%= post.post_likes.count %>
+              </span>
             <% end %>
-          <% else %>
-            <span>
-              <i class="far fa-heart"></i>
-              <%= post.post_likes.count %>
-            </span>
-          <% end %>
-          
+            
+          </div>
         </div>
       </div>
     </div>

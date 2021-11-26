@@ -4,25 +4,40 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/brands';
+@import 'material_icons';
+@import 'simple_calendar';
 
 /* scss files */
 // @import ''
-@import 'static_pages';
-@import 'goals';
-@import 'reports';
-@import 'posts';
-@import 'shared';
-@import 'articles';
-@import 'boards';
-@import 'users';
-@import 'simple_calendar';
-@import 'bookmarks';
-@import 'my_simple_calendar';
-@import 'sessions';
+@import 'scss/module/card';
+@import 'scss/custom';
+@import 'scss/module/header';
+@import 'scss/module/comment';
+@import 'scss/module/tag';
+@import 'scss/module/favorite';
+@import 'scss/module/search';
+@import 'scss/module/aim';
+@import 'scss/module/action';
+@import 'scss/module/realize';
+@import 'scss/module/images';
+@import 'scss/module/term';
+@import 'scss/module/tab';
+@import 'scss/static_pages';
+@import 'scss/goals';
+@import 'scss/reports';
+@import 'scss/posts';
+@import 'scss/shared';
+@import 'scss/articles';
+@import 'scss/boards';
+@import 'scss/users';
+@import 'scss/bookmarks';
+@import 'scss/my_simple_calendar';
+@import 'scss/sessions';
+
 
 /* mixins, variables, etc */
 
-@import 'variables';
+@import 'scss/variables';
 
 // $theme-color: #dc3545;
 // $footer-bg: #d1d1d1;
@@ -45,9 +60,9 @@ body{
 
 .main{
   margin: 0;
-  background-color: $container-bg;
+  background-color: $bg-color;
   &-inner{
-    background-color: #fff;
+    // background-color: #fff;
     padding: 40px 0;
   }
 }
@@ -101,8 +116,8 @@ body{
 
 .footer{
     text-align: center;
-    background-color: $footer-bg;
-    padding: 90px 0;
+    background: linear-gradient(90deg, $footer-bg1, $footer-bg2);
+    padding: 40px 0;
 }
 
 /* miscellaneous */
@@ -119,16 +134,16 @@ body{
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
+// input, textarea, select, .uneditable-input {
+//   border: 1px solid #bbb;
+//   width: 100%;
+//   margin-bottom: 15px;
+//   @include box_sizing;
+// }
 
-input {
-  height: auto !important;
-}
+// input {
+//   height: auto !important;
+// }
 
 #error_explanation {
   color: red;
@@ -167,49 +182,4 @@ input {
 .users{
   list-style: none;
   margin: 0;
-}
-
-/* comment */
-
-.comment{
-  &-inner{
-    
-  }
-  &-list{
-    list-style-type: none;
-    border: 1px solid #e8e8e8;
-    padding: 20px 30px;
-    margin-bottom: 50px;
-  }
-  &-item{
-    
-  }
-  &-avatar{
-    margin-bottom: 10px;
-  }
-  &-user{
-    font-size: 1.2em;
-    margin-left: 10px;
-  }
-  &-content{
-    
-  }
-  &-date{
-    color: $gray-light;
-    margin-bottom: 30px;
-  }
-  
-  
-  &-btn{
-    
-  }
-  &-form{
-    border: 1px solid #e8e8e8;
-    padding: 20px 30px;
-    margin-bottom: 20px;
-    textarea{
-      height: 100px;
-      margin-bottom: 10px;
-    }
-  }
 }

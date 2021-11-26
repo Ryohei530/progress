@@ -1,0 +1,13 @@
+@import '/scss/variables';
+
+.search{
+  &-inner{
+    input{
+      border-radius: 0.5em 0 0 0.5em;
+    }
+    button{
+      border-radius: 0 0.5em 0.5em 0;
+      width: 80px;
+    }
+  }
+}

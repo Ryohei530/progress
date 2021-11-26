@@ -75,7 +75,7 @@ class User < ApplicationRecord
   
   def default_image
     unless self.avatar.attached?
-      self.avatar.attach(io: File.open('./app/assets/images/default.png'), filename: 'default.png', content_type: 'image/png')
+      self.avatar.attach(io: File.open('./app/assets/images/user.png'), filename: 'user.png', content_type: 'image/png')
     end
   end
   

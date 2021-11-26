@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include ReportsHelper
+  include UsersHelper
   
   private
     
@@ -8,7 +9,7 @@ class ApplicationController < ActionController::Base
       unless logged_in?
         store_location
         flash[:danger] = "ログインしてください。"
-        redirect_to login_url
+        redirect_to new_user_session_url
       end
     end
     

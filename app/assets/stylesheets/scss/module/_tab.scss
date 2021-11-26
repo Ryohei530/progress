@@ -1,0 +1,20 @@
+@import '/scss/variables';
+
+// タブ切り替え
+.tab {
+  
+  &-active {
+    transition: all 0.2s ease-in-out;
+  }
+  &-box {
+    display: none;
+  }
+  &:hover{
+    
+  }
+  
+}
+
+.box-show {
+  display: block;
+}
