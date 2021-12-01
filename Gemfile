@@ -31,6 +31,11 @@ group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0'
   gem 'factory_bot_rails'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
 end
 
 group :development do
