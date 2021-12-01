@@ -10,6 +10,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: 123
+  host: db
 
 development:
   <<: *default
@@ -28,3 +29,11 @@ production:
   password: 00kuboryO*
   socket: /var/lib/mysql/mysql.sock
   host: 35.72.30.233
+
+
+  #Dockerの設定
+
+  # database: <%= ENV['DB_NAME']%>
+  # username: <%= ENV['DB_USERNAME']%>
+  # password: <%= ENV['DB_PASSWORD']%>
+  # host: <%= ENV['DB_HOSTNAME']%>

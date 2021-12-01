@@ -56,6 +56,7 @@ yama = User.create!(name: "やまはる",
                password_confirmation: password)
 end
 
+<<<<<<< HEAD
 # avatars
 brian.avatar.attach(io: File.open('./app/assets/images/brian.jpg'), filename: 'brian.png', content_type: 'image/jpg')
 guest.avatar.attach(io: File.open('./app/assets/images/user.png'), filename: 'user.png', content_type: 'image/png')
