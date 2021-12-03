@@ -21,3 +21,8 @@ set :rbenv_ruby, '2.7.3' #カリキュラム通りに進めた場合、2.5.1か2
 # どの公開鍵を利用してデプロイするか
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/ryohei.pem'] 
+
+#nginxのconfigのパスを追加                  
+set :nginx_sites_available_path, "/etc/nginx/sites-available"
+set :nginx_sites_enabled_path, "/etc/nginx/sites-enabled"
+
