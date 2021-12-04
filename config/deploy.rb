@@ -22,5 +22,7 @@ set :rbenv_ruby, '2.7.3' #カリキュラム通りに進めた場合、2.5.1か2
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/ryohei.pem'] 
 
-# pumaの読み込む設定ファイルを指定
-set :puma_conf, "#{current_path}/config/puma/production.rb"
+
+#nginxのconfigのパスを追加                  
+set :nginx_config_name, "#{fetch(:application)}.conf"
+set :nginx_sites_enabled_path, "/etc/nginx/conf.d"

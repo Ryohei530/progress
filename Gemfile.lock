@@ -199,7 +199,7 @@ GEM
       ast (~> 2.4.1)
     popper_js (1.16.0)
     public_suffix (4.0.6)
-    puma (4.3.10)
+    puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
@@ -385,7 +385,7 @@ DEPENDENCIES
   material_icons
   mini_magick
   mysql2 (~> 0.5.3)
-  puma (~> 4)
+  puma (~> 5)
   rails (~> 6.1)
   rails-i18n (~> 6.0)
   rspec-rails (~> 5.0)
