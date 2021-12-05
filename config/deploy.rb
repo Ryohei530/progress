@@ -23,6 +23,8 @@ set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/ryohei.pem'] 
 
 
+set :puma_service_unit_name, 'puma.service'
+
 #nginxのconfigのパスを追加                  
 set :nginx_config_name, "#{fetch(:application)}.conf"
 set :nginx_sites_enabled_path, "/etc/nginx/conf.d"
