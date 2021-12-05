@@ -26,6 +26,7 @@ gem 'devise-i18n-views'
 gem 'faker'
 gem 'material_icons'
 gem 'chart-js-rails'
+gem 'listen',                '~> 3.5.1'
 
 group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
@@ -40,7 +41,6 @@ end
 
 group :development do
   gem 'web-console',           '~> 4.1.0'
-  gem 'listen',                '~> 3.5.1'
   gem 'spring',                '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'spring-commands-rspec'
