@@ -11,7 +11,7 @@ set :repo_url,  'git@github.com:Ryohei530/progress.git'
 set :branch, "ec2-capi"
 
 # バージョンが変わっても共通で参照するディレクトリを指定
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/storage"
 #バージョンが変わってもマスターキーを共有する
 append :linked_files, "config/master.key"
 
