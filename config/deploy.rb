@@ -21,10 +21,5 @@ set :rbenv_ruby, '2.7.3' #カリキュラム通りに進めた場合、2.5.1か2
 # どの公開鍵を利用してデプロイするか
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/ryohei.pem'] 
-
-
+                  
 set :puma_service_unit_name, 'puma.service'
-
-#nginxのconfigのパスを追加                  
-set :nginx_config_name, "#{fetch(:application)}.conf"
-set :nginx_sites_enabled_path, "/etc/nginx/conf.d"
