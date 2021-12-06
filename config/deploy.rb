@@ -17,9 +17,11 @@ append :linked_files, "config/master.key"
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.3' #カリキュラム通りに進めた場合、2.5.1か2.3.1です
+set :rbenv_custom_path, "/home/ryohei/.rbenv"
 
 # どの公開鍵を利用してデプロイするか
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/ryohei.pem'] 
-                  
-set :puma_service_unit_name, 'puma.service'
+
+set :nginx_sites_available_path, "/etc/nginx/sites-available"
+set :nginx_sites_enabled_path, "/etc/nginx/sites-enabled"
