@@ -26,7 +26,7 @@ gem 'devise-i18n-views'
 gem 'faker'
 gem 'material_icons'
 gem 'chart-js-rails'
-gem 'listen',                '~> 3.5.1'
+gem 'mini_racer',       '~> 0.3.1'
 
 group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
@@ -44,6 +44,7 @@ group :development do
   gem 'spring',                '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'spring-commands-rspec'
+  gem 'listen',                '~> 3.5.1' 
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
