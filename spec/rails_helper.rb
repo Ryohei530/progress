@@ -8,6 +8,7 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
+require 'devise'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -66,8 +67,8 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   
   # Devise のテストヘルパーを使用する
-  # config.include RequestSpecHelper, type: :request
-  # config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include RequestSpecHelper, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|

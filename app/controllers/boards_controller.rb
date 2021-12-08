@@ -29,7 +29,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @comment = BoardComment.new
     @comments = BoardComment.includes(:user).where(board_id: params[:id]).where(reply_id: nil)
-    @replies = BoardComment.includes(:user).where(board_id: params[:id]).where.not(reply_id: nil)
+    # @replies = BoardComment.includes(:user).where(board_id: params[:id]).where.not(reply_id: nil)
     @board_tags = @board.board_tags
   end
 

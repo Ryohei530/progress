@@ -29,10 +29,9 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find(params[:id])
-    if logged_in?
-      @comment = current_user.article_comments.build
-      @comment.article_id = params[:id]
-    end
+    @comment = ArticleComment.new
+    @comment.article_id = params[:id]
+    @comments = ArticleComment.includes(:user).where(article_id: params[:id]).where(reply_id: nil)
     @article_tags = @article.tags
     @tags = Tag.joins(:article_tags).distinct
   end
