@@ -12,7 +12,9 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
     working_directory: ~/progress
     steps:
       - checkout
@@ -22,7 +24,7 @@ jobs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
   test:
     docker: 
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-node-browsers
       - image: circleci/mysql:8.0.27
         environment:
           MYSQL_ROOT_PASSWORD: 123
@@ -30,14 +32,18 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
+      BUNDLER_VERSION: 2.1.4
       APP_DATABASE_HOST: 127.0.0.1
       RAILS_ENV: test
     steps:
       - checkout
       - ruby/install-deps
       - run:
+          name: Database create
+          command: bundle exec rails db:create
+      - run:
           name: Database setup
-          command: bundle exec rails db:migrate
+          command: bundle exec rails db:schema:load
       - run:
           name: run rubocop
           command: bundle exec rubocop
@@ -47,24 +53,18 @@ jobs:
           
   deploy:
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
-      - heroku/install
-      - run: 
-          name: heroku login
-          command: heroku container:login
-      - run: 
-          name: push docker image
-          command: heroku container:push web -a $HEROKU_APP_NAME
-      - run: 
-          name: release docker image
-          command: heroku container:release web -a $HEROKU_APP_NAME
-      - run:
-          name: database setup
-          command: heroku run bundle exec rails db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
+      - ruby/install-deps
+      - add_ssh_keys:
+          fingerprints:
+            - "b6:14:ba:fa:63:f1:61:2f:0c:f0:b7:c1:ef:b1:72:40"
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
   
 workflows:
   version: 2
