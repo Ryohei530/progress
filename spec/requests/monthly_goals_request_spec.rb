@@ -10,7 +10,7 @@ RSpec.describe "MonthlyGoals", type: :request do
 
   describe "GET /new" do
     it "returns http success" do
-      post login_path , params: { session: user_params } 
+      sign_in user 
       get new_monthly_goal_path
       expect(response).to have_http_status(200)
     end
@@ -25,7 +25,7 @@ RSpec.describe "MonthlyGoals", type: :request do
 
   describe "GET /edit" do
     it "returns http success" do
-      post login_path , params: { session: user_params } 
+      sign_in user 
       get edit_monthly_goal_path(monthly_goal)
       expect(response).to have_http_status(200)
     end

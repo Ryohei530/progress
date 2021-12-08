@@ -39,7 +39,7 @@ naru = User.create!(name: "ナルホド",
 end
 
 User.all.each do |user|
-  user.avatar.attach(io: File.open('./app/assets/images/default.png'), filename: 'default.png', content_type: 'image/png')
+  user.avatar.attach(io: File.open('./app/assets/images/user.png'), filename: 'user.png', content_type: 'image/png')
 end
 
 users = User.order(:created_at).take(6)
