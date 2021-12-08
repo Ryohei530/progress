@@ -39,6 +39,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run: yarn add @fortawesome/fontawesome-free
       - run:
           name: Database create
           command: bundle exec rails db:create
