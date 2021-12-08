@@ -51,14 +51,14 @@
     </div>
     
     <div id="comment" class="comment">
-      <% if @article.article_comments.present? %>
+      <% if @comments.present? %>
         <div class="card mb-5">
           <div class="card-header">
             <h4 class="comment-header"><i class="far fa-comment"></i> コメント</h4>
           </div>
           <div class="card-body">
             <ul class="comment-list">
-              <% @article.article_comments.each do |comment| %>
+              <% @comments.each do |comment| %>
                 <li class="comment-item">
                   <div class=" comment-avatar">
                     <%= link_to comment.user do %>
