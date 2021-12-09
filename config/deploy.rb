@@ -8,7 +8,7 @@ set :deploy_to, '/var/www/rails/progress'
 
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url,  'git@github.com:Ryohei530/progress.git'
-set :branch, "ec2-capi"
+# set :branch, "ec2-capi"
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/storage"
