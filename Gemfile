@@ -6,7 +6,7 @@ ruby '2.7.3'
 gem 'rails',      '~> 6.1'
 gem 'bcrypt',     '~> 3.1.16'
 gem 'bootstrap',  '~> 4.5.0'
-gem 'puma',       '~> 5.3'
+gem 'puma',       '~> 5'
 gem 'sass-rails', '~> 6'
 gem 'webpacker',  '5.4.0'
 gem 'turbolinks', '~> 5.2.0'
@@ -16,7 +16,7 @@ gem 'mysql2',     '~> 0.5.3'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'active_storage_validations'
-gem 'image_processing'
+gem 'image_processing', '1.2'
 gem 'mini_magick'
 gem 'simple_calendar', '~> 2.0'
 gem 'rails-i18n', '~> 6.0'
@@ -26,19 +26,25 @@ gem 'devise-i18n-views'
 gem 'faker'
 gem 'material_icons'
 gem 'chart-js-rails'
+gem 'mini_racer',       '~> 0.3.1'
 
 group :development, :test do
   gem 'byebug',  '~>11.1.3', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0'
   gem 'factory_bot_rails'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
 end
 
 group :development do
   gem 'web-console',           '~> 4.1.0'
-  gem 'listen',                '~> 3.5.1'
   gem 'spring',                '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'spring-commands-rspec'
+  gem 'listen',                '~> 3.5.1' 
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false

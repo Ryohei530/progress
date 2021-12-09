@@ -1,0 +1,85 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  ruby: circleci/ruby@1.2.0
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    working_directory: ~/progress
+    steps:
+      - checkout
+      - ruby/install-deps
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  test:
+    docker: 
+      - image: circleci/ruby:2.7.3-node-browsers
+      - image: circleci/mysql:8.0.27
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ROOT_PASSWORD: 123
+          MYSQL_DATABASE: progress_test
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      BUNDLER_VERSION: 2.1.4
+      APP_DATABASE_HOST: 127.0.0.1
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run: yarn add @fortawesome/fontawesome-free
+      - run:
+          name: Database create
+          command: bundle exec rails db:create
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+      - run:
+          name: run rspec
+          command: bundle exec rspec spec/requests
+          
+  deploy:
+    docker:
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - ruby/install-deps
+      - add_ssh_keys:
+          fingerprints:
+            - "b6:14:ba:fa:63:f1:61:2f:0c:f0:b7:c1:ef:b1:72:40"
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
+  
+workflows:
+  version: 2
+  build_test_and_deploy: 
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters: 
+            branches:
+              only: master
+        
