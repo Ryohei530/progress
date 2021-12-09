@@ -1,0 +1,8 @@
+test:
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: 123
+  database: progress_test
+  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
