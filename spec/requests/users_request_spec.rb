@@ -51,7 +51,7 @@ RSpec.describe "Users", type: :request do
       end
     end
     
-    context "logged in as wrong user" do
+    pending "logged in as wrong user" do
       it "redirects edit" do
         post user_session_path, params: { session: @other_user_params } 
         get edit_user_path(@user)
@@ -68,7 +68,7 @@ RSpec.describe "Users", type: :request do
       end
     end
     
-    context "logged in as non-admin user" do
+    pending "logged in as non-admin user" do
       it "redirects destroy" do
         post user_session_path, params: { session: @other_user_params }
         expect{
@@ -100,7 +100,7 @@ RSpec.describe "Users", type: :request do
       expect(@other_user.admin).to be_falsey
     end
     
-    context "log in as admin user" do
+    pending "log in as admin user" do
       it "includes pagination and delete links" do
         post user_session_path, params: { session: @user_params }
         get users_path
