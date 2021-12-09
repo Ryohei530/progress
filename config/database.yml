@@ -21,7 +21,6 @@ development:
 test:
   <<: *default
   database: progress_test
-  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 production:
   <<: *default
