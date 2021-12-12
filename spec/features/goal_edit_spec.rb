@@ -6,6 +6,11 @@ RSpec.feature "GoalEdits", type: :feature do
   
   scenario "edit a new goal" do
     log_in_as(user)
+    within '.navbar-dark' do
+      find(".dropdown-toggle").click
+    end
+    find('a', text: 'マイページ').click
+    
     click_link "長期目標を設定"
     
     fill_in "開始日", with: "2021/06/27"

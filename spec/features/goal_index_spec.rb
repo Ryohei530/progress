@@ -9,6 +9,8 @@ RSpec.feature "GoalIndexes", type: :feature do
   let!(:goal2) { FactoryBot.create(:goal, user_id: user2.id) }
   let!(:monthly_goal2) { FactoryBot.create(:monthly_goal, user_id: user2.id) }
   let!(:goal_action2) { monthly_goal2.goal_actions.create(content: "test action", number: 500) }
+  let!(:running_day) { FactoryBot.create_list(:running_day, 7, user_id: user.id) }
+  let!(:r_day) { FactoryBot.create(:r_day, :day3) }
   
   scenario "goals" do
     log_in_as(user)
@@ -23,27 +25,27 @@ RSpec.feature "GoalIndexes", type: :feature do
     expect(page).to have_content "indicator"
     
     within "#goal-#{goal.id}" do
-      find(".goal-link").click
+      find(".card-link").click
     end
-    within ".goal-box" do
+    within ".card-box" do
       expect(page).to have_content "削除"
     end
     expect(page).to have_content "長期目標"
-    within ".goal-head" do
+    within ".card-header" do
       expect(page).to have_css ".fa-arrow-left"
     end
     expect(page).to have_content "aim"
     expect(page).to have_content "indicator"
     
-    within ".goal-head" do
-      find(".goal-back").click
+    within ".card-header" do
+      find(".card-back").click
     end
     expect(current_path).to eq goals_path
     
     within "#goal-#{goal2.id}" do
-      find(".goal-link").click
+      find(".card-link").click
     end
-    within ".goal-box" do
+    within ".card-box" do
       expect(page).to_not have_content "削除"
     end
   end

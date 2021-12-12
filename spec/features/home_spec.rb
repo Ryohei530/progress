@@ -33,8 +33,9 @@ RSpec.feature "Homes", type: :feature do
     fill_in "メールアドレス", with: "brian@example.com"
     fill_in "パスワード", with: "012345"
     click_button "ログイン"
-    
-    click_link "Progress"
+    within '.header' do 
+      click_link "Progress"
+    end
     
     expect(page).to_not have_content "みんなと目標を共有して"
     expect(page).to_not have_content "新規作成"
@@ -43,7 +44,7 @@ RSpec.feature "Homes", type: :feature do
     expect(page).to have_content "目的、得たい結果"
     expect(page).to have_content "今月の目的"
     expect(page).to have_content "1ヶ月間のアクション"
-    expect(page).to have_css ".content-form"
+    expect(page).to have_css ".card-form"
     
     
     click_link "日報"
@@ -53,6 +54,6 @@ RSpec.feature "Homes", type: :feature do
     expect(page).to have_content "目的、得たい結果"
     expect(page).to have_content "今月の目的"
     expect(page).to have_content "1ヶ月間のアクション"
-    expect(page).to have_css ".content-form"
+    expect(page).to have_css ".card-form"
   end
 end

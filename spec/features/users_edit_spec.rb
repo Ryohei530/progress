@@ -16,20 +16,19 @@ RSpec.feature "UsersEdits", type: :feature do
     expect(page).to have_content "プロフィール"
     expect(page).to have_content "error"
     
-    click_link "メールアドレス"
+    
+    click_link "アカウント設定"
+    
+    
     fill_in "メールアドレス", with: ""
-    click_button "編集"
+    
+    fill_in "パスワード", with: "123"
+    fill_in "確認用パスワード", with: ""
+    click_button "更新"
     
     expect(page).to have_content "メールアドレス"
-    expect(page).to have_content "error"
-    
-    click_link "パスワード"
-    fill_in "パスワード", with: "123"
-    fill_in "確認用", with: ""
-    click_button "編集"
-    
     expect(page).to have_content "パスワード"
-    expect(page).to have_content "error"
+    expect(page).to have_content "エラー"
     
   end
   
@@ -46,18 +45,14 @@ RSpec.feature "UsersEdits", type: :feature do
     click_button "編集"
     expect(page).to have_css '.alert-success'
     
-    click_link "メールアドレス"
+    click_link "アカウント設定"
     
     fill_in "メールアドレス", with: email
-    click_button "編集"
-    expect(page).to have_css '.alert-success'
-    
-    click_link "パスワード"
-    
     fill_in "パスワード", with: ""
-    fill_in "確認用", with: ""
-    click_button "編集"
-    expect(page).to have_css '.alert-success'
+    fill_in "確認用パスワード", with: ""
+    fill_in "現在のパスワード", with: "012345"
+    click_button "更新"
+    expect(page).to have_css '.alert-notice'
     
     user.reload
     

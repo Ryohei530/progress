@@ -5,7 +5,7 @@ RSpec.feature "UsersLogin", type: :feature do
   let!(:goal) { user.create_goal }
   
   scenario "user login and logout the app", js: true do
-    visit login_path
+    visit new_user_session_path
     
     expect(page).to have_content "ログイン"
     click_button "ログイン"
@@ -43,7 +43,7 @@ RSpec.feature "UsersLogin", type: :feature do
   end
   
   scenario "login with a valid email and a invalid password" do
-    visit login_path
+    visit new_user_session_path
     fill_in "メールアドレス", with: user.email
     fill_in "パスワード", with: "invalid"
     

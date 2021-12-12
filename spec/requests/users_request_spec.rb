@@ -27,14 +27,14 @@ RSpec.describe "Users", type: :request do
     context "not logged in" do
       it "redirects edit" do
         get edit_user_path(@user)
-        expect(flash[:danger]).to be_truthy
+        expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to new_user_session_url
       end
       
       it "redirects update" do
         patch user_path(@user), params: { user: { name: @user.name,
                                                   email: @user.email} }
-        expect(flash[:danger]).to be_truthy
+        expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to new_user_session_url
       end
       
@@ -51,26 +51,26 @@ RSpec.describe "Users", type: :request do
       end
     end
     
-    pending "logged in as wrong user" do
+    context "logged in as wrong user" do
       it "redirects edit" do
-        post user_session_path, params: { session: @other_user_params } 
+        sign_in @other_user
         get edit_user_path(@user)
-        expect(flash[:danger]).to be_falsey
+        expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to root_url
       end
       
       it "redirects update" do
-        post user_session_path, params: { session: @other_user_params }
+        sign_in @other_user
         patch user_path(@user), params: { user: { name: @user.name,
                                                   email: @user.email} }
-        expect(flash[:danger]).to be_falsey
+        expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to root_url
       end
     end
     
-    pending "logged in as non-admin user" do
+    context "logged in as non-admin user" do
       it "redirects destroy" do
-        post user_session_path, params: { session: @other_user_params }
+        sign_in @other_user
         expect{
           delete user_path(@user)
         }.to change(User, :count).by(0)
@@ -90,7 +90,7 @@ RSpec.describe "Users", type: :request do
     end 
     
     it "does not allow the admin attributes to be edited via the web " do
-      post user_session_path, params: { session: @other_user_params }
+      sign_in @other_user
       expect(@other_user.admin).to be_falsey
       
       patch user_url(@other_user), params: { user: { password: "012345",
@@ -100,9 +100,9 @@ RSpec.describe "Users", type: :request do
       expect(@other_user.admin).to be_falsey
     end
     
-    pending "log in as admin user" do
+    context "log in as admin user" do
       it "includes pagination and delete links" do
-        post user_session_path, params: { session: @user_params }
+        sign_in @user
         get users_path
         
         first_page_of_users = User.page('1').per(20)
@@ -114,7 +114,7 @@ RSpec.describe "Users", type: :request do
     
     context "log in as non-admin user" do
       it "includes pagination and no delete links" do
-        post user_session_path, params: { session: @other_user_params }
+        sign_in @other_user
         get users_path
         
         expect(response.body).to_not include "削除" 

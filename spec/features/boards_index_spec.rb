@@ -15,7 +15,7 @@ RSpec.feature "BoardsIndexes", type: :feature do
     click_link "お悩み相談（掲示板）"
     expect(page).to have_content "brian"
     expect(page).to have_content "タグ"
-    expect(page).to have_content "掲示板を作成"
+    expect(page).to have_content "投稿する"
     expect(page).to have_content "tag1"
     expect(page).to have_content "tag2"
     expect(page).to have_content "tag3"
