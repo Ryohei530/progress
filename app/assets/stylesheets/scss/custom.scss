@@ -160,6 +160,53 @@ input-group>.form-control:not(:first-child) {
 }
 
 
+.custom-control {
+  .custom-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    
+    &::before {
+      position: absolute;
+      top: 0.25rem;
+      left: -1.5rem;
+      display: block;
+      height: 1rem;
+      content: "";
+      background-color: #fff;
+      border: #adb5bd solid 1px;
+    }
+    
+    &::after {
+      position: absolute;
+      top: 0.25rem;
+      left: -1.5rem;
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      content: "";
+      background: no-repeat 50% / 50% 50%;
+    }
+  }
+  .custom-check {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 1rem;
+    height: 1.25rem;
+    opacity: 0;
+    
+     &::before {
+      border-radius: 0.25rem;
+    }
+  }
+  
+  #user_remember_me{
+    width: 1rem;
+  } 
+}
+
+
 .btn-neutral {
   color: #5e72e4;
   border-color: #fff;
@@ -213,6 +260,10 @@ input-group>.form-control:not(:first-child) {
 
 .text-gray {
   color: rgba(24, 28, 50, 0.5);
+}
+
+.py-3px {
+  padding: 3px 0;
 }
 
 

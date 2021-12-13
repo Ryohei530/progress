@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, 
+         :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   
   has_many :posts, dependent: :destroy
   has_one :goal, dependent: :destroy
@@ -47,6 +48,14 @@ class User < ApplicationRecord
   #   SecureRandom.urlsafe_base64
   # end
   
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
+  
+  
   # def remember
   #   self.remember_token = User.new_token
   #   update_attribute(:remember_digest, User.digest(remember_token))
@@ -78,6 +87,7 @@ class User < ApplicationRecord
       self.avatar.attach(io: File.open('./app/assets/images/user.png'), filename: 'user.png', content_type: 'image/png')
     end
   end
+  
   
   private
     
