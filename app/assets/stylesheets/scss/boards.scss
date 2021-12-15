@@ -154,3 +154,77 @@
   }
   
 }
+
+
+// @include media-breakpoint-only(lg) {
+//   .boards {
+//     .card {
+//       .list {
+//         th {
+//           font-size: 0.55em;
+//         }
+        
+//         td {
+//           font-size: 0.8em;
+//         }
+//       }
+//     }
+//   }  
+// }
+
+@include media-breakpoint-down(lg) {
+  .boards {
+    .card {
+      .table {
+        th {
+          font-size: 0.55em;
+          // padding-left: 0.5rem;
+          // padding-right: 0.2rem;
+          // max-width: 80px;
+          vertical-align: sub;
+        }
+        
+        td {
+          font-size: 0.8em;
+          // padding-left: 0.5rem;
+          // padding-right: 0.2rem;
+          // max-width: 80px;
+          vertical-align: sub;
+        }
+        
+        &-user {
+          a {
+            vertical-align: sub;
+          }
+        }
+      }
+    }
+  }  
+}
+
+@include media-breakpoint-down(md) {
+   .boards {
+    .card {
+      &-header {
+        h3 {
+          font-size: 1.35rem;
+        }
+      }
+      .table {
+        th {
+          // font-size: 0.55em;
+          padding-left: 0.5rem;
+          padding-right: 0.2rem;
+          max-width: 80px;
+        }
+        
+        td {
+          font-size: 0.7em;
+          padding-left: 0.5rem;
+          padding-right: 0.2rem;
+          max-width: 80px;
+        }
+      }
+    }
+  }  
+}

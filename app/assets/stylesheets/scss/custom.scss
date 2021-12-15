@@ -242,6 +242,10 @@ input-group>.form-control:not(:first-child) {
   height: 120px;
 }
 
+.min-h100 {
+  min-height: 100px;
+}
+
 .min-h130 {
   min-height: 130px;
 }
@@ -287,4 +291,3 @@ input-group>.form-control:not(:first-child) {
     }
   }
 }
-

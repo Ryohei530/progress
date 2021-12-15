@@ -1,0 +1,34 @@
+<li class="favorite-item">
+  <div class="card mt-3">
+    <div class="row no-gutters min-h100">
+      <div class="col-3">
+        <img src="<%= "assets/rank#{rank_article_counter + 1}.png" %>" class="rank-img">
+      </div>
+      <div class="col-9">
+        <div class="row no-gutters">
+          <div class="col-4 py-3">
+            <%= link_to article_path(rank_article), class: "card-img" do %>
+              <%= image_tag 'english.jpeg' %>
+              <!--article.image-->
+            <% end %>
+          </div>
+          <div class="col-7 px-2 py-3">
+            <%= link_to rank_article, class: "card-title h5" do %>
+              <%= rank_article.title %>
+            <% end %>
+            <div class="card-inner">
+              <div class="card-avatar">
+                <%= link_to rank_article.user do %>
+                  <%= image_tag rank_article.user.avatar.variant(gravity: :center, resize: "20x20^", crop: "20x20+0+0").processed, class: '_rounded' %>
+                <% end %> 
+              </div>
+              <div class="card-user">
+                <%= rank_article.user.name %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

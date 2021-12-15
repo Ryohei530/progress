@@ -6,13 +6,26 @@
 
 <div class="user">
   <div class="row">
-    <div class="d-flex col-12 mb-3 justify-content-between">
+    <div class="d-flex col-12 mb-3 justify-content-between flex-wrap">
       <div class="d-flex">
         <h2>目標</h2>
         <div class="tab1">
           <div class="tab-list term ml-3">
             <button class="tab-item tab-active btn">長期</button>
             <button class="tab-item btn">月間</button>
+            
+            <button class="btn" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></button>
+            <div class="dropdown-menu">
+              <%= link_to edit_goal_path(@user), class: "dropdown-item" do %>
+                <i class="far fa-edit"></i> 長期目標を編集
+              <% end %>
+              <%= link_to new_monthly_goal_path(@user), class: "dropdown-item" do %>
+                <i class="fas fa-plus mr-1"></i>  月間目標を新規作成
+              <% end %>
+              <%= link_to edit_monthly_goal_path(@user), class: "dropdown-item" do %>
+                <i class="far fa-edit"></i> 月間目標を編集
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -32,7 +45,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xl-4 mb-5">
+    <div class="col-lg-4 mb-5">
       <div class="card">
         <div class="card-body">
           <div class="user-avatar">
@@ -48,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-8 mb-5">
+    <div class="col-lg-8 mb-5">
       <div class="card">
         <div class="card-body">
           <section class="calendar">
@@ -80,7 +93,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xl-12 mb-5">
+    <div class="col-12 mb-5">
       <div class="card">
         <div class="action">
           <div class="card-header">
@@ -91,6 +104,9 @@
                   <button class="tab-item btn bg-btn-gray">月間</button>
                   <button class="tab-item btn bg-btn-gray">週間</button>
                   <button class="tab-item btn bg-btn-gray">日間</button>
+                  <%= link_to edit_monthly_goal_path(@user), class: "" do %>
+                    <button class="btn"><i class="far fa-edit"></i></button>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -113,7 +129,7 @@
     </div>
   </div>
   <div class="row chart">
-    <div class="col-xl-6 mb-5">
+    <div class="col-lg-6 mb-5">
       <div class="card">
         <div class="card-header chart-header">
           <h4 class="m-0"><i class="far fa-check-circle"></i> 達成度</h4>
@@ -127,7 +143,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-6 mb-5">
+    <div class="col-lg-6 mb-5">
       <div class="card">
         <div class="card-header chart-header">
           <div class="d-flex align-items-center">
@@ -141,7 +157,7 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="d-flex flex-wrap flex-xl-nowrap justify-content-center justify-content-md-start">
+          <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
             <div class="chart-wrap mr-3">
               <ul class="chnav nav flex-column nav-pills">
                 <li class="nav-item mb-3">
@@ -221,7 +237,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xl-6 mb-5 posts">
+    <div class="col-lg-6 mb-5 posts">
       <div class="card">
         <% if @user.posts.present? %>
         <div class="card-header">
@@ -239,7 +255,7 @@
           <%= link_to(post_path(post), class: "card-link card-link-#{post.id}") do %>
             <div class="card-inner">
               <div class="card-text"><%= post.content %></div>
-              <div class="card-img">
+              <div class="images">
                 <% if post.images.attached? %>
                   <div class="row">
                     <%  post.images.each do |image| %>
@@ -256,7 +272,7 @@
             <div class="row">
               <div class="col d-flex">
                 <span class="card-timestamp">
-                  <%= time_ago_in_words(post.created_at) %> ago
+                  <%= time_ago_in_words(post.created_at) %>前
                 </span>
               </div>
               <div class="col d-flex justify-content-end">
@@ -303,7 +319,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-xl-6 mb-5">
+    <div class="col-lg-6 mb-5">
       <div class="card ">
         <div class="card-body">
           coming soon

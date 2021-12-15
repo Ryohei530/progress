@@ -1,0 +1,26 @@
+@import '/scss/variables';
+
+.utab {
+  a {
+    color: $gray;
+    border-radius: .65rem;
+    &:hover {
+      background-color: $bg-btn-red;
+      text-decoration: none;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  button {
+    color: $gray;
+    border-radius: .65rem;
+    &:hover {
+      background-color: $bg-btn-red;
+      text-decoration: none;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

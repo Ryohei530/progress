@@ -22,6 +22,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'scss/module/images';
 @import 'scss/module/term';
 @import 'scss/module/tab';
+@import 'scss/module/utab';
 @import 'scss/static_pages';
 @import 'scss/goals';
 @import 'scss/reports';
@@ -63,7 +64,8 @@ body{
   background-color: $bg-color;
   &-inner{
     // background-color: #fff;
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }
 
@@ -182,4 +184,14 @@ body{
 .users{
   list-style: none;
   margin: 0;
+}
+
+
+
+@include media-breakpoint-down(md) {
+  .main {
+    &-inner-xs {
+      padding-top: 420px;
+    }
+  }
 }

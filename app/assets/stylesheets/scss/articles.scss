@@ -110,6 +110,29 @@
     &-content{
       font-size: 1.3em;
     }
+    
+  }
+  .favorite {
+    &-item {
+      .card {
+        
+        &-title {
+          font-size: 0.9em;
+        }
+        &-img {
+          width: 100%;
+          &::before {
+            padding-top: 100%;
+          }
+        }
+        .rank-img {
+          width: 40px;
+          position: relative;
+          left: 14px;
+          top: 30px;
+        }
+      }
+    }
   }
 }
 

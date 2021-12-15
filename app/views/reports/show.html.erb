@@ -1,7 +1,7 @@
 <% provide(:title, "日報") %>
 <% provide(:button_text, "投稿") %>
 <div class="reports row justify-content-center">
-  <div class="col-8">
+  <div class="col-12 col-lg-10 col-xl-8">
     <div id="report-<%= @report.id %>" class="card mb-5">
       <div class="card-body">
         <div class="card-wrap">
@@ -53,7 +53,7 @@
                 <div class="row">
                   <%  @report.images.each do |image| %>
                     <div class="col-6">
-                      <%= image_tag image.variant(resize: "240x180!") %>
+                      <%= image_tag image.variant(resize: "280x180!") %>
                     </div>
                   <% end %>
                 </div>
@@ -73,7 +73,7 @@
                 <%= link_to "削除", @report, method: :delete,
                                           data: { confirm: "本当に削除しますか？" },
                                           class: "card-dlt dlt-card-#{@report.id} btn btn-outline-danger btn-sm" %>
-                <%= link_to "編集", edit_report_path(@report), class: 'card-edit btn btn-outline-danger btn-sm' %>
+                <%= link_to "編集", edit_report_path(@report), class: 'card-edit btn btn-outline-success btn-sm' %>
               <% end %>
             </div>
             <div class="col d-flex justify-content-end">

@@ -31,6 +31,7 @@ gem 'faker'
 gem 'material_icons'
 gem 'chart-js-rails'
 gem 'mini_racer',       '~> 0.3.1'
+gem 'impressionist'
 
 group :development, :test do
   gem 'pry-byebug'

@@ -89,7 +89,7 @@
 .sec{
   margin: 10px;
   .snav{
-    padding-left: 40px;
+    padding-right: 40px;
     margin-top: 40px;
       
     &-wrap{
@@ -233,8 +233,19 @@
       margin-left: 10px;
     }
   }
+  &-bg {
+    background: linear-gradient(-45deg, rgba(204, 149, 192, .6), rgba(219, 212, 180, .6), rgba(122, 161, 210, .6)), image-url("blank-notepad-on-a-desk.jpg");
+    background-size: cover;
+    
+    height: 430px;
+    width: 100%;
+    position: relative;
+    top: -432px;
+  }
+  
   .form{
     margin: 0 auto;
+    z-index: 1;
     &-header{
       padding: 10px;
       background-color: #007bff;
@@ -243,6 +254,23 @@
     }
     &-main{
       padding: 40px;
+    }
+  }
+}
+
+@include media-breakpoint-only(lg) { 
+  .nltop {
+    .lead {
+          font-size: 1.12rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .nltop {
+    &-bg {
+      top: -456px;
+      
     }
   }
 }

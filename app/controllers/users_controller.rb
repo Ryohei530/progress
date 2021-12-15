@@ -116,8 +116,11 @@ class UsersController < ApplicationController
       
       def correct_user
         @user = User.find(params[:id])
-        flash[:alert] = "異なるユーザーのため権限がありません"
-        redirect_to(root_url) unless current_user?(@user)
+        
+        unless current_user?(@user)
+          flash[:alert] = "異なるユーザーのため権限がありません" 
+          redirect_to(root_url) 
+        end
       end
 
 end
