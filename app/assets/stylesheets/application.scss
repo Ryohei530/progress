@@ -9,8 +9,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 /* scss files */
 // @import ''
+@import 'scss/base/base';
+@import 'scss/mixin/mixin';
 @import 'scss/module/card';
-@import 'scss/custom';
 @import 'scss/module/header';
 @import 'scss/module/comment';
 @import 'scss/module/tag';
@@ -23,17 +24,18 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'scss/module/term';
 @import 'scss/module/tab';
 @import 'scss/module/utab';
-@import 'scss/static_pages';
-@import 'scss/goals';
-@import 'scss/reports';
-@import 'scss/posts';
-@import 'scss/shared';
-@import 'scss/articles';
-@import 'scss/boards';
-@import 'scss/users';
-@import 'scss/bookmarks';
-@import 'scss/my_simple_calendar';
-@import 'scss/sessions';
+@import 'scss/custom';
+@import 'scss/page/static_pages';
+@import 'scss/page/goals';
+@import 'scss/page/reports';
+@import 'scss/page/posts';
+@import 'scss/page/shared';
+@import 'scss/page/articles';
+@import 'scss/page/boards';
+@import 'scss/page/users';
+@import 'scss/page/bookmarks';
+@import 'scss/page/sessions';
+@import 'scss/plugins/my_simple_calendar';
 
 
 /* mixins, variables, etc */
@@ -46,12 +48,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 // $gray-light: #b7bdb8;
 // $container-bg: #EEEEEE;
 
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
 
 /* universal */
 
