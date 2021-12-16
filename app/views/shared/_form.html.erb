@@ -1,20 +1,23 @@
 <div class="card  border-0 mb-0 vh-80 bg-form">
   <div class="card-header bg-transparent pb-4">
-    <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-    <div class="btn-wrapper text-center">
-      <a href="#" class="btn btn-neutral btn-icon">
-        <span class="btn-inner--icon"><img src="<%= asset_path('github.svg') %>"></span>
-        <span class="btn-inner--text">Github</span>
-      </a>
-      <a href="#" class="btn btn-neutral btn-icon">
-        <span class="btn-inner--icon"><img src="<%= asset_path('google.svg') %>"></span>
-        <span class="btn-inner--text">Google</span>
-      </a>
-    </div>
+    <div class="text-muted text-center mt-2 mb-3"><small>SNSアカウントでログイン</small></div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="btn-wrapper text-center">
+        <%= link_to omniauth_authorize_path(resource, :twitter), method: :post, class: "btn btn-neutral btn-icon" do %>
+          <span class="btn-inner--icon"><img src="<%= asset_path('twitter.svg') %>" class="py-3px"></span>
+          <span class="btn-inner--text">Twitter</span>
+        <% end %>
+        <%= link_to omniauth_authorize_path(resource, :google_oauth2), method: :post, class: "btn btn-neutral btn-icon" do %>
+          <span class="btn-inner--icon"><img src="<%= asset_path('google.svg') %>"></span>
+          <span class="btn-inner--text">Google</span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="card-body px-lg-5 py-lg-3 border-bottom">
     <div class="text-center text-muted mb-4">
-      <small>Or sign in with credentials</small>
+      <small>メールアドレスでログイン</small>
     </div>
     
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -54,7 +57,7 @@
   </div>
   <div class="card-body px-lg-5 py-lg-4">
     <div class="text-center text-muted mb-4">
-      <small>Or sign in as guest</small>
+      <small>ゲストでログイン</small>
     </div>
     <div class="text-center">
       <%= link_to "ゲストログイン（閲覧用）", static_pages_guest_sign_in_path, method: :post, class: 'btn btn-danger nltop-btn _btn-red' %>

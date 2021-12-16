@@ -1,4 +1,4 @@
-<div class="col-xl-6 mb-3">
+<div class="col-md-10 col-xl-6 mb-3 justify-content-center">
   <li id="goal-<%= monthly_goal.id %>" class="card mb-3">
     <div class="card-body">
       <div class="card-wrap">
@@ -49,6 +49,7 @@
               <%= link_to "削除", monthly_goal, method: :delete,
                                         data: { confirm: "本当に削除しますか？" },
                                         class: "card-dlt dlt-card-#{monthly_goal.id} btn btn-outline-danger btn-sm" %>
+              <%= link_to "編集", edit_monthly_goal_path(monthly_goal.user), class: 'card-edit btn btn-outline-success btn-sm' %>
             <% end %>
           </div>
         </div>

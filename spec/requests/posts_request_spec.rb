@@ -8,9 +8,9 @@ RSpec.describe "Posts", type: :request do
   describe "when not logged in" do
     it "redirects create" do
       expect{
-        post posts_path(@post), params: { post: { content: "Lorem Ipsum" } }
+        post posts_path, params: { post: { content: "Lorem Ipsum" } }
       }.to change(Post, :count).by(0)
-      expect(response).to redirect_to new_user_session_url
+      expect(response).to redirect_to new_user_session_path
     end
     it "redirects destroy" do
       expect{

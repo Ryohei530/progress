@@ -4,7 +4,13 @@
   <h2 class="text-center mb-4">ブックマーク一覧</h2>
   <ul class="bookmark-list">
     <div class="row">
-      <%= render @bookmarks %>
+      <% if @bookmarks.any? %>
+        <%= render @bookmarks %>
+      <% else %>  
+      <div class="col">
+        <p class="text-center">ブックマークがありません</p>
+      </div>
+      <% end %>
     </div>
   </ul>
 </div>

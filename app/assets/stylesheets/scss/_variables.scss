@@ -17,29 +17,3 @@ $bg-form: #F7FAFC;
 $def-font: #181C32; //rgb(24, 28, 50)
 $bg-btn-red: rgba(236,64,108, 0.1);
 $bg-btn-gray: #F5F8FA;
-
-
-
-@mixin title {
-  display: inline-block;
-  // color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 0.5;
-  border-radius: 0.25rem;
-}
-
-@mixin aim-color {
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-@mixin card {
-  border: 0;
-  border-radius: .65rem;
-  box-shadow: 0 0 20px 0 #f9f8f5;
-}

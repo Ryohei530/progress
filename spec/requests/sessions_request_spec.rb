@@ -12,10 +12,8 @@ RSpec.describe "Sessions", type: :request do
   
   describe "logout test" do
     it "logout 2 times in 2 windows" do
-      user_params = FactoryBot.attributes_for(:user)
-      
       get new_user_session_path
-      post user_session_path, params: { session: user_params }
+      sign_in user
       delete destroy_user_session_path
       expect(response).to have_http_status "302"
       
@@ -47,17 +45,4 @@ RSpec.describe "Sessions", type: :request do
       expect(cookies[:remember_token]).to eq ""
     end
   end
-  
-  pending "forwarding url" do
-    it "redirects to forwarding url only first time" do
-      user_params = FactoryBot.attributes_for(:user)
-      
-      get edit_user_registration_path
-      post user_session_path(user), params: { session: user_params }
-      
-      expect(response).to redirect_to edit_user_registration_path
-      expect(session[:forwarding_url]).to be_falsey
-    end
-  end
-
 end

@@ -9,8 +9,13 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     let!(:goal) { user.create_goal }
     let!(:goal2) { user2.create_goal }
     let!(:post3) { user.posts.create(content: "test") }
-  
+    let!(:monthly_goal) { FactoryBot.create(:monthly_goal, user_id: user.id) }
+    let!(:goal_action) { monthly_goal.goal_actions.create(content: "test action", number: 500) }
+    let!(:monthly_goal2) { FactoryBot.create(:monthly_goal, user_id: user2.id) }
+    let!(:goal_action2) { monthly_goal2.goal_actions.create(content: "test action", number: 500) }
+    
   scenario "post interface" do
+    
     log_in_as(user)
     visit root_path
     
@@ -26,7 +31,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     image_path = "#{Rails.root}/spec/fixtures/Cosmos01.jpg"
     expect{
       fill_in 'post[content]', with: content
-      attach_file "post[image]", image_path, make_visible: true
+      attach_file "post[images][]", image_path, make_visible: true
       click_button '投稿'
     }.to change(Post, :count).by(1)
     expect(page).to have_title 'ホーム | Progress'
@@ -34,11 +39,11 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     expect(page).to have_selector "img[src$='Cosmos01.jpg']"
     
     expect{
-      find(".post-link-#{post.id}").click
+      find(".card-link-#{post.id}").click
       expect(page).to have_link "削除"
       accept_alert do
-        within ".post-box" do
-          find(".post-dlt", text: "削除").click
+        within ".card-box" do
+          find(".card-dlt", text: "削除").click
         end
       end
       sleep 3
@@ -47,17 +52,24 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     expect(current_path).to eq root_path
     
     visit user_path(user2)
-    click_link "つぶやき"
-    find(".post-link-#{post2.id}").click
+    # click_link "つぶやき"
+    within ".user" do 
+      page.all('.tnav-link')[4].click
+    end
+    
+    find(".card-link-#{post2.id}").click
     expect(page).to_not have_content '削除'
     
     visit user_path(user)
-    click_link "つぶやき"
-    find(".post-link-#{post3.id}").click
+    # click_link "つぶやき"
+    within ".user" do 
+      page.all('.tnav-link')[4].click
+    end
+    find(".card-link-#{post3.id}").click
     
     accept_alert do
-      within ".post-box" do
-        find(".post-dlt", text: "削除").click
+      within ".card-box" do
+        find(".card-dlt", text: "削除").click
       end
     end
     sleep 3

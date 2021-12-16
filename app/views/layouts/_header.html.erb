@@ -1,7 +1,10 @@
 <header class="header navbar navbar-fixed-top navbar-expand-lg navbar-dark">
   <div class="header-inner container">
     <%= link_to "Progress", root_path, id: "logo" %>
-    <nav>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav navbar-right align-items-center">
         <li class="nav-item <%= "active" if current_page?(goals_path) %>">
           <%= link_to  goals_path, class: "nav-link" do %>

@@ -7,6 +7,7 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :user_id, presence: true
+  is_impressionable counter_cache: true
   
   def Article.search(search)
     return Article.all unless search

@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   
   def index
     @articles = Article.page(params[:page])
     @tags = Tag.joins(:article_tags).distinct
+    @rank_articles = Article.order(impressions_count: 'DESC').take(3)
   end
 
   def new
@@ -34,6 +35,7 @@ class ArticlesController < ApplicationController
     @comments = ArticleComment.includes(:user).where(article_id: params[:id]).where(reply_id: nil)
     @article_tags = @article.tags
     @tags = Tag.joins(:article_tags).distinct
+    impressionist(@article, nil, unique: [:ip_address])
   end
 
   def edit

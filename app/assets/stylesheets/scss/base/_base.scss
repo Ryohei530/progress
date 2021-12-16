@@ -1,0 +1,93 @@
+@import '/../variables';
+
+$headings-line-height: 1.5;
+$line-height-base: 1.65;
+$modal-inner-padding: 30px;
+$modal-title-padding: 30px;
+
+
+
+:root{
+  --font-family-sans-serif: Poppins, -apple-system, BlinkMacSystemFont ,"Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  font-family: var(--font-family-sans-serif);
+  color: #181C32;
+  letter-spacing: .1em;
+  text-align: justify;
+  // font-smoothing: antialiased;
+  // -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-sans-serif);
+}
+
+
+
+.btn {
+  border-radius: 7px;
+}
+
+.btn-small {
+  border-radius: 1px;
+}
+
+.btn-large {
+  border-radius: 3px;
+}
+
+.btn-success {
+  background-color: #61D589;
+  border-color: #61D58A;
+  &:hover {
+    border-color: #19b674;
+    background-color: #19b674;
+  }
+}
+
+
+
+/* bootstrap_button_sns */
+
+.bg-twitter {
+  background-color: #55acee;
+  text: #FFF;
+}
+
+.bg-mastodon {
+  background-color: #2b90d9;
+  text: #FFF;
+}
+
+.bg-facebook {
+  background-color: #3b5998;
+  text: #FFF;
+}
+
+.bg-linkedin {
+  background-color: #0079ba;
+  text: #FFF;
+}
+
+.bg-github {
+  background-color: #333;
+  text: #FFF;
+}
+
+.bg-qiita {
+  background-color: #79bd28;
+  text: #FFF;
+}
+
+.bg-misskey {
+  background-color: #00acc1;
+  text: #FFF;
+}
+
+.bg-soundcloud{
+  background-color: #ff3300;
+  text: #FFF;
+}

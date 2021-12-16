@@ -2,7 +2,7 @@
 
 .favorite{
   @include card;
-  background-color: $component-bg;
+  // background-color: $component-bg;
   
   &-header{
     background-color: $theme-color;
@@ -12,8 +12,10 @@
   }
   &-list{
     list-style: none;
+    padding: 0;
   }
   &-item{
     
   }
+  
 }

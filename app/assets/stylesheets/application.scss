@@ -9,8 +9,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 /* scss files */
 // @import ''
+@import 'scss/base/base';
+@import 'scss/mixin/mixin';
 @import 'scss/module/card';
-@import 'scss/custom';
 @import 'scss/module/header';
 @import 'scss/module/comment';
 @import 'scss/module/tag';
@@ -22,17 +23,20 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'scss/module/images';
 @import 'scss/module/term';
 @import 'scss/module/tab';
-@import 'scss/static_pages';
-@import 'scss/goals';
-@import 'scss/reports';
-@import 'scss/posts';
-@import 'scss/shared';
-@import 'scss/articles';
-@import 'scss/boards';
-@import 'scss/users';
-@import 'scss/bookmarks';
-@import 'scss/my_simple_calendar';
-@import 'scss/sessions';
+@import 'scss/module/utab';
+@import 'scss/page/static_pages';
+@import 'scss/page/goals';
+@import 'scss/page/reports';
+@import 'scss/page/posts';
+@import 'scss/page/shared';
+@import 'scss/page/articles';
+@import 'scss/page/boards';
+@import 'scss/page/users';
+@import 'scss/page/bookmarks';
+@import 'scss/page/sessions';
+@import 'scss/plugins/my_simple_calendar';
+@import 'scss/plugins/argon_form';
+@import 'scss/custom';
 
 
 /* mixins, variables, etc */
@@ -46,12 +50,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 // $container-bg: #EEEEEE;
 
 
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
-
 /* universal */
 
 body{
@@ -63,7 +61,8 @@ body{
   background-color: $bg-color;
   &-inner{
     // background-color: #fff;
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }
 
@@ -182,4 +181,14 @@ body{
 .users{
   list-style: none;
   margin: 0;
+}
+
+
+
+@include media-breakpoint-down(md) {
+  .main {
+    &-inner-xs {
+      padding-top: 420px;
+    }
+  }
 }

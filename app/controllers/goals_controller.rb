@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :get_location, only: :edit
   
