@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :article do
     title { "MyString" }
     content { "MyText" }
-    view { 1 } 
+    impressions_count { 1 } 
     
     trait :title1 do
       title { "You are string" }

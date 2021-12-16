@@ -24,7 +24,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'scss/module/term';
 @import 'scss/module/tab';
 @import 'scss/module/utab';
-@import 'scss/custom';
 @import 'scss/page/static_pages';
 @import 'scss/page/goals';
 @import 'scss/page/reports';
@@ -36,6 +35,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'scss/page/bookmarks';
 @import 'scss/page/sessions';
 @import 'scss/plugins/my_simple_calendar';
+@import 'scss/plugins/argon_form';
+@import 'scss/custom';
 
 
 /* mixins, variables, etc */
