@@ -54,6 +54,7 @@
 // Then uncomment the code block below:
 //
 import TurbolinksAdapter from 'vue-turbolinks';
+import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue/dist/vue.esm';
 import Vuetify from 'vuetify';
 import "vuetify/dist/vuetify.min.css";
@@ -61,7 +62,11 @@ import App from '../app.vue';
 
 Vue.use(TurbolinksAdapter);
 Vue.use(Vuetify);
-const vuetify = new Vuetify();
+const vuetify = new Vuetify({
+  icons: {
+    iconfont: 'mdi', // default - only for display purposes
+  },
+});
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
