@@ -1,2 +1,2 @@
 rails: rails s
-webpack: ./bin/webpack-dev-server
+webpack-dev-server: yarn run webpack-dev-server --mode development

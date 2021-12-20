@@ -77,4 +77,5 @@ Rails.application.configure do
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
   
   config.web_console.whitelisted_ips = '118.241.8.200'
+  # config.middleware.use AssetsPathProxy, ssl_verify_none: true
 end

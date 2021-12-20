@@ -8,8 +8,6 @@ gem 'bcrypt',     '~> 3.1.16'
 gem 'bootstrap',  '~> 4.5.0'
 gem 'puma',       '~> 5'
 gem 'sass-rails', '~> 6'
-gem 'webpacker',  '5.4.0'
-gem 'turbolinks', '~> 5.2.0'
 gem 'jbuilder',   '~> 2.11'
 gem 'bootsnap',   '~> 1.7', require: false
 gem 'mysql2',     '~> 0.5.3'
@@ -32,6 +30,7 @@ gem 'material_icons'
 gem 'chart-js-rails'
 gem 'mini_racer',       '~> 0.3.1'
 gem 'impressionist'
+gem 'rack-proxy'
 
 group :development, :test do
   gem 'pry-byebug'
