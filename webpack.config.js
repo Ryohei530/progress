@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
                         {
                             loader: 'css-loader',
                             options: {
-                                // url: false,
+                                url: false,
                                 sourceMap: true,
                                 importLoaders: 2
                             }
@@ -82,13 +82,13 @@ module.exports = (env, argv) => {
                                     __dirname,
                                     './frontend/public/assets/stylesheets/bundle'
                                 ),
-                                // url: false
+                                url: false
                             }
                         },
                         {
                             loader: 'css-loader',
                             options: {
-                                // url: false,
+                                url: false,
                                 sourceMap: true,
                                 importLoaders: 2
                             }
@@ -134,7 +134,7 @@ module.exports = (env, argv) => {
             public: "9622943d6ddd4db6a1aec8991d298951.vfs.cloud9.ap-northeast-1.amazonaws.com:3035",
             contentBase: path.resolve(__dirname, './frontend/public/assets'),
             hot: true,
-            disableHostCheck: true,
+            // disableHostCheck: true,
             historyApiFallback: true
         }
     }
