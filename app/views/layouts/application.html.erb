@@ -3,22 +3,26 @@
   <%= render 'layouts/head' %>
 
   <body>
-    <%= render 'layouts/header' %>
-    <div class="main <%= bg_color %>">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      
-      <% if current_page?(root_path) && !logged_in? %>
-        <%= render 'layouts/nltop' %>
-      <% end %>
-      <div class="main-inner container <%= "main-inner-xs" if current_page?(root_path) && !logged_in? %>">
-          <%= yield %>
-          <%= javascript_pack_tag 'hello_vue' %>
-          <%= stylesheet_pack_tag 'hello_vue'  %> 
-      </div>
+    <div id="vue-app">
+      <v-app v-cloak>
+        <%= render 'layouts/header2' %>
+        <v-main class="main <%= bg_color %>">
+          <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+          
+          <% if current_page?(root_path) && !logged_in? %>
+            <%= render 'layouts/nltop' %>
+          <% end %>
+          <div class="main-inner container <%= "main-inner-xs" if current_page?(root_path) && !logged_in? %>">
+            <div id="vue-<%= controller.controller_name %>-<%= controller.action_name %>">
+              <%= yield %>
+            </div>
+          </div>
+        </v-main>
+        <%= render 'layouts/footer' %>
+      </v-app>
     </div>
-    <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

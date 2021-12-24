@@ -1,0 +1,112 @@
+<v-navigation-drawer app v-model="hum" clipped>
+  <v-container>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="title grey--text text--darken-2">
+          メニュー
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-divider></v-divider>
+    
+    <v-list dense nav>
+      <v-list-group 
+      v-for="nav_list in nav_lists" 
+      :key="nav_list.name" 
+      :prepend-icon="nav_list.icon" 
+      no-action 
+      :append-icon="nav_list.lists ? undefined : ''"> 
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title>{{ nav_list.name }}</v-list-item-title>
+          </v-list-item-content>
+        </template>
+        <v-list-item v-for="list in nav_list.lists" :key="list">
+          <v-list-item-content>
+            <v-list-item-title>{{ list }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+    </v-list>
+  </v-container>
+</v-navigation-drawer>
+<v-app-bar color="red" elevation="2" dark app clipped-left>
+  <v-app-bar-nav-icon @click="hum=!hum"></v-app-bar-nav-icon>
+  <v-toolbar-title><%= link_to "Progress", root_path, id: "logo" %></v-toolbar-title>
+  <v-spacer></v-spacer>
+  <v-toolbar-items>
+    <v-btn text href="<%= goals_path %>" class="text-decoration-none">
+      <i class="far fa-flag"></i>
+      <span>みんなの目標</span>
+    </v-btn>
+    <v-btn text href="<%= boards_path %>" class="text-decoration-none">
+      <i class="far fa-comments"></i>
+      <span>お悩み相談（掲示板）</span>
+    </v-btn>
+    <v-btn text href="<%= articles_path %>" class="text-decoration-none">
+      <i class="fas fa-book-open"></i>
+      <span>英語学習法特集</span>
+    </v-btn>
+    <v-btn text href="<%= rank_path %>" class="text-decoration-none">
+      <i class="fas fa-medal"></i>
+      <span>ランキング</span>
+    </v-btn>
+    <% if user_signed_in? %>
+    <v-menu offset-y>
+      <template v-slot:activator="{on}">
+      <v-btn v-on="on" text>
+        <%= image_tag current_user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed, class: '_rounded' %> 
+        <%= current_user.name %>
+        <v-icon>mdi-menu-down</v-icon>
+      </v-btn>
+      </template>
+      <v-list>
+        
+        <v-list-item href="<%= user_path(current_user) %>" class="text-decoration-none">
+          <v-list-item-icon>
+            <v-icon>fa-user</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>マイページ</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item href="<%= edit_user_path(current_user) %>" class="text-decoration-none">
+          <v-list-item-icon>
+            <v-icon>fa-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>設定</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item href="<%= bookmarks_path %>" class="text-decoration-none">
+          <v-list-item-icon>
+            <v-icon>fa-bookmark</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>ブックマーク一覧</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-divider></v-divider>
+        
+        <v-list-item href="<%= destroy_user_session_path %>" data-method="delete" class="text-decoration-none">
+          <v-list-item-icon>
+            <v-icon>fa-sign-out-alt</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+      </v-list>
+    </v-menu>
+    <% else %>
+    <v-btn text href="<%= new_user_session_path %>" class="text-decoration-none">
+      ログイン
+    </v-btn>
+    <% end %>
+  </v-toolbar-items>
+</v-app-bar>
+

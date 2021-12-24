@@ -2,6 +2,12 @@
     <title><%= yield(:title) %> | Progress</title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <style>
+    [v-cloak] {
+      display: none;
+    }
+    </style>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
