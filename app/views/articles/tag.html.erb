@@ -30,7 +30,7 @@
         <ul class="tag-list d-flex flex-wrap">
           <% @tags.each do |tag| %>
             <li class="tag-item">
-              <%= link_to tag_articles_path(tag), class: "tag-link badge badge-pill badge-info" do %>
+              <%= link_to tag_articles_path(tag), class: "tag-link badge badge-pill badge-info white--text" do %>
                 <%= tag.name %> <span class="badge badge-light"><%= tag.articles.count %></span>
               <% end %>
             </li>

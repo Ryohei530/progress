@@ -8,7 +8,7 @@
         <%= form_with(url: search_articles_path, method: :get, local: true) do |f| %>
           <div class="search-inner d-flex">
             <%= f.text_field :search, class: 'form-control' %>
-            <%= button_tag type: "submit", class: "btn btn-primary" do %>
+            <%= button_tag type: "submit", class: "btn btn-primary white--text" do %>
               <i class="fas fa-search"></i>
             <% end %>
           </div>
@@ -48,7 +48,7 @@
         <ul class="tag-list d-flex flex-wrap">
           <% @tags.each do |tag| %>
             <li class="tag-item">
-              <%= link_to tag_articles_path(tag), class: "tag-link badge badge-pill badge-info" do %>
+              <%= link_to tag_articles_path(tag), class: "tag-link badge badge-pill badge-info white--text" do %>
                 <%= tag.name %> <span class="badge badge-light"><%= tag.articles.count %></span>
               <% end %>
             </li>

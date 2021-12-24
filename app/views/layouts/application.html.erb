@@ -6,17 +6,19 @@
     <div id="vue-app">
       <v-app v-cloak>
         <%= render 'layouts/header2' %>
-        <v-main class="main <%= bg_color %>">
-          <% flash.each do |message_type, message| %>
-            <div class="alert alert-<%= message_type %>"><%= message %></div>
-          <% end %>
-          
-          <% if current_page?(root_path) && !logged_in? %>
-            <%= render 'layouts/nltop' %>
-          <% end %>
-          <div class="main-inner container <%= "main-inner-xs" if current_page?(root_path) && !logged_in? %>">
-            <div id="vue-<%= controller.controller_name %>-<%= controller.action_name %>">
-              <%= yield %>
+        <v-main>
+          <div class="main <%= bg_color %>">
+            <% flash.each do |message_type, message| %>
+              <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>
+            
+            <% if current_page?(root_path) && !logged_in? %>
+              <%= render 'layouts/nltop' %>
+            <% end %>
+            <div class="main-inner container py-10 <%= "main-inner-xs" if current_page?(root_path) && !logged_in? %>">
+              <div id="vue-<%= controller.controller_name %>-<%= controller.action_name %>">
+                <%= yield %>
+              </div>
             </div>
           </div>
         </v-main>

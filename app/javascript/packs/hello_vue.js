@@ -54,8 +54,8 @@
 // Then uncomment the code block below:
 //
 import TurbolinksAdapter from 'vue-turbolinks';
-import '@mdi/font/css/materialdesignicons.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import '@mdi/font/css/materialdesignicons.css';
 import Vue from 'vue/dist/vue.esm';
 import Vuetify from 'vuetify';
 import "vuetify/dist/vuetify.min.css";
@@ -65,8 +65,8 @@ Vue.use(TurbolinksAdapter);
 Vue.use(Vuetify);
 const vuetify = new Vuetify({
   icons: {
-    iconfont: 'mdi', // default - only for display purposes
     iconfont: 'fa',
+    iconfont: 'mdi', // default - only for display purposes
   },
 });
 
@@ -80,42 +80,58 @@ document.addEventListener('turbolinks:load', () => {
         hum: false,
         time: '11:15',
         timeStep: '10:10',
-        users: [
-          { name:'マイページ', 
-            icon: 'fa-user',
-          },
-          {name: '設定',icon: 'fa-cog'},
-          {name: 'ブックマーク一覧',icon: 'fa-bookmark'},
-          {name: ""},
-          {name: 'ログアウト',icon: 'fa-sign-out-alt'},
-        ],
         nav_lists:[
           {
             name: '日報',
-            icon: 'mdi-vuetify',
-            lists: ['Quick Start', 'Pre-made layouts']
+            icon: 'mdi-message-alert-outline',
+            link: '/reports'
           },
           {
             name: 'つぶやき',
-            icon: 'mdi-cogs' 
+            icon: 'far fa-comment-dots' ,
+            link: '/'
           },
           {
             name: 'Styles & animations',
             icon: 'mdi-palette',
-            lists:['Colors','Content','Display']
+            lists: [
+              {
+                name: 'Colors',
+                link: ''
+              },
+              {
+                name: 'Content',
+                link: ''
+              },
+              {
+                name: 'Display',
+                link: ''
+              },
+            ]
           },
           {
             name: 'UI Components',
             icon: 'mdi-view-dashboard',
-            lists:['API explorer','Alerts']
+            lists:[
+              {
+                name: 'API explorer',
+                link: '/'
+              },
+              {
+                name: 'Alerts',
+                link: '/'
+              }
+            ]
           },
           {
             name: 'Directives',
-            icon: 'mdi-function'
+            icon: 'mdi-function',
+            link: '/'
           },
           {
             name: 'Preminum themes',
-            icon: 'mdi-vuetify'
+            icon: 'mdi-vuetify',
+            link: '/'
           },
         ]
       };
