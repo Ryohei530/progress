@@ -1,33 +1,46 @@
-<header class="header navbar navbar-fixed-top navbar-expand-lg navbar-dark">
-  <div class="header-inner container">
+<header class="header navbar navbar-fixed-top navbar-expand navbar-dark">
+  <div class="hamburger_btn" @click='activeBtn=!activeBtn'>
+    <span class="line line_01" :class="btnLine1"></span>
+    <span class="line line_02" :class="btnLine2"></span>
+    <span class="line line_03" :class="btnLine3"></span>
+  </div>
+  <transition name="menu">
+    <div class="menu" v-show="activeBtn">
+        <ul>
+            <li><a href="#">日報</a></li>
+            <li><a href="#">つぶやき</a></li>
+            <li><a href="#">項目3</a></li>
+            <li><a href="#">項目4</a></li>
+            <li><a href="#">項目5</a></li>
+        </ul>
+    </div>
+  </transition>
+  <div class="header-inner container-fluid">
     <%= link_to "Progress", root_path, id: "logo" %>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="justify-content-end">
       <ul class="nav navbar-nav navbar-right align-items-center">
         <li class="nav-item <%= "active" if current_page?(goals_path) %>">
           <%= link_to  goals_path, class: "nav-link" do %>
             <i class="far fa-flag"></i>
-            <span>みんなの目標</span>
+            <span class="d-none d-lg-inline-block">みんなの目標</span>
           <% end %>
         </li>
         <li class="nav-item <%= "active" if current_page?(boards_path) %>">
           <%= link_to  boards_path, class: "nav-link" do %>
             <i class="far fa-comments"></i>
-            <span>お悩み相談（掲示板）</span>
+            <span class="d-none d-lg-inline-block">お悩み相談（掲示板）</span>
           <% end %>
           </li>
         <li class="nav-item <%= "active" if current_page?(articles_path) %>">
           <%= link_to  articles_path, class: "nav-link" do %>
             <i class="fas fa-book-open"></i>
-            <span>英語学習法特集</span>
+            <span class="d-none d-lg-inline-block">英語学習法特集</span>
           <% end %>
         </li>
         <li class="nav-item <%= "active" if current_page?(rank_path) %>">
           <%= link_to rank_path, class: "nav-link" do %>
             <i class="fas fa-medal"></i>
-            <span>ランキング</span>
+            <span class="d-none d-lg-inline-block">ランキング</span>
           <% end %>
         </li>
         <% if user_signed_in? %>
@@ -37,7 +50,7 @@
               <%= current_user.name %>
               <b class="carret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li>
                 <%= link_to  current_user, class: "dropdown-item" do %>
                   <i class="fas fa-user"></i>

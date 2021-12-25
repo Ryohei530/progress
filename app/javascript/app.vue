@@ -1,8 +1,5 @@
 <template>
-  <v-app>
-    <Practice></Practice>
-    <Sample></Sample>
-  </v-app> 
+  <p>app.vue</p>
 </template>
 
 
@@ -22,10 +19,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>

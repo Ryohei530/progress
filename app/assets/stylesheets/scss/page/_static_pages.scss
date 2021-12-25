@@ -266,6 +266,17 @@
   }
 }
 
+@include media-breakpoint-down(md) {
+  .sec {
+    .snav {
+      padding-right: 0px;
+    }
+    .content {
+      padding: 40px 0px;
+    }
+  }
+}
+
 @include media-breakpoint-down(xs) {
   .nltop {
     &-bg {

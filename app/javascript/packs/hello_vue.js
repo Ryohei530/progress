@@ -54,29 +54,55 @@
 // Then uncomment the code block below:
 //
 import TurbolinksAdapter from 'vue-turbolinks';
-import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue/dist/vue.esm';
-import Vuetify from 'vuetify';
-import "vuetify/dist/vuetify.min.css";
 import App from '../app.vue';
 
 Vue.use(TurbolinksAdapter);
-Vue.use(Vuetify);
-const vuetify = new Vuetify({
-  icons: {
-    iconfont: 'mdi', // default - only for display purposes
-  },
-});
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
-    vuetify,
-    el: 'App',
+    el: '#app',
     data: () => {
       return {
-        message: "Can you say hello?"
+        message: "Can you say hello?",
+        activeBtn: false,
+        isActive: '1'
       };
+    },
+    computed: {
+      btnLine1: function() {
+        return {
+          'btn_line01': this.activeBtn
+        };
+      },
+      btnLine2: function() {
+        return {
+          'btn_line02': this.activeBtn
+        };
+      },
+      btnLine3: function() {
+        return {
+          'btn_line03': this.activeBtn
+        };
+      },
+      tabActive1: function() {
+        return {
+        'tab-active': this.isActive === '1'
+        };
+      },
+      tabActive2: function() {
+        return {
+        'tab-active': this.isActive === '2'
+        };
+      },
+    },
+    methods: {
+      changeTab: function(num) {
+        this.isActive = num;
+      },
     },
     components: { App }
   });
 });
+
+require("../src/pages/vue_index");

@@ -198,12 +198,13 @@
     }
   }
   
+  .posts{
+    list-style: none;
+    padding: 0 15px;
+  }
+  
 }
   
-.posts{
-  list-style: none;
-  padding: 0;
-}
 
 .account{
   &-snav{
