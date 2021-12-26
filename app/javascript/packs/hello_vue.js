@@ -5,17 +5,91 @@
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
-// import Vue from 'vue'
-// import App from '../app.vue'
+import Vue from 'vue'
+import App from '../app.vue'
+import router from '../src/router'
+import VueIndex from "../src/components/VueIndex"
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const app = new Vue({
-//     render: h => h(App)
-//   }).$mount()
-//   document.body.appendChild(app.$el)
 
-//   console.log(app)
-// })
+document.addEventListener('DOMContentLoaded', () => {
+  // const element = document.getElementById("app")
+  // console.log(element)
+  // if (element) {
+    const app = new Vue({
+      el: '#app',
+      router,
+      render: h => h(App)
+    }).$mount()
+  
+    console.log(app)
+    
+    const app2 = new Vue({
+      el: "#vue-app",
+      components: {
+        VueIndex
+      },
+      data: () => { 
+        return {
+          message: "Hello World mypage",
+          activeBtn: false,
+          isActive: '1'
+        };
+      },
+      computed: {
+        btnLine1: function() {
+          return {
+            'btn_line01': this.activeBtn
+          };
+        },
+        btnLine2: function() {
+          return {
+            'btn_line02': this.activeBtn
+          };
+        },
+        btnLine3: function() {
+          return {
+            'btn_line03': this.activeBtn
+          };
+        },
+        tabActive1: function() {
+          return {
+          'tab-active': this.isActive === '1'
+          };
+        },
+        tabActive2: function() {
+          return {
+          'tab-active': this.isActive === '2'
+          };
+        },
+      },
+      methods: {
+        changeTab: function(num) {
+          this.isActive = num;
+        },
+      },
+    })
+    
+    console.log(app2)
+  // }
+  // else {
+  //   const app = new Vue({
+  //     el: "#vue-app",
+  //     components: {
+  //       VueIndex
+  //     },
+  //     data: () => { 
+  //       return {
+  //         message: "Hello World mypage",
+  //       }
+  //     },
+  //     methods: {
+        
+  //     },
+  //   })
+    
+  //   console.log(app)
+  // }
+})
 
 
 // The above code uses Vue without the compiler, which means you cannot
@@ -53,56 +127,60 @@
 //
 // Then uncomment the code block below:
 //
-import TurbolinksAdapter from 'vue-turbolinks';
-import Vue from 'vue/dist/vue.esm';
-import App from '../app.vue';
+// import TurbolinksAdapter from 'vue-turbolinks';
+// import Vue from 'vue/dist/vue.esm';
+// import App from '../app.vue';
 
-Vue.use(TurbolinksAdapter);
 
-document.addEventListener('turbolinks:load', () => {
-  const app = new Vue({
-    el: '#app',
-    data: () => {
-      return {
-        message: "Can you say hello?",
-        activeBtn: false,
-        isActive: '1'
-      };
-    },
-    computed: {
-      btnLine1: function() {
-        return {
-          'btn_line01': this.activeBtn
-        };
-      },
-      btnLine2: function() {
-        return {
-          'btn_line02': this.activeBtn
-        };
-      },
-      btnLine3: function() {
-        return {
-          'btn_line03': this.activeBtn
-        };
-      },
-      tabActive1: function() {
-        return {
-        'tab-active': this.isActive === '1'
-        };
-      },
-      tabActive2: function() {
-        return {
-        'tab-active': this.isActive === '2'
-        };
-      },
-    },
-    methods: {
-      changeTab: function(num) {
-        this.isActive = num;
-      },
-    },
-    components: { App }
-  });
-});
+// Vue.use(TurbolinksAdapter);
 
-require("../src/pages/vue_index");
+
+// document.addEventListener('turbolinks:load', () => {
+//   const app = new Vue({
+//     el: '#app',
+//     data: () => {
+//       return {
+//         message: "Can you say hello?",
+//         activeBtn: false,
+//         isActive: '1'
+//       };
+//     },
+//     computed: {
+//       btnLine1: function() {
+//         return {
+//           'btn_line01': this.activeBtn
+//         };
+//       },
+//       btnLine2: function() {
+//         return {
+//           'btn_line02': this.activeBtn
+//         };
+//       },
+//       btnLine3: function() {
+//         return {
+//           'btn_line03': this.activeBtn
+//         };
+//       },
+//       tabActive1: function() {
+//         return {
+//         'tab-active': this.isActive === '1'
+//         };
+//       },
+//       tabActive2: function() {
+//         return {
+//         'tab-active': this.isActive === '2'
+//         };
+//       },
+//     },
+//     methods: {
+//       changeTab: function(num) {
+//         this.isActive = num;
+//       },
+//     },
+//     components: { App }
+//   });
+// });
+
+
+// require("../src/pages/vue_index");
+// require("../src/pages/mypage");

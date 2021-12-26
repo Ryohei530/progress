@@ -1,5 +1,5 @@
 <template>
-  <p>app.vue</p>
+  <router-view></router-view>
 </template>
 
 
@@ -15,7 +15,7 @@ export default {
   },
   components: {
     Practice,
-    Sample
+    Sample,
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-
+<div id="app"></div>
 <div class="user">
   <div class="row">
     <div class="d-flex col-12 mb-3 justify-content-between flex-wrap">
@@ -132,10 +132,7 @@
         </div>
         <div class="card-body">
           <canvas id="myChart" width="400px" height="400px"></canvas>
-          <script>
-            var ratios = <%= @monthly_ratios.reverse %>;
-          </script>
-          <script>my_chart();</script>
+          
         </div>
       </div>
     </div>
@@ -215,12 +212,7 @@
                 </div>
                 <div class="tab-chart">
                   <canvas id="myChart2" width="400px" height="400px"></canvas>
-                  <script>
-                    var dayDate = <%= raw @day_date.reverse %>;
-                    var dayDone = <%= @day_done.reverse %>;
-                    var dayIndicator = <%= [].fill(@monthly_goal.goal_actions.first.number, 0, @days_of_week) %>;
-                  </script>
-                  <script>my_chart2();</script>
+                  
                 </div>
               </div>
               <div class="tab-box"></div>

@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start();
-require("turbolinks").start();
+// require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 // require("jquery");
@@ -13,7 +13,7 @@ require("@fortawesome/fontawesome-free");
 import "bootstrap"; // これが自動でjqueryをrequireしている
 import '../src/modules/action';
 import '../src/modules/tab';
-import '../src/custom';
+// import '../src/custom';
 import Chart from 'chart.js/auto';
 global.Chart = Chart;
 import '../src/modules/mychart';
