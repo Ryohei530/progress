@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   # delete '/logout', to: 'sessions#destroy'
   resources :vue, only: [:index]
   
+  namespace :api, format: 'json' do
+    resources :users, only: :show
+  end
+  
   resources :users do
     member do
      get 'goal'
@@ -28,6 +32,7 @@ Rails.application.routes.draw do
     # get 'password'
     end
   end
+  
   resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]

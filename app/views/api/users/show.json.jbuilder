@@ -1,0 +1,10 @@
+json.user @user
+json.current_user @current_user
+json.goal @goal
+json.monthly_goal @monthly_goal
+json.monthly_actions @monthly_actions
+json.rday_dates @rday_dates
+json.post @post
+json.posts @posts
+json.avatar_url60 @avatar_url60
+json.avatar_url70 @avatar_url70
