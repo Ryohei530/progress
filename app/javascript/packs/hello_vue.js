@@ -9,8 +9,10 @@ import Vue from 'vue';
 import App from '../app.vue';
 import router from '../src/router';
 import store from '../src/store';
+import sanitizeHTML from 'sanitize-html';
 import VueIndex from "../src/components/VueIndex";
 
+Vue.prototype.$sanitize = sanitizeHTML;
 
 document.addEventListener('DOMContentLoaded', () => {
   // const element = document.getElementById("app")
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.isActive = num;
         },
       },
-    })
+    });
     
     console.log(app2)
   // }
