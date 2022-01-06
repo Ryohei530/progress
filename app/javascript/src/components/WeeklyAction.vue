@@ -58,10 +58,6 @@
         console.log(monthlyActions);
         for (let i = 0; i < monthlyActions.length; i++) {
           let weekActNum = (monthlyActions[i].number / daysOfMonth) * this.days_of_week;
-          console.log(weekActNum);
-          console.log(this.days_of_month);
-          console.log(daysOfMonth);
-          console.log(this.days_of_week);
           weekActNums.push(Math.round(weekActNum));
         }
         return weekActNums;
@@ -73,13 +69,10 @@
         let ratios = [];
         let sums = this.week_sums.reverse();
         let weekActNums = this.weekActNumbers();
-        console.log(sums);
-        console.log(weekActNums);
+        
         for (let index = 0; index < sums.length; index++) {
           let ratioValue = (sums[index] / weekActNums[index] ) * 100;
           let ratio = this.roundSecondDecimal(ratioValue);
-          console.log(ratioValue);
-          console.log(ratio);
           ratios.push(ratio);
         }
         return ratios;

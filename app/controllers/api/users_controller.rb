@@ -14,8 +14,8 @@ class Api::UsersController < ApplicationController
     @report_actions = report.report_actions if @report.present?
     @avatar_url60 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)
     @avatar_url70 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "70x70^", crop: "70x70+0+0").processed)
-    sum_of_monthly_actions # @sums @monthly_ratio
-    sum_of_weekly_actions # @week_sums
+    sum_of_monthly_actions # @sums @monthly_ratios
+    sum_of_weekly_actions # @week_sums @day_done @day_date
     days_of_month # @days_of_month
     days_of_week # @days_of_week, @nth_week
   end

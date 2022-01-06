@@ -131,8 +131,7 @@
             <h4 class="m-0"><i class="far fa-check-circle"></i> 達成度</h4>
           </div>
           <div class="card-body">
-            <canvas id="myChart" width="400px" height="400px"></canvas>
-            
+            <my-chart></my-chart>
           </div>
         </div>
       </div>
@@ -210,8 +209,7 @@
                     </div>
                   </div>
                   <div class="tab-chart">
-                    <canvas id="myChart2" width="400px" height="400px"></canvas>
-                    
+                    <my-chart2></my-chart2>
                   </div>
                 </div>
                 <div class="tab-box"></div>
@@ -338,6 +336,8 @@
   import WeeklyAction from './WeeklyAction';
   import DailyAction from './DailyAction';
   import Calendar from './Calendar';
+  import MyChart from './MyChart';
+  import MyChart2 from './MyChart2';
   
   export default {
     data: function() {
@@ -390,6 +390,8 @@
       WeeklyAction,
       DailyAction,
       Calendar,
+      MyChart,
+      MyChart2
     }
-  }
+  };
 </script>
