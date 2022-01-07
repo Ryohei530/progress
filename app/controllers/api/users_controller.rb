@@ -10,6 +10,12 @@ class Api::UsersController < ApplicationController
     @rday_dates = @user.running_days.filter_map { |rday| rday.date }
     @post = @user.posts.first
     @posts = @user.posts
+    @post_images = []
+    @post.images.each do |image|
+      @post_images << rails_representation_url(image.variant(resize: "280x180!"))
+    end
+    @post_comment_count = @post.post_comments.count
+    @like = @post.post_likes.find_by(user_id: current_user.id)
     @report = @user.monthly_goals.last.reports.where(created_at: Date.today).last
     @report_actions = report.report_actions if @report.present?
     @avatar_url60 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)

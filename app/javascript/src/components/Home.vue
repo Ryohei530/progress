@@ -246,17 +246,15 @@
                 <div class="card-inner">
                   <div class="card-text"> {{ data.post.content }}</div>
                   <div class="images">
-                    <!--<% if @post.images.attached? %>-->
-                    <!--<template v-if="">-->
-                    <!--  <div class="row">-->
-                    <!--    <%  @post.images.each do |image| %>-->
-                    <!--      <div class="col-6">-->
-                    <!--        <%= image_tag image.variant(resize: "280x180!") %>-->
-                    <!--      </div>-->
-                    <!--    <% end %>-->
-                    <!--  </div>-->
-                    <!--</template>-->
-                    <!--<% end %>-->
+                    <template v-if="data.post_images">
+                      <div class="row">
+                        <template v-for="image in data.post_images">
+                          <div class="col-6">
+                            <img :src="image" alt="">
+                          </div>
+                        </template>
+                      </div>
+                    </template>
                   </div>
                 </div>
               </router-link>
@@ -269,39 +267,12 @@
                   </div>
                   <div class="col d-flex justify-content-end">
                     <div class="card-comment">
-                      <!--<%= link_to @post do %>-->
-                      <router-link to="">
+                      <a :href="`/posts/${data.post.id}`">
                         <i class="far fa-comment"></i>
-                        <!--<span>{{  }}</span>-->
-                        <!--<span><%= @post.post_comments.count %></span>-->
-                      </router-link>
+                        <span>{{ data.post_comment_count }}</span>
+                      </a>
                     </div>
-                    <div class="card-like">
-                      <template v-if="data.current_user">
-                        <!--<% like = @post.post_likes.find_by(user_id: current_user.id) %>-->
-                        <!--<% if current_user.post_liked?(@post) %>-->
-                          <!--<%= link_to post_post_like_path(@post, like), method: :delete do %>-->
-                            <span>
-                              <i class="fas fa-heart"></i>
-                              <!--<%= @post.post_likes.count %>-->
-                            </span>
-                          <!--<% end %>-->
-                        <!--<% else %>-->
-                        <!--  <%= link_to post_post_likes_path(@post), method: :post do %>-->
-                        <!--    <span>-->
-                        <!--      <i class="far fa-heart"></i>-->
-                        <!--      <%= @post.post_likes.count %>-->
-                        <!--    </span>-->
-                        <!--  <% end %>-->
-                        <!--<% end %>-->
-                      </template>
-                      <template v-else>
-                        <span>
-                          <i class="far fa-heart"></i>
-                          <!--<%= @post.post_likes.count %>-->
-                        </span>
-                      </template>
-                    </div>
+                    <post-likes></post-likes>
                   </div>
                 </div>
               </div>
@@ -338,6 +309,7 @@
   import Calendar from './Calendar';
   import MyChart from './MyChart';
   import MyChart2 from './MyChart2';
+  import PostLikes from './PostLikes';
   
   export default {
     data: function() {
@@ -358,7 +330,7 @@
       },
       lack() {
         return parseInt(this.data.week_sums[0] - this.weekActNumber);
-      }
+      },
     },
     mounted() {
       this.$store.dispatch('getData')
@@ -391,7 +363,8 @@
       DailyAction,
       Calendar,
       MyChart,
-      MyChart2
+      MyChart2,
+      PostLikes,
     }
   };
 </script>

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   
   namespace :api, format: 'json' do
     resources :users, only: :show
+    resources :posts, only: [:index, :create, :show, :destroy] do
+      resources :post_likes, only: [:index ,:create, :destroy]
+    end
   end
   
   resources :users do

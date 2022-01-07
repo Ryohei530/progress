@@ -6,6 +6,9 @@ json.monthly_actions @monthly_actions
 json.rday_dates @rday_dates
 json.post @post
 json.posts @posts
+json.post_images @post_images
+json.post_comment_count @post_comment_count
+json.like @like
 json.report @report
 json.report_actions @report_actions
 json.avatar_url60 @avatar_url60
