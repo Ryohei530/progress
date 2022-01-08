@@ -201,6 +201,12 @@
   .posts{
     list-style: none;
     padding: 0 15px;
+    .card-like {
+      span {
+        color: $theme-color;
+        cursor: pointer;
+      }
+    }
   }
   
 }

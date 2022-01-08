@@ -11,8 +11,10 @@ import router from '../src/router';
 import store from '../src/store';
 import sanitizeHTML from 'sanitize-html';
 import VueIndex from "../src/components/VueIndex";
+import globalVariables from '../src/mixins/globalVariables';
 
 Vue.prototype.$sanitize = sanitizeHTML;
+Vue.mixin(globalVariables);
 
 document.addEventListener('DOMContentLoaded', () => {
   // const element = document.getElementById("app")
@@ -36,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
           message: "Hello World mypage",
           activeBtn: false,
-          isActive: '1'
         };
       },
       computed: {
@@ -55,21 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'btn_line03': this.activeBtn
           };
         },
-        tabActive1: function() {
-          return {
-          'tab-active': this.isActive === '1'
-          };
-        },
-        tabActive2: function() {
-          return {
-          'tab-active': this.isActive === '2'
-          };
-        },
       },
       methods: {
-        changeTab: function(num) {
-          this.isActive = num;
-        },
       },
     });
     

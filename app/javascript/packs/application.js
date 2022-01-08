@@ -12,7 +12,7 @@ require("@fortawesome/fontawesome-free");
 
 import "bootstrap"; // これが自動でjqueryをrequireしている
 import '../src/modules/action';
-import '../src/modules/tab';
+// import '../src/modules/tab';
 // import '../src/custom';
 // import Chart from 'chart.js/auto';
 // global.Chart = Chart;

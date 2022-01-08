@@ -73,9 +73,6 @@
       },
     },
     methods: {
-      textFormat(value) {
-        return value.replace(/\n/g, '<br/>');
-      }
     },
     filters: {
       moment(value, format) {

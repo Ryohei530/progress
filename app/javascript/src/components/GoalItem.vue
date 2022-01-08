@@ -21,6 +21,7 @@
                 <p class="aim-tit"><i class="far fa-calendar-alt"></i> 期間</p>
                 <p class="aim-txt">{{ data.goal.term_start }} 〜 {{ data.goal.term_end }}</p>
                 <p class="aim-tit"><i class="far fa-flag"></i> 目的、得たい結果</p>
+                <p class="aim-txt" v-html="$sanitize(textFormat(goal.aim))"></p>
                 <!--<%= simple_format(goal.aim, class: "aim-txt") %>-->
                 <p class="aim-tit"><i class="far fa-chart-bar"></i> 目標数値、指標</p>
                 <!--<%= simple_format(goal.indicator, class: "aim-txt") %>-->
@@ -80,10 +81,13 @@
 <script>
   export default {
     data() {
+      let storeState = this.$store.state;
+      let stateData = this.$store.state.data;
       return {
-        data: this.$store.state.data,
-        user: this.$store.state.user
-      }
-    }
-  }
+        data: stateData,
+        user: storeState.user,
+        goal: stateData.goal,
+      };
+    },
+  };
 </script>

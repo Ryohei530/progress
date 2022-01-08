@@ -6,8 +6,8 @@
           <h2>目標</h2>
           <div class="tab1">
             <div class="tab-list term ml-3">
-              <button class="tab-item tab-active btn">長期</button>
-              <button class="tab-item btn">月間</button>
+              <button @click="changeTab('1')" class="tab-item btn" :class="tabActive1">長期</button>
+              <button @click="changeTab('2')" class="tab-item btn" :class="tabActive2">月間</button>
               
               <button class="btn" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></button>
               <div class="dropdown-menu">
@@ -28,13 +28,11 @@
       </div>
     </div>
     <div class="tab1-content row">
-      <div class="tab-box box-show col-12">
+      <div v-show="tabIsActive === '1'" class="col-12">
         <goal-tab></goal-tab>
       </div>
-      <div class="tab-box col-12">
-        <div class="row">
-          <monthly-goal-tab></monthly-goal-tab>
-        </div>
+      <div v-show="tabIsActive === '2'" class="col-12">
+        <monthly-goal-tab></monthly-goal-tab>
       </div>
     </div>
     <div class="row">
@@ -96,9 +94,9 @@
                 <div class="action-title"><i class="fas fa-clipboard-list"></i> アクション</div>
                 <div class="tab2">
                   <div class="tab-list term ml-3">
-                    <button class="tab-item btn bg-btn-gray">月間</button>
-                    <button class="tab-item btn bg-btn-gray">週間</button>
-                    <button class="tab-item btn bg-btn-gray">日間</button>
+                    <button @click="changeTab2('1')" class="tab-item btn bg-btn-gray" :class="tab2Active1">月間</button>
+                    <button @click="changeTab2('2')" class="tab-item btn bg-btn-gray" :class="tab2Active2">週間</button>
+                    <button @click="changeTab2('3')" class="tab-item btn bg-btn-gray" :class="tab2Active3">日間</button>
                     <a href="">
                       <button class="btn"><i class="far fa-edit"></i></button>
                     </a>
@@ -109,13 +107,13 @@
             </div>
             <div class="card-body">
               <div class="tab2-content">
-                <div class="tab-box box-show">
+                <div v-show="tab2IsActive === '1'">
                   <monthly-action></monthly-action>
                 </div>
-                <div class="tab-box">
+                <div v-show="tab2IsActive === '2'">
                   <weekly-action></weekly-action>
                 </div>
-                <div class="tab-box">
+                <div v-show="tab2IsActive === '3'">
                   <daily-action></daily-action>
                 </div>
               </div>
@@ -315,8 +313,10 @@
     data: function() {
       return {
         data: '',
-        user: ''
-      }
+        user: '',
+        tabIsActive: '1',
+        tab2IsActive: '1',
+      };
     },
     computed: {
       weekAve() {
@@ -331,18 +331,51 @@
       lack() {
         return parseInt(this.data.week_sums[0] - this.weekActNumber);
       },
+      tabActive1() {
+        return {
+          'tab-active': this.tabIsActive === '1'
+        };
+      },
+      tabActive2() {
+        return {
+          'tab-active': this.tabIsActive === '2'
+        };
+      },
+      tab2Active1() {
+        return {
+          'tab-active': this.tab2IsActive === '1'
+        };
+      },
+      tab2Active2() {
+        return {
+          'tab-active': this.tab2IsActive === '2'
+        };
+      },
+      tab2Active3() {
+        return {
+          'tab-active': this.tab2IsActive === '3'
+        };
+      },
+    },
+    methods: {
+      changeTab(num) {
+        this.tabIsActive = num;
+      },
+      changeTab2(num) {
+        this.tab2IsActive = num;
+      },
     },
     mounted() {
       this.$store.dispatch('getData')
         .then(response => {
-          this.$store.commit('setData', response.data)
-          this.data = response.data
-          this.user = response.data.user
-          console.log(response)
-          console.log(response.data.week_sums)
+          this.$store.commit('setData', response.data);
+          this.data = response.data;
+          this.user = response.data.user;
+          console.log(response);
+          console.log(response.data.week_sums);
         });
-      console.log("created")
-      this.$store.state.dateToday = moment(new Date).format('YYYY-MM-DD')
+      console.log("mounted");
+      this.$store.state.dateToday = moment(new Date).format('YYYY-MM-DD');
       
     },
     watch: {
