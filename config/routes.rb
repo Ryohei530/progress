@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :create, :show, :destroy] do
       resources :post_likes, only: [:index ,:create, :destroy]
     end
+    resources :reports do
+      resources :report_likes, only: [:index, :create, :destroy]
+    end
   end
   
   resources :users do

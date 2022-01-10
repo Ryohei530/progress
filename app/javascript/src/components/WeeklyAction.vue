@@ -55,7 +55,6 @@
         let weekActNums = [];
         let monthlyActions = this.monthly_actions;
         let daysOfMonth = parseInt(this.days_of_month);
-        console.log(monthlyActions);
         for (let i = 0; i < monthlyActions.length; i++) {
           let weekActNum = (monthlyActions[i].number / daysOfMonth) * this.days_of_week;
           weekActNums.push(Math.round(weekActNum));
@@ -79,8 +78,6 @@
       }
     },
     mounted() {
-      console.log(this.weekActNumbers());
-      console.log(this.actionRatio());
     }
   };
 </script>

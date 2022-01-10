@@ -6,9 +6,8 @@
           <div class="d-flex">
             <h2>1ヶ月の目標一覧</h2>
             <div class="utab ml-3">
-              <a href="/" class="btn">
+              <a href="/monthly_goals/new" class="btn">
                 <i class="fas fa-plus"></i>
-                <!--new_monthly_goal_path-->
               </a>
             </div>
           </div>
@@ -17,9 +16,14 @@
       </div>
     </div>
     
-    <template v-if="data.monthly_goal">
+    <template v-if="monthly_goals">
       <ul class="goals row justify-content-center justify-content-xl-start">
-        <monthly-goal-item></monthly-goal-item>
+        <monthly-goal-item 
+          v-for="(monthly_goal, index) in monthly_goals" 
+          :key="monthly_goal.id"
+          :monthly_goal="monthly_goal"
+          :monthly_actions="monthly_actions_array[index]"
+          ></monthly-goal-item>
       </ul>
     </template>
   </div>
@@ -31,8 +35,11 @@
   
   export default {
     data: function() {
+      let stateData = this.$store.state.data;
       return {
-        data: this.$store.state.data
+        data: stateData,
+        monthly_goals: stateData.monthly_goals,
+        monthly_actions_array: stateData.monthly_actions_array,
       };
     },
     components: {

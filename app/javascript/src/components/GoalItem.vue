@@ -14,7 +14,7 @@
             </router-link>
           </span>
         </div>
-        <!--<%= link_to(goal, class: "card-link") do %>-->
+        <a href="`goals/${goal.id}`" class="card-link">
           <div class="card-inner">
             <div class="card-content">
               <div class="aim">
@@ -22,9 +22,8 @@
                 <p class="aim-txt">{{ data.goal.term_start }} 〜 {{ data.goal.term_end }}</p>
                 <p class="aim-tit"><i class="far fa-flag"></i> 目的、得たい結果</p>
                 <p class="aim-txt" v-html="$sanitize(textFormat(goal.aim))"></p>
-                <!--<%= simple_format(goal.aim, class: "aim-txt") %>-->
                 <p class="aim-tit"><i class="far fa-chart-bar"></i> 目標数値、指標</p>
-                <!--<%= simple_format(goal.indicator, class: "aim-txt") %>-->
+                <p class="aim-txt" v-html="$sanitize(textFormat(goal.indicator))"></p>
                 <p class="aim-tit"><i class="fas fa-crosshairs"></i> １ヶ月間の目的</p>
                 <p class="aim-txt">{{ data.monthly_goal.monthly_aim }}</p>
                 <p class="aim-tit"><i class="fas fa-tachometer-alt"></i> １ヶ月間の目標数値、指標</p>
@@ -33,41 +32,47 @@
               <div class="action">
                 <p class="action-tit"><i class="fas fa-clipboard-list"></i> 1ヶ月間のアクション</p>
                 <ul class="action-list">
-                  <!--<% monthly_goal.goal_actions.each do |action| %>-->
-                  <!--  <li class="action-item">-->
-                  <!--    <div class="action-inner">-->
-                  <!--      <div class="action-wrap">-->
-                  <!--        <%= action.content %>-->
-                  <!--      </div>-->
-                  <!--      <div class="action-box">-->
-                  <!--        <%= action.number %> / <%= action.number %>-->
-                  <!--      </div>-->
-                  <!--    </div>-->
-                  <!--  </li>-->
-                  <!--<% end %>-->
+                  <template v-for="m_act in monthly_actions">
+                    <li class="action-item">
+                      <div class="action-inner">
+                        <div class="action-wrap">
+                          {{ m_act.content }}
+                        </div>
+                        <div class="action-box">
+                          {{ m_act.number }}
+                        </div>
+                      </div>
+                    </li>
+                  </template>
                 </ul>
               </div>
             </div>
           </div>
-        <!--<% end %>-->
+        </a>
         <div class="card-box mt-auto">
           <div class="row">
             <div class="col d-flex align-items-center">
               <span class="card-timestamp">
                 <i class="far fa-clock"></i>
-                <!--<%= time_ago_in_words(goal.created_at) %>前-->
+                {{ goal.created_at | moment }}
               </span>
-              <!--<% if current_user?(goal.user) %>-->
-              <!--  <%= link_to "削除", goal, method: :delete,-->
-              <!--                            data: { confirm: "本当に削除しますか？" },-->
-              <!--                            class: "card-dlt dlt-card-#{goal.id} btn btn-outline-danger btn-sm" %>-->
-              <!--<% end %>-->
+              <template v-if="currentUser()">
+                <a 
+                  href="`goals/${goal.id}`"  
+                  class="card-dlt dlt-card-#{goal.id} btn btn-outline-danger btn-sm"
+                  data-confirm="本当に削除しますか？"
+                  data-method="delete"
+                  rel="nofollow"
+                >
+                  削除
+                </a>
+              </template>
             </div>
             <div class="col d-flex justify-content-end align-items-center">
               <div class="card-comment">
-                <!--<%= link_to goal do %>-->
+                <a href="`goals/${goal.id}`">
                   <i class="far fa-comment"></i>
-                <!--<% end %>-->
+                </a>
               </div>
             </div>
           </div>
@@ -79,15 +84,34 @@
 </template>
 
 <script>
+  import moment from 'moment';
+  
   export default {
+    moment,
     data() {
-      let storeState = this.$store.state;
       let stateData = this.$store.state.data;
       return {
         data: stateData,
-        user: storeState.user,
+        user: stateData.user,
         goal: stateData.goal,
+        monthly_actions: stateData.monthly_actions,
+        current_user: stateData.current_user,
       };
+    },
+    methods: {
+      currentUser() {
+        if (this.current_user) {
+          return  this.user.id === this.current_user.id;
+        } else {
+          return false;
+        }
+      }
+    },
+    filters: {
+      moment: function(date) {
+        moment.locale("ja");
+        return moment(date).fromNow();
+      },
     },
   };
 </script>

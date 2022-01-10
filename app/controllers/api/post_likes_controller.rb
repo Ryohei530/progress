@@ -6,18 +6,18 @@ class Api::PostLikesController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_likes = @post.post_likes
     @count = @post_likes.count
-    @like = @post_likes.find_by(user_id: current_user.id)
+    @like = @post_likes.find_by(user_id: current_user.id) if current_user
   end
   
   def create
     @post = Post.find(params[:post_id])
-    like = @post.post_likes.create!(user_id: current_user.id)
+    @post.post_likes.create!(user_id: current_user.id) if current_user
     head :created
   end
   
   def destroy
     @post = Post.find(params[:post_id])
-    like = @post.post_likes.find_by(user_id: current_user.id).destroy!
+    @post.post_likes.find_by(user_id: current_user.id).destroy! if current_user
     head :ok
   end
   

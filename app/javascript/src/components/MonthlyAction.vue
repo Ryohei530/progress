@@ -60,7 +60,6 @@
       }
     },
     mounted() {
-      console.log(this.actionRatio());
     },
   };
 </script>

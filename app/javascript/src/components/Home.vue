@@ -270,7 +270,7 @@
                         <span>{{ data.post_comment_count }}</span>
                       </a>
                     </div>
-                    <post-likes></post-likes>
+                    <post-likes :post="data.post"></post-likes>
                   </div>
                 </div>
               </div>
@@ -372,9 +372,14 @@
           this.data = response.data;
           this.user = response.data.user;
           console.log(response);
-          console.log(response.data.week_sums);
+          console.log(response.data);
         });
       console.log("mounted");
+      console.log(location.serach);
+      console.log(location.pathname);
+      console.log(location.pathname.split('/'));
+      let arr = location.pathname.split('/');
+      console.log(arr[2]);
       this.$store.state.dateToday = moment(new Date).format('YYYY-MM-DD');
       
     },

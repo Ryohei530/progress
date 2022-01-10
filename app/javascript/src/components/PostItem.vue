@@ -1,71 +1,48 @@
 <template>
   <div class="col-xl-6 mb-3">
-    <li id="post-<%= post.id %>" class="card mb-4">
+    <li :id="`post-${post.id}`" class="card mb-4">
       <div class="card-body">
         <div class="card-wrap d-flex">
           <div class="card-avatar">
-            <%= link_to post.user do %>
-              <%= image_tag post.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
-            <% end %>
+            <router-link to="/">
+              <img :src="data.avatar_url60" alt="" class="_rounded">
+            </router-link>
           </div>
-          <div class="card-title"><%= link_to post.user.name, post.user %></div>
+          <div class="card-title">
+            <router-link to="/">{{ user.name }}</router-link>
+          </div>
         </div>
-        <%= link_to(post_path(post), class: "card-link card-link-#{post.id}") do %>
+        <a href="`/posts/${post.id}`" class="card-link" :class="`card-link-${post.id}`">
           <div class="card-inner">
-            <div class="card-text"><%= post.content %></div>
+            <div class="card-text">{{ post.content }}</div>
             <div class="images">
-              <% if post.images.attached? %>
+              <template v-if="post_images">
                 <div class="row">
-                  <%  post.images.each do |image| %>
+                  <template v-for="image in post_images">
                     <div class="col-6">
-                      <%= image_tag image.variant(resize: "280x180!") %>
+                      <img :src="image" alt="">
                     </div>
-                  <% end %>
+                  </template>
                 </div>
-              <% end %>
+              </template>
             </div>
           </div>
-        <% end %>  
+        </a>
         <div class="card-box">
           <div class="row">
             <div class="col d-flex">
               <span class="card-timestamp">
-                <%= time_ago_in_words(post.created_at) %>前
+                {{ post.created_at | moment }}
               </span>
             </div>
             <div class="col d-flex justify-content-end">
               <div class="card-comment">
-                <%= link_to post do %>
+                <a href="`/posts/${post.id}`">
                   <i class="far fa-comment"></i>
-                  <span><%= post.post_comments.count %></span>
-                <% end %>
+                  <span>{{ commentCount }}</span>
+                </a>
               </div>
-              <div class="card-like">
-                <% if logged_in? %>
-                  <% like = post.post_likes.find_by(user_id: current_user.id) %>
-                  <% if current_user.post_liked?(post) %>
-                    <%= link_to post_post_like_path(post, like), method: :delete do %>
-                      <span>
-                        <i class="fas fa-heart"></i>
-                        <%= post.post_likes.count %>
-                      </span>
-                    <% end %>
-                  <% else %>
-                    <%= link_to post_post_likes_path(post), method: :post do %>
-                      <span>
-                        <i class="far fa-heart"></i>
-                        <%= post.post_likes.count %>
-                      </span>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                  <span>
-                    <i class="far fa-heart"></i>
-                    <%= post.post_likes.count %>
-                  </span>
-                <% end %>
-                
-              </div>
+              <post-likes :post="post"></post-likes>
             </div>
           </div>
         </div>
@@ -73,3 +50,34 @@
     </li>
   </div>
 </template>
+
+<script>
+  import moment from 'moment';
+  import PostLikes from './PostLikes';
+  
+  export default {
+    moment,
+    props: ['post', 'post_images', 'commentCount'],
+    data() {
+      let stateData = this.$store.state.data;
+      return {
+        data: stateData,
+        user: stateData.user,
+        current_user: stateData.current_user,
+      };
+    },
+    filters: {
+      moment: function(date) {
+        moment.locale("ja");
+        return moment(date).fromNow();
+      },
+    },
+    methods: {
+
+    },
+    components: {
+      PostLikes,
+    },
+  };
+</script>
+

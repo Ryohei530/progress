@@ -6,7 +6,7 @@
           <div class="d-flex">
             <h2>長期目標</h2>
             <div class="utab ml-3">
-              <a href="/" class="btn">
+              <a href="`/goals/${data.user.id}/edit`" class="btn">
                 <i class="far fa-edit ml-1"></i>
                 <!--edit_goal_path(@user)-->
               </a>
@@ -38,6 +38,6 @@
     components: {
       Tnav,
       GoalItem
-    }
+    },
   };
 </script>

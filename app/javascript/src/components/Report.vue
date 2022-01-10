@@ -15,7 +15,7 @@
                 <button class="btn">いいねした日報</button>
               </a>
               <!--<%= link_to  reports_path, class: "term-link" do %>-->
-              <a href="" class="term-link">
+              <a href="/reports" class="term-link">
                 <button class="btn"><i class="fas fa-plus"></i></button>
               </a>
             </div>
@@ -26,9 +26,17 @@
     </div>
     
     <!--<% if @user.reports.any? %>-->
-    <template v-if="data.reports">
+    <template v-if="reports">
       <ul class="reports row">
-        <report-item></report-item>
+        <report-item
+          v-for="(report,index) in reports"
+          :key="report.id"
+          :report="report"
+          :report_actions="report_actions_array[index]"
+          :report_images="report_images_array[index]"
+          :monthly_goal="filterMGoal(report)"
+          :commentCount="commentCount(report)"
+        ></report-item>
         <!--<%= render partial: 'users/report', collection: @reports %>-->
       </ul>
       <!--<%= paginate @reports %>-->
@@ -45,13 +53,31 @@
   
   export default {
     data: function() {
+      let stateData = this.$store.state.data;
       return {
-        data: this.$store.state.data
+        data: stateData,
+        reports: stateData.reports,
+        report_actions_array: stateData.report_actions_array,
+        report_images_array: stateData.report_images_array,
+        monthly_goals: stateData.monthly_goals,
+        report_comments: stateData.report_comments,
       };
+    },
+    methods: {
+      filterMGoal(report) {
+        let monthlyGoal = this.monthly_goals.filter(mGoal => mGoal.id === report.monthly_goal_id);
+        return monthlyGoal.shift();
+      },
+      commentCount(report) {
+        let repComments = this.report_comments.filter(comment => comment.report_id === report.id);
+        return repComments.length;
+      },
     },
     components: {
       Tnav,
       ReportItem
+    },
+    mounted() {
     }
   };
 </script>

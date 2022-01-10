@@ -54,8 +54,8 @@
       return {
         data: this.$store.state.data,
         monthly_actions: this.$store.state.data.monthly_actions,
-        report: this.$store.state.data.report,
-        report_actions: this.$store.state.data.report_actions,
+        report: this.$store.state.data.latest_report,
+        report_actions: this.$store.state.data.latest_report_actions,
         days_of_month: this.$store.state.data.days_of_month
       };
     },
@@ -74,9 +74,6 @@
         let daysOfMonth = parseInt(this.days_of_month);
         for(let i = 0; i < monthlyActions.length; i++) {
           let dayActNum = monthlyActions[i].number / daysOfMonth;
-          console.log(dayActNum);
-          console.log(this.days_of_month);
-          console.log(daysOfMonth);
           dayActNums.push(Math.round(dayActNum));
         }
         return dayActNums;
@@ -88,8 +85,6 @@
         for (let index = 0; index < repActs.length; index++) {
           let ratioValue = (repActs[index].number / dayActNums[index] ) * 100;
           let ratio = this.roundSecondDecimal(ratioValue);
-          console.log(ratioValue);
-          console.log(ratio);
           ratios.push(ratio);
         }
         return ratios;

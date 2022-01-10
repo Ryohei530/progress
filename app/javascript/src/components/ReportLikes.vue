@@ -31,11 +31,11 @@
   axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken();
   
   export default {
-    props: ['post'],
+    props: ['report'],
     data() {
       return{
         current_user: this.$store.state.data.current_user,
-        // post: this.$store.state.data.post,
+        // report: this.$store.state.data.report,
         likeCount: 0,
         like: null,
         hoverFlag: false,
@@ -51,14 +51,14 @@
     },
     methods: {
       fetchLike: async function() {
-        const res = await axios.get(`/api/posts/${this.post.id}/post_likes`);
+        const res = await axios.get(`/api/reports/${this.report.id}/report_likes`);
         // if (res.status !== 200) {
         //   // エラー処理
         // }
         return res.data;
       },
       registerLike: async function() {
-        const res = await axios.post(`/api/posts/${this.post.id}/post_likes`);
+        const res = await axios.post(`/api/reports/${this.report.id}/report_likes`);
         // if (res.status !== 201) {
         //   // エラー処理
         // }
@@ -68,7 +68,7 @@
         });
       },
       deleteLike: async function() {
-        const res = await axios.delete(`/api/posts/${this.post.id}/post_likes/${this.like.id}`);
+        const res = await axios.delete(`/api/reports/${this.report.id}/report_likes/${this.like.id}`);
         // if (res.status !== 200) {
         //   // エラー処理
         // }
@@ -98,10 +98,13 @@
 <style scoped>
   .require-like {
     position: absolute;
-    top: 30px;
+    top: 25px;
     left: -20px;
     background-color: rgba(74, 69, 69 ,0.2);
     width: 280px;
+  }
+  .reports .card-like{
+    margin-right: 0;
   }
   .card-like span {
     color: #EC406C;

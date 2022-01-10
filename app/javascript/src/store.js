@@ -48,7 +48,9 @@ export default new Vuex.Store({
     //   commit('increment', number);
     // },
     getData({ state }) {
-      return axios.get('/api' + location.pathname, {})
+      let pathArray = location.pathname.split('/');
+      // return axios.get('/api' + location.pathname, {})
+      return axios.get('/api/users/' + pathArray[2], {});
     }
   }
 });

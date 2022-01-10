@@ -203,9 +203,7 @@
       },
     },
     mounted() {
-      console.log(this.getStartDate());
-      console.log(this.getEndDate());
-      console.log(this.getCalendar());
+      
     }
   };
 </script>
