@@ -1,3 +1,5 @@
+import { mapState } from 'vuex';
+
 export default {
   created() {
     
@@ -7,4 +9,7 @@ export default {
       return value.replace(/\n/g, '<br/>');
     },
   },
+  // computed: mapState({
+  //   data: state => state.data
+  // })
 };

@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
 
 Vue.use(Vuex);
 
@@ -15,18 +15,46 @@ export default new Vuex.Store({
   },
   getters: {
     // sample: state => state.count * 2
+    data: state => state.data,
+    chart_data: state => state.data,
+    user: state => state.data.user,
+    current_user: state => state.data.current_user,
+    goal: state => state.data.goal,
+    monthly_goals: state => state.data.monthly_goals,
+    monthly_actions: state => state.data.monthly_actions,
+    monthly_actions_array: state => state.data.monthly_actions_array,
+    monthly_ratios: state => state.data.monthly_ratios.reverse(),
+    reports: state => state.data.reports,
+    report_actions_array: state => state.data.report_actions_array,
+    report_images_array: state => state.data.report_images_array,
+    report_comments: state => state.data.report_comments,
+    latest_report: state => state.data.latest_report,
+    latest_report_actions: state => state.data.latest_report_actions,
+    posts: state => state.data.posts,
+    post_comments: state => state.data.post_comments,
+    post_images_array: state => state.data.post_images_array,
+    days_of_week: state => state.data.days_of_week,
+    days_of_month: state => state.data.days_of_month,
+    nth_week: state => state.data.nth_week,
+    week_sums: state => state.data.week_sums.reverse(),
+    sums: state => state.data.sums.reverse(),
+    
+    
     weekAve: state => parseInt(state.data.week_sums / state.data.days_of_week),
     cardLink: state => "card-link-" + state.data.posts[0].id,
     weekActNumber(state) {
-      let mAct = state.data.monthly_actions[0] 
-      let daysOfMonth = parseInt(state.data.days_of_month)
-      let daysOfWeek = state.data.days_of_week
-      return parseInt((mAct.number / daysOfMonth ) * daysOfWeek)
+      let mAct = state.data.monthly_actions[0];
+      let daysOfMonth = parseInt(state.data.days_of_month);
+      let daysOfWeek = state.data.days_of_week;
+      return parseInt((mAct.number / daysOfMonth ) * daysOfWeek);
+    },
+    lack(state) {
+      return parseInt(state.data.week_sums[0] - state.data.weekActNumber);
     },
     remain(state) {
-      let date = state.data.goal.term_end
-      let today = state.dateToday
-      return moment(date).diff(today, 'days')
+      let date = state.data.goal.term_end;
+      let today = state.dateToday;
+      return moment(date).diff(today, 'days');
     },
     // textReplace(state) {
     //   return state.data.goal.indicator.replace(/\n/g, '<br/>');

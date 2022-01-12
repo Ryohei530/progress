@@ -1,9 +1,9 @@
 <template>
   <div class="cacontent">
-    <h2>カレンダー{{ displayDate }}</h2>
-    <div class="py-3">
-      <button class="btn btn-primary" @click="prevMonth">前の月</button>
-      <button class="btn btn-primary" @click="nextMonth">次の月</button>
+    <div class="py-3 d-flex justify-content-around term">
+      <button class="btn bg-btn-gray" @click="prevMonth">前の月</button>
+      <h2 class="">{{ displayDate }}</h2>
+      <button class="btn bg-btn-gray" @click="nextMonth">次の月</button>
     </div>
     <div class="calendar">
       <div class="calendar-weekly">
@@ -251,5 +251,9 @@
     z-index:1;
     border-radius:4px;
     padding-left:4px;
+  }
+  
+  .bg-btn-gray:hover {
+    background-color: #F5F8FA;
   }
 </style>

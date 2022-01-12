@@ -1,6 +1,6 @@
 /* global $ */
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener('DOMContentLoaded', function() {
   $(function() {
     var index = $('.js-file-group').length;
     $('.add-form-btn').on('click', function() {
@@ -27,7 +27,7 @@ document.addEventListener("turbolinks:load", function() {
                 <input class="form-control" type="number" name="monthly_goal[goal_actions_attributes][${index}][number]" id="monthly_goal_goal_actions_attributes_${index}_number">
               </div>
               <div class="col-1 px-0 pt-1">
-                <span class="btn btn-outline-danger delete-form-btn" data-id="${index}" data-default="default">
+                <span class="btn btn-outline-danger delete-form-btn" data-id="${index}" data-default="new">
                   <i class="fas fa-times"></i>
                 </span>
               </div>

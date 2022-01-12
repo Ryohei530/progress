@@ -18,7 +18,7 @@
           <button class="card-rdays btn btn-success">{{ report.r_days }}日目</button>
         </div>
         
-        <a href="`/reports/${report.id}`" class="card-link">
+        <a :href="`/reports/${report.id}`" class="card-link">
           <div class="card-inner">
             <div class="card-content">
               <div class="aim">
@@ -83,33 +83,6 @@
               </div>
               
               <report-likes :report="report"></report-likes>
-              <!--<template v-if="current_user">-->
-              <!--  <i class="far fa-heart"></i>-->
-                <!--<% like = report.report_likes.find_by(user_id: current_user.id) %>-->
-                <!--<% if current_user.report_liked?(report) %>-->
-                <!--<template v-if="">-->
-                <!--  <%= link_to report_report_like_path(report, like), method: :delete do %>-->
-                <!--    <span>-->
-                <!--      <i class="fas fa-heart"></i>-->
-                <!--      <%= report.report_likes.count %>-->
-                <!--    </span>-->
-                <!--  <% end %>-->
-                <!--</template>-->
-                <!--<template v-else>-->
-                <!--  <%= link_to report_report_likes_path(report), method: :post do %>-->
-                <!--    <span>-->
-                <!--      <i class="far fa-heart"></i>-->
-                <!--      <%= report.report_likes.count %>-->
-                <!--    </span>-->
-                <!--  <% end %>-->
-                <!--</template>-->
-              <!--</template>-->
-              <!--<template v-else>-->
-              <!--  <span>-->
-              <!--    <i class="far fa-heart"></i>-->
-                  <!--<%= report.report_likes.count %>-->
-                <!--</span>-->
-              <!--</template>-->
             </div>
           </div>
         </div>
@@ -121,19 +94,22 @@
 <script>
   import moment from 'moment';
   import ReportLikes from './ReportLikes';
+  import { mapGetters } from 'vuex';
   export default {
     moment,
     props: ['report', 'report_actions', 'report_images', 'monthly_goal','commentCount',],
     data() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        user: stateData.user,
-        current_user: stateData.current_user,
-        monthly_actions_array: stateData.monthly_actions_array,
       };
     },
     computed: {
+      ...mapGetters([
+        'data',
+        'user', 
+        'current_user',
+        'monthly_actions_array',
+      ]),
+      
       monthlyActions() {
         return this.findMonthlyActions(this.monthly_goal);
       },

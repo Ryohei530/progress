@@ -50,18 +50,22 @@
 <script>
   import Tnav from './Tnav';
   import ReportItem from './ReportItem';
+  import { mapGetters } from 'vuex';
   
   export default {
     data: function() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        reports: stateData.reports,
-        report_actions_array: stateData.report_actions_array,
-        report_images_array: stateData.report_images_array,
-        monthly_goals: stateData.monthly_goals,
-        report_comments: stateData.report_comments,
       };
+    },
+    computed: {
+      ...mapGetters([
+        'data',
+        'reports', 
+        'report_actions_array',
+        'report_images_array',
+        'monthly_goals',
+        'report_comments',
+      ]),
     },
     methods: {
       filterMGoal(report) {

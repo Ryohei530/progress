@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
     @current_user = current_user
     @goal = @user.goal
     @monthly_goals = @user.monthly_goals.reverse()
-    @monthly_goal = @monthly_goals.last
+    @monthly_goal = @monthly_goals.first
     @monthly_actions = @monthly_goal.goal_actions
     @monthly_actions_array = []
     @monthly_goals.each do |monthly_goal|

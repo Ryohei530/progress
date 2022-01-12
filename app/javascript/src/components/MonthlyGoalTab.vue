@@ -26,8 +26,8 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title"><i class="fas fa-crosshairs"></i> 今月の目的</h4>
-          <template v-if="data.monthly_goal.aim">
-            <p class="ugoal-txt" v-html="$sanitize(textFormat(data.monthly_goal.aim))"></p>
+          <template v-if="data.monthly_goal.monthly_aim">
+            <p class="ugoal-txt" v-html="$sanitize(textFormat(data.monthly_goal.monthly_aim))"></p>
           </template>
           <template v-else>
             <p class="ugoal-txt">未設定</p>
@@ -39,8 +39,8 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title"><i class="fas fa-tachometer-alt"></i> 今月の目標数値</h4>
-          <template v-if="data.monthly_goal.indicator">
-            <p class="ugoal-txt" v-html="$sanitize(textFormat(data.monthly_goal.indicator))"></p>
+          <template v-if="data.monthly_goal.monthly_indicator">
+            <p class="ugoal-txt" v-html="$sanitize(textFormat(data.monthly_goal.monthly_indicator))"></p>
           </template>
           <template v-else>
             <p class="ugoal-txt">未設定</p>
@@ -53,16 +53,19 @@
 
 <script>
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   
   export default {
     moment,
     data: function() {
       return {
-        data: this.$store.state.data,
         dateToday: ''
       }
     },
     computed: {
+      ...mapGetters([
+        'data',
+      ]),
       // parseDate(date) {
       //   return this.$store.getters.parseDate(date)
       // },

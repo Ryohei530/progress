@@ -7,15 +7,15 @@
           <template v-for="(m_act, index) in monthly_actions">
             <li class="action-item">
               <div class="action-inner row">
-                <div class="action-wrap col-4">
+                <div class="action-wrap col-5">
                   {{ m_act.content }}
                 </div>
-                <div class="action-box col-2">
+                <div class="action-box col-4 col-lg-2">
                   {{ report_actions[index].number }} / {{ dayActNumbers[index] }}
                 </div>
-                <div class="action-progress col-6">
+                <div class="action-progress col-lg-5 mb-2 mb-lg-0">
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="`width: ${ratios[index]}%`" aria-valuenow="<%= ratios[index] %>" aria-valuemin="0" aria-valuemax="100">{{ ratios[index] }}%</div>
+                    <div class="progress-bar" role="progressbar" :style="`width: ${ratios[index]}%`" :aria-valuenow="ratios[index]" aria-valuemin="0" aria-valuemax="100">{{ ratios[index] }}%</div>
                   </div>
                 </div>
               </div>
@@ -25,13 +25,13 @@
         <template v-else>
           <li class="action-item" v-for="(m_act, index) in monthly_actions">
             <div class="action-inner row">
-              <div class="action-wrap col-4">
+              <div class="action-wrap col-5">
                 {{ m_act.content }}
               </div>
-              <div class="action-box col-2">
-                0 / {{ dayActNumber[index] }}
+              <div class="action-box col-4 col-lg-2">
+                0 / {{ dayActNumbers[index] }}
               </div>
-              <div class="action-progress col-6">
+              <div class="action-progress col-lg-5 mb-2 mb-lg-0">
                 <div class="progress">
                   <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                 </div>
@@ -49,25 +49,24 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     data() {
       return {
-        data: this.$store.state.data,
-        monthly_actions: this.$store.state.data.monthly_actions,
-        report: this.$store.state.data.latest_report,
-        report_actions: this.$store.state.data.latest_report_actions,
-        days_of_month: this.$store.state.data.days_of_month
       };
     },
     computed: {
-      dayActNumber() {
-       return this.dayActNumbers();
+      ...mapGetters([
+        'data',
+        'monthly_actions', 
+        'days_of_month',
+      ]),
+      report() {
+        this.$store.getters.latest_report;
       },
-      ratios() {
-        return this.actionRatio();
-      }
-    },
-    methods: {
+      report_actions() {
+        this.$store.getters.latest_report_actions;
+      },
       dayActNumbers() {
         let dayActNums = [];
         let monthlyActions = this.monthly_actions;
@@ -78,10 +77,10 @@
         }
         return dayActNums;
       },
-      actionRatio() {
+      ratios() {
         let ratios = [];
         let repActs = this.report_actions; 
-        let dayActNums = this.dayActNumbers();
+        let dayActNums = this.dayActNumbers;
         for (let index = 0; index < repActs.length; index++) {
           let ratioValue = (repActs[index].number / dayActNums[index] ) * 100;
           let ratio = this.roundSecondDecimal(ratioValue);
@@ -89,6 +88,13 @@
         }
         return ratios;
       },
+    },
+    methods: {
+      roundSecondDecimal(num) {
+        return Math.round(num * 10) / 10;
+      },
+      mounted() {
+      }
     }
   };
 </script>

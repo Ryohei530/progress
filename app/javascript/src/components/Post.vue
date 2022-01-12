@@ -48,16 +48,20 @@
 <script>
   import Tnav from './Tnav';
   import PostItem from './PostItem';
+  import { mapGetters } from 'vuex';
   
   export default {
     data: function() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        posts: stateData.posts,
-        post_comments: stateData.post_comments,
-        post_images_array: stateData.post_images_array,
       };
+    },
+    computed:{
+      ...mapGetters([
+        'data',
+        'posts', 
+        'post_comments',
+        'post_images_array',
+      ]),
     },
     methods: {
       commentCount(post) {

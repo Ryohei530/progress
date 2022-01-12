@@ -32,15 +32,20 @@
 <script>
   import Tnav from './Tnav';
   import MonthlyGoalItem from './MonthlyGoalItem';
+  import { mapGetters } from 'vuex';
   
   export default {
     data: function() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        monthly_goals: stateData.monthly_goals,
-        monthly_actions_array: stateData.monthly_actions_array,
+        
       };
+    },
+    computed: {
+      ...mapGetters([
+        'data',
+        'monthly_goals', 
+        'monthly_actions_array', 
+      ]),
     },
     components: {
       Tnav,

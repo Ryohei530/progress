@@ -26,6 +26,7 @@
 
 <script>
   import axios from 'axios';
+  import { mapGetters } from 'vuex';
   import { csrfToken } from 'rails-ujs';
 // CSRFトークンの取得とリクエストヘッダへの設定
   axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken();
@@ -34,7 +35,6 @@
     props: ['post'],
     data() {
       return{
-        current_user: this.$store.state.data.current_user,
         // post: this.$store.state.data.post,
         likeCount: 0,
         like: null,
@@ -42,6 +42,10 @@
       };
     },
     computed: {
+      ...mapGetters([
+        'data',
+        'current_user',
+      ]),
       count() {
         return this.likeCount;
       },

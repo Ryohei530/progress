@@ -14,12 +14,12 @@
             </router-link>
           </span>
         </div>
-        <a href="`goals/${goal.id}`" class="card-link">
+        <a :href="`goals/${goal.id}`" class="card-link">
           <div class="card-inner">
             <div class="card-content">
               <div class="aim">
                 <p class="aim-tit"><i class="far fa-calendar-alt"></i> 期間</p>
-                <p class="aim-txt">{{ data.goal.term_start }} 〜 {{ data.goal.term_end }}</p>
+                <p class="aim-txt">{{ goal.term_start }} 〜 {{ goal.term_end }}</p>
                 <p class="aim-tit"><i class="far fa-flag"></i> 目的、得たい結果</p>
                 <p class="aim-txt" v-html="$sanitize(textFormat(goal.aim))"></p>
                 <p class="aim-tit"><i class="far fa-chart-bar"></i> 目標数値、指標</p>
@@ -58,19 +58,17 @@
               </span>
               <template v-if="currentUser()">
                 <a 
-                  href="`goals/${goal.id}`"  
-                  class="card-dlt dlt-card-#{goal.id} btn btn-outline-danger btn-sm"
-                  data-confirm="本当に削除しますか？"
-                  data-method="delete"
+                  :href="`/goals/${goal.id}/edit`"  
+                  class="card-dlt dlt-card-#{goal.id} btn btn-outline-success btn-sm"
                   rel="nofollow"
                 >
-                  削除
+                  編集
                 </a>
               </template>
             </div>
             <div class="col d-flex justify-content-end align-items-center">
               <div class="card-comment">
-                <a href="`goals/${goal.id}`">
+                <a :href="`goals/${goal.id}`">
                   <i class="far fa-comment"></i>
                 </a>
               </div>
@@ -85,18 +83,22 @@
 
 <script>
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   
   export default {
     moment,
     data() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        user: stateData.user,
-        goal: stateData.goal,
-        monthly_actions: stateData.monthly_actions,
-        current_user: stateData.current_user,
       };
+    },
+    computed: {
+      ...mapGetters([
+        'data',
+        'user', 
+        'goal',
+        'monthly_actions',
+        'current_user',
+      ]),
     },
     methods: {
       currentUser() {

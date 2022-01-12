@@ -12,7 +12,7 @@
             <router-link to="/">{{ user.name }}</router-link>
           </span>
         </div>
-        <a href="`/monthly_goals/${monthly_goal.id}`" class="card-link">
+        <a :href="`/monthly_goals/${monthly_goal.id}`" class="card-link">
           <div class="card-inner">
             <div class="card-content">
               <div class="aim">
@@ -52,7 +52,7 @@
               </span>
               <template v-if="currentUser()">
                 <a 
-                  href="`goals/${goal.id}`"  
+                  :href="`monthly_goals/${monthly_goal.id}`"  
                   class="card-dlt dlt-card-#{goal.id} btn btn-outline-danger btn-sm"
                   data-confirm="本当に削除しますか？"
                   data-method="delete"
@@ -61,7 +61,7 @@
                   削除
                 </a>
                 <a 
-                  href="`/monthly_goals/${monthly_goal.id}/edit`"
+                  :href="`/monthly_goals/${monthly_goal.id}/edit`"
                   class="card-edit btn btn-outline-success btn-sm"
                 >
                   編集
@@ -77,19 +77,22 @@
 
 <script>
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   
   export default {
     moment,
     props: ['monthly_goal', 'monthly_actions'],
     data() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        user: stateData.user,
-        // monthly_goal: stateData.monthly_goal,
-        // monthly_actions: stateData.monthly_actions,
-        current_user: stateData.current_user,
+        
       };
+    },
+    computed: {
+      ...mapGetters([
+        'data',
+        'user', 
+        'current_user',
+      ]),
     },
     methods: {
       currentUser() {

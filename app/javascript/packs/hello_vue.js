@@ -17,72 +17,63 @@ Vue.prototype.$sanitize = sanitizeHTML;
 Vue.mixin(globalVariables);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // const element = document.getElementById("app")
-  // console.log(element)
-  // if (element) {
+  const element = document.getElementById("app");
+  if (element) {
     const app = new Vue({
       el: '#app',
       router,
       store,
-      render: h => h(App)
-    }).$mount()
-  
-    console.log(app)
-    
-    const app2 = new Vue({
-      el: "#vue-app",
-      components: {
-        VueIndex
+      created() {
+        this.$store.dispatch('getData')
+        .then(response => {
+          this.$store.commit('setData', response.data);
+          // this.data = response.data;
+          // this.user = response.data.user;
+          console.log(response);
+          console.log(response.data);
+        });
       },
-      data: () => { 
+      render: h => h(App)
+    }).$mount();
+  
+    console.log(app);
+  }
+    
+  const app2 = new Vue({
+    el: "#vue-app",
+    components: {
+      VueIndex
+    },
+    data: () => { 
+      return {
+        message: "Hello World mypage",
+        activeBtn: false,
+      };
+    },
+    computed: {
+      btnLine1: function() {
         return {
-          message: "Hello World mypage",
-          activeBtn: false,
+          'btn_line01': this.activeBtn
         };
       },
-      computed: {
-        btnLine1: function() {
-          return {
-            'btn_line01': this.activeBtn
-          };
-        },
-        btnLine2: function() {
-          return {
-            'btn_line02': this.activeBtn
-          };
-        },
-        btnLine3: function() {
-          return {
-            'btn_line03': this.activeBtn
-          };
-        },
+      btnLine2: function() {
+        return {
+          'btn_line02': this.activeBtn
+        };
       },
-      methods: {
+      btnLine3: function() {
+        return {
+          'btn_line03': this.activeBtn
+        };
       },
-    });
-    
-    console.log(app2)
-  // }
-  // else {
-  //   const app = new Vue({
-  //     el: "#vue-app",
-  //     components: {
-  //       VueIndex
-  //     },
-  //     data: () => { 
-  //       return {
-  //         message: "Hello World mypage",
-  //       }
-  //     },
-  //     methods: {
-        
-  //     },
-  //   })
-    
-  //   console.log(app)
-  // }
-})
+    },
+    methods: {
+    },
+  });
+  console.log(app2);
+});
 
+// require("../src/pages/m_goal_form");
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would

@@ -12,7 +12,7 @@
             <router-link to="/">{{ user.name }}</router-link>
           </div>
         </div>
-        <a href="`/posts/${post.id}`" class="card-link" :class="`card-link-${post.id}`">
+        <a :href="`/posts/${post.id}`" class="card-link" :class="`card-link-${post.id}`">
           <div class="card-inner">
             <div class="card-text">{{ post.content }}</div>
             <div class="images">
@@ -54,17 +54,22 @@
 <script>
   import moment from 'moment';
   import PostLikes from './PostLikes';
+  import { mapGetters } from 'vuex';
   
   export default {
     moment,
     props: ['post', 'post_images', 'commentCount'],
     data() {
-      let stateData = this.$store.state.data;
       return {
-        data: stateData,
-        user: stateData.user,
-        current_user: stateData.current_user,
+
       };
+    },
+    computed:{
+      ...mapGetters([
+        'data',
+        'user', 
+        'current_user',
+      ]),
     },
     filters: {
       moment: function(date) {

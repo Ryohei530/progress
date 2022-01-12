@@ -1,11 +1,12 @@
 <script>
   import { Bar } from 'vue-chartjs';
+  import { mapGetters } from 'vuex';
   
   export default {
     extends: Bar,
     name: 'myChart',
     data() {
-      let ratios = this.$store.state.data.monthly_ratios.reverse();
+      let ratios = this.$store.getters.chart_data.monthly_ratios;
       return {
         data: {
           labels: ['1ヶ月目', '2ヶ月目', '3ヶ月目', '4ヶ月目', '5ヶ月目', '6ヶ月目', '7ヶ月目'],

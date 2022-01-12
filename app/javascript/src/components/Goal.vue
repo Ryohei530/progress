@@ -28,12 +28,18 @@
 <script>
   import Tnav from './Tnav';
   import GoalItem from './GoalItem';
+  import { mapGetters } from 'vuex';
   
   export default {
     data: function() {
       return {
-        data: this.$store.state.data
+        // data: this.$store.state.data
       };
+    },
+    computed: {
+      ...mapGetters([
+        'data', 
+      ]),
     },
     components: {
       Tnav,

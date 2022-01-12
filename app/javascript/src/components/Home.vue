@@ -11,15 +11,15 @@
               
               <button class="btn" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></button>
               <div class="dropdown-menu">
-                <router-link to="/" class="dropdown-item">
+                <a :href="`/goals/${data.goal.id}/edit`" class="dropdown-item">
                   <i class="far fa-edit"></i> 長期目標を編集
-                </router-link>
-                <router-link to="/" class="dropdown-item">
+                </a>
+                <a href="/monthly_goals/new" class="dropdown-item">
                   <i class="fas fa-plus mr-1"></i>  月間目標を新規作成
-                </router-link>
-                <router-link to="/" class="dropdown-item">
+                </a>
+                <a :href="`/monthly_goals/${data.monthly_goal.id}/edit`" class="dropdown-item">
                   <i class="far fa-edit"></i> 月間目標を編集
-                </router-link>
+                </a>
               </div>
             </div>
           </div>
@@ -47,8 +47,7 @@
             <h1 class="text-center">{{ user.name }}</h1>
             <p class="user-txt">{{ user.bio }}</p>
             <div class="user-edit">
-              <a href="/" class="btn btn-outline-primary">プロフィールを編集する</a>
-              <!--<%= link_to "プロフィールを編集する", edit_user_path(@user), class: "btn btn-outline-primary" %>-->
+              <a :href="`/users/${user.id}/edit`" class="btn btn-outline-primary">プロフィールを編集する</a>
             </div>
           </div>
         </div>
@@ -97,10 +96,9 @@
                     <button @click="changeTab2('1')" class="tab-item btn bg-btn-gray" :class="tab2Active1">月間</button>
                     <button @click="changeTab2('2')" class="tab-item btn bg-btn-gray" :class="tab2Active2">週間</button>
                     <button @click="changeTab2('3')" class="tab-item btn bg-btn-gray" :class="tab2Active3">日間</button>
-                    <a href="">
+                    <a :href="`/monthly_goals/${data.monthly_goal.id}/edit`">
                       <button class="btn"><i class="far fa-edit"></i></button>
                     </a>
-                    <!--<%= link_to edit_monthly_goal_path(@user), class: "" do %>-->
                   </div>
                 </div>
               </div>
@@ -149,7 +147,7 @@
           <div class="card-body">
             <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
               <div class="chart-wrap mr-3">
-                <ul class="chnav nav flex-column nav-pills">
+                <ul class="chnav nav flex-md-column nav-pills">
                   <li class="nav-item mb-3">
                     <a class="nav-link">
                       アクション１
@@ -239,8 +237,7 @@
                   </router-link>
                 </div>
               </div>
-              <!--<%= link_to(post_path(@post), class: "card-link card-link-#{@post.id}") do %>-->
-              <router-link to="" class="card-link " :class="cardLink">
+              <a :href="`/posts/${data.post.id}`" class="card-link " :class="cardLink">
                 <div class="card-inner">
                   <div class="card-text"> {{ data.post.content }}</div>
                   <div class="images">
@@ -255,7 +252,7 @@
                     </template>
                   </div>
                 </div>
-              </router-link>
+              </a>
               <div class="card-box">
                 <div class="row">
                   <div class="col d-flex">
@@ -298,6 +295,7 @@
 /* global location */
   import axios from 'axios';
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   import Tnav from './Tnav';
   import GoalTab from './GoalTab';
   import MonthlyGoalTab from './MonthlyGoalTab';
@@ -311,26 +309,26 @@
   
   export default {
     data: function() {
+      // let stateData = this.$store.state.data;
       return {
-        data: '',
-        user: '',
+        // data: stateData,
+        // user: stateData.user,
         tabIsActive: '1',
         tab2IsActive: '1',
       };
     },
     computed: {
-      weekAve() {
-        return this.$store.getters.weekAve;
-      },
-      cardLink() {
-        return this.$store.getters.cardLink;
-      },
-      weekActNumber() {
-        return this.$store.getters.weekActNumber;
-      },
-      lack() {
-        return parseInt(this.data.week_sums[0] - this.weekActNumber);
-      },
+      ...mapGetters([
+        'data',
+        'user', 
+        'weekAve',
+        'cardLink',
+        'weekActNumber',
+        'lack'
+      ]),
+      // user() {
+      //   return this.$store.getters.user;
+      // },
       tabActive1() {
         return {
           'tab-active': this.tabIsActive === '1'
@@ -366,20 +364,19 @@
       },
     },
     mounted() {
-      this.$store.dispatch('getData')
-        .then(response => {
-          this.$store.commit('setData', response.data);
-          this.data = response.data;
-          this.user = response.data.user;
-          console.log(response);
-          console.log(response.data);
-        });
+      // this.$store.dispatch('getData')
+      //   .then(response => {
+      //     this.$store.commit('setData', response.data);
+      //     this.data = response.data;
+      //     this.user = response.data.user;
+      //     console.log(response);
+      //     console.log(response.data);
+      //   });
       console.log("mounted");
-      console.log(location.serach);
-      console.log(location.pathname);
-      console.log(location.pathname.split('/'));
-      let arr = location.pathname.split('/');
-      console.log(arr[2]);
+      console.log(this.data.goal);
+      console.log(this.data.monthly_goal);
+      console.log(this.user);
+      console.log(this.data.post);
       this.$store.state.dateToday = moment(new Date).format('YYYY-MM-DD');
       
     },

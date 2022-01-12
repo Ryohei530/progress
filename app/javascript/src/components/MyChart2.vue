@@ -1,11 +1,12 @@
 <script>
   import { Bar } from 'vue-chartjs';
+  import { mapGetters } from 'vuex';
   
   export default {
     extends: Bar,
     name: 'myChart2',
     data() {
-      let storeData = this.$store.state.data;
+      let storeData = this.$store.getters.chart_data;
       let mAct1stNum = storeData.monthly_actions[0].number;
       let daysOfWeek = storeData.days_of_week;
       let dayDate = storeData.day_date.reverse();

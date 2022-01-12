@@ -7,15 +7,15 @@
         <template v-for="(m_act, index) in monthly_actions">
           <li class="action-item">
             <div class="action-inner row">
-              <div class="action-wrap col-4">
+              <div class="action-wrap col-5">
                 {{ m_act.content }}
               </div>
-              <div class="action-box col-2">
-                {{ week_sums[index] }} / {{ weekActNums[index] }}
+              <div class="action-box col-4 col-lg-2">
+                {{ week_sums[index] }} / {{ weekActNumbers[index] }}
               </div>
-              <div class="action-progress col-6">
+              <div class="action-progress col-lg-5 mb-2 mb-lg-0">
                 <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="`width: ${ratios[index]}%`" aria-valuenow="<%= ratios[index] %>" aria-valuemin="0" aria-valuemax="100">{{ ratios[index] }}%</div>
+                  <div class="progress-bar" role="progressbar" :style="`width: ${ratios[index]}%`" :aria-valuenow="ratios[index]" aria-valuemin="0" aria-valuemax="100">{{ ratios[index] }}%</div>
                 </div>
               </div>
             </div>
@@ -31,26 +31,22 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     data() {
       return {
-        data: this.$store.state.data,
-        monthly_actions: this.$store.state.data.monthly_actions,
-        nth_week: this.$store.state.data.nth_week,
-        week_sums: this.$store.state.data.week_sums.reverse(),
-        days_of_week: this.$store.state.data.days_of_week,
-        days_of_month: this.$store.state.data.days_of_month
       }
     },
     computed: {
-      weekActNums() {
-        return this.weekActNumbers();
-      },
-      ratios() {
-        return this.actionRatio();
-      }
-    },
-    methods: {
+      ...mapGetters([
+        'data',
+        'monthly_actions', 
+        'nth_week',
+        'week_sums',
+        'days_of_week',
+        'days_of_month',
+        
+      ]),
       weekActNumbers() {
         let weekActNums = [];
         let monthlyActions = this.monthly_actions;
@@ -61,13 +57,10 @@
         }
         return weekActNums;
       },
-      roundSecondDecimal(num) {
-        return Math.round(num * 10) / 10;
-      },
-      actionRatio() {
+      ratios() {
         let ratios = [];
-        let sums = this.week_sums.reverse();
-        let weekActNums = this.weekActNumbers();
+        let sums = this.week_sums;
+        let weekActNums = this.weekActNumbers;
         
         for (let index = 0; index < sums.length; index++) {
           let ratioValue = (sums[index] / weekActNums[index] ) * 100;
@@ -77,7 +70,13 @@
         return ratios;
       }
     },
+    methods: {
+      roundSecondDecimal(num) {
+        return Math.round(num * 10) / 10;
+      },
+    },
     mounted() {
+
     }
   };
 </script>

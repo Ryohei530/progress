@@ -53,16 +53,19 @@
 
 <script>
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   
   export default {
     moment,
     data: function() {
       return {
-        data: this.$store.state.data,
         dateToday: ''
       };
     },
     computed: {
+      ...mapGetters([
+        'data', 
+      ]),
       // parseDate(date) {
       //   return this.$store.getters.parseDate(date)
       // },
