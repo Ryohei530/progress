@@ -2,7 +2,17 @@
   <div class="col-xl-6 mb-3">
     <li :id="`post-${post.id}`" class="card mb-4">
       <div class="card-body">
-        <div class="card-wrap d-flex">
+        <div v-if="user_id" class="card-wrap d-flex">
+          <div class="card-avatar">
+            <router-link to="/">
+              <img :src="user_obj.image_url" alt="" class="_rounded">
+            </router-link>
+          </div>
+          <div class="card-title">
+            <router-link to="/">{{ user_obj.name }}</router-link>
+          </div>
+        </div>
+        <div v-else class="card-wrap d-flex">
           <div class="card-avatar">
             <router-link to="/">
               <img :src="data.avatar_url60" alt="" class="_rounded">
@@ -58,7 +68,7 @@
   
   export default {
     moment,
-    props: ['post', 'post_images', 'commentCount'],
+    props: ['post', 'post_images', 'commentCount','user_id', 'user_obj'],
     data() {
       return {
 

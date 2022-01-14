@@ -7,10 +7,10 @@
             <h2>日報</h2>
             <div class="term ml-3">
               <router-link to="/report" class="term-link">
-                <button class="btn">日報</button>
+                <button class="tab-item btn">日報</button>
               </router-link>
               <router-link to="/liked_report" class="term-link">
-                <button class="btn">いいねした日報</button>
+                <button class="tab-item btn">いいねした日報</button>
               </router-link>
               <a href="/reports" class="term-link">
                 <button class="btn"><i class="fas fa-plus"></i></button>
@@ -22,14 +22,16 @@
       </div>
     </div>
     
-    <template v-if="reports">
+    <template v-if="liked_reports">
       <ul class="reports row">
         <report-item
-          v-for="(report,index) in reports"
+          v-for="(report,index) in liked_reports"
           :key="report.id"
           :report="report"
-          :report_actions="report_actions_array[index]"
-          :report_images="report_images_array[index]"
+          :user_id="report.user_id"
+          :user_obj="userObj(report)"
+          :report_actions="liked_report_actions_array[index]"
+          :report_images="liked_report_images_array[index]"
           :monthly_goal="filterMGoal(report)"
           :commentCount="commentCount(report)"
         ></report-item>
@@ -47,26 +49,32 @@
   export default {
     data: function() {
       return {
+        
       };
     },
     computed: {
       ...mapGetters([
         'data',
-        'reports', 
-        'report_actions_array',
-        'report_images_array',
-        'monthly_goals',
+        'liked_reports',
+        'liked_report_users_obj',
+        'liked_report_actions_array',
+        'liked_report_images_array',
         'report_comments',
+        'liked_report_monthly_goals',
       ]),
     },
     methods: {
       filterMGoal(report) {
-        let monthlyGoal = this.monthly_goals.filter(mGoal => mGoal.id === report.monthly_goal_id);
+        let monthlyGoal = this.liked_report_monthly_goals.filter(mGoal => mGoal.id === report.monthly_goal_id);
         return monthlyGoal.shift();
       },
       commentCount(report) {
         let repComments = this.report_comments.filter(comment => comment.report_id === report.id);
         return repComments.length;
+      },
+      userObj(report) {
+        let userObj = this.liked_report_users_obj.filter(user => user.id === report.user_id);
+        return userObj.shift();
       },
     },
     components: {

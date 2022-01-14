@@ -22,13 +22,15 @@
       </div>
     </div>
       
-    <template v-if="posts">
+    <template v-if="liked_posts">
       <ol class="posts row">
         <post-item 
-          v-for="(post, index) in posts"
+          v-for="(post, index) in liked_posts"
           :key="post.id"
           :post="post"
-          :post_images="post_images_array[index]"
+          :user_id="post.user_id"
+          :user_obj="userObj(post)"
+          :post_images="liked_post_images_array[index]"
           :commentCount="commentCount(post)"
         ></post-item>
       </ol>
@@ -51,15 +53,20 @@
     computed:{
       ...mapGetters([
         'data',
-        'posts', 
+        'liked_posts',
         'post_comments',
-        'post_images_array',
+        'liked_post_users_obj',
+        'liked_post_images_array',
       ]),
     },
     methods: {
       commentCount(post) {
         let postComments = this.post_comments.filter(comment => comment.post_id === post.id);
         return postComments.length;
+      },
+      userObj(post) {
+        let userObj = this.liked_post_users_obj.filter(user => user.id === post.user_id);
+        return userObj.shift();
       },
     },
     components: {

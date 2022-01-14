@@ -27,8 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         this.$store.dispatch('getData')
         .then(response => {
           this.$store.commit('setData', response.data);
-          // this.data = response.data;
-          // this.user = response.data.user;
           console.log(response);
           console.log(response.data);
         });

@@ -3,7 +3,19 @@
     <li id="`report-${report.id}`" class="card mb-4">
       <div class="card-body">
         <div class="card-wrap">
-          <div class="card-ubox">
+          <div v-if="user_id" class="card-ubox">
+            <div class="card-avatar">
+              <router-link to="/">
+                <img :src="user_obj.image_url" alt="" class="_rounded">
+              </router-link>
+            </div>
+            <span class="card-user">
+              <router-link to="/">
+                {{ user_obj.name }}
+              </router-link>
+            </span>
+          </div>
+          <div v-else class="card-ubox">
             <div class="card-avatar">
               <router-link to="/">
                 <img :src="data.avatar_url60" alt="" class="_rounded">
@@ -31,17 +43,14 @@
               <div class="action">
                 <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
                 <ul class="action-list">
-                  <!--<% rep_acts = report.report_actions %>-->
-                  <!--<% actions = report.monthly_goal.goal_actions %>-->
-                  <!--<%= actions.zip(rep_acts) do |action, rep_act| %>-->
                   <template v-for="(report_action,index) in report_actions">
                     <li class="action-item">
                       <div class="action-inner">
                         <div class="action-wrap">
-                          {{ monthlyActions[index].content }}
+                          {{ LikedRepMonthlyActions ? LikedRepMonthlyActions[index].content : monthlyActions[index].content }}
                         </div>
                         <div class="action-box">
-                          {{ report_action.number }} / {{ monthlyActions[index].number }}
+                          {{ report_action.number }} / {{ LikedRepMonthlyActions ? LikedRepMonthlyActions[index].number : monthlyActions[index].number }}
                         </div>
                       </div>
                     </li>
@@ -97,7 +106,7 @@
   import { mapGetters } from 'vuex';
   export default {
     moment,
-    props: ['report', 'report_actions', 'report_images', 'monthly_goal','commentCount',],
+    props: ['report', 'report_actions', 'report_images', 'monthly_goal','commentCount','user_id', 'user_obj'],
     data() {
       return {
       };
@@ -108,15 +117,25 @@
         'user', 
         'current_user',
         'monthly_actions_array',
+        'liked_report_monthly_actions_array',
       ]),
       
       monthlyActions() {
         return this.findMonthlyActions(this.monthly_goal);
       },
+      LikedRepMonthlyActions() {
+        return this.findLikedRepMonthlyActions(this.monthly_goal);
+      },
     },
     methods: {
       findMonthlyActions(monthly_goal) {
         let monthlyActions = this.monthly_actions_array.filter(mArray => {
+          return mArray[0].monthly_goal_id == monthly_goal.id;
+        });
+        return monthlyActions.shift();
+      },
+      findLikedRepMonthlyActions(monthly_goal) {
+        let monthlyActions = this.liked_report_monthly_actions_array.filter(mArray => {
           return mArray[0].monthly_goal_id == monthly_goal.id;
         });
         return monthlyActions.shift();

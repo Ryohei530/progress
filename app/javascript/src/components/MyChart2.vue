@@ -9,7 +9,7 @@
       let storeData = this.$store.getters.chart_data;
       let mAct1stNum = storeData.monthly_actions[0].number;
       let daysOfWeek = storeData.days_of_week;
-      let dayDate = storeData.day_date.reverse();
+      let dayDate = storeData.day_date;
       let dayDone = storeData.day_done.reverse();
       let dayIndicator = Array(daysOfWeek).fill(mAct1stNum, 0, daysOfWeek);
       return {

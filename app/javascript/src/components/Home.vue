@@ -176,20 +176,20 @@
                     <div class="px-3">
                       <span class="text-muted">平均</span>
                       <span class="d-block">
-                        {{ weekAve }}
+                        {{ weekAve ? weekAve : 0 }}
                       </span>
                     </div>
                     <div class="px-3">
                       <span class="text-muted">達成</span>
                       <span class="d-block">
-                        {{ data.week_sums[0] }}
+                        {{ data.week_sums[0] ? data.week_sums[0] : 0 }}
                         <!--<%= @week_sums.first %>-->
                       </span>
                     </div>
                     <div class="px-3">
                       <span class="text-muted">目標</span>
                       <span class="d-block">
-                        {{ weekActNumber }}
+                        {{ weekActNumber ? weekActNumber : 0 }}
                       </span>
                     </div>
                     <div class="px-3">
@@ -199,7 +199,7 @@
                           +{{ lack }}
                         </template>
                         <template v-else>
-                          {{ lack }}
+                          {{ lack ? lack : 0 }}
                         </template>
                       </span>
                     </div>
