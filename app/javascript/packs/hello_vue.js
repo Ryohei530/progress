@@ -10,7 +10,6 @@ import App from '../app.vue';
 import router from '../src/router';
 import store from '../src/store';
 import sanitizeHTML from 'sanitize-html';
-import VueIndex from "../src/components/VueIndex";
 import globalVariables from '../src/mixins/globalVariables';
 
 Vue.prototype.$sanitize = sanitizeHTML;
@@ -36,42 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
     console.log(app);
   }
-    
-  const app2 = new Vue({
-    el: "#vue-app",
-    components: {
-      VueIndex
-    },
-    data: () => { 
-      return {
-        message: "Hello World mypage",
-        activeBtn: false,
-      };
-    },
-    computed: {
-      btnLine1: function() {
-        return {
-          'btn_line01': this.activeBtn
-        };
-      },
-      btnLine2: function() {
-        return {
-          'btn_line02': this.activeBtn
-        };
-      },
-      btnLine3: function() {
-        return {
-          'btn_line03': this.activeBtn
-        };
-      },
-    },
-    methods: {
-    },
-  });
-  console.log(app2);
 });
 
+require("../src/vue_modules/header");
+
 // require("../src/pages/m_goal_form");
+
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would

@@ -57,28 +57,6 @@
           <div class="card-body">
             <section class="calendar">
               <calendar></calendar>
-              <!--<%= month_calendar do |date| %>-->
-              <!--  <%= date.day %>-->
-                
-              <!--  <% if @rday_dates.any? { |rday_date| rday_date == date } %>-->
-              <!--    <%= image_tag 'mark_sumi.png', size: '30x30' %>-->
-              <!--  <% end %>-->
-                
-              <!--  <% if date == @goal.term_end %>-->
-              <!--  <div class="calendar-wrap">-->
-              <!--    <i class="fas fa-hourglass-end"></i>-->
-              <!--    <span>目標締切日</span>-->
-              <!--  </div>-->
-              <!--  <% end %>-->
-                
-              <!--  <% if @monthly_goal.present? && date == @monthly_goal.term_end %>-->
-              <!--    <div class="calendar-wrap">-->
-              <!--      <i class="fas fa-hourglass-end"></i>-->
-              <!--      <span>今月の目標締切日</span>-->
-              <!--    </div>-->
-              <!--  <% end %>-->
-                
-              <!--<% end %>-->
             </section>
           </div>
         </div>

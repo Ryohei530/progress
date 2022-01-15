@@ -27,6 +27,25 @@
           <div class="calendar-day">
             {{ day.day }}
           </div>
+          <div v-if="findRDay(day.date)" class="calendar-done d-flex justify-content-center">
+            <img :src="mark_sumi" alt="">
+          </div>
+          <div 
+            v-if="day.date === goal.term_end"
+            class="calendar-event"
+            style="width:95%;background-color:red;"
+          >
+            <i class="fas fa-hourglass-end"></i>
+            <span>目標締切日</span>
+          </div>
+          <div 
+            v-if="monthly_goal && day.date === monthly_goal.term_end"
+            class="calendar-event"
+            style="width:95%;background-color:red;"
+          >
+            <i class="fas fa-hourglass-end"></i>
+            <span>月間締切日</span>
+          </div>
           <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
             <div 
               v-if="dayEvent.width"
@@ -47,11 +66,13 @@
 
 <script>
   import moment from 'moment';
+  import { mapGetters } from 'vuex';
   
   export default {
     data() {
       return {
         currentDate: moment(),
+        mark_sumi: require('/app/assets/images/mark_sumi.png'),
         events: [
           { id: 1, name: "ミーティング", start: "2022-01-01", end:"2022-01-01", color:"blue"},
           { id: 2, name: "イベント", start: "2022-01-02", end:"2022-01-03", color:"limegreen"},
@@ -76,6 +97,17 @@
       };
     },
     computed: {
+      ...mapGetters([
+        'data',
+        'goal',
+        'monthly_goal',
+      ]),
+      // events() {
+      //   let events = [
+          
+      //   ]
+      //   return events;
+      // },
       calendars() {
         return this.getCalendar();
       },
@@ -85,6 +117,9 @@
       currentMonth() {
         return this.currentDate.format('YYYY-MM');
       },
+      rdayDates() {
+        return this.$store.getters.rday_dates;
+      }
     },
     methods: {
       getStartDate() {
@@ -201,6 +236,9 @@
         dragEvent.start = date;
         dragEvent.end = moment(dragEvent.start).add(betweenDays, "days").format("YYYY-MM-DD");
       },
+      findRDay(date) {
+        return this.rdayDates.find(rdayDate => rdayDate === date);
+      },
     },
     mounted() {
       
@@ -241,6 +279,10 @@
   }
   .outside{
     background-color: #f7f7f7;
+  }
+  .calendar-done img {
+    width: 30px;
+    height: 30px;
   }
   .calendar-event{
     color:white;

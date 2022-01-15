@@ -51,7 +51,7 @@
 .menu {
   background-color: rgba(255, 137, 101, 0.671);
   z-index: 30;
-  padding: 4.1rem 1rem;
+  padding: 4.1rem 0rem;
   position: fixed;
   width: 20rem;
   height: 80rem;
@@ -73,18 +73,21 @@
   li {
     list-style: none;
     line-height: 1;
-    padding: 1rem;
+    &:hover {
+      background-color: rgba(255, 137, 101, 0.371);
+    }
   }
   
   a {
     color: #fff;
     text-decoration: none;
     font-size: 1.2rem;
-    padding: 0 2rem;
+    display: block;
+    padding: 1rem 1rem 1rem 3rem;
   }
   
   ul {
-    margin: 1rem;
+    margin: 1.05rem 0;
     padding: 0;
   }
 }

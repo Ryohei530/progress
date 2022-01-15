@@ -20,10 +20,12 @@ export default new Vuex.Store({
     user: state => state.data.user,
     current_user: state => state.data.current_user,
     goal: state => state.data.goal,
+    monthly_goal: state => state.data.monthly_goal,
     monthly_goals: state => state.data.monthly_goals,
     monthly_actions: state => state.data.monthly_actions,
     monthly_actions_array: state => state.data.monthly_actions_array,
     monthly_ratios: state => state.data.monthly_ratios.reverse(),
+    rday_dates: state => state.data.rday_dates,
     reports: state => state.data.reports,
     liked_reports: state => state.data.liked_reports,
     liked_report_users_obj: state => state.data.liked_report_users_obj,
@@ -65,9 +67,6 @@ export default new Vuex.Store({
       let today = state.dateToday;
       return moment(date).diff(today, 'days');
     },
-    // textReplace(state) {
-    //   return state.data.goal.indicator.replace(/\n/g, '<br/>');
-    // }
   },
   mutations: {
     // increment(state, number) {

@@ -1,4 +1,4 @@
-<header id="vue-app" class="header navbar navbar-fixed-top navbar-expand navbar-dark">
+<header id="vue-header" class="header navbar navbar-fixed-top navbar-expand navbar-dark">
   <div class="hamburger_btn" @click='activeBtn=!activeBtn'>
     <span class="line line_01" :class="btnLine1"></span>
     <span class="line line_02" :class="btnLine2"></span>
@@ -7,11 +7,12 @@
   <transition name="menu">
     <div class="menu" v-show="activeBtn">
         <ul>
-            <li><a href="#">日報</a></li>
-            <li><a href="#">つぶやき</a></li>
-            <li><a href="#">項目3</a></li>
-            <li><a href="#">項目4</a></li>
-            <li><a href="#">項目5</a></li>
+            <li><a href="/reports">日報</a></li>
+            <li><a href="/">つぶやき</a></li>
+            <% if user_signed_in? %>
+            <li><%= link_to "長期目標", edit_goal_path(current_user) %></li>
+            <li><%= link_to "月間目標", new_monthly_goal_path %></li>
+            <% end %>
         </ul>
     </div>
   </transition>
