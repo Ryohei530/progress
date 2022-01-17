@@ -51,16 +51,13 @@ export default new Vuex.Store({
     sums: state => state.data.sums.reverse(),
     
     
-    weekAve: state => parseInt(state.data.week_sums / state.data.days_of_week),
+    weekAve: state => parseInt(state.data.week_sums[0] / state.data.day_done.length),
     cardLink: state => "card-link-" + state.data.posts[0].id,
     weekActNumber(state) {
       let mAct = state.data.monthly_actions[0];
-      let daysOfMonth = parseInt(state.data.days_of_month);
+      let daysOfMonth = state.data.days_of_month;
       let daysOfWeek = state.data.days_of_week;
       return parseInt((mAct.number / daysOfMonth ) * daysOfWeek);
-    },
-    lack(state) {
-      return parseInt(state.data.week_sums[0] - state.data.weekActNumber);
     },
     remain(state) {
       let date = state.data.goal.term_end;

@@ -299,14 +299,21 @@
       ...mapGetters([
         'data',
         'user', 
+        'week_sums',
         'weekAve',
         'cardLink',
         'weekActNumber',
-        'lack'
+        'days_of_week',
       ]),
+      // dayActNum() {
+      //   return Math.ceil(this.weekActNumber / this.days_of_week);
+      // },
       // user() {
       //   return this.$store.getters.user;
       // },
+      lack() {
+        return parseInt(this.week_sums[0] - this.weekActNumber);
+      },
       tabActive1() {
         return {
           'tab-active': this.tabIsActive === '1'

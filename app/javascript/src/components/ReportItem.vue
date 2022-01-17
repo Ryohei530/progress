@@ -43,14 +43,14 @@
               <div class="action">
                 <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
                 <ul class="action-list">
-                  <template v-for="(report_action,index) in report_actions">
+                  <template v-for="(report_action,index) in reportActions">
                     <li class="action-item">
                       <div class="action-inner">
                         <div class="action-wrap">
                           {{ LikedRepMonthlyActions ? LikedRepMonthlyActions[index].content : monthlyActions[index].content }}
                         </div>
                         <div class="action-box">
-                          {{ report_action.number }} / {{ LikedRepMonthlyActions ? LikedRepMonthlyActions[index].number : monthlyActions[index].number }}
+                          {{ report_action.number }} / {{ LikedRepMonthlyActions ? LikedRepMonthlyActNumbers[index] : monthlyActNumbers[index] }}
                         </div>
                       </div>
                     </li>
@@ -116,15 +116,38 @@
         'data',
         'user', 
         'current_user',
+        'days_of_month',
         'monthly_actions_array',
         'liked_report_monthly_actions_array',
       ]),
-      
+      reportActions() {
+        return this.report_actions;
+      },
       monthlyActions() {
         return this.findMonthlyActions(this.monthly_goal);
       },
       LikedRepMonthlyActions() {
         return this.findLikedRepMonthlyActions(this.monthly_goal);
+      },
+      monthlyActNumbers() {
+        let MonActNums = [];
+        let acts = this.findMonthlyActions(this.monthly_goal);
+        let daysOfMonth = parseInt(this.days_of_month);
+        for(let i = 0; i < acts.length; i++) {
+          let MonActNum = acts[i].number / daysOfMonth;
+          MonActNums.push(Math.ceil(MonActNum));
+        }
+        return MonActNums;
+      },
+      LikedRepMonthlyActNumbers() {
+        let MonActNums = [];
+        let acts = this.findLikedRepMonthlyActions(this.monthly_goal);
+        let daysOfMonth = parseInt(this.days_of_month);
+        for(let i = 0; i < acts.length; i++) {
+          let MonActNum = acts[i].number / daysOfMonth;
+          MonActNums.push(Math.ceil(MonActNum));
+        }
+        return MonActNums;
       },
     },
     methods: {

@@ -51,8 +51,9 @@
         let weekActNums = [];
         let monthlyActions = this.monthly_actions;
         let daysOfMonth = parseInt(this.days_of_month);
+        let daysOfWeek = parseInt(this.days_of_week);
         for (let i = 0; i < monthlyActions.length; i++) {
-          let weekActNum = (monthlyActions[i].number / daysOfMonth) * this.days_of_week;
+          let weekActNum = (monthlyActions[i].number / daysOfMonth) * daysOfWeek;
           weekActNums.push(Math.round(weekActNum));
         }
         return weekActNums;

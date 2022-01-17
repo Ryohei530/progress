@@ -52,7 +52,7 @@
               </span>
               <template v-if="currentUser()">
                 <a 
-                  :href="`monthly_goals/${monthly_goal.id}`"  
+                  :href="`/monthly_goals/${monthly_goal.id}`"  
                   class="card-dlt dlt-card-#{goal.id} btn btn-outline-danger btn-sm"
                   data-confirm="本当に削除しますか？"
                   data-method="delete"

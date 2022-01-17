@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
    
     @goal = @user.goal
    
-    @monthly_goals = @user.monthly_goals.reverse()
+    @monthly_goals = @user.monthly_goals.reverse
     @monthly_goal = @monthly_goals.first
     @monthly_actions = @monthly_goal.goal_actions
     @monthly_actions_array = []
@@ -60,7 +60,7 @@ class Api::UsersController < ApplicationController
     liked_report_monthly_goals = @liked_report_users.map { |user| user.monthly_goals }
     @liked_report_monthly_goals = liked_report_monthly_goals.flatten
     @liked_report_monthly_actions_array = @liked_report_monthly_goals.map { |monthly_goal| monthly_goal.goal_actions }
-    @report_actions_array = @reports.map { |report| report.report_actions }
+    @report_actions_array = @reports.map { |report| report.report_actions.reverse }
     @report_images_array =  @reports.map do |report|
                               report.images.map do |image|
                                 rails_representation_url(image.variant(resize: "240x180!"))
@@ -73,8 +73,9 @@ class Api::UsersController < ApplicationController
                                     end
                                   end
     @report_comments = ReportComment.all
-    @latest_report = @user.monthly_goals.last.reports.where(created_at: Date.today).last
-    @latest_report_actions = @latest_report.report_actions if @latest_report.present?
+    range = Date.today.beginning_of_day.since(3.hours)..Date.today.end_of_day.since(3.hours)
+    @latest_report = @user.monthly_goals.last.reports.where(created_at: range)
+    @latest_report_actions = @latest_report[0].report_actions.reverse if @latest_report.present?
     @avatar_url60 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)
     @avatar_url70 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "70x70^", crop: "70x70+0+0").processed)
     sum_of_monthly_actions # @sums @monthly_ratios

@@ -24,6 +24,8 @@
           <div class="action">
             <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
             <ul class="action-list">
+              <% monthly_goal = report.monthly_goal %>
+              <% days_of_month_public = (monthly_goal.term_end - monthly_goal.term_start) %>
               <% rep_acts = report.report_actions.reverse %>
               <% actions = report.monthly_goal.goal_actions %>
               <%= actions.zip(rep_acts) do |action, rep_act| %>
@@ -33,7 +35,7 @@
                     <%= action.content %>
                   </div>
                   <div class="action-box">
-                    <%= rep_act.number %> / <%= action.number %>
+                    <%= rep_act.number %> / <%= (action.number.to_f / days_of_month_public).ceil.to_i %>
                   </div>
                 </div>
               </li>

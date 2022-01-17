@@ -1,20 +1,18 @@
 <%= form_with(model: @report, local: true, class: "card-form") do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= hidden_field :running, :start_date %>
-  <% monthly_goal = current_user.monthly_goals.last %>
-  <%= f.hidden_field :monthly_goal_id, value: monthly_goal.id %>
+  <%= f.hidden_field :monthly_goal_id, value: @monthly_goal.id %>
   <div class="aim">
     <p class="aim-tit"><i class="fas fa-crosshairs"></i> 今月の目的</p>
-    <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+    <p class="aim-txt"><%= @monthly_goal.monthly_aim %></p>
     <p class="aim-tit"><i class="fas fa-tachometer-alt"></i> 今月の目標指標</p>
-    <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+    <p class="aim-txt"><%= @monthly_goal.monthly_indicator %></p>
   </div>
   
   <div class="action">
     <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
     <ul class="action-list">
-      <% actions = monthly_goal.goal_actions %>
-      <% actions.each do |action| %>
+      <% @actions.each_with_index do |action, i| %>
         <%= f.fields_for :report_actions, @report.report_actions.build do |rep| %>
         <li class="action-item">
           <div class="action-inner">
@@ -22,7 +20,7 @@
               <%= rep.label :number, action.content %>
             </div>
             <div class="action-box">
-              <%= rep.number_field :number %> / <%= action.number %>
+              <%= rep.number_field :number %> / <%= @action_numbers[i] %>
             </div>
           </div>
         </li>

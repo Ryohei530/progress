@@ -3,7 +3,7 @@
     <div v-if="data.monthly_goal" class="action-day">
       <p class="action-tit">日間</p>
       <ul class="action-list">
-        <template v-if="report">
+        <template v-if="report[0]">
           <template v-for="(m_act, index) in monthly_actions">
             <li class="action-item">
               <div class="action-inner row">
@@ -11,7 +11,7 @@
                   {{ m_act.content }}
                 </div>
                 <div class="action-box col-4 col-lg-2">
-                  {{ report_actions[index].number }} / {{ dayActNumbers[index] }}
+                  {{ reportActs[index].number }} / {{ dayActNumbers[index] }}
                 </div>
                 <div class="action-progress col-lg-5 mb-2 mb-lg-0">
                   <div class="progress">
@@ -62,10 +62,10 @@
         'days_of_month',
       ]),
       report() {
-        this.$store.getters.latest_report;
+        return this.$store.getters.latest_report;
       },
-      report_actions() {
-        this.$store.getters.latest_report_actions;
+      reportActs() {
+        return this.$store.getters.latest_report_actions;
       },
       dayActNumbers() {
         let dayActNums = [];
@@ -73,13 +73,13 @@
         let daysOfMonth = parseInt(this.days_of_month);
         for(let i = 0; i < monthlyActions.length; i++) {
           let dayActNum = monthlyActions[i].number / daysOfMonth;
-          dayActNums.push(Math.round(dayActNum));
+          dayActNums.push(Math.ceil(dayActNum));
         }
         return dayActNums;
       },
       ratios() {
         let ratios = [];
-        let repActs = this.report_actions; 
+        let repActs = this.reportActs; 
         let dayActNums = this.dayActNumbers;
         for (let index = 0; index < repActs.length; index++) {
           let ratioValue = (repActs[index].number / dayActNums[index] ) * 100;
