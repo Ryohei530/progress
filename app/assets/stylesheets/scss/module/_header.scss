@@ -1,6 +1,32 @@
 .header {
   background-color: $theme-color;
+  padding: 0rem 1rem;
+  height: 82px;
   &-inner {
     
+  }
+}
+
+@include media-breakpoint-only(lg) {
+  .header {
+    #logo {
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1026px) {
+  .header {
+    #logo {
+      font-size: 1.2em;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .header {
+    #logo {
+      font-size: 1.4em;
+    }
   }
 }

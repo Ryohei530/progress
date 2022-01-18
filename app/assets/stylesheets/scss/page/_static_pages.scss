@@ -194,7 +194,7 @@
   
   background-size: cover;
   padding: 0;
-  height: 93vh;
+  height: 712px;
   
   &-inner{
     padding: 260px 0 0 3%;
@@ -262,6 +262,17 @@
   .nltop {
     .lead {
           font-size: 1.12rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .sec {
+    .snav {
+      padding-right: 0px;
+    }
+    .content {
+      padding: 40px 0px;
     }
   }
 }

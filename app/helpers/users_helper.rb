@@ -132,8 +132,10 @@ module UsersHelper
         [(term_start + 7.days)..(term_start + 13.days)]
       elsif now.between?((term_start + 14.days), (term_start + 20.days))
         [(term_start + 14.days)..(term_start + 20.days)]
-      elsif now.between?((term_start + 21.days), term_end)
-        [(term_start + 21.days)..term_end]
+      elsif now.between?((term_start + 21.days), (term_start + 27.days))
+        [(term_start + 21.days)..(term_start + 27.days)]
+      elsif now.between?((term_start + 28.days), term_end)
+        [(term_start + 28.days)..term_end]
       end
       )
     
@@ -145,19 +147,36 @@ module UsersHelper
       @week_sums[n-1] = sum
     end
     
-    
     @day_date = []
+    terms = if now.between?(term_start, (term_start + 6.days))
+              (term_start..(term_start + 6.days))
+            elsif now.between?((term_start + 7.days), (term_start + 13.days))
+              ((term_start + 7.days)..(term_start + 13.days))
+            elsif now.between?((term_start + 14.days), (term_start + 20.days))
+              ((term_start + 14.days)..(term_start + 20.days))
+            elsif now.between?((term_start + 21.days), (term_start + 27.days))
+              ((term_start + 21.days)..(term_start + 27.days))
+            elsif now.between?((term_start + 28.days), term_end)
+              ((term_start + 28.days)..term_end)
+            else
+              (Date.today..Date.today.next_day(6))
+            end
+            
+    terms.each do |term|
+      @day_date << term.strftime('%-m月%-d日')
+    end
+    
+    
     @day_done = []
     reports.each do |report|
-      @day_date << report.created_at.strftime('%m月%d日')
-      @day_done << report.report_actions.first.number
+      @day_done << report.report_actions.last.number
     end
 
   end
   
   def days_of_month
     monthly_goal = @user.monthly_goals.last
-    @days_of_month = (monthly_goal.term_end - monthly_goal.term_start)
+    @days_of_month = (monthly_goal.term_end - monthly_goal.term_start).to_i
   end
   
   def days_of_week
@@ -168,7 +187,7 @@ module UsersHelper
     
     @days_of_week = (
       if now.between?((term_start + 21.days), term_end)
-        term_end - (term_start + 21.days)
+        (term_end - (term_start + 21.days)).to_i
       else 
         7
       end
@@ -181,8 +200,10 @@ module UsersHelper
         (term_start + 7.days).strftime('%m月%d日') + "〜" + (term_start + 13.days).strftime('%m月%d日')
       elsif now.between?((term_start + 14.days), (term_start + 20.days))
         (term_start + 14.days).strftime('%m月%d日') + "〜" + (term_start + 20.days).strftime('%m月%d日')
-      elsif now.between?((term_start + 21.days), term_end)
-        (term_start + 21.days).strftime('%m月%d日') + "〜" + term_end.strftime('%m月%d日')
+      elsif now.between?((term_start + 21.days), (term_start + 27.days))
+        (term_start + 21.days).strftime('%m月%d日') + "〜" + (term_start + 27.days).strftime('%m月%d日')
+      elsif now.between?((term_start + 28.days), term_end)
+        (term_start + 28.days).strftime('%m月%d日') + "〜" + term_end.strftime('%m月%d日')
       end
   end
 

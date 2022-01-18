@@ -190,6 +190,7 @@
       .nav-link {
         color: $gray;
         border-radius: .65rem;
+        font-size: 0.95em;
         &:hover {
           background-color: $bg-btn-gray;
           cursor: pointer;
@@ -198,12 +199,19 @@
     }
   }
   
+  .posts{
+    list-style: none;
+    padding: 0 15px;
+    .card-like {
+      span {
+        color: $theme-color;
+        cursor: pointer;
+      }
+    }
+  }
+  
 }
   
-.posts{
-  list-style: none;
-  padding: 0;
-}
 
 .account{
   &-snav{
@@ -222,3 +230,42 @@
   }
 }
 
+
+@include media-breakpoint-only(lg) { 
+  .user {
+    .chart {
+      .chnav {
+        .nav-link {
+          font-size: 0.68em;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-only(md) { 
+  .user {
+    .chart {
+      .chnav {
+        .nav-link {
+          font-size: 1.1em;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .user {
+    .chart {
+      &-wrap {
+        width: 100%;
+      }
+      .chnav {
+        .nav-link {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

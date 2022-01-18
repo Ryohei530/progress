@@ -1,21 +1,7 @@
 <% provide(:controller, :static_pages) %>
 <% provide(:action, :home) %>
 
-
-<div class="sec row">
-  <aside class="snav col-12 col-lg-4 list-group list-group-flush">
-    <div class="snav-wrap">
-      <span class="list-group-item">メニュー</span>
-      <%= link_to reports_path, class: "snav-link list-group-item list-group-item-action" do %>
-        <i class="material-icons align-middle">feedback</i>
-        <div class="d-inline">日報</div>
-      <% end %>
-      <%= link_to  root_path, class: "snav-link list-group-item list-group-item-action" do %>    
-        <i class="far fa-comment-dots"></i>
-        <div class="d-inline">つぶやき</div>
-      <% end %>
-    </div>
-  </aside>
+<div class="sec row justify-content-center">
   <div class="content col-12 col-lg-8">
     <% if logged_in? %>
     <div class="content-inner mb-5">

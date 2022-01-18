@@ -14,6 +14,17 @@ Rails.application.routes.draw do
   # get '/login', to: 'sessions#new'
   # post '/login', to: 'sessions#create'
   # delete '/logout', to: 'sessions#destroy'
+  
+  namespace :api, format: 'json' do
+    resources :users, only: :show
+    resources :posts, only: [:index, :create, :show, :destroy] do
+      resources :post_likes, only: [:index ,:create, :destroy]
+    end
+    resources :reports do
+      resources :report_likes, only: [:index, :create, :destroy]
+    end
+  end
+  
   resources :users do
     member do
      get 'goal'
@@ -26,6 +37,7 @@ Rails.application.routes.draw do
     # get 'password'
     end
   end
+  
   resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]

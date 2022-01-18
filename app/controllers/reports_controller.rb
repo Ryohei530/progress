@@ -4,8 +4,17 @@ class ReportsController < ApplicationController
   before_action :correct_or_admin_user, only: :destroy
   
   def index
-    @report = current_user.reports.build if logged_in?
     @feed_items = Report.all.page(params[:page])
+    if logged_in?
+      @report = current_user.reports.build 
+      @monthly_goal = current_user.monthly_goals.last
+      @actions = @monthly_goal.goal_actions
+      @user = current_user 
+      days_of_month # @days_of_month
+      @action_numbers = @actions.map do |action|
+                          (action.number.to_f / @days_of_month).ceil.to_i
+                        end
+    end
   end
   
   def new
@@ -43,6 +52,14 @@ class ReportsController < ApplicationController
   
   def show
     @report = Report.find(params[:id])
+    @user = @report.user
+    @monthly_goal = @report.monthly_goal
+    @rep_acts = @report.report_actions.reverse
+    @actions = @monthly_goal.goal_actions
+    days_of_month # @days_of_month
+    @action_numbers = @actions.map do |action|
+                        (action.number.to_f / @days_of_month).ceil.to_i
+                      end
     @comment = ReportComment.new
     @comments = ReportComment.includes(:user).where(report_id: params[:id]).where(reply_id: nil)
     @replies = ReportComment.includes(:user).where(report_id: params[:id]).where.not(reply_id: nil)
