@@ -6,6 +6,22 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   ruby: circleci/ruby@1.2.0
+  
+commands:
+  swap_node_version:
+    steps:
+      - run:    
+          name: Node バージョンの切り替え    
+          command: |      
+            set +e      
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash      
+            export NVM_DIR="$HOME/.nvm"      
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"      
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"      
+            nvm install v15      
+            nvm alias default 15.14.0      
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV      
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -19,6 +35,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - swap_node_version
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -39,6 +56,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - swap_node_version
       - run: yarn add @fortawesome/fontawesome-free
       - run: mv config/database.yml.ci config/database.yml
       - run:
@@ -62,6 +80,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - swap_node_version
       - add_ssh_keys:
           fingerprints:
             - "b6:14:ba:fa:63:f1:61:2f:0c:f0:b7:c1:ef:b1:72:40"
