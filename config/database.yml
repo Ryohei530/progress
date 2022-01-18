@@ -10,7 +10,9 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: 123
-  host: db
+  
+  # Dockerの設定
+  # host: db
 
 development:
   <<: *default
