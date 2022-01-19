@@ -28,9 +28,10 @@ test:
 production:
   <<: *default
   database: progress_production
-  password: 00kuboryO*
+  username: ryohei
+  password: pro12345
   socket: /var/lib/mysql/mysql.sock
-  host: 35.72.30.233
+  host: progress-db.c7feugfbzv7q.ap-northeast-1.rds.amazonaws.com
 
 
   #Dockerの設定

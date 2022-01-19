@@ -23,7 +23,7 @@
             <% @rank_rdays.take(10).each.with_index(1) do |rank_rday, n| %>
               <tr class="rank-item rank-<%= n %>">
                 <td>
-                  <img src="<%= "assets/rank#{n}.png" %>">
+                  <%= image_tag "assets/rank#{n}.png" %>
                 </td>
                 <td>
                   <% if n <= 3 %>  
