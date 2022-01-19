@@ -30,7 +30,7 @@ production:
   database: progress_production
   password: 00kuboryO*
   socket: /var/lib/mysql/mysql.sock
-  host: 35.72.30.233
+  host: 18.183.243.16
 
 
   #Dockerの設定
