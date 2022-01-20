@@ -28,7 +28,7 @@ class BookmarksController < ApplicationController
     end
   end
   
-    private
+  private
     
     def correct_user
       @user = Bookmark.find(params[:id]).user

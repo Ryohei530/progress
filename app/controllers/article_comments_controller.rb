@@ -19,7 +19,7 @@ class ArticleCommentsController < ApplicationController
     redirect_to board_url(params[:article_id])
   end
   
-    private
+  private
     
     def article_comment_params
       params.require(:article_comment).permit(:content)

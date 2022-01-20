@@ -23,7 +23,7 @@ class PostLikesController < ApplicationController
     end
   end
   
-    private
+  private
     
     def correct_user
       @user = PostLike.find(params[:id]).user

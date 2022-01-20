@@ -58,16 +58,16 @@ class BoardsController < ApplicationController
   def tag
     @tags = Tag.joins(:board_tags).distinct
     @tag = Tag.find(params[:tag_id])
-    @boards = @tag.boards
+    @boards = @tag.boards.page(params[:page])
   end
   
   def search
-    @boards = Board.search(params[:search])
+    @boards = Board.search(params[:search]).page(params[:page])
     @tags = Tag.joins(:board_tags).distinct
     @search = params[:search]
   end
   
-    private
+  private
     
     def board_params
       params.require(:board).permit(:title, :content)

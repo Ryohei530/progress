@@ -1,1 +1,17 @@
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.7.3　
+  TargetRailsVersion: 6.1.4.1　
+  Exclude:
+    - "vendor/**/*" 
+    - "db/schema*.rb"
+    - "node_modules/**/*"
+    - "db/migrate/**/*"
+    - "app/channels/**/*"
+    - "config/**/*"
+    - "config.ru"
+    - "bin/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
+    - "log/**/*"

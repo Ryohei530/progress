@@ -43,7 +43,7 @@ class MonthlyGoalsController < ApplicationController
     redirect_to goal_user_url(current_user)
   end
   
-    private
+  private
     
     def monthly_goal_params
       params.require(:monthly_goal).permit(

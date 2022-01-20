@@ -3,66 +3,67 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 
-gem 'rails',      '~> 6.1'
-gem 'bcrypt',     '~> 3.1.16'
-gem 'bootstrap',  '~> 4.5.0'
-gem 'puma',       '~> 5'
-gem 'sass-rails', '~> 6'
-gem 'webpacker',  '5.4.0'
-gem 'turbolinks', '~> 5.2.0'
-gem 'jbuilder',   '~> 2.11'
-gem 'bootsnap',   '~> 1.7', require: false
-gem 'mysql2',     '~> 0.5.3'
-gem 'kaminari'
-gem 'kaminari-bootstrap'
 gem 'active_storage_validations'
-gem 'image_processing', '1.2'
-gem 'mini_magick'
-gem 'simple_calendar', '~> 2.0'
-gem 'rails-i18n', '~> 6.0'
+gem "aws-sdk-s3", require: false
+gem 'bcrypt',     '~> 3.1.16'
+gem 'bootsnap',   '~> 1.7', require: false
+gem 'bootstrap',  '~> 4.5.0'
+gem 'chart-js-rails'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'omniauth-twitter'
-gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
-gem 'omniauth-rails_csrf_protection'
 gem 'faker'
-gem 'material_icons'
-gem 'chart-js-rails'
-gem 'mini_racer',       '~> 0.3.1'
+gem 'image_processing', '1.2'
 gem 'impressionist'
+gem 'jbuilder',   '~> 2.11'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
+gem 'material_icons'
+gem 'mini_magick'
+gem 'mini_racer',       '~> 0.3.1'
+gem 'mysql2',     '~> 0.5.3'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-twitter'
+gem 'puma',       '~> 5'
+gem 'rails',      '~> 6.1'
+gem 'rails-i18n', '~> 6.0'
+gem 'sass-rails', '~> 6'
+gem 'simple_calendar', '~> 2.0'
+gem 'turbolinks', '~> 5.2.0'
+gem 'webpacker',  '5.4.0'
 
 group :development, :test do
-  gem 'pry-byebug'
-  gem 'rspec-rails', '~> 5.0'
-  gem 'factory_bot_rails'
   gem 'capistrano'
-  gem 'capistrano-rbenv'
+  gem 'capistrano3-puma'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano3-puma'
+  gem 'capistrano-rbenv'
+  gem 'factory_bot_rails'
+  gem 'pry-byebug'
+  gem 'rspec-rails', '~> 5.0'
 end
 
 group :development do
-  gem 'web-console',           '~> 4.1.0'
-  gem 'spring',                '~> 2.1.0'
-  gem 'spring-watcher-listen', '~> 2.0.1'
-  gem 'spring-commands-rspec'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'listen',                '~> 3.5.1' 
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'spring',                '~> 2.1.0'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen', '~> 2.0.1'
+  gem 'web-console',           '~> 4.1.0'
 end
 
 group :test do
   gem 'capybara'           
-  gem 'webdrivers'         
   gem 'launchy'
   gem 'shoulda-matchers'
+  gem 'webdrivers'         
 end
 
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります

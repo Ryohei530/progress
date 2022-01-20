@@ -15,7 +15,7 @@ class BoardCommentsController < ApplicationController
     redirect_to board_url(params[:board_id])
   end
   
-    private
+  private
     
     def board_comment_params
       params.require(:board_comment).permit(:content, :reply_id, :board_id).merge(user_id: current_user.id, board_id: params[:board_id])

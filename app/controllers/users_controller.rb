@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     @running_day = RunningDay.last
   end
   
-    private
+  private
       
       def user_params
         params.require(:user).permit(:name, 

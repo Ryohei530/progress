@@ -63,16 +63,18 @@ class ArticlesController < ApplicationController
   def tag
     @tags = Tag.joins(:article_tags).distinct
     @tag = Tag.find(params[:tag_id])
-    @articles = @tag.articles.all
+    @articles = @tag.articles.all.page(params[:page])
+    @rank_articles = Article.order(impressions_count: 'DESC').take(3)
   end
   
   def search
-    @articles = Article.search(params[:search])
+    @articles = Article.search(params[:search]).page(params[:page])
     @tags = Tag.joins(:article_tags).distinct
     @search = params[:search]
+    @rank_articles = Article.order(impressions_count: 'DESC').take(3)
   end
   
-    private
+  private
     
     def article_params
       params.require(:article).permit(:title, :content)

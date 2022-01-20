@@ -23,7 +23,7 @@ class ReportLikesController < ApplicationController
     end
   end
   
-    private
+  private
     
     def correct_user
       @user = ReportLike.find(params[:id]).user

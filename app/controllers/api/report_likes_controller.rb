@@ -21,7 +21,7 @@ class Api::ReportLikesController < ApplicationController
     head :ok
   end
   
-    private
+  private
     
     def correct_user
       @user = ReportLike.find(params[:id]).user
