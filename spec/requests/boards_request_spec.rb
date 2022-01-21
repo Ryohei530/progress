@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Boards", type: :request do
-  
   let(:user) { FactoryBot.create(:user) }
   let!(:goal) { FactoryBot.create(:goal, user_id: user.id) }
   let!(:board) { FactoryBot.create(:board1, user_id: user.id) }

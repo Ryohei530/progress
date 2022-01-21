@@ -48,7 +48,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'listen', '~> 3.5.1' 
+  gem 'listen', '~> 3.5.1'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -60,10 +60,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'           
+  gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'webdrivers'         
+  gem 'webdrivers'
 end
 
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります

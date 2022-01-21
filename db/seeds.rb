@@ -13,7 +13,7 @@ brian = User.create!(name: "brian",
                      password: "012345",
                      password_confirmation: "012345",
                      admin: true)
-             
+
 guest = User.create!(name: "ゲスト",
                      email: "guest@example.com",
                      password: "012345",
@@ -22,7 +22,7 @@ mary = User.create!(name: "メアリー",
                     email: "mary@example.com",
                     password: "012345",
                     password_confirmation: "012345")
-             
+
 naru = User.create!(name: "ナルホド",
                     email: "naru@example.com",
                     password: "012345",
@@ -39,7 +39,7 @@ yama = User.create!(name: "やまはる",
                     email: "yamaharu@example.com",
                     password: "012345",
                     password_confirmation: "012345")
-             
+
 93.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@example.com"
@@ -86,7 +86,7 @@ brian.monthly_goals.create!(
     {
       content: "日記30ページ (1日1ページ)",
       number: 30
-      
+
     }
   ]
 )
@@ -546,14 +546,14 @@ end
 brian.create_goal!(
   aim: "自分の武器になるスキル。
 海外で商談、交渉、営業ができるレベルの英会話力",
-  indicator: "TOEIC900 
+  indicator: "TOEIC900
 TOEFL 100
 動画日記累計時間 5400分
 英会話レッスン 90回",
   term_start: Date.today.prev_day(31),
   term_end: Date.today.prev_day(31).next_month(6)
 )
-  
+
 guest.create_goal!(
   aim: "目的を書きます",
   indicator: "その目的を達成するために必要な行動、
@@ -562,10 +562,10 @@ guest.create_goal!(
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
 )
-  
+
 mary.create_goal!(
   aim: "キャビンアテンダントになる！",
-  indicator: "TOEIC750 
+  indicator: "TOEIC750
 英会話レッスン 60回
 英単語3000個覚える
 シャドーイング合計180時間",
@@ -573,7 +573,7 @@ mary.create_goal!(
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
 )
-  
+
 naru.create_goal!(
   aim: "資格が欲しい！",
   indicator: "TOEIC600",
@@ -595,16 +595,16 @@ hiro.create_goal!(
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
 )
-  
+
 yama.create_goal!(
   aim: "海外旅行を楽しめるようになりたい",
   indicator: "TOEIC600",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
 )
-  
-  
-  
+
+
+
 # user.monthly_goals.create!(
 #   monthly_aim: "基礎を固める",
 #   monthly_indicator: "単語300個",
@@ -635,13 +635,13 @@ guest.posts.create!(
 
 guest.posts.first.images.attach(
   {
-    io: File.open('./app/assets/images/cat.jpeg'), 
-    filename: 'cat.jpeg', 
+    io: File.open('./app/assets/images/cat.jpeg'),
+    filename: 'cat.jpeg',
     content_type: 'image/jpeg'
   },
   {
-    io: File.open('./app/assets/images/english.jpeg'), 
-    filename: 'english.jpeg', 
+    io: File.open('./app/assets/images/english.jpeg'),
+    filename: 'english.jpeg',
     content_type: 'image/jpeg'
   }
 )
@@ -689,10 +689,10 @@ tag_name = [
   "習慣",
   "Podcast",
   "英語", # 20
-  "単語", 
-  "英単語", 
-  "暗記", 
-  "英会話", 
+  "単語",
+  "英単語",
+  "暗記",
+  "英会話",
   "シャドーイング", # 25
   "スピーキング",
   "発音", # 27

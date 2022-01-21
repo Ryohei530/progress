@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Goals", type: :request do
-  
   let(:user) { FactoryBot.create(:user) }
   let!(:goal) { FactoryBot.create(:goal, user_id: user.id) }
   let!(:monthly_goal) { FactoryBot.create(:monthly_goal, user_id: user.id) }

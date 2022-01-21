@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # super
     devise_create
   end
-  
+
   def devise_create
     build_resource(sign_up_params)
 
@@ -84,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  
+
   def ensure_normal_user
     if resource.email == 'guest@example.com'
       redirect_to root_path, alert: 'ゲストユーザーの更新、削除はできません。'

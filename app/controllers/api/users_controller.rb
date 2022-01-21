@@ -1,28 +1,26 @@
 class Api::UsersController < ApplicationController
-  
-  
   def show
     @user = User.find(params[:id])
     @current_user = current_user
-   
+
     @goal = @user.goal
-   
+
     @monthly_goals = @user.monthly_goals.reverse
     @monthly_goal = @monthly_goals.first
     @monthly_actions = @monthly_goal.goal_actions
     @monthly_actions_array = []
     @monthly_goals.each do |monthly_goal|
-      @monthly_actions_array << monthly_goal.goal_actions  
+      @monthly_actions_array << monthly_goal.goal_actions
     end
     @rday_dates = @user.running_days.filter_map { |rday| rday.date }
-    
+
     @post = @user.posts.first
     @posts = @user.posts
     @liked_posts = @user.liked_posts # .page(params[:page])
     liked_post_user_ids = @liked_posts.map { |liked_post| liked_post.user_id }
     @liked_post_users = liked_post_user_ids.uniq.map { |user_id| User.find(user_id) }
     @liked_post_users_obj = @liked_post_users.map do |user|
-                              { 
+                              {
                                 id: user.id,
                                 name: user.name,
                                 image_url: rails_representation_url(user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)
@@ -45,13 +43,13 @@ class Api::UsersController < ApplicationController
     @post_comment_count = @post.post_comments.count
     @post_comments = PostComment.all
     @like = @post.post_likes.find_by(user_id: current_user.id) if current_user
-    
+
     @reports = @user.reports
     @liked_reports = @user.liked_reports # .page(params[:page])
     liked_report_user_ids = @liked_reports.map { |liked_report| liked_report.user_id }
     @liked_report_users = liked_report_user_ids.uniq.map { |user_id| User.find(user_id) }
     @liked_report_users_obj = @liked_report_users.map do |user|
-                              { 
+                              {
                                 id: user.id,
                                 name: user.name,
                                 image_url: rails_representation_url(user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)

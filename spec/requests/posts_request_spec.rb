@@ -19,10 +19,9 @@ RSpec.describe "Posts", type: :request do
       expect(response).to redirect_to new_user_session_url
     end
     it "redirects destroy for a wrong post" do
-      
       post2 = FactoryBot.create(:post2)
       sign_in @user
-      
+
       expect {
         delete post_path(post2)
       }.to change(Post, :count).by(0)

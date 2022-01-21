@@ -9,14 +9,14 @@ RSpec.feature "Ranks", type: :feature do
   let!(:r_day3) { FactoryBot.create(:r_day, :day10) }
   let!(:r_day4) { FactoryBot.create(:r_day, :day20) }
   let!(:r_day5) { FactoryBot.create(:r_day, :day30) }
-  
+
   before do
     log_in_as(user)
   end
-  
+
   scenario "ranking" do
     click_link "ランキング"
-    
+
     expect(page).to have_content "継続日数ランキング"
     within ".rank-1" do
       expect(page).to have_content "ナルト"

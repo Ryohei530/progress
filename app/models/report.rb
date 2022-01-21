@@ -9,7 +9,7 @@ class Report < ApplicationRecord
                      foreign_key: :reply_id,
                      dependent: :destroy
   belongs_to :monthly_goal
-  
+
   accepts_nested_attributes_for :report_actions, allow_destroy: true
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
@@ -19,5 +19,4 @@ class Report < ApplicationRecord
                                      message: "must be a valid image format" },
                      size: { less_than: 5.megabytes,
                              message: "should be less than 5MB" }
-  
 end
