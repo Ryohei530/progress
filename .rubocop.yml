@@ -229,3 +229,19 @@ Metrics/PerceivedComplexity:
     
 Style/Documentation:
   Enabled: false
+  
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  
+Style/StringLiterals:
+  Enabled: false
+  
+Style/SymbolArray:
+  Enabled: false
+  
+# Offense count: 8
+# Cop supports --auto-correct.
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 153
