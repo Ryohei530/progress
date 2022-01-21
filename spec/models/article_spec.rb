@@ -24,7 +24,7 @@ RSpec.describe Article, type: :model do
   end
   
   it "is invalid without a content" do
-    article.content =nil
+    article.content = nil
     article.valid?
     expect(article.errors[:content]).to include("を入力してください")
   end
@@ -36,11 +36,11 @@ RSpec.describe Article, type: :model do
   
   describe "class method" do
     it "returns search results that match the search term" do
-      article1 = FactoryBot.create(:article, :title1, user_id: user.id,)
+      article1 = FactoryBot.create(:article, :title1, user_id: user.id)
       # title1 { "You are string" }
-      article2 = FactoryBot.create(:article, :title2, user_id: user.id,)
+      article2 = FactoryBot.create(:article, :title2, user_id: user.id)
       # title2 { "My String is long" }
-      article3 = FactoryBot.create(:article, :title3, user_id: user.id,)
+      article3 = FactoryBot.create(:article, :title3, user_id: user.id)
       # title3 { "My String and Your string" }
       
       expect(Article.search("My")).to include(article2, article3)

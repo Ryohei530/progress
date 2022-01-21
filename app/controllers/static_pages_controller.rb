@@ -27,7 +27,6 @@ class StaticPagesController < ApplicationController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-
   def resource_name
     :user
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MonthlyGoal, type: :model do
-  let(:user) { FactoryBot.create(:user)}
+  let(:user) { FactoryBot.create(:user) }
   let(:monthly_goal) { FactoryBot.build(:monthly_goal, user_id: user.id) }
   
   describe "presence" do

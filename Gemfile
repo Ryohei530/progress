@@ -21,8 +21,8 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'material_icons'
 gem 'mini_magick'
-gem 'mini_racer',       '~> 0.3.1'
-gem 'mysql2',     '~> 0.5.3'
+gem 'mini_racer', '~> 0.3.1'
+gem 'mysql2', '~> 0.5.3'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter'
@@ -48,12 +48,12 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'listen',                '~> 3.5.1' 
+  gem 'listen', '~> 3.5.1' 
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
-  gem 'spring',                '~> 2.1.0'
+  gem 'spring', '~> 2.1.0'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'web-console',           '~> 4.1.0'

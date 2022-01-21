@@ -14,12 +14,10 @@ RSpec.describe "Goals", type: :request do
     end
   end
 
-
   describe "GET /show" do
     it "returns http success" do
       get goal_path(goal)
       expect(response).to have_http_status(200)
     end
   end
-
 end

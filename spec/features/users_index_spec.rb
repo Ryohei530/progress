@@ -12,7 +12,7 @@ RSpec.feature "UsersIndex", type: :feature, js: true do
     expect(page).to have_css ".pagination"
     expect(page).to have_content "削除"
     
-    expect{
+    expect {
       accept_alert do
         find(".user-Test2").click
       end

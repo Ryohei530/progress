@@ -20,7 +20,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     visit root_path
     
     expect(page).to have_css '.content-inner'
-    expect{
+    expect {
       click_button '投稿'
     }.to change(Post, :count).by(0)
     expect(page).to have_selector 'div#error_explanation'
@@ -29,7 +29,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     
     content = "異議あり！"
     image_path = "#{Rails.root}/spec/fixtures/Cosmos01.jpg"
-    expect{
+    expect {
       fill_in 'post[content]', with: content
       attach_file "post[images][]", image_path, make_visible: true
       click_button '投稿'
@@ -38,7 +38,7 @@ RSpec.feature "PostsInterfaces", type: :feature, js: true do
     expect(page).to have_content content
     expect(page).to have_selector "img[src$='Cosmos01.jpg']"
     
-    expect{
+    expect {
       find(".card-link-#{post.id}").click
       expect(page).to have_link "削除"
       accept_alert do

@@ -1,5 +1,4 @@
 module UsersHelper
-
   def sum_of_monthly_actions
     
     # monthly_goal = @user.monthly_goals.last
@@ -42,9 +41,9 @@ module UsersHelper
       num.each do |n|
         sum = 0
         monthly_goal.reports.each do |report|
-          sum += report.report_actions[n-1].number
+          sum += report.report_actions[n - 1].number
         end
-        @sums[n-1] = sum
+        @sums[n - 1] = sum
         
       end
       @monthly_sums += @sums 
@@ -136,15 +135,14 @@ module UsersHelper
         [(term_start + 21.days)..(term_start + 27.days)]
       elsif now.between?((term_start + 28.days), term_end)
         [(term_start + 28.days)..term_end]
-      end
-      )
+      end)
     
     num.each do |n|
       sum = 0
       reports.each do |report|
-        sum += report.report_actions[n-1].number
+        sum += report.report_actions[n - 1].number
       end
-      @week_sums[n-1] = sum
+      @week_sums[n - 1] = sum
     end
     
     @day_date = []
@@ -171,7 +169,6 @@ module UsersHelper
     reports.each do |report|
       @day_done << report.report_actions.last.number
     end
-
   end
   
   def days_of_month
@@ -191,7 +188,7 @@ module UsersHelper
       else 
         7
       end
-      )
+    )
       
     @nth_week = 
       if now.between?(term_start, (term_start + 6.days))
@@ -206,5 +203,4 @@ module UsersHelper
         (term_start + 28.days).strftime('%m月%d日') + "〜" + term_end.strftime('%m月%d日')
       end
   end
-
 end

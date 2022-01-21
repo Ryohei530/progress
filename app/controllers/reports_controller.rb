@@ -13,12 +13,11 @@ class ReportsController < ApplicationController
       days_of_month # @days_of_month
       @action_numbers = @actions.map do |action|
                           (action.number.to_f / @days_of_month).ceil.to_i
-                        end
+      end
     end
   end
   
-  def new
-  end
+  def new; end
   
   def create
     @report = current_user.reports.build(report_params)
@@ -26,12 +25,10 @@ class ReportsController < ApplicationController
     if @report.save
       r_days = current_user.running_days
       
-      unless r_days.first.nil?
-        @latest_r_day = r_days.last.date 
-      end
+      @latest_r_day = r_days.last.date unless r_days.first.nil?
       
-      #その日既に日報が投稿されている時、running_daysを作らない
-      unless @latest_r_day == @report.created_at.to_date
+      # その日既に日報が投稿されている時、running_daysを作らない
+      if @latest_r_day ==! @report.created_at.to_date
         set_rdays_params
         @running_day = r_days.build(running_days_params)
         @running_day.save
@@ -59,11 +56,11 @@ class ReportsController < ApplicationController
     days_of_month # @days_of_month
     @action_numbers = @actions.map do |action|
                         (action.number.to_f / @days_of_month).ceil.to_i
-                      end
+    end
     @comment = ReportComment.new
     @comments = ReportComment.includes(:user).where(report_id: params[:id]).where(reply_id: nil)
     @replies = ReportComment.includes(:user).where(report_id: params[:id]).where.not(reply_id: nil)
-    #@comment_reply = 
+    # @comment_reply = 
   end
   
   def edit
@@ -95,7 +92,7 @@ class ReportsController < ApplicationController
         :monthly_goal_id,
         images: [],
         report_actions_attributes: [:number, :_destroy, :id]
-        )
+      )
     end
     
     def correct_user

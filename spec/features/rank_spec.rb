@@ -42,6 +42,5 @@ RSpec.feature "Ranks", type: :feature do
       expect(page).to have_content "tanaka"
       expect(page).to have_content "3日"
     end
-
   end
 end

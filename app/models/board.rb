@@ -10,6 +10,7 @@ class Board < ApplicationRecord
   
   def Board.search(search)
     return Board.all unless search
+
     Board.where(['title LIKE ?', "%#{search}%"])
   end
   

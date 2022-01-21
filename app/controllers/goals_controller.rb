@@ -32,8 +32,8 @@ class GoalsController < ApplicationController
         :aim,
         :indicator, 
         :term_start, 
-        :term_end, 
-        )
+        :term_end 
+      )
     end
     
     def correct_user

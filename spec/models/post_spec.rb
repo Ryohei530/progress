@@ -23,7 +23,7 @@ RSpec.describe Post, type: :model do
   end
   
   it "is too long post with over 141 chars" do
-    @post.content = "a"*141
+    @post.content = "a" * 141
     expect(@post).to_not be_valid
   end
   

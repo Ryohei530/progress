@@ -4,8 +4,7 @@ class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
   before_action :get_location, only: :show
   
-  def index
-  end
+  def index; end
   
   def create
     @post = current_user.posts.build(post_params)

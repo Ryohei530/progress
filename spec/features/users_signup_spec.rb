@@ -5,7 +5,7 @@ RSpec.feature "UsersSignup", type: :feature do
     
     visit signup_path
     
-    expect{
+    expect {
       fill_in "名前", with: ""
       fill_in "メールアドレス", with: "user@invalid"
       
@@ -13,7 +13,7 @@ RSpec.feature "UsersSignup", type: :feature do
       fill_in "確認用", with: "bar"
       
       click_button "アカウント作成"
-    }.to_not change(User.all,  :count)
+    }.to_not change(User.all, :count)
     
     expect(page).to have_content "The form contains"
     expect(page).to have_content "名前を入力してください"
@@ -21,7 +21,7 @@ RSpec.feature "UsersSignup", type: :feature do
     expect(page).to have_content "パスワードは6文字以上で入力してください"
     expect(page).to have_content "確認用とパスワードの入力が一致しません"
     
-    expect{
+    expect {
       fill_in "名前", with: "Brian"
       fill_in "メールアドレス", with: "brian@example.com"
       

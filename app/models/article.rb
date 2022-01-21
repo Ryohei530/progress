@@ -11,6 +11,7 @@ class Article < ApplicationRecord
   
   def Article.search(search)
     return Article.all unless search
+
     Article.where(['title LIKE ?', "%#{search}%"])
   end
   

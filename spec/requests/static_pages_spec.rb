@@ -24,5 +24,4 @@ RSpec.describe "StaticPages", type: :request do
       expect(response.body).to include "ランキング | Progress"
     end
   end
-
 end

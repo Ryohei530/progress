@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
     end
     
     it "is too long name with over 51 chars" do
-      user.name = "a"*51
+      user.name = "a" * 51
       user.valid?
       expect(user.errors[:name]).to include("は50文字以内で入力してください")
     end
@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
   
   describe "email validation" do
     it "is too long email with over 256 chars" do
-      user.email = "a"*256
+      user.email = "a" * 256
       user.valid?
       expect(user.errors[:email]).to include("は255文字以内で入力してください")
     end
@@ -70,13 +70,13 @@ RSpec.describe User, type: :model do
   
   describe "password validation" do
     it "is invalid without a password" do
-      user.password = user.password_confirmation = " "*6
+      user.password = user.password_confirmation = " " * 6
       user.valid?
       expect(user.errors[:password]).to include("を入力してください")
     end
     
     it "is invalid less than a minimum length" do
-      user.password = user.password_confirmation = "a"*5
+      user.password = user.password_confirmation = "a" * 5
       user.valid?
       expect(user.errors[:password]).to include("は6文字以上で入力してください")
     end
@@ -92,7 +92,7 @@ RSpec.describe User, type: :model do
   it "destroys asscoiated posts" do
     user.save
     user.posts.create!(content: "Lorem Ipsum")
-    expect{
+    expect {
       user.destroy
     }.to change(Post.all, :count).by(-1)
   end

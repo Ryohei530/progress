@@ -52,7 +52,7 @@ class MonthlyGoalsController < ApplicationController
         :term_start, 
         :term_end, 
         goal_actions_attributes: [:content, :number, :_destroy, :id]
-        )
+      )
     end
     
     def correct_user

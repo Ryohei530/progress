@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-
   describe "GET #new" do
     it "returns http success" do
       get new_user_registration_path
@@ -33,7 +32,7 @@ RSpec.describe "Users", type: :request do
       
       it "redirects update" do
         patch user_path(@user), params: { user: { name: @user.name,
-                                                  email: @user.email} }
+                                                  email: @user.email } }
         expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to new_user_session_url
       end
@@ -44,7 +43,7 @@ RSpec.describe "Users", type: :request do
       end
       
       it "redirects destroy" do
-        expect{
+        expect {
           delete user_path(@user)
         }.to change(User, :count).by(0)
         expect(response).to redirect_to new_user_session_url
@@ -62,7 +61,7 @@ RSpec.describe "Users", type: :request do
       it "redirects update" do
         sign_in @other_user
         patch user_path(@user), params: { user: { name: @user.name,
-                                                  email: @user.email} }
+                                                  email: @user.email } }
         expect(flash[:alert]).to be_truthy
         expect(response).to redirect_to root_url
       end
@@ -71,7 +70,7 @@ RSpec.describe "Users", type: :request do
     context "logged in as non-admin user" do
       it "redirects destroy" do
         sign_in @other_user
-        expect{
+        expect {
           delete user_path(@user)
         }.to change(User, :count).by(0)
         expect(response).to redirect_to root_url
@@ -94,9 +93,9 @@ RSpec.describe "Users", type: :request do
       expect(@other_user.admin).to be_falsey
       
       patch user_url(@other_user), params: { user: { password: "012345",
-                                                      password_confirmation: "012345",
-                                                      admin: true} },
-                                   headers: {'HTTP_REFERER' => edit_user_url(@other_user)}
+                                                     password_confirmation: "012345",
+                                                     admin: true } },
+                                   headers: { 'HTTP_REFERER' => edit_user_url(@other_user) }
       expect(@other_user.admin).to be_falsey
     end
     
@@ -121,5 +120,4 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
-
 end

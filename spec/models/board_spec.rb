@@ -24,7 +24,7 @@ RSpec.describe Board, type: :model do
   end
   
   it "is invalid without a content" do
-    board.content =nil
+    board.content = nil
     board.valid?
     expect(board.errors[:content]).to include("を入力してください")
   end
@@ -36,11 +36,11 @@ RSpec.describe Board, type: :model do
   
   describe "class method" do
     it "returns search results that match the search term" do
-      board1 = FactoryBot.create(:board, :title1, user_id: user.id,)
+      board1 = FactoryBot.create(:board, :title1, user_id: user.id)
       # title1 { "You are string" }
-      board2 = FactoryBot.create(:board, :title2, user_id: user.id,)
+      board2 = FactoryBot.create(:board, :title2, user_id: user.id)
       # title2 { "My String is long" }
-      board3 = FactoryBot.create(:board, :title3, user_id: user.id,)
+      board3 = FactoryBot.create(:board, :title3, user_id: user.id)
       # title3 { "My String and Your string" }
       
       expect(Board.search("My")).to include(board2, board3)

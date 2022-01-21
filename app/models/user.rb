@@ -34,8 +34,8 @@ class User < ApplicationRecord
   # has_secure_password
   validates :avatar, content_type: { in: %w[image/jpeg image/gif image/png],
                                      message: "jpeg, gif, png形式のみアップロード可能です" },
-                     size:         { less_than: 5.megabytes,
-                                     message: "5MBを超える画像はアップロードできません" }
+                     size: { less_than: 5.megabytes,
+                             message: "5MBを超える画像はアップロードできません" }
   before_create :default_image
    
   # def User.digest(string)
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
   
