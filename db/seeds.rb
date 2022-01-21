@@ -603,8 +603,6 @@ yama.create_goal!(
   term_end: Date.today.prev_day(20).next_month(6)
 )
 
-
-
 # user.monthly_goals.create!(
 #   monthly_aim: "基礎を固める",
 #   monthly_indicator: "単語300個",
