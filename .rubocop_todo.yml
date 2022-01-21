@@ -6,31 +6,11 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 36
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-# Layout/IndentationConsistency:
-#   Enabled: false
-
-# Offense count: 45
-# Cop supports --auto-correct.
-# Configuration parameters: Width, IgnoredPatterns.
-Layout/IndentationWidth:
-  Enabled: false
-
-# Offense count: 20
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: final_newline, final_blank_line
-Layout/TrailingEmptyLines:
-  Enabled: false
-
 # Offense count: 640
 # Cop supports --auto-correct.
 # Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Enabled: false
+# Layout/TrailingWhitespace:
+#   Enabled: false
 
 # Offense count: 13
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.

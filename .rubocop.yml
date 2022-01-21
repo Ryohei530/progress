@@ -177,3 +177,23 @@ Style/BlockDelimiters:
     - 'spec/models/user_spec.rb'
     - 'spec/requests/posts_request_spec.rb'
     - 'spec/requests/users_request_spec.rb'
+    
+# Offense count: 36
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: normal, indented_internal_methods
+Layout/IndentationConsistency:
+  Enabled: false
+  
+# Offense count: 45
+# Cop supports --auto-correct.
+# Configuration parameters: Width, IgnoredPatterns.
+Layout/IndentationWidth:
+  Enabled: false
+  
+# Offense count: 20
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: final_newline, final_blank_line
+Layout/TrailingEmptyLines:
+  Enabled: false
