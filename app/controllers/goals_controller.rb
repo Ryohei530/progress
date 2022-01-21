@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :get_location, only: :edit
-  
+
   def index
     @goals = Goal.page(params[:page]).per(20)
   end
@@ -10,11 +10,11 @@ class GoalsController < ApplicationController
   def show
     @goal = Goal.find(params[:id])
   end
-  
+
   def edit
     @goal = Goal.find(params[:id])
   end
-  
+
   def update
     @goal = Goal.find(params[:id])
     if @goal.update(goal_params)
@@ -24,18 +24,18 @@ class GoalsController < ApplicationController
       render 'edit'
     end
   end
-  
-    private
-    
+
+  private
+
     def goal_params
       params.require(:goal).permit(
         :aim,
-        :indicator, 
-        :term_start, 
-        :term_end, 
-        )
+        :indicator,
+        :term_start,
+        :term_end
+      )
     end
-    
+
     def correct_user
       @user = Goal.find(params[:id]).user
       redirect_to(root_url) unless current_user?(@user)

@@ -5,8 +5,8 @@ FactoryBot.define do
     term_start { "2021-07-17" }
     term_end { "2021-12-17" }
   end
-  
-  factory :goal0 , class: Goal do
+
+  factory :goal0, class: Goal do
     aim { nil }
     indicator { nil }
     term_start { nil }

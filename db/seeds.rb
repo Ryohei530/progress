@@ -9,43 +9,37 @@ require './db/content'
 
 # users
 brian = User.create!(name: "brian",
-             email: "brian@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             admin: true)
-             
+                     email: "brian@example.com",
+                     password: "012345",
+                     password_confirmation: "012345",
+                     admin: true)
+
 guest = User.create!(name: "ゲスト",
-             email: "guest@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
+                     email: "guest@example.com",
+                     password: "012345",
+                     password_confirmation: "012345")
 mary = User.create!(name: "メアリー",
-             email: "mary@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
-             
+                    email: "mary@example.com",
+                    password: "012345",
+                    password_confirmation: "012345")
+
 naru = User.create!(name: "ナルホド",
-             email: "naru@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
+                    email: "naru@example.com",
+                    password: "012345",
+                    password_confirmation: "012345")
 rumi = User.create!(name: "るみ",
-             email: "rumi@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
+                    email: "rumi@example.com",
+                    password: "012345",
+                    password_confirmation: "012345")
 hiro = User.create!(name: "ひろき",
-             email: "hiroki@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
+                    email: "hiroki@example.com",
+                    password: "012345",
+                    password_confirmation: "012345")
 yama = User.create!(name: "やまはる",
-             email: "yamaharu@example.com",
-             password: "012345",
-             password_confirmation: "012345",
-             )
-             
+                    email: "yamaharu@example.com",
+                    password: "012345",
+                    password_confirmation: "012345")
+
 93.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@example.com"
@@ -87,13 +81,13 @@ brian.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "単語1500個覚える",
-      number: 1500,
+      number: 1500
     },
     {
       content: "日記30ページ (1日1ページ)",
-      number: 30,
-      
-    },
+      number: 30
+
+    }
   ]
 )
 
@@ -107,12 +101,12 @@ guest.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "目標を達成するためのアクション",
-      number: 100,
+      number: 100
     },
     {
       content: "シャドーイング30時間",
-      number: 30,
-    },
+      number: 30
+    }
   ]
 )
 
@@ -125,12 +119,12 @@ mary.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "動画日記60時間",
-      number: 60,
+      number: 60
     },
     {
       content: "シャドーイング30時間",
-      number: 30,
-    },
+      number: 30
+    }
   ]
 )
 
@@ -142,12 +136,12 @@ naru.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "単語帳30ページ",
-      number: 30,
+      number: 30
     },
     {
       content: "日記30ページ",
-      number: 30,
-    },
+      number: 30
+    }
   ]
 )
 
@@ -159,12 +153,12 @@ rumi.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "金フレ150ページ",
-      number: 150,
+      number: 150
     },
     {
       content: "Vintage60ページ",
-      number: 60,
-    },
+      number: 60
+    }
   ]
 )
 
@@ -176,12 +170,12 @@ hiro.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "リピーティング 60時間",
-      number: 60,
+      number: 60
     },
     {
       content: "発音の教材終わらせる(300ページ)",
-      number: 300,
-    },
+      number: 300
+    }
   ]
 )
 
@@ -193,15 +187,14 @@ yama.monthly_goals.create!(
   goal_actions_attributes: [
     {
       content: "洋画５本",
-      number: 5,
+      number: 5
     },
     {
       content: "シチェーション別の英会話表現集30ページ",
-      number: 30,
-    },
+      number: 30
+    }
   ]
 )
-
 
 User.all.offset(7).each do |user|
   user.monthly_goals.create!(
@@ -212,7 +205,7 @@ User.all.offset(7).each do |user|
     term_end: Date.today.next_month,
     goal_actions_attributes: [
       content: "単語1500個覚える",
-      number: 1500,
+      number: 1500
     ]
   )
 end
@@ -227,7 +220,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 30 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -240,7 +233,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 3 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -253,7 +246,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 1 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -266,7 +259,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 1 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -279,7 +272,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 4 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -292,7 +285,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 1 },
-      { number: 3 },
+      { number: 3 }
     ]
   )
 end
@@ -305,7 +298,7 @@ end
     r_days: 1 + n,
     report_actions_attributes: [
       { number: 1 },
-      { number: 1 },
+      { number: 1 }
     ]
   )
 end
@@ -332,14 +325,13 @@ end
 #   )
 # end
 
-
 brian.reports.create!(
   content: "いい感じで継続ができてます",
   monthly_goal_id: brian.monthly_goals.first.id,
   r_days: brian.reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 45 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -349,7 +341,7 @@ User.second.reports.create!(
   r_days: User.second.reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 3 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -359,7 +351,7 @@ User.third.reports.create!(
   r_days: User.third.reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 1 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -369,7 +361,7 @@ User.find(4).reports.create!(
   r_days: User.find(4).reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 1 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -379,7 +371,7 @@ User.find(5).reports.create!(
   r_days: User.find(5).reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 4 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -389,7 +381,7 @@ User.find(6).reports.create!(
   r_days: User.find(6).reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 1 },
-    { number: 3 },
+    { number: 3 }
   ]
 )
 
@@ -399,7 +391,7 @@ User.find(7).reports.create!(
   r_days: User.find(7).reports.first.r_days + 1,
   report_actions_attributes: [
     { number: 1 },
-    { number: 1 },
+    { number: 1 }
   ]
 )
 
@@ -410,7 +402,7 @@ brian.running_days.create!(
   date: Date.today.days_ago(30),
   created_at: Time.current.days_ago(30),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 30.times do |n|
@@ -419,7 +411,7 @@ brian.running_days.create!(
     date: Date.today.days_ago(29 - n),
     created_at: Time.current.days_ago(29 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
 
@@ -428,7 +420,7 @@ User.second.running_days.create!(
   date: Date.today.days_ago(20),
   created_at: Time.current.days_ago(20),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 20.times do |n|
@@ -437,7 +429,7 @@ User.second.running_days.create!(
     date: Date.today.days_ago(19 - n),
     created_at: Time.current.days_ago(19 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
 
@@ -446,7 +438,7 @@ User.third.running_days.create!(
   date: Date.today.days_ago(15),
   created_at: Time.current.days_ago(15),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 15.times do |n|
@@ -455,26 +447,25 @@ User.third.running_days.create!(
     date: Date.today.days_ago(14 - n),
     created_at: Time.current.days_ago(14 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
-
 
 User.find(4).running_days.create!(
   start_date: Date.today.days_ago(10),
   date: Date.today.days_ago(10),
   created_at: Time.current.days_ago(10),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 10.times do |n|
   User.find(4).running_days.create!(
     start_date: Date.today.days_ago(10),
     date: Date.today.days_ago(9 - n),
-    created_at: Time.current.days_ago(9- n),
+    created_at: Time.current.days_ago(9 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
 
@@ -483,7 +474,7 @@ User.find(5).running_days.create!(
   date: Date.today.days_ago(5),
   created_at: Time.current.days_ago(5),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 5.times do |n|
@@ -492,7 +483,7 @@ User.find(5).running_days.create!(
     date: Date.today.days_ago(4 - n),
     created_at: Time.current.days_ago(4 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
 
@@ -501,7 +492,7 @@ User.find(6).running_days.create!(
   date: Date.today.days_ago(3),
   created_at: Time.current.days_ago(3),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 3.times do |n|
@@ -510,7 +501,7 @@ User.find(6).running_days.create!(
     date: Date.today.days_ago(2 - n),
     created_at: Time.current.days_ago(2 - n),
     s_or_c: true,
-    r_days: 2 + n,
+    r_days: 2 + n
   )
 end
 
@@ -519,7 +510,7 @@ User.find(7).running_days.create!(
   date: Date.today.days_ago(2),
   created_at: Time.current.days_ago(2),
   s_or_c: false,
-  r_days: 1,
+  r_days: 1
 )
 
 2.times do |n|
@@ -528,7 +519,7 @@ User.find(7).running_days.create!(
     date: Date.today.days_ago(1 - n),
     created_at: Time.current.days_ago(1 - n),
     s_or_c: true,
-    r_days: 2,
+    r_days: 2
   )
 end
 
@@ -546,7 +537,7 @@ User.all.offset(7).each do |user|
     start_date: Date.today,
     date: Date.today,
     s_or_c: false,
-    r_days: 1,
+    r_days: 1
   )
 end
 
@@ -555,14 +546,14 @@ end
 brian.create_goal!(
   aim: "自分の武器になるスキル。
 海外で商談、交渉、営業ができるレベルの英会話力",
-  indicator: "TOEIC900 
+  indicator: "TOEIC900
 TOEFL 100
 動画日記累計時間 5400分
 英会話レッスン 90回",
   term_start: Date.today.prev_day(31),
   term_end: Date.today.prev_day(31).next_month(6)
-  )
-  
+)
+
 guest.create_goal!(
   aim: "目的を書きます",
   indicator: "その目的を達成するために必要な行動、
@@ -570,32 +561,32 @@ guest.create_goal!(
   を評価できる指標を書きます",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
-  
+)
+
 mary.create_goal!(
   aim: "キャビンアテンダントになる！",
-  indicator: "TOEIC750 
+  indicator: "TOEIC750
 英会話レッスン 60回
 英単語3000個覚える
 シャドーイング合計180時間",
 
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
-  
+)
+
 naru.create_goal!(
   aim: "資格が欲しい！",
   indicator: "TOEIC600",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
+)
 
 rumi.create_goal!(
   aim: "海外で働く、海外拠点配属をもぎ取る",
   indicator: "TOEFL IBT 80点",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
+)
 
 hiro.create_goal!(
   aim: "自分の強みを作る",
@@ -603,17 +594,15 @@ hiro.create_goal!(
   TOEIC900",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
-  
+)
+
 yama.create_goal!(
   aim: "海外旅行を楽しめるようになりたい",
   indicator: "TOEIC600",
   term_start: Date.today.prev_day(20),
   term_end: Date.today.prev_day(20).next_month(6)
-  )
-  
-  
-  
+)
+
 # user.monthly_goals.create!(
 #   monthly_aim: "基礎を固める",
 #   monthly_indicator: "単語300個",
@@ -644,13 +633,13 @@ guest.posts.create!(
 
 guest.posts.first.images.attach(
   {
-    io: File.open('./app/assets/images/cat.jpeg'), 
-    filename: 'cat.jpeg', 
+    io: File.open('./app/assets/images/cat.jpeg'),
+    filename: 'cat.jpeg',
     content_type: 'image/jpeg'
   },
   {
-    io: File.open('./app/assets/images/english.jpeg'), 
-    filename: 'english.jpeg', 
+    io: File.open('./app/assets/images/english.jpeg'),
+    filename: 'english.jpeg',
     content_type: 'image/jpeg'
   }
 )
@@ -697,12 +686,12 @@ tag_name = [
   "工夫",
   "習慣",
   "Podcast",
-  "英語",  # 20
-  "単語", 
-  "英単語", 
-  "暗記", 
-  "英会話", 
-  "シャドーイング",  # 25
+  "英語", # 20
+  "単語",
+  "英単語",
+  "暗記",
+  "英会話",
+  "シャドーイング", # 25
   "スピーキング",
   "発音", # 27
   "単語帳",
@@ -712,7 +701,7 @@ tag_name = [
   "ネタ切れ",
   "両立",
   "時間",
-  "レッスン", # 35
+  "レッスン" # 35
 ]
 
 tag_name.each do |name|
@@ -749,29 +738,28 @@ article5 = rumi.articles.create!(
 # article tags
 
 6.times do |n|
-  article1.article_tags.create!(tag_id: 1 + n )
+  article1.article_tags.create!(tag_id: 1 + n)
 end
 
 5.times do |n|
-  article2.article_tags.create!(tag_id: 7 + n )
+  article2.article_tags.create!(tag_id: 7 + n)
 end
 
 4.times do |n|
-  article3.article_tags.create!(tag_id: 12 + n )
+  article3.article_tags.create!(tag_id: 12 + n)
 end
 
 4.times do |n|
-  article4.article_tags.create!(tag_id: 16 + n )
+  article4.article_tags.create!(tag_id: 16 + n)
 end
 
 7.times do |n|
-  article5.article_tags.create!(tag_id: 20 + n )
+  article5.article_tags.create!(tag_id: 20 + n)
 end
 
 2.times do |n|
-  article4.article_tags.create!(tag_id: 12 + n )
+  article4.article_tags.create!(tag_id: 12 + n)
 end
-
 
 # board
 
@@ -835,27 +823,27 @@ rumi.board_comments.create!(
   content: "なるほど！！　その日の予定を可視化させれば、なんとなく過ごしてしまう時間を減らせそうですね！　ありがとうございました(^-^)"
 )
 
-board.board_tags.create!(tag_id: 20 )
+board.board_tags.create!(tag_id: 20)
 
 3.times do |n|
-  board.board_tags.create!(tag_id: 24 + n )
+  board.board_tags.create!(tag_id: 24 + n)
 end
 
 board2.board_tags.create!(tag_id: 27)
 
 3.times do |n|
-  board3.board_tags.create!(tag_id: 28 + n )
+  board3.board_tags.create!(tag_id: 28 + n)
 end
 
 2.times do |n|
-  board4.board_tags.create!(tag_id: 30 + n )
+  board4.board_tags.create!(tag_id: 30 + n)
 end
 
 board5.board_tags.create!(tag_id: 1)
 board5.board_tags.create!(tag_id: 32)
 
 2.times do |n|
-  board6.board_tags.create!(tag_id: 33 + n )
+  board6.board_tags.create!(tag_id: 33 + n)
 end
 
 board7.board_tags.create!(tag_id: 35)

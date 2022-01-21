@@ -6,7 +6,7 @@ RSpec.describe "StaticPages", type: :request do
       get root_path
       expect(response).to have_http_status(:success)
     end
-    
+
     it "has the title 'ホーム | Progress'" do
       get root_path
       expect(response.body).to include "ホーム | Progress"
@@ -18,11 +18,10 @@ RSpec.describe "StaticPages", type: :request do
       get rank_path
       expect(response).to have_http_status(:success)
     end
-    
+
     it "has the title 'ランキング | Progress'" do
       get rank_path
       expect(response.body).to include "ランキング | Progress"
     end
   end
-
 end

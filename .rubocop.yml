@@ -1,1 +1,247 @@
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.7.3　
+  TargetRailsVersion: 6.1.4.1　
+  Exclude:
+    - "vendor/**/*" 
+    - "db/schema*.rb"
+    - "node_modules/**/*"
+    - "db/migrate/**/*"
+    - "app/channels/**/*"
+    - "config/**/*"
+    - "config.ru"
+    - "bin/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
+    
+Style/AsciiComments:
+  Enabled: false
+  
+# Offense count: 7
+# Cop supports --auto-correct.
+# Configuration parameters: AllowMethodsWithArguments, IgnoredMethods.
+# IgnoredMethods: respond_to, define_method
+Style/SymbolProc:
+  Exclude:
+    - 'app/controllers/api/users_controller.rb'
+    - 'app/controllers/users_controller.rb'
+    
+# Offense count: 10
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: nested, compact
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/api/post_likes_controller.rb'
+    - 'app/controllers/api/report_likes_controller.rb'
+    - 'app/controllers/api/users_controller.rb'
+    - 'app/controllers/users/confirmations_controller.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/controllers/users/sessions_controller.rb'
+    - 'app/controllers/users/unlocks_controller.rb'
+    - 'app/helpers/api/users_helper.rb'
+    
+    
+# Offense count: 6
+# Configuration parameters: MinBodyLength.
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/application_controller.rb'
+    - 'app/controllers/reports_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/controllers/users_controller.rb'
+    - 'app/models/user.rb'
+    
+    
+# Offense count: 5
+# Cop supports --auto-correct.
+Style/IfUnlessModifier:
+  Exclude:
+    - 'app/controllers/reports_controller.rb'
+    - 'app/controllers/static_pages_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/models/user.rb'
+    
+# Offense count: 1
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - 'app/controllers/static_pages_controller.rb'
+    
+# Offense count: 1
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/helpers/sessions_helper.rb'
+    
+# Offense count: 5
+# Cop supports --auto-correct.
+# Configuration parameters: Mode.
+Style/StringConcatenation:
+  Exclude:
+    - 'app/helpers/users_helper.rb'
+    
+    
+# Offense count: 13
+# Cop supports --auto-correct.
+Style/RedundantSelf:
+  Exclude:
+    - 'app/models/article.rb'
+    - 'app/models/board.rb'
+    - 'app/models/user.rb'
+    
+    
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+    
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: IgnoredMethods.
+Style/MethodCallWithoutArgsParentheses:
+  Exclude:
+    - 'spec/models/user_spec.rb'
+    
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/RedundantConditional:
+  Exclude:
+    - 'spec/factories/running_days.rb'
+    
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/ColonMethodCall:
+  Exclude:
+    - 'db/seeds.rb'
+    
+# Offense count: 2
+# Cop supports --auto-correct.
+Style/ClassMethods:
+  Exclude:
+    - 'app/models/article.rb'
+    - 'app/models/board.rb'
+    
+# Offense count: 3
+# Cop supports --auto-correct.
+Style/RedundantInterpolation:
+  Exclude:
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'spec/features/sample_spec.rb'
+    - 'spec/features/users_login_spec.rb'
+
+# Offense count: 18
+# Cop supports --auto-correct.
+Style/IdenticalConditionalBranches:
+  Exclude:
+    - 'app/controllers/board_comments_controller.rb'
+    - 'app/controllers/bookmarks_controller.rb'
+    - 'app/controllers/post_comments_controller.rb'
+    - 'app/controllers/post_likes_controller.rb'
+    - 'app/controllers/report_comments_controller.rb'
+    - 'app/controllers/report_likes_controller.rb'
+
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Layout/SpaceAfterNot:
+  Exclude:
+    - 'app/controllers/reports_controller.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
+# SupportedStylesForExponentOperator: space, no_space
+Layout/SpaceAroundOperators:
+  Exclude:
+    - 'app/controllers/reports_controller.rb'
+    
+    
+# Offense count: 12
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, IgnoredMethods, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
+# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
+# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
+# FunctionalMethods: let, let!, subject, watch
+# IgnoredMethods: lambda, proc, it
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/features/posts_interface_spec.rb'
+    - 'spec/features/users_index_spec.rb'
+    - 'spec/features/users_signup_spec.rb'
+    - 'spec/models/user_spec.rb'
+    - 'spec/requests/posts_request_spec.rb'
+    - 'spec/requests/users_request_spec.rb'
+    
+# Offense count: 36
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: normal, indented_internal_methods
+Layout/IndentationConsistency:
+  Enabled: false
+  
+# Offense count: 45
+# Cop supports --auto-correct.
+# Configuration parameters: Width, IgnoredPatterns.
+Layout/IndentationWidth:
+  Enabled: false
+  
+# Offense count: 20
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: final_newline, final_blank_line
+Layout/TrailingEmptyLines:
+  Enabled: false
+  
+# Offense count: 13
+# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Max: 134
+  
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    
+# Offense count: 2
+# Configuration parameters: IgnoredMethods.
+Metrics/CyclomaticComplexity:
+  Max: 24
+
+# Offense count: 11
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+Metrics/MethodLength:
+  Max: 76
+
+# Offense count: 1
+# Configuration parameters: CountComments, CountAsOne.
+Metrics/ModuleLength:
+  Max: 102
+
+# Offense count: 3
+# Configuration parameters: IgnoredMethods.
+Metrics/PerceivedComplexity:
+  Max: 24
+    
+Style/Documentation:
+  Enabled: false
+  
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  
+Style/StringLiterals:
+  Enabled: false
+  
+Style/SymbolArray:
+  Enabled: false
+  
+# Offense count: 8
+# Cop supports --auto-correct.
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 153

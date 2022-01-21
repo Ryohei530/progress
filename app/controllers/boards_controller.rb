@@ -1,21 +1,21 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  
+
   def index
     @boards = Board.page(params[:page])
     @tags = Tag.joins(:board_tags).distinct
   end
-  
+
   def new
     @board = Board.new
     @tags = Tag.joins(:board_tags).distinct
   end
-  
+
   def create
     @board = current_user.boards.build(board_params)
     tag_list = params[:board][:name].split(nil)
-    
+
     if @board.save
       @board.save_tag(tag_list)
       flash[:success] = "掲示板が作成されました"
@@ -36,7 +36,7 @@ class BoardsController < ApplicationController
   def edit
     @board = Board.find(params[:id])
   end
-  
+
   def update
     @board = Board.find(params[:id])
     tag_list = params[:board][:name].split(nil)
@@ -48,31 +48,31 @@ class BoardsController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def destroy
     @board = Board.find(params[:id]).destroy
     flash[:success] = "削除しました"
     redirect_to boards_url
   end
-  
+
   def tag
     @tags = Tag.joins(:board_tags).distinct
     @tag = Tag.find(params[:tag_id])
-    @boards = @tag.boards
+    @boards = @tag.boards.page(params[:page])
   end
-  
+
   def search
-    @boards = Board.search(params[:search])
+    @boards = Board.search(params[:search]).page(params[:page])
     @tags = Tag.joins(:board_tags).distinct
     @search = params[:search]
   end
-  
-    private
-    
+
+  private
+
     def board_params
       params.require(:board).permit(:title, :content)
     end
-    
+
     def correct_user
       @user = Board.find(params[:id]).user
       redirect_to(root_url) unless current_user?(@user)

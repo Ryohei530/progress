@@ -1,11 +1,11 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :correct_user, only: :destroy
-  
+
   def index
     @bookmarks = current_user.bookmarks
   end
-  
+
   def create
     @article = Article.find(params[:article_id])
     bookmark = @article.bookmarks.build(user_id: current_user.id)
@@ -16,7 +16,7 @@ class BookmarksController < ApplicationController
       redirect_to request.referer
     end
   end
-  
+
   def destroy
     @article = Article.find(params[:article_id])
     bookmark = @article.bookmarks.find_by(user_id: current_user.id)
@@ -27,9 +27,9 @@ class BookmarksController < ApplicationController
       redirect_to request.referer
     end
   end
-  
-    private
-    
+
+  private
+
     def correct_user
       @user = Bookmark.find(params[:id]).user
       redirect_to(root_url) unless current_user?(@user)
