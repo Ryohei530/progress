@@ -1,3 +1,4 @@
+<% monthly_goal = report.monthly_goal %>
 <li id="report-<%= report.id %>" class="card mb-4">
   <div class="card-body">
     <div class="card-wrap">
@@ -16,18 +17,17 @@
         <div class="card-content">
           <div class="aim">
             <p class="aim-tit"><i class="fas fa-crosshairs"></i> 今月の目的</p>
-            <p class="aim-txt"><%= report.monthly_goal.monthly_aim %></p>
+            <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
             <p class="aim-tit"><i class="fas fa-tachometer-alt"></i> 今月の目標指標</p>
-            <p class="aim-txt"><%= report.monthly_goal.monthly_indicator %></p>
+            <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
           </div>
         
           <div class="action">
             <p class="action-tit"><i class="far fa-star"></i> 今日達成したアクション</p>
             <ul class="action-list">
-              <% monthly_goal = report.monthly_goal %>
               <% days_of_month_public = (monthly_goal.term_end - monthly_goal.term_start) %>
               <% rep_acts = report.report_actions.reverse %>
-              <% actions = report.monthly_goal.goal_actions %>
+              <% actions = monthly_goal.goal_actions %>
               <%= actions.zip(rep_acts) do |action, rep_act| %>
               <li class="action-item">
                 <div class="action-inner">

@@ -21,6 +21,7 @@ class MonthlyGoalsController < ApplicationController
 
   def show
     @monthly_goal = MonthlyGoal.find(params[:id])
+    @avatar = @monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed
   end
 
   def edit

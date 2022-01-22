@@ -34,10 +34,10 @@ RSpec.describe "Users", type: :request do
         expect(response).to redirect_to new_user_session_url
       end
 
-      it "redirects index" do
-        get users_path
-        expect(response).to redirect_to new_user_session_url
-      end
+      # it "redirects index" do
+      #   get users_path
+      #   expect(response).to redirect_to new_user_session_url
+      # end
 
       it "redirects destroy" do
         expect {
@@ -95,25 +95,25 @@ RSpec.describe "Users", type: :request do
       expect(@other_user.admin).to be_falsey
     end
 
-    context "log in as admin user" do
-      it "includes pagination and delete links" do
-        sign_in @user
-        get users_path
+    # context "log in as admin user" do
+    #   it "includes pagination and delete links" do
+    #     sign_in @user
+    #     get users_path
 
-        first_page_of_users = User.page('1').per(20)
-        first_page_of_users.each do |user|
-          expect(response.body).to include user.name
-        end
-      end
-    end
+    #     first_page_of_users = User.page('1').per(20)
+    #     first_page_of_users.each do |user|
+    #       expect(response.body).to include user.name
+    #     end
+    #   end
+    # end
 
-    context "log in as non-admin user" do
-      it "includes pagination and no delete links" do
-        sign_in @other_user
-        get users_path
+    # context "log in as non-admin user" do
+    #   it "includes pagination and no delete links" do
+    #     sign_in @other_user
+    #     get users_path
 
-        expect(response.body).to_not include "削除"
-      end
-    end
+    #     expect(response.body).to_not include "削除"
+    #   end
+    # end
   end
 end

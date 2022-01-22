@@ -9,7 +9,7 @@
         <div class="card-inner d-flex">
           <div class="card-avatar">
             <%= link_to @article.user do %>
-              <%= image_tag @article.user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed, class: '_rounded' %>
+              <%= image_tag @avatar, class: '_rounded' %>
             <% end %> 
           </div>
           <div class="card-user">
@@ -28,8 +28,7 @@
           <div class="card-bookmark">
             <% if logged_in? %>
               <% if @article.bookmarked_by?(current_user) %>
-                <% bookmark = @article.bookmarks.find_by(user_id: current_user.id) %>
-                <%= link_to article_bookmark_path(@article, bookmark), class: 'btn', method: :delete do %>
+                <%= link_to article_bookmark_path(@article, @bookmark), class: 'btn', method: :delete do %>
                   <i class="fas fa-bookmark book-off"></i><span>ブックマーク解除</span>
                 <% end %>
               <% else %>

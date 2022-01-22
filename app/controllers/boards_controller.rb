@@ -27,8 +27,10 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    @avatar = @board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed
+    @comment_counts = @board.board_comments.count
     @comment = BoardComment.new
-    @comments = BoardComment.includes(:user).where(board_id: params[:id]).where(reply_id: nil)
+    @comments = BoardComment.includes(:user).where(board_id: params[:id], reply_id: nil)
     # @replies = BoardComment.includes(:user).where(board_id: params[:id]).where.not(reply_id: nil)
     @board_tags = @board.board_tags
   end

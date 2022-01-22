@@ -12,12 +12,11 @@
         <div class="card-wrap">
           <div class="card-avatar">
             <%= link_to @goal.user do %>
-              <%= image_tag @goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+              <%= image_tag @avatar, class: '_rounded' %>
             <% end %> 
           </div>
           <span class="card-user"><%= link_to @goal.user.name, @goal.user %></span>
         </div>
-        <% monthly_goal = @goal.user.monthly_goals.last %>
         <div class="card-inner">
           <div class="card-content">
             <div class="aim">
@@ -28,14 +27,14 @@
               <p class="aim-tit"><i class="far fa-chart-bar"></i> 目標数値、指標</p>
               <p class="aim-txt"><%= @goal.indicator %></p>
               <p class="aim-tit"><i class="fas fa-crosshairs"></i>１ヶ月間の目的</p>
-              <p class="aim-txt"><%= monthly_goal.monthly_aim %></p>
+              <p class="aim-txt"><%= @monthly_goal.monthly_aim %></p>
               <p class="aim-tit"><i class="fas fa-tachometer-alt"></i>１ヶ月間の目標数値、指標</p>
-              <p class="aim-txt"><%= monthly_goal.monthly_indicator %></p>
+              <p class="aim-txt"><%= @monthly_goal.monthly_indicator %></p>
             </div>
             <div class="action">
               <p class="action-tit"><i class="fas fa-clipboard-list"></i> 1ヶ月間のアクション</p>
               <ul class="action-list">
-                <% monthly_goal.goal_actions.each do |action| %>
+                <% @monthly_goal.goal_actions.each do |action| %>
                   <li class="action-item">
                     <div class="action-inner">
                       <div class="action-wrap">

@@ -4,9 +4,6 @@
 
 
 <script>
-import Practice from 'src/components/Practice';
-import Sample from 'src/components/Sample';
-
 export default {
   data: function () {
     return {
@@ -20,8 +17,7 @@ export default {
     
   },
   components: {
-    Practice,
-    Sample,
+    
   }
 }
 </script>
