@@ -29,9 +29,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @avatar = @article.user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed
+    @bookmark = @article.bookmarks.find_by(user_id: current_user.id)
     @comment = ArticleComment.new
     @comment.article_id = params[:id]
-    @comments = ArticleComment.includes(:user).where(article_id: params[:id]).where(reply_id: nil)
+    @comments = ArticleComment.includes(:user).where(article_id: params[:id], reply_id: nil)
     @article_tags = @article.tags
     @tags = Tag.joins(:article_tags).distinct
     impressionist(@article, nil, unique: [:ip_address])

@@ -17,8 +17,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  def new; end
-
   def create
     @report = current_user.reports.build(report_params)
 
@@ -50,6 +48,7 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
     @user = @report.user
+    @avatar = @user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed
     @monthly_goal = @report.monthly_goal
     @rep_acts = @report.report_actions.reverse
     @actions = @monthly_goal.goal_actions
@@ -57,9 +56,13 @@ class ReportsController < ApplicationController
     @action_numbers = @actions.map do |action|
                         (action.number.to_f / @days_of_month).ceil.to_i
     end
+    @images = @report.images
+    @comment_counts = @report.report_comments.count
+    @like = @report.report_likes.find_by(user_id: current_user.id)
+    @like_counts = @report.report_likes.count
     @comment = ReportComment.new
-    @comments = ReportComment.includes(:user).where(report_id: params[:id]).where(reply_id: nil)
-    @replies = ReportComment.includes(:user).where(report_id: params[:id]).where.not(reply_id: nil)
+    @comments = ReportComment.includes(:user).where(report_id: params[:id], reply_id: nil)
+    # @replies = ReportComment.includes(:user).where(report_id: params[:id]).where.not(reply_id: nil)
     # @comment_reply =
   end
 

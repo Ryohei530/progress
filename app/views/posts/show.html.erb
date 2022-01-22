@@ -7,10 +7,10 @@
         <div class="card-wrap">
           <div class="card-avatar">
             <%= link_to @post.user do %>
-              <%= image_tag @post.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+              <%= image_tag @avatar, class: '_rounded' %>
             <% end %>
           </div>
-          <div class="card-title"><%= link_to @post.user.name, @post.user %></div>
+          <div class="card-title"><%= link_to @name, @post.user %></div>
         </div>
         <div class="card-inner">
           <div class="card-content">
@@ -18,9 +18,9 @@
                 <%= @post.content %>
               </div>
               <div class="images">
-                <% if @post.images.attached? %>
+                <% if @images.attached? %>
                   <div class="row">
-                    <%  @post.images.each do |image| %>
+                    <%  @images.each do |image| %>
                       <div class="col-6">
                         <%= image_tag image.variant(resize: "280x180!") %>
                       </div>
@@ -46,7 +46,7 @@
               <div class="card-comment">
                 <a href="#comment">
                   <i class="far fa-comment"></i>
-                  <span><%= @post.post_comments.count %></span>
+                  <span><%= @comment_counts %></span>
                 </a>
               </div>
               <div class="card-like">
@@ -56,21 +56,21 @@
                     <%= link_to post_post_like_path(@post, like), method: :delete do %>
                       <span>
                         <i class="fas fa-heart"></i>
-                        <%= @post.post_likes.count %>
+                        <%= @like_counts %>
                       </span>
                     <% end %>
                   <% else %>
                     <%= link_to post_post_likes_path(@post), method: :post do %>
                       <span>
                         <i class="far fa-heart"></i>
-                        <%= @post.post_likes.count %>
+                        <%= @like_counts %>
                       </span>
                     <% end %>
                   <% end %>
                 <% else %>
                   <span>
                     <i class="far fa-heart"></i>
-                    <%= @post.post_likes.count %>
+                    <%= @like_counts %>
                   </span>
                 <% end %>
                 

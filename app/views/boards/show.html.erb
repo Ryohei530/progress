@@ -8,7 +8,7 @@
         <div class="d-flex">
           <div class="card-avatar">
             <%= link_to @board.user do %>
-              <%= image_tag @board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed, class: '_rounded' %>
+              <%= image_tag @avatar, class: '_rounded' %>
             <% end %>
             <span class="card-user"><%= @board.user.name %></span>
           </div>
@@ -49,7 +49,7 @@
           <div class="card-comment">
             <a href="#comment">
               <i class="far fa-comment"></i>
-              <span><%= @board.board_comments.count %></span>
+              <span><%= @comment_counts %></span>
             </a>
           </div>
         </div>

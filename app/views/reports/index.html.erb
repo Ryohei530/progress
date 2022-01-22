@@ -3,12 +3,8 @@
 <% provide(:action, :index) %>
 
 <% if logged_in? %>
-  <% rep = current_user.reports.count.to_s %>
-  <% provide(:pluralize, rep) %>
   <% provide(:feed, "report") %>
   <% provide(:button_text, "投稿") %>
-  <% goal = current_user.goal %>
-  <% monthly_goal = current_user.monthly_goals.last %>
 <% end %>
 
 <div class="sec row justify-content-center">
@@ -20,7 +16,7 @@
             <%= render 'shared/user_info' %>
           </div>
           <section class="card-body">
-            <% if monthly_goal.present? %>
+            <% if @monthly_goal.present? %>
               <%= render 'shared/report_form' %>
             <% else %>
               <%= render 'shared/no_goal_report_form' %>

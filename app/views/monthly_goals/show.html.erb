@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="card-wrap">
         <div class="card-avatar">
-          <%= image_tag @monthly_goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed, class: '_rounded' %>
+          <%= image_tag @avatar, class: '_rounded' %>
         </div>
         <span class="card-user"><%= link_to @monthly_goal.user.name, @monthly_goal.user %></span>
       </div>

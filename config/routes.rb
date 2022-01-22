@@ -10,22 +10,18 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   post '/static_pages/guest_sign_in', to: 'static_pages#guest_sign_in'
   get '/rank', to: 'static_pages#rank'
-  # get '/signup', to: 'users#new'
-  # get '/login', to: 'sessions#new'
-  # post '/login', to: 'sessions#create'
-  # delete '/logout', to: 'sessions#destroy'
   
   namespace :api, format: 'json' do
     resources :users, only: :show
-    resources :posts, only: [:index, :create, :show, :destroy] do
+    resources :posts, only: [:create, :show, :destroy] do
       resources :post_likes, only: [:index ,:create, :destroy]
     end
-    resources :reports do
+    resources :reports, except: :new do
       resources :report_likes, only: [:index, :create, :destroy]
     end
   end
   
-  resources :users do
+  resources :users, only: [:show, :edit, :update, :destroy] do
     member do
      get 'goal'
      get 'monthly_goal'
@@ -33,18 +29,16 @@ Rails.application.routes.draw do
      get 'post'
      get 'liked_posts'
      get 'liked_reports'
-    # get 'email'
-    # get 'password'
     end
   end
   
-  resources :posts, only: [:index, :create, :show, :destroy] do
+  resources :posts, only: [:create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
   resources :goals, except: [:new, :create]
-  resources :monthly_goals
-  resources :reports do
+  resources :monthly_goals, except: :index
+  resources :reports, except: :new do
     resources :report_likes, only: [:create, :destroy]
     resources :report_comments, only: [:create, :destroy]
   end

@@ -9,6 +9,8 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+    @avatar = @goal.user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed
+    @monthly_goal = @goal.user.monthly_goals.last
   end
 
   def edit
