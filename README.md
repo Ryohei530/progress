@@ -1,6 +1,8 @@
 # Progress
 アプリ: [https://progress-start.com](https://progress-start.com)
 
+![app](app/assets/images/アプリトップページ.png)
+
 ## 概要
 
 継続できないを解消する横の繋がりを活かした目標達成アプリです
@@ -38,8 +40,8 @@
 * フロントエンド
   - HTML/CSS(Sass)
   - Bootstrap 4.5.0
-  - jQuery
-  - Vue.js（部分SPA化）
+  - jQuery 3.6.0
+  - Vue.js 2.6.14（部分SPA化）
 
 * バックエンド
   - Ruby 2.7.3
