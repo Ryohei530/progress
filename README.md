@@ -1,7 +1,7 @@
 # Progress
 アプリ: [https://progress-start.com](https://progress-start.com)
 
-![app](app/assets/images/アプリトップページ.png)
+![app](app/assets/images/top-page.png)
 
 ## 概要
 
