@@ -16,7 +16,7 @@
             <div class="row">
               <%  post.images.each do |image| %>
                 <div class="col-6">
-                  <%= image_tag image.variant(resize: "280x180!") %>
+                  <%= image_tag image.variant(resize: "280x180!").processed %>
                 </div>
               <% end %>
             </div>

@@ -1,6 +1,7 @@
 <% provide(:title, "ホーム") %>
-<% if logged_in? %>
-  <%= render 'static_pages/home_logged_in' %>
-<% else %>
-  <%= render 'static_pages/home_not_logged_in' %>
-<% end %>
+
+<div class="text-center mb-5">
+  <%= link_to "目標を設定しましょう！", static_pages_guest_sign_in_path, method: :post, class: 'btn btn-danger nltop-btn _btn-red' %>
+</div>
+<h1 class="goals-txt">みんなの目標</h1>
+<%= render 'shared/feed' %>

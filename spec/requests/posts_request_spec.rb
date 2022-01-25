@@ -25,7 +25,7 @@ RSpec.describe "Posts", type: :request do
       expect {
         delete post_path(post2)
       }.to change(Post, :count).by(0)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to posts_path
     end
   end
 end

@@ -37,6 +37,10 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || super
+    if stored_location_for(resource_or_scope) == root_path
+      user_path(resource_or_scope)
+    else
+      stored_location_for(resource_or_scope) || user_path(resource_or_scope)
+    end
   end
 end

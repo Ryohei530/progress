@@ -2,11 +2,7 @@ class StaticPagesController < ApplicationController
   helper_method :resource_name, :resource, :devise_mapping, :resource_class
 
   def home
-    if logged_in?
-      @post = current_user.posts.build
-    end
-
-    @feed_items = Post.all.page(params[:page])
+    @feed_items = Goal.page(params[:page]).per(20)
   end
 
   def rank
@@ -23,7 +19,7 @@ class StaticPagesController < ApplicationController
     end
 
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to user, notice: 'ゲストユーザーとしてログインしました。'
   end
 
   def resource_name

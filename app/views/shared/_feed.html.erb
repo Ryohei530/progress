@@ -1,6 +1,12 @@
 <% if @feed_items.any? %>
+  <% if current_page?(root_path) %>
+  <div class="goals row">
+    <%= render @feed_items %>
+  </div>
+  <% else %>
   <ol class="<%= posts_or_reports %>">
     <%= render @feed_items %>
   </ol>
+  <% end %>
   <%= paginate @feed_items, params: { controller: yield(:controller), action: yield(:action) } %>
 <% end %>

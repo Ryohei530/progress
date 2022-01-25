@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   namespace :api, format: 'json' do
     resources :users, only: :show
-    resources :posts, only: [:create, :show, :destroy] do
+    resources :posts, only: [:index, :create, :show, :destroy] do
       resources :post_likes, only: [:index ,:create, :destroy]
     end
     resources :reports, except: :new do
@@ -32,11 +32,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :posts, only: [:create, :show, :destroy] do
+  resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  resources :goals, except: [:new, :create]
+  resources :goals, except: [:index, :new, :create]
   resources :monthly_goals, except: :index
   resources :reports, except: :new do
     resources :report_likes, only: [:create, :destroy]
