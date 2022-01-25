@@ -2,15 +2,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :correct_user, only: :destroy
   before_action :get_location, only: :show
-  
+
   def index
-    if logged_in?
-      @post = current_user.posts.build
-    end
-    
+    @post = current_user.posts.build if logged_in?
     @feed_items = Post.all.page(params[:page])
   end
-  
+
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
