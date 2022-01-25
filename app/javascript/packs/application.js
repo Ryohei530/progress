@@ -18,6 +18,7 @@ import '../src/modules/action';
 // global.Chart = Chart;
 // import '../src/modules/mychart';
 // import '../src/modules/mychart2';
+import '../src/modules/flash';
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

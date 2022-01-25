@@ -51,7 +51,7 @@
               <div class="row">
                 <% report.images.each do |image| %>
                   <div class="col-6">
-                    <%= image_tag image.variant(resize: "240x180!") %>
+                    <%= image_tag image.variant(resize: "240x180!").processed %>
                   </div>
                 <% end %>
               </div>

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   namespace :api, format: 'json' do
     resources :users, only: :show
-    resources :posts, only: [:create, :show, :destroy] do
+    resources :posts, only: [:index, :create, :show, :destroy] do
       resources :post_likes, only: [:index ,:create, :destroy]
     end
     resources :reports, except: :new do
@@ -32,11 +32,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :posts, only: [:create, :show, :destroy] do
+  resources :posts, only: [:index, :create, :show, :destroy] do
     resources :post_likes, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  resources :goals, except: [:new, :create]
+  resources :goals, except: [:index, :new, :create]
   resources :monthly_goals, except: :index
   resources :reports, except: :new do
     resources :report_likes, only: [:create, :destroy]
@@ -61,4 +61,38 @@ Rails.application.routes.draw do
     
   end
   resources :bookmarks, only: :index
+  
+  #CloudFront(CDN)のプロキシ設定
+  direct :cdn_proxy do |model, options|
+    cdn_options = if Rails.env.development?
+      Rails.application.routes.default_url_options
+    else
+      {
+        protocol: 'https',
+        port: 443,
+        host: Rails.env.production? ? "static.progress-start.com" : "#{Rails.env}.static.progress-start.com"
+      }
+    end
+
+    if model.respond_to?(:signed_id)
+      route_for(
+        :rails_service_blob_proxy,
+        model.signed_id,
+        model.filename,
+        options.merge(cdn_options)
+      )
+    else
+      signed_blob_id = model.blob.signed_id
+      variation_key  = model.variation.key
+      filename       = model.blob.filename
+
+      route_for(
+        :rails_blob_representation_proxy,
+        signed_blob_id,
+        variation_key,
+        filename,
+        options.merge(cdn_options)
+      )
+    end
+  end
 end

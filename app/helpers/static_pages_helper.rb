@@ -1,6 +1,6 @@
 module StaticPagesHelper
   def posts_or_reports
-    if current_page?(root_path)
+    if current_page?(posts_path)
       "posts"
     elsif current_page?(reports_path)
       "reports"

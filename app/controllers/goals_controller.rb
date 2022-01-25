@@ -3,9 +3,9 @@ class GoalsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :get_location, only: :edit
 
-  def index
-    @goals = Goal.page(params[:page]).per(20)
-  end
+  # def index
+  #   @goals = Goal.page(params[:page]).per(20)
+  # end
 
   def show
     @goal = Goal.find(params[:id])

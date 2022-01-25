@@ -8,7 +8,7 @@
     <div class="menu" v-show="activeBtn">
         <ul>
             <li><a href="/reports">日報</a></li>
-            <li><a href="/">つぶやき</a></li>
+            <li><a href="/posts">つぶやき</a></li>
             <% if user_signed_in? %>
             <li><%= link_to "長期目標", edit_goal_path(current_user) %></li>
             <li><%= link_to "月間目標", new_monthly_goal_path %></li>
@@ -20,8 +20,8 @@
     <%= link_to "Progress", root_path, id: "logo" %>
     <nav class="justify-content-end">
       <ul class="nav navbar-nav navbar-right align-items-center">
-        <li class="nav-item <%= "active" if current_page?(goals_path) %>">
-          <%= link_to  goals_path, class: "nav-link" do %>
+        <li class="nav-item <%= "active" if current_page?(root_path) %>">
+          <%= link_to  root_path, class: "nav-link" do %>
             <i class="far fa-flag"></i>
             <span class="d-none d-lg-inline-block">みんなの目標</span>
           <% end %>

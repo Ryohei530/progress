@@ -6,9 +6,9 @@ RSpec.describe "Goals", type: :request do
   let!(:monthly_goal) { FactoryBot.create(:monthly_goal, user_id: user.id) }
   let!(:goal_action) { monthly_goal.goal_actions.create(content: "test action", number: 500) }
 
-  describe "GET /index" do
+  describe "GET /" do
     it "returns http success" do
-      get goals_path
+      get root_path
       expect(response).to have_http_status(200)
     end
   end

@@ -6,6 +6,11 @@
         みんなと目標を共有して、刺激をもらおう！<br>
         継続できないを克服する目標達成アプリです
       </p>
+      <% if !logged_in? %>
+      <div class="text-center tbtn-wrap">
+        <%= link_to "目標を設定しましょう！", static_pages_guest_sign_in_path, method: :post, class: 'tbtn' %>
+      </div>
+      <% end %>
     </div>
     <div class="form col-md-10 col-lg-7 col-xl-6">
       <div class="form-main">

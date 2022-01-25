@@ -3,11 +3,16 @@ class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
   before_action :get_location, only: :show
 
+  def index
+    @post = current_user.posts.build if logged_in?
+    @feed_items = Post.all.page(params[:page])
+  end
+
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "投稿しました"
-      redirect_to root_url
+      redirect_to posts_url
     else
       @feed_items = Post.all.page(params[:page])
       render 'static_pages/home'
@@ -29,7 +34,7 @@ class PostsController < ApplicationController
   def destroy
     Post.find(params[:id]).destroy
     flash[:success] = "削除しました"
-    redirect_back_or root_url
+    redirect_back_or posts_url
   end
 
   private
@@ -40,6 +45,6 @@ class PostsController < ApplicationController
 
     def correct_user
       @post = current_user.posts.find_by(id: params[:id])
-      redirect_to root_url if @post.nil?
+      redirect_to posts_url if @post.nil?
     end
 end
