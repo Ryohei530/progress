@@ -38,6 +38,12 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
+  
+  Rails.application.routes.default_url_options = {
+    host: Rails.env.production? ? 'progress-start.com' : "#{Rails.env}.progress-start.com",
+    port: 443,
+    protocol: 'https'
+  }
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
