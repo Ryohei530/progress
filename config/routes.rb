@@ -64,15 +64,7 @@ Rails.application.routes.draw do
   
   #CloudFront(CDN)のプロキシ設定
   direct :cdn_proxy do |model, options|
-    cdn_options = if Rails.env.development?
-      Rails.application.routes.default_url_options
-    else
-      {
-        protocol: 'https',
-        port: 443,
-        host: Rails.env.production? ? "static.progress-start.com" : "#{Rails.env}.static.progress-start.com"
-      }
-    end
+    cdn_options = Rails.application.routes.default_url_options
 
     if model.respond_to?(:signed_id)
       route_for(
