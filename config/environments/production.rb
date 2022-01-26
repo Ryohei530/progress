@@ -40,7 +40,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon
   
   Rails.application.routes.default_url_options = {
-    host: 'progress-start.com'
+    host: 'progress-start.com',
     port: 443,
     protocol: 'https'
   }
