@@ -54,6 +54,10 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    
+    member do
+      patch 'solve'
+    end
   end
   resources :tags, only: :index do
     get 'articles', to: 'articles#tag'

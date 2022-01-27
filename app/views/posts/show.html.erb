@@ -15,7 +15,7 @@
         <div class="card-inner">
           <div class="card-content">
               <div class="card-text">
-                <%= @post.content %>
+                <%= simple_format(@post.content) %>
               </div>
               <div class="images">
                 <% if @images.attached? %>
@@ -33,7 +33,7 @@
         <div class="card-box">
           <div class="row">
             <div class="col d-flex">
-              <span class="card-timestamp">
+              <span class="card-timestamp mr-2 pt-1">
                 <%= time_ago_in_words(@post.created_at) %>前
               </span>
               <% if current_user?(@post.user) %>
@@ -96,10 +96,10 @@
                       <% end %> 
                       <span class="comment-user"><%= comment.user.name %></span>
                       <% if current_user != nil && comment.user_id == current_user.id %>
-                          <%= link_to "削除", post_post_comment_path(@post, comment), method: :delete, class: "btn btn-outline-danger" %>
+                          <%= link_to "削除", post_post_comment_path(@post, comment), method: :delete, class: "btn btn-outline-danger btn-sm" %>
                       <% end %>
                     </div>
-                    <p class="comment-content"><%= comment.content %></p>
+                    <p class="comment-content"><%= simple_format(comment.content) %></p>
                     <p class="comment-date"><%= time_ago_in_words(comment.created_at) %>前</p>
                   </li>
                 <% end %>

@@ -14,6 +14,7 @@ set :repo_url,  'git@github.com:Ryohei530/progress.git'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/storage"
 #バージョンが変わってもマスターキーを共有する
 append :linked_files, "config/master.key"
+append :linked_files, ".env"
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.3' #カリキュラム通りに進めた場合、2.5.1か2.3.1です

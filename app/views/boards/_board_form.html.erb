@@ -15,5 +15,10 @@
     スペース（半角）を入力することで複数のタグを付けることができます。<br>
     例：音楽 文芸 スポーツ
   </p>
+  
+  <% if !current_page?(new_board_path) %>
+    <%= f.label :solved, "状態" %>
+    <%= f.select :solved, [["受付中", false], ["解決済み", true]], {}, class: "custom-select mb-3" %>
+  <% end %>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

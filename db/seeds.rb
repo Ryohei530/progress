@@ -783,7 +783,8 @@ board4 = yama.boards.create!(
   title: "TOEICの時間配分が上手くいかない",
   content: "いつも大問7の途中で時間切れになってしまいます汗
 今まで時間内に解き終わったことがなく悩んでいます...
-解く順番って大切なんですかね？時間内に終わらせるために意識してることがあればお聞きしたいです！"
+解く順番って大切なんですかね？時間内に終わらせるために意識してることがあればお聞きしたいです！",
+  solved: true
 )
 
 board5 = rumi.boards.create!(
@@ -799,7 +800,8 @@ board6 = rumi.boards.create!(
 
 時間がないっていうのは言い訳になってしまうかもしれないのですが、
 みなさんはどのように英語に割く時間を作っていますか？
-何かアドバイスいただけると嬉しいです"
+何かアドバイスいただけると嬉しいです",
+  solved: true
 )
 
 board7 = naru.boards.create!(
@@ -813,6 +815,45 @@ mary.board_comments.create!(
   content: "具体例をいくつか見てどういった文脈で使われる単語なのかイメージをを頭に入れると覚えやすくなりますよ！"
 )
 
+hiro.board_comments.create!(
+  board_id: 1,
+  content: "とにかく量をこなせぇい！"
+)
+
+naru.board_comments.create!(
+  board_id: 1,
+  content: ">>ひろきさん
+  量だけの問題じゃないと思いますよ。"
+)
+
+hiro.board_comments.create!(
+  board_id: 1,
+  content: ">>ナルホド
+  気合いが足りてないんじゃ！"
+)
+
+yama.board_comments.create!(
+  board_id: 1,
+  content: "精神論で草"
+)
+
+brian.board_comments.create!(
+  board_id: 4,
+  content: "悩んで1つの問題に時間をかけすぎてしまうことはありませんか？
+  パッと答えられなさそうな問題は飛ばして後回しにすると良いですよ"
+)
+
+mary.board_comments.create!(
+  board_id: 4,
+  content: "今度、ストップウォッチで計りながら問題を解いてみて
+  1問にどれだけ時間をかけているか把握すると良いと思います！"
+)
+
+yama.board_comments.create!(
+  board_id: 4,
+  content: "みなさんありがとうございました！"
+)
+
 guest.board_comments.create!(
   board_id: 6,
   content: "僕だったら1日の中で物理的にどれくらい時間が取れるかをまず探しますね。 その日にやらないといけないことを紙でもアプリでもなんでも良いんですけどスケジュールに埋めて、その日の予定を可視化させると英語に使える時間が見つかると思います〜"
@@ -822,6 +863,7 @@ rumi.board_comments.create!(
   board_id: 6,
   content: "なるほど！！　その日の予定を可視化させれば、なんとなく過ごしてしまう時間を減らせそうですね！　ありがとうございました(^-^)"
 )
+
 
 board.board_tags.create!(tag_id: 20)
 
