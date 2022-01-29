@@ -96,8 +96,8 @@ guest.monthly_goals.create!(
   monthly_indicator: "その目的が達成できたか判別できる
   定量的な数値や指標、行動あるいは
   その目的達成に近づけそうな指標を書きます",
-  term_start: Date.today.prev_day(20),
-  term_end: Date.today.next_day(10),
+  term_start: Date.today.prev_day(24),
+  term_end: Date.today.next_day(6),
   goal_actions_attributes: [
     {
       content: "目標を達成するためのアクション",
@@ -559,8 +559,8 @@ guest.create_goal!(
   indicator: "その目的を達成するために必要な行動、
   行動の数値、その他得たいゴールに近づいているか
   を評価できる指標を書きます",
-  term_start: Date.today.prev_day(20),
-  term_end: Date.today.prev_day(20).next_month(6)
+  term_start: Date.today.prev_day(24),
+  term_end: Date.today.prev_day(24).next_month(6)
 )
 
 mary.create_goal!(

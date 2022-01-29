@@ -201,7 +201,7 @@ Layout/TrailingEmptyLines:
 # Offense count: 13
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 193
+  Max: 194
   
 Metrics/BlockLength:
   Exclude:

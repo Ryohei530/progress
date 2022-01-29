@@ -39,16 +39,16 @@ module UsersHelper
     now = Date.current
 
     reports = monthly_goal.reports.where(created_at:
-      if now.between?(term_start, (term_start + 6.days))
-        [term_start..(term_start + 6.days)]
-      elsif now.between?((term_start + 7.days), (term_start + 13.days))
-        [(term_start + 7.days)..(term_start + 13.days)]
-      elsif now.between?((term_start + 14.days), (term_start + 20.days))
-        [(term_start + 14.days)..(term_start + 20.days)]
-      elsif now.between?((term_start + 21.days), (term_start + 27.days))
-        [(term_start + 21.days)..(term_start + 27.days)]
-      elsif now.between?((term_start + 28.days), term_end)
-        [(term_start + 28.days)..term_end]
+      if now.between?(term_start, (term_start + 7.days))
+        [term_start..(term_start + 7.days)]
+      elsif now.between?((term_start + 7.days), (term_start + 14.days))
+        [(term_start + 7.days)..(term_start + 14.days)]
+      elsif now.between?((term_start + 14.days), (term_start + 21.days))
+        [(term_start + 14.days)..(term_start + 21.days)]
+      elsif now.between?((term_start + 21.days), (term_start + 28.days))
+        [(term_start + 21.days)..(term_start + 28.days)]
+      elsif now.between?((term_start + 28.days), (term_end + 1.day))
+        [(term_start + 28.days)..(term_end + 1.day)]
       end)
 
     num.each do |n|
@@ -124,13 +124,10 @@ module UsersHelper
         sum = 0
         week_reports.each do |report|
           sum += report.report_actions[n - 1].number
-          puts sum
         end
         week_done[n - 1] = sum
-        p week_done
       end
       week_dones << week_done
-      p week_dones
     end
 
     wk_dones = []
