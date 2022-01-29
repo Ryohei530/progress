@@ -19,19 +19,20 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.build(report_params)
-
     if @report.save
       r_days = current_user.running_days
 
+      # current_userのrunning_daysテーブルにデータが1つでも存在すれば
+      # 最新のデータを@latest_r_dayに代入する
       @latest_r_day = r_days.last.date unless r_days.first.nil?
 
       # その日既に日報が投稿されている時、running_daysを作らない
-      if @latest_r_day ==! @report.created_at.to_date
+      if @latest_r_day == @report.created_at.to_date
+        @running_day = r_days.last
+      else
         set_rdays_params
         @running_day = r_days.build(running_days_params)
         @running_day.save
-      else
-        @running_day = r_days.last
       end
 
       @report.r_days = @running_day.r_days

@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @avatar = @article.user.avatar.variant(gravity: :center, resize: "30x30^", crop: "30x30+0+0").processed
-    @bookmark = @article.bookmarks.find_by(user_id: current_user.id)
+    @bookmark = @article.bookmarks.find_by(user_id: current_user.id) if logged_in?
     @comment = ArticleComment.new
     @comment.article_id = params[:id]
     @comments = ArticleComment.includes(:user).where(article_id: params[:id], reply_id: nil)

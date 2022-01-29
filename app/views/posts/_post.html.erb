@@ -10,7 +10,7 @@
     </div>
     <%= link_to(post_path(post), class: "card-link card-link-#{post.id}") do %>
       <div class="card-inner">
-        <div class="card-text"><%= post.content %></div>
+        <div class="card-text"><%= simple_format(post.content) %></div>
         <div class="images">
           <% if post.images.attached? %>
             <div class="row">

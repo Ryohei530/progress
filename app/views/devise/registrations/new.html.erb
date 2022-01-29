@@ -3,6 +3,10 @@
 
 <div class="row justify-content-center">
   <div class="col-md-9 col-lg-7 col-xl-6">
-    <%= render 'form' %>
+    <% if request.env["omniauth.auth"] %>
+      <%= render 'devise/registrations/form' %>
+    <% else %>
+      <%= render 'form' %>
+    <% end %>
   </div>
 </div>

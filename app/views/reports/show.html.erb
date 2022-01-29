@@ -44,7 +44,7 @@
             </div>
             <div class="realize">
               <p class="realize-tit"><i class="far fa-lightbulb"></i> 感想、気付き</p>
-              <p><%= @report.content %></p>
+              <p><%= simple_format(@report.content) %></p>
             </div>
             <div class="images">
               <% if @images.attached? %>
@@ -126,10 +126,10 @@
                       <% end %> 
                       <span class="comment-user"><%= comment.user.name %></span>
                       <% if current_user != nil && comment.user_id == current_user.id %>
-                          <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-outline-danger" %>
+                          <%= link_to "削除", report_report_comment_path(@report, comment), method: :delete, class: "btn btn-outline-danger btn-sm" %>
                       <% end %>
                     </div>
-                    <p class="comment-content"><%= comment.content %></p>
+                    <p class="comment-content"><%= simple_format(comment.content) %></p>
                     <p class="comment-date"><%= time_ago_in_words(comment.created_at) %></p>
                   </li>
                 <% end %>

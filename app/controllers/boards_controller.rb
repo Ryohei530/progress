@@ -27,6 +27,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+    # binding.pry
     @avatar = @board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed
     @comment_counts = @board.board_comments.count
     @comment = BoardComment.new
@@ -69,10 +70,20 @@ class BoardsController < ApplicationController
     @search = params[:search]
   end
 
+  def solve
+    @board = Board.find(params[:id])
+    if @board.update(board_params)
+      flash[:success] = "更新しました"
+      redirect_to @board
+    else
+      render 'edit'
+    end
+  end
+
   private
 
     def board_params
-      params.require(:board).permit(:title, :content)
+      params.require(:board).permit(:title, :content, :solved)
     end
 
     def correct_user

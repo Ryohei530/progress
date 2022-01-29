@@ -5,7 +5,7 @@
   <div class="col-12 col-md-8">
     <div class="card mb-5">
       <div class="card-header card-inner">
-        <div class="d-flex">
+        <div class="d-flex justify-content-between">
           <div class="card-avatar">
             <%= link_to @board.user do %>
               <%= image_tag @avatar, class: '_rounded' %>
@@ -14,10 +14,19 @@
           </div>
           <div class="card-config">
             <% if current_user?(@board.user) %>
-              <%= link_to "編集", edit_board_path, class: "btn btn-outline-primary" %>
+              <%= link_to "編集", edit_board_path, class: "btn btn-outline-success" %>
               <%= link_to "削除", board_path, class: "btn btn-outline-danger",
                                                 method: :delete,
                                                 data: { confirm: "本当に削除しますか？" } %>
+              <% if @board.solved %>
+                <%= link_to solve_board_path(@board, board: {solved: false}), class: "btn btn-outline-primary", method: :patch do %>
+                  <i class="fas fa-hourglass-half"></i> 回答受付中に戻す
+                <% end %>
+              <% else %>
+                <%= link_to solve_board_path(@board, board: {solved: true}), class: "btn btn-outline-primary", method: :patch do %>
+                  <i class="fas fa-check-circle"></i> 解決済みにする
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -45,7 +54,16 @@
           </ul>
         </div>
         <div class="d-flex justify-content-between">
-          <%= @board.created_at.strftime('%Y/%m/%d %H:%M') %>
+          <div class="d-flex">
+            <%= @board.created_at.strftime('%Y/%m/%d %H:%M') %>
+            <div class="ml-2">
+              <% if @board.solved %>
+                <i class="fas fa-check-circle"></i> 解決済み
+              <% else %>
+                <i class="fas fa-hourglass-half"></i> 受付中
+              <% end %>
+            </div>
+          </div>
           <div class="card-comment">
             <a href="#comment">
               <i class="far fa-comment"></i>
@@ -78,7 +96,7 @@
                       <% end %>
                     <% end %> 
                   </div>
-                  <p class="comment-content"><%= comment.content %></p>
+                  <p class="comment-content"><%= simple_format(comment.content) %></p>
                   <p class="comment-date"><%= time_ago_in_words(comment.created_at) %>前</p>
                 </li>
               <% end %>

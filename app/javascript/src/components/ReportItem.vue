@@ -59,7 +59,7 @@
               </div>
               <div class="realize">
                 <p class="realize-tit"><i class="far fa-lightbulb"></i> 感想、気付き</p>
-                <p>{{ report.content }}</p>
+                <p v-html="$sanitize(textFormat(report.content))"></p>
               </div>
               <div class="images">
                 <template v-if="report_images">

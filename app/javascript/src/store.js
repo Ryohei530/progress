@@ -46,19 +46,24 @@ export default new Vuex.Store({
     liked_post_images_array: state => state.data.liked_post_images_array,
     days_of_week: state => state.data.days_of_week,
     days_of_month: state => state.data.days_of_month,
+    day_date: state => state.data.day_date,
+    day_done: state => state.data.day_done,
+    day_dones: state => state.data.day_dones,
+    week_terms: state => state.data.week_terms,
+    week_dones: state => state.data.week_dones,
     nth_week: state => state.data.nth_week,
     week_sums: state => state.data.week_sums.reverse(),
     sums: state => state.data.sums.reverse(),
     
     
-    weekAve: state => parseInt(state.data.week_sums[0] / state.data.day_done.length),
+    // weekAve: state => parseInt(state.data.week_sums[0] / state.data.day_done.length),
     cardLink: state => "card-link-" + state.data.posts[0].id,
-    weekActNumber(state) {
-      let mAct = state.data.monthly_actions[0];
-      let daysOfMonth = state.data.days_of_month;
-      let daysOfWeek = state.data.days_of_week;
-      return parseInt((mAct.number / daysOfMonth ) * daysOfWeek);
-    },
+    // weekActNumber(state) {
+    //   let mAct = state.data.monthly_actions[0];
+    //   let daysOfMonth = state.data.days_of_month;
+    //   let daysOfWeek = state.data.days_of_week;
+    //   return parseInt((mAct.number / daysOfMonth ) * daysOfWeek);
+    // },
     remain(state) {
       let date = state.data.goal.term_end;
       let today = state.dateToday;

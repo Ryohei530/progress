@@ -96,8 +96,8 @@ guest.monthly_goals.create!(
   monthly_indicator: "その目的が達成できたか判別できる
   定量的な数値や指標、行動あるいは
   その目的達成に近づけそうな指標を書きます",
-  term_start: Date.today.prev_day(20),
-  term_end: Date.today.next_day(10),
+  term_start: Date.today.prev_day(24),
+  term_end: Date.today.next_day(6),
   goal_actions_attributes: [
     {
       content: "目標を達成するためのアクション",
@@ -559,8 +559,8 @@ guest.create_goal!(
   indicator: "その目的を達成するために必要な行動、
   行動の数値、その他得たいゴールに近づいているか
   を評価できる指標を書きます",
-  term_start: Date.today.prev_day(20),
-  term_end: Date.today.prev_day(20).next_month(6)
+  term_start: Date.today.prev_day(24),
+  term_end: Date.today.prev_day(24).next_month(6)
 )
 
 mary.create_goal!(
@@ -783,7 +783,8 @@ board4 = yama.boards.create!(
   title: "TOEICの時間配分が上手くいかない",
   content: "いつも大問7の途中で時間切れになってしまいます汗
 今まで時間内に解き終わったことがなく悩んでいます...
-解く順番って大切なんですかね？時間内に終わらせるために意識してることがあればお聞きしたいです！"
+解く順番って大切なんですかね？時間内に終わらせるために意識してることがあればお聞きしたいです！",
+  solved: true
 )
 
 board5 = rumi.boards.create!(
@@ -799,7 +800,8 @@ board6 = rumi.boards.create!(
 
 時間がないっていうのは言い訳になってしまうかもしれないのですが、
 みなさんはどのように英語に割く時間を作っていますか？
-何かアドバイスいただけると嬉しいです"
+何かアドバイスいただけると嬉しいです",
+  solved: true
 )
 
 board7 = naru.boards.create!(
@@ -811,6 +813,45 @@ board7 = naru.boards.create!(
 mary.board_comments.create!(
   board_id: 1,
   content: "具体例をいくつか見てどういった文脈で使われる単語なのかイメージをを頭に入れると覚えやすくなりますよ！"
+)
+
+hiro.board_comments.create!(
+  board_id: 1,
+  content: "とにかく量をこなせぇい！"
+)
+
+naru.board_comments.create!(
+  board_id: 1,
+  content: ">>ひろきさん
+  量だけの問題じゃないと思いますよ。"
+)
+
+hiro.board_comments.create!(
+  board_id: 1,
+  content: ">>ナルホド
+  気合いが足りてないんじゃ！"
+)
+
+yama.board_comments.create!(
+  board_id: 1,
+  content: "精神論で草"
+)
+
+brian.board_comments.create!(
+  board_id: 4,
+  content: "悩んで1つの問題に時間をかけすぎてしまうことはありませんか？
+  パッと答えられなさそうな問題は飛ばして後回しにすると良いですよ"
+)
+
+mary.board_comments.create!(
+  board_id: 4,
+  content: "今度、ストップウォッチで計りながら問題を解いてみて
+  1問にどれだけ時間をかけているか把握すると良いと思います！"
+)
+
+yama.board_comments.create!(
+  board_id: 4,
+  content: "みなさんありがとうございました！"
 )
 
 guest.board_comments.create!(
