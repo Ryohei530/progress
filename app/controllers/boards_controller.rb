@@ -69,7 +69,7 @@ class BoardsController < ApplicationController
     @tags = Tag.joins(:board_tags).distinct
     @search = params[:search]
   end
-  
+
   def solve
     @board = Board.find(params[:id])
     if @board.update(board_params)

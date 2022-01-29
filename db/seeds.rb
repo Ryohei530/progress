@@ -864,7 +864,6 @@ rumi.board_comments.create!(
   content: "なるほど！！　その日の予定を可視化させれば、なんとなく過ごしてしまう時間を減らせそうですね！　ありがとうございました(^-^)"
 )
 
-
 board.board_tags.create!(tag_id: 20)
 
 3.times do |n|

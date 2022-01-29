@@ -201,7 +201,7 @@ Layout/TrailingEmptyLines:
 # Offense count: 13
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 134
+  Max: 193
   
 Metrics/BlockLength:
   Exclude:
@@ -215,12 +215,12 @@ Metrics/CyclomaticComplexity:
 # Offense count: 11
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
-  Max: 76
+  Max: 95
 
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ModuleLength:
-  Max: 102
+  Max: 150
 
 # Offense count: 3
 # Configuration parameters: IgnoredMethods.
