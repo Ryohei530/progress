@@ -24,7 +24,7 @@
         </div>
         <a :href="`/posts/${post.id}`" class="card-link" :class="`card-link-${post.id}`">
           <div class="card-inner">
-            <div class="card-text">{{ post.content }}</div>
+            <div class="card-text" v-html="$sanitize(textFormat(post.content))"></div>
             <div class="images">
               <template v-if="post_images">
                 <div class="row">

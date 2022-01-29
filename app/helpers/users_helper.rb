@@ -50,7 +50,7 @@ module UsersHelper
       elsif now.between?((term_start + 28.days), term_end)
         [(term_start + 28.days)..term_end]
       end)
-
+    
     num.each do |n|
       sum = 0
       reports.each do |report|
@@ -73,17 +73,79 @@ module UsersHelper
             else
               (Date.today..Date.today.next_day(6))
             end
-
+            
+    # term_obj = {
+    #     day: term.wday,
+    #     date: term.strftime('%-m月%-d日')
+    #   }
+    #   @day_date << term_obj
     terms.each do |term|
       @day_date << term.strftime('%-m月%-d日')
     end
+    
+    @week_terms = [
+      term_start.strftime('%-d日') + '〜' + (term_start + 6.days).strftime('%-d日'),
+      (term_start + 7.days).strftime('%-d日') + '〜' + (term_start + 13.days).strftime('%-d日'),
+      (term_start + 14.days).strftime('%-d日') + '〜' + (term_start + 20.days).strftime('%-d日'),
+      (term_start + 21.days).strftime('%-d日') + '〜' + (term_start + 27.days).strftime('%-d日'),
+      (term_start + 28.days).strftime('%-d日') + '〜' + (term_end).strftime('%-d日'),
+    ]
 
-    @day_done = []
-    reports.each do |report|
-      @day_done << report.report_actions.last.number
+    day_done = []
+    day_dones = []
+    num.each do |n|
+      reports.each do |report|
+        day_done << report.report_actions[n - 1].number
+      end
+      @day_done = day_done.reverse
+      day_dones << @day_done
     end
+    
+    @day_dones = day_dones.reverse
+    
+    wktms = [
+      [term_start..(term_start + 7.days)],
+      [(term_start + 7.days)..(term_start + 14.days)],
+      [(term_start + 14.days)..(term_start + 21.days)],
+      [(term_start + 21.days)..(term_start + 28.days)],
+      [(term_start + 28.days)..(term_end + 1.day)]
+    ]
+    
+    week_reports_array = []
+    wktms.each do |wktm|
+      week_reports_array << monthly_goal.reports.where(created_at: wktm)
+    end
+    
+    
+    week_dones = []
+    
+    week_reports_array.each do |week_reports|
+      week_done = []
+      num.each do |n|
+        sum = 0
+        week_reports.each do |report|
+          sum += report.report_actions[n - 1].number
+          puts sum
+        end
+        week_done[n - 1] = sum
+        p week_done
+      end
+      week_dones << week_done
+      p week_dones
+    end
+    
+    wk_dones = []
+    num.each do |n|
+      array = []
+      week_dones.each do |done|
+        array << done[n - 1]
+      end
+      wk_dones[n - 1] = array 
+    end
+    @week_dones = wk_dones.reverse
   end
-
+  
+  
   def days_of_month
     monthly_goal = @user.monthly_goals.last
     @days_of_month = (monthly_goal.term_end - monthly_goal.term_start).to_i

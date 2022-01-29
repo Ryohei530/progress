@@ -116,8 +116,8 @@
               <h4 class="m-0"><i class="fas fa-trophy"></i> 実績</h4>
               <div class="tab3">
                 <div class="tab-list term ml-3">
-                  <button class="tab-item tab-active btn">月間</button>
-                  <button class="tab-item btn">週間</button>
+                  <button @click="changeTab3('1')" class="tab-item btn" :class="tab3Active1">月間</button>
+                  <button @click="changeTab3('2')" class="tab-item btn" :class="tab3Active2">週間</button>
                 </div>
               </div>
             </div>
@@ -126,30 +126,15 @@
             <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
               <div class="chart-wrap mr-3">
                 <ul class="chnav nav flex-md-column nav-pills">
-                  <li class="nav-item mb-3">
-                    <a class="nav-link">
-                      アクション１
-                    </a>
-                  </li>
-                  <li class="nav-item mb-3">
-                    <a class="nav-link">
-                      アクション２
-                    </a>
-                  </li>
-                  <li class="nav-item mb-3">
-                    <a class="nav-link">
-                      アクション３
-                    </a>
-                  </li>
-                  <li class="nav-item mb-5">
-                    <a class="nav-link">
-                      アクション４
+                  <li v-for="n in week_sums.length" class="nav-item mb-3">
+                    <a @click="getActIndex(n)" class="nav-link">
+                      アクション {{ n }}
                     </a>
                   </li>
                 </ul>
               </div>
               <div class="tab-content chart-content">
-                <div class="tab-box box-show">
+                <div v-show="tab3IsActive === '1'" >
                   <div class="d-flex justify-content-center mb-5">
                     <div class="px-3">
                       <span class="text-muted">平均</span>
@@ -160,7 +145,44 @@
                     <div class="px-3">
                       <span class="text-muted">達成</span>
                       <span class="d-block">
-                        {{ data.week_sums[0] ? data.week_sums[0] : 0 }}
+                        {{ sums[actionIndex] ? sums[actionIndex] : 0 }}
+                        <!--<%= @week_sums.first %>-->
+                      </span>
+                    </div>
+                    <div class="px-3">
+                      <span class="text-muted">目標</span>
+                      <span class="d-block">
+                        {{ mActNumber ? mActNumber : 0 }}
+                      </span>
+                    </div>
+                    <div class="px-3">
+                      <span class="text-muted">不足</span>
+                      <span class="d-block">
+                        <template v-if="lack > 0">
+                          +{{ mLack }}
+                        </template>
+                        <template v-else>
+                          {{ mLack ? mLack : 0 }}
+                        </template>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="tab-chart">
+                    <monthly-chart :chart-data="datacollection2"></monthly-chart>
+                  </div>
+                </div>
+                <div v-show="tab3IsActive === '2'">
+                  <div class="d-flex justify-content-center mb-5">
+                    <div class="px-3">
+                      <span class="text-muted">平均</span>
+                      <span class="d-block">
+                        {{ dayAve ? dayAve : 0 }}
+                      </span>
+                    </div>
+                    <div class="px-3">
+                      <span class="text-muted">達成</span>
+                      <span class="d-block">
+                        {{ week_sums[actionIndex] ? week_sums[actionIndex] : 0 }}
                         <!--<%= @week_sums.first %>-->
                       </span>
                     </div>
@@ -183,12 +205,11 @@
                     </div>
                   </div>
                   <div class="tab-chart">
-                    <my-chart2></my-chart2>
+                    <weekly-chart :chart-data="datacollection"></weekly-chart>
                   </div>
                 </div>
-                <div class="tab-box"></div>
-                <div class="tab-box"></div>
-                <div class="tab-box"></div>
+                <!--<div class="tab-box"></div>-->
+                <!--<div class="tab-box"></div>-->
               </div>
             </div>
           </div>
@@ -217,7 +238,7 @@
               </div>
               <a :href="`/posts/${data.post.id}`" class="card-link " :class="cardLink">
                 <div class="card-inner">
-                  <div class="card-text"> {{ data.post.content }}</div>
+                  <div class="card-text" v-html="$sanitize(textFormat(data.post.content))"></div>
                   <div class="images">
                     <template v-if="data.post_images">
                       <div class="row">
@@ -282,7 +303,9 @@
   import DailyAction from './DailyAction';
   import Calendar from './Calendar';
   import MyChart from './MyChart';
-  import MyChart2 from './MyChart2';
+  import WeeklyChart from './WeeklyChart';
+  import MonthlyChart from './MonthlyChart';
+  
   import PostLikes from './PostLikes';
   
   export default {
@@ -293,17 +316,27 @@
         // user: stateData.user,
         tabIsActive: '1',
         tab2IsActive: '1',
+        tab3IsActive: '1',
+        actionIndex: '0',
       };
     },
     computed: {
       ...mapGetters([
         'data',
         'user', 
+        'sums',
         'week_sums',
-        'weekAve',
         'cardLink',
         'weekActNumber',
+        'days_of_month',
         'days_of_week',
+        'day_date',
+        'day_done',
+        'day_dones',
+        'week_terms',
+        'week_dones',
+        'monthly_actions',
+        'report_actions_array',
       ]),
       // dayActNum() {
       //   return Math.ceil(this.weekActNumber / this.days_of_week);
@@ -311,8 +344,26 @@
       // user() {
       //   return this.$store.getters.user;
       // },
+      dayAve() {
+        return parseInt(this.week_sums[this.actionIndex] / this.day_done.length);
+      },
+      weekAve() {
+        return parseInt(this.sums[this.actionIndex] / this.report_actions_array.length);
+      },
+      weekActNumber() {
+        let mAct = this.data.monthly_actions[this.actionIndex];
+        let daysOfMonth = this.days_of_month;
+        let daysOfWeek = this.days_of_week;
+        return parseInt((mAct.number / daysOfMonth ) * daysOfWeek);
+      },
+      mActNumber() {
+        return this.monthly_actions[this.actionIndex].number;
+      },
       lack() {
-        return parseInt(this.week_sums[0] - this.weekActNumber);
+        return parseInt(this.week_sums[this.actionIndex] - this.weekActNumber);
+      },
+      mLack() {
+        return parseInt(this.sums[this.actionIndex] - this.mActNumber);
       },
       tabActive1() {
         return {
@@ -339,6 +390,66 @@
           'tab-active': this.tab2IsActive === '3'
         };
       },
+      tab3Active1() {
+        return {
+          'tab-active': this.tab3IsActive === '1'
+        };
+      },
+      tab3Active2() {
+        return {
+          'tab-active': this.tab3IsActive === '2'
+        };
+      },
+      mAct1stNum() {
+        return this.data.monthly_actions[this.actionIndex].number;
+      },
+      dayIndicator() {
+        return Math.ceil(this.mAct1stNum / this.days_of_month);
+      },
+      weekIndicator() {
+        return this.weekActNumber
+      },
+      dayIndicators() {
+        return Array(this.days_of_week).fill(this.dayIndicator, 0, this.days_of_week);
+      },
+      weekIndicators() {
+        return Array(this.week_terms.length).fill(this.weekIndicator, 0, this.week_terms.length);
+      },
+      axisMax() {
+        return this.ceilTensPlace(this.dayIndicator);
+      },
+      datacollection() {
+        return {
+         labels: this.day_date,
+          datasets: [
+            {
+              label: '達成値',
+              data: this.day_dones[this.actionIndex],
+              backgroundColor: "rgba(97,213,138, 1)"
+            },{
+              label: '目標値',
+              data: this.dayIndicators,
+              backgroundColor: "rgba(130,201,169,0.5)"
+            }
+          ] 
+        };
+      },
+      datacollection2() {
+        return {
+         labels: this.week_terms,
+          datasets: [
+            {
+              label: '達成値',
+              data: this.week_dones[this.actionIndex],
+              backgroundColor: "rgba(97,213,138, 1)"
+            },{
+              label: '目標値',
+              data: this.weekIndicators,
+              backgroundColor: "rgba(130,201,169,0.5)"
+            }
+          ] 
+        };
+      },
     },
     methods: {
       changeTab(num) {
@@ -347,21 +458,17 @@
       changeTab2(num) {
         this.tab2IsActive = num;
       },
+      changeTab3(num) {
+        this.tab3IsActive = num;
+      },
+      getActIndex(n) {
+        this.actionIndex = (n - 1).toString();
+        // console.log("click")
+        // console.log(this.actionIndex)
+      },
     },
     mounted() {
-      // this.$store.dispatch('getData')
-      //   .then(response => {
-      //     this.$store.commit('setData', response.data);
-      //     this.data = response.data;
-      //     this.user = response.data.user;
-      //     console.log(response);
-      //     console.log(response.data);
-      //   });
       console.log("mounted");
-      console.log(this.data.goal);
-      console.log(this.data.monthly_goal);
-      console.log(this.user);
-      console.log(this.data.post);
       this.$store.state.dateToday = moment(new Date).format('YYYY-MM-DD');
       
     },
@@ -383,7 +490,8 @@
       DailyAction,
       Calendar,
       MyChart,
-      MyChart2,
+      WeeklyChart,
+      MonthlyChart,
       PostLikes,
     }
   };

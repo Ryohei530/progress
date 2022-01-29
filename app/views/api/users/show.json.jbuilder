@@ -32,8 +32,11 @@ json.avatar_url60 @avatar_url60
 json.avatar_url70 @avatar_url70
 json.sums @sums
 json.week_sums @week_sums
+json.week_terms @week_terms
+json.week_dones @week_dones
 json.day_date @day_date
 json.day_done @day_done
+json.day_dones @day_dones
 json.monthly_ratios @monthly_ratios
 json.days_of_month @days_of_month
 json.days_of_week @days_of_week
