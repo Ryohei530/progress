@@ -6,7 +6,7 @@
           <div class="d-flex">
             <h2>長期目標</h2>
             <div class="utab ml-3">
-              <a href="`/goals/${data.user.id}/edit`" class="btn">
+              <a :href="`/goals/${data.goal.id}/edit`" class="btn">
                 <i class="far fa-edit ml-1"></i>
                 <!--edit_goal_path(@user)-->
               </a>
@@ -17,10 +17,21 @@
       </div>
     </div>
     
-    <template v-if="data.goal.aim">
+    <template v-if="data.goal.aim && data.monthly_goal">
       <ul class="goals row justify-content-center">
         <goal-item></goal-item>
       </ul>
+    </template>
+    <template v-else>
+      <div class="goals row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 mb-5">
+          <div class="card">
+            <div class="card-body">
+              <p>長期目標または月間目標が未設定です</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
   </div>
 </template>

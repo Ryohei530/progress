@@ -52,12 +52,18 @@ export default new Vuex.Store({
     week_terms: state => state.data.week_terms,
     week_dones: state => state.data.week_dones,
     nth_week: state => state.data.nth_week,
-    week_sums: state => state.data.week_sums.reverse(),
-    sums: state => state.data.sums.reverse(),
+    week_sums: state => state.data.week_sums,
+    sums: state => state.data.sums,
     
     
     // weekAve: state => parseInt(state.data.week_sums[0] / state.data.day_done.length),
-    cardLink: state => "card-link-" + state.data.posts[0].id,
+    cardLink(state){
+      if (state.data.posts[0]){
+        "card-link-" + state.data.posts[0].id;
+      } else {
+        "card-link-null";
+      }
+    },
     // weekActNumber(state) {
     //   let mAct = state.data.monthly_actions[0];
     //   let daysOfMonth = state.data.days_of_month;

@@ -22,7 +22,7 @@
       </div>
     </div>
       
-    <template v-if="liked_posts">
+    <template v-if="liked_posts[0]">
       <ol class="posts row">
         <post-item 
           v-for="(post, index) in liked_posts"
@@ -35,6 +35,17 @@
         ></post-item>
       </ol>
       <!--<%= paginate @posts %>-->
+    </template>
+    <template v-else>
+      <div class="posts row">
+        <div class="col-xl-6 mb-3">
+          <div class="card mb-4">
+            <div class="card-body">
+              <p>いいねしたつぶやきがありません</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
   </div>
 </template>

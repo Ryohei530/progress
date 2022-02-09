@@ -16,7 +16,7 @@
       </div>
     </div>
     
-    <template v-if="monthly_goals">
+    <template v-if="monthly_goals[0]">
       <ul class="goals row justify-content-center justify-content-xl-start">
         <monthly-goal-item 
           v-for="(monthly_goal, index) in monthly_goals" 
@@ -25,6 +25,17 @@
           :monthly_actions="monthly_actions_array[index]"
           ></monthly-goal-item>
       </ul>
+    </template>
+    <template v-else>
+      <div class="goals row justify-content-center justify-content-xl-start">
+        <div class="col-md-10 col-xl-6 mb-3 justify-content-center">
+          <div class="card">
+            <div class="card-body">
+              <p>月間目標が未設定です</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
   </div>
 </template>
