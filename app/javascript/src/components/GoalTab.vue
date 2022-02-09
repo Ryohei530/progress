@@ -9,7 +9,7 @@
           </div>
           <p v-if="data.goal.term_start">{{ data.goal.term_start | moment('YYYY年MM月DD日') }} から</p>
           <p v-if="data.goal.term_end">{{ data.goal.term_end | moment('YYYY年MM月DD日') }} <br>までに目標を達成する</p>
-          <div class="remaining">
+          <div v-if="data.goal.term_start && data.goal.term_end" class="remaining">
             <i class="fas fa-hourglass-half"></i> 
             残り日数　
             <template v-if="remain < 0">
@@ -18,6 +18,9 @@
             <template v-else>
               {{ remain }}日
             </template>
+          </div>
+          <div v-else class="remaining">
+            期間が未設定です
           </div>
         </div>
       </div>

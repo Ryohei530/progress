@@ -50,8 +50,15 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
+      user.build_goal.save
+      url = URI.parse(auth.info.image.to_s) # imageのURL
+      if auth.image.present?
+        avatar = url.open
+        user.avatar.attach(io: avatar, filename: "user_avatar.jpg")
+      end
     end
   end
 

@@ -12,9 +12,18 @@
               <router-link to="/liked_report" class="term-link">
                 <button class="btn">いいねした日報</button>
               </router-link>
-              <a href="/reports" class="term-link">
+              <a v-if="monthly_goals[0]" href="/reports" class="term-link">
                 <button class="btn"><i class="fas fa-plus"></i></button>
               </a>
+              <a v-else 
+                 href="/monthly_goals/new" 
+                 class="term-link"
+                 @mouseover="mouseOverAction" 
+                 @mouseleave="mouseLeaveAction"
+              >
+                <button class="btn"><i class="fas fa-plus"></i></button>
+              </a>
+              <p v-show="hoverBtn" class="require-report">日報を投稿するには、月間目標の設定が必要です</p>
             </div>
           </div>
           <tnav></tnav>
@@ -22,7 +31,7 @@
       </div>
     </div>
     
-    <template v-if="reports">
+    <template v-if="reports[0]">
       <ul class="reports row">
         <report-item
           v-for="(report,index) in reports"
@@ -36,6 +45,17 @@
       </ul>
       <!--<%= paginate @reports %>-->
     </template>
+    <template v-else>
+      <div class="reports row">
+        <div class="col-xl-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <p>日報がありません</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -47,6 +67,7 @@
   export default {
     data: function() {
       return {
+        hoverBtn: false,
       };
     },
     computed: {
@@ -68,6 +89,12 @@
         let repComments = this.report_comments.filter(comment => comment.report_id === report.id);
         return repComments.length;
       },
+      mouseOverAction() {
+        this.hoverBtn = true;
+      },
+      mouseLeaveAction() {
+        this.hoverBtn = false;
+      }
     },
     components: {
       Tnav,
@@ -77,3 +104,15 @@
     }
   };
 </script>
+
+<style scoped>
+  .require-report {
+    position: absolute;
+    top: -0.2rem;
+    left: 23rem;
+    color: #7E8299;
+    background-color: rgba(236,64,108, 0.1);
+    padding: 10px;
+    border-radius: 1rem;
+  }
+</style>

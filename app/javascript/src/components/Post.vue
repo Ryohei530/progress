@@ -12,7 +12,7 @@
               <router-link to="/liked_post" class="term-link">
                 <button class="btn">いいねしたつぶやき</button>
               </router-link>
-              <a href="/" class="term-link">
+              <a href="/posts" class="term-link">
                 <button class="btn"><i class="fas fa-plus"></i></button>
               </a>
             </div>
@@ -22,7 +22,7 @@
       </div>
     </div>
       
-    <template v-if="posts">
+    <template v-if="posts[0]">
       <ol class="posts row">
         <post-item 
           v-for="(post, index) in posts"
@@ -33,6 +33,17 @@
         ></post-item>
       </ol>
       <!--<%= paginate @posts %>-->
+    </template>
+    <template v-else>
+      <div class="posts row">
+        <div class="col-xl-6 mb-3">
+          <div class="card mb-4">
+            <div class="card-body">
+              <p>つぶやきがありません</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
   </div>
 </template>

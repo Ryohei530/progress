@@ -27,7 +27,6 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
-    # binding.pry
     @avatar = @board.user.avatar.variant(gravity: :center, resize: "50x50^", crop: "50x50+0+0").processed
     @comment_counts = @board.board_comments.count
     @comment = BoardComment.new

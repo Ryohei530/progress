@@ -7,7 +7,14 @@ class Api::UsersController < ApplicationController
 
     @monthly_goals = @user.monthly_goals.reverse
     @monthly_goal = @monthly_goals.first
-    @monthly_actions = @monthly_goal.goal_actions
+    if @monthly_goal
+      @monthly_actions = @monthly_goal.goal_actions
+    else
+      @monthly_actions = [{
+        content: "none",
+        number: 0
+      }]
+    end
     @monthly_actions_array = []
     @monthly_goals.each do |monthly_goal|
       @monthly_actions_array << monthly_goal.goal_actions
@@ -26,24 +33,25 @@ class Api::UsersController < ApplicationController
         image_url: rails_representation_url(user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)
       }
     end
-    @post_images = []
-    @post.images.each do |image|
-      @post_images << rails_representation_url(image.variant(resize: "280x180!"))
-    end
-    @post_images_array = @posts.map do |post|
-      post.images.map do |image|
-        rails_representation_url(image.variant(resize: "280x180!"))
+    if @post
+      @post_images = []
+      @post.images.each do |image|
+        @post_images << rails_representation_url(image.variant(resize: "280x180!"))
       end
-    end
-    @liked_post_images_array = @liked_posts.map do |post|
-      post.images.map do |image|
-        rails_representation_url(image.variant(resize: "280x180!"))
+      @post_images_array = @posts.map do |post|
+        post.images.map do |image|
+          rails_representation_url(image.variant(resize: "280x180!"))
+        end
       end
+      @liked_post_images_array = @liked_posts.map do |post|
+        post.images.map do |image|
+          rails_representation_url(image.variant(resize: "280x180!"))
+        end
+      end
+      @post_comment_count = @post.post_comments.count
+      @post_comments = PostComment.all
+      @like = @post.post_likes.find_by(user_id: current_user.id) if current_user
     end
-    @post_comment_count = @post.post_comments.count
-    @post_comments = PostComment.all
-    @like = @post.post_likes.find_by(user_id: current_user.id) if current_user
-
     @reports = @user.reports
     @liked_reports = @user.liked_reports # .page(params[:page])
     liked_report_user_ids = @liked_reports.map { |liked_report| liked_report.user_id }
@@ -72,7 +80,7 @@ class Api::UsersController < ApplicationController
     end
     @report_comments = ReportComment.all
     range = Date.today.beginning_of_day.since(3.hours)..Date.today.end_of_day.since(3.hours)
-    @latest_report = @user.monthly_goals.last.reports.where(created_at: range)
+    @latest_report = @user.monthly_goals.last.reports.where(created_at: range) if @user.monthly_goals.last
     @latest_report_actions = @latest_report[0].report_actions.reverse if @latest_report.present?
     @avatar_url60 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "60x60^", crop: "60x60+0+0").processed)
     @avatar_url70 = rails_representation_url(@user.avatar.variant(gravity: :center, resize: "70x70^", crop: "70x70+0+0").processed)

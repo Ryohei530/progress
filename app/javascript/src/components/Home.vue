@@ -17,9 +17,11 @@
                 <a href="/monthly_goals/new" class="dropdown-item">
                   <i class="fas fa-plus mr-1"></i>  月間目標を新規作成
                 </a>
-                <a :href="`/monthly_goals/${data.monthly_goal.id}/edit`" class="dropdown-item">
-                  <i class="far fa-edit"></i> 月間目標を編集
-                </a>
+                <template v-if="data.monthly_goal">
+                  <!--<a :href="`/monthly_goals/${data.monthly_goal.id}/edit`" class="dropdown-item">-->
+                  <!--  <i class="far fa-edit"></i> 月間目標を編集-->
+                  <!--</a>-->
+                </template>
               </div>
             </div>
           </div>
@@ -74,7 +76,7 @@
                     <button @click="changeTab2('1')" class="tab-item btn bg-btn-gray" :class="tab2Active1">月間</button>
                     <button @click="changeTab2('2')" class="tab-item btn bg-btn-gray" :class="tab2Active2">週間</button>
                     <button @click="changeTab2('3')" class="tab-item btn bg-btn-gray" :class="tab2Active3">日間</button>
-                    <a :href="`/monthly_goals/${data.monthly_goal.id}/edit`">
+                    <a v-if="data.monthly_goal" :href="`/monthly_goals/${data.monthly_goal.id}/edit`">
                       <button class="btn"><i class="far fa-edit"></i></button>
                     </a>
                   </div>
@@ -219,7 +221,7 @@
     <div class="row">
       <div class="col-lg-6 mb-5 posts">
         <div class="card">
-          <template v-if="data.posts">
+          <template v-if="data.post">
             <div class="card-header">
               <div class="card-title">最新のつぶやき</div>
             </div>
@@ -236,7 +238,7 @@
                   </router-link>
                 </div>
               </div>
-              <a :href="`/posts/${data.post.id}`" class="card-link " :class="cardLink">
+              <a v-if="data.post" :href="`/posts/${data.post.id}`" class="card-link" :class="cardLink">
                 <div class="card-inner">
                   <div class="card-text" v-html="$sanitize(textFormat(data.post.content))"></div>
                   <div class="images">
@@ -252,7 +254,7 @@
                   </div>
                 </div>
               </a>
-              <div class="card-box">
+              <div v-if="data.post" class="card-box">
                 <div class="row">
                   <div class="col d-flex">
                     <span class="card-timestamp">

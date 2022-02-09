@@ -14,7 +14,7 @@
             </router-link>
           </span>
         </div>
-        <a :href="`goals/${goal.id}`" class="card-link">
+        <a :href="`/goals/${goal.id}`" class="card-link">
           <div class="card-inner">
             <div class="card-content">
               <div class="aim">

@@ -2,7 +2,6 @@
   <div class="card-header bg-transparent pb-4">
     <div class="text-muted text-center mt-2 mb-3"><small>SNSアカウントでログイン</small></div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
         <div class="btn-wrapper text-center">
           <%= link_to omniauth_authorize_path(resource, :twitter), method: :post, class: "btn btn-neutral btn-icon" do %>
             <span class="btn-inner--icon"><img src="<%= asset_path('twitter.svg') %>" class="py-3px"></span>

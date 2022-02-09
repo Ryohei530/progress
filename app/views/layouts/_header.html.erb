@@ -10,7 +10,7 @@
             <li><a href="/reports">日報</a></li>
             <li><a href="/posts">つぶやき</a></li>
             <% if user_signed_in? %>
-            <li><%= link_to "長期目標", edit_goal_path(current_user) %></li>
+            <li><%= link_to "長期目標", edit_goal_path(current_user.goal) %></li>
             <li><%= link_to "月間目標", new_monthly_goal_path %></li>
             <% end %>
         </ul>
