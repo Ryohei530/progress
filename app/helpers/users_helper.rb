@@ -2,15 +2,15 @@ module UsersHelper
   def sum_of_monthly_actions
     monthly_goals = @user.monthly_goals
     if monthly_goals
-    
+
       @monthly_ratios = []
       @monthly_sums = []
-  
+
       monthly_goals.each do |monthly_goal|
         count = monthly_goal.goal_actions.length
         num = (1..count).to_a
         @sums = []
-  
+
         num.each do |n|
           sum = 0
           monthly_goal.reports.each do |report|
@@ -19,19 +19,19 @@ module UsersHelper
           @sums[n - 1] = sum
         end
         @monthly_sums += @sums
-  
+
         ratio_sum = 0
         m_actions = monthly_goal.goal_actions
-  
+
         m_actions.zip(@sums.reverse) do |m_act, sum|
           ratio_sum += ((sum.to_f / m_act.number) * 100).round(1)
         end
         @monthly_ratios << (ratio_sum / count).round(1)
       end
       if @sums
-        @sums.reverse! 
+        @sums.reverse!
       else
-        @sums = [0]  
+        @sums = [0]
       end
     else
       @monthly_ratios = [0]
@@ -48,10 +48,10 @@ module UsersHelper
 
       count = monthly_goal.goal_actions.length
       num = (1..count).to_a
-      
+
       @week_sums = []
       now = Date.current
-  
+
       reports = monthly_goal.reports.where(created_at:
         if now.between?(term_start, (term_start + 7.days))
           [term_start..(term_start + 7.days)]
@@ -64,7 +64,7 @@ module UsersHelper
         elsif now.between?((term_start + 28.days), (term_end + 1.day))
           [(term_start + 28.days)..(term_end + 1.day)]
         end)
-  
+
       num.each do |n|
         sum = 0
         reports.each do |report|
@@ -73,7 +73,7 @@ module UsersHelper
         @week_sums[n - 1] = sum
       end
       @week_sums.reverse!
-  
+
       @day_date = []
       terms = if now.between?(term_start, (term_start + 6.days))
                 (term_start..(term_start + 6.days))
@@ -88,7 +88,7 @@ module UsersHelper
               else
                 (Date.today..Date.today.next_day(6))
               end
-  
+
       # term_obj = {
       #     day: term.wday,
       #     date: term.strftime('%-m月%-d日')
@@ -97,7 +97,7 @@ module UsersHelper
       terms.each do |term|
         @day_date << term.strftime('%-m月%-d日')
       end
-  
+
       @week_terms = [
         term_start.strftime('%-d日') + '〜' + (term_start + 6.days).strftime('%-d日'),
         (term_start + 7.days).strftime('%-d日') + '〜' + (term_start + 13.days).strftime('%-d日'),
@@ -105,7 +105,7 @@ module UsersHelper
         (term_start + 21.days).strftime('%-d日') + '〜' + (term_start + 27.days).strftime('%-d日'),
         (term_start + 28.days).strftime('%-d日') + '〜' + (term_end).strftime('%-d日')
       ]
-  
+
       day_done = []
       day_dones = []
       num.each do |n|
@@ -115,9 +115,9 @@ module UsersHelper
         @day_done = day_done.reverse
         day_dones << @day_done
       end
-  
+
       @day_dones = day_dones.reverse
-  
+
       wktms = [
         [term_start..(term_start + 7.days)],
         [(term_start + 7.days)..(term_start + 14.days)],
@@ -125,14 +125,14 @@ module UsersHelper
         [(term_start + 21.days)..(term_start + 28.days)],
         [(term_start + 28.days)..(term_end + 1.day)]
       ]
-  
+
       week_reports_array = []
       wktms.each do |wktm|
         week_reports_array << monthly_goal.reports.where(created_at: wktm)
       end
-  
+
       week_dones = []
-  
+
       week_reports_array.each do |week_reports|
         week_done = []
         num.each do |n|
@@ -144,7 +144,7 @@ module UsersHelper
         end
         week_dones << week_done
       end
-  
+
       wk_dones = []
       num.each do |n|
         array = []
@@ -175,7 +175,7 @@ module UsersHelper
       term_start = monthly_goal.term_start
       term_end = monthly_goal.term_end
       now = Date.current
-  
+
       @days_of_week = (
         if now.between?((term_start + 21.days), term_end)
           (term_end - (term_start + 21.days)).to_i
@@ -183,7 +183,7 @@ module UsersHelper
           7
         end
       )
-  
+
       @nth_week =
         if now.between?(term_start, (term_start + 6.days))
           term_start.strftime('%m月%d日') + "〜" + (term_start + 6.days).strftime('%m月%d日')

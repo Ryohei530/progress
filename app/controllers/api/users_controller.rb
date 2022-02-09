@@ -8,7 +8,7 @@ class Api::UsersController < ApplicationController
     @monthly_goals = @user.monthly_goals.reverse
     @monthly_goal = @monthly_goals.first
     if @monthly_goal
-      @monthly_actions = @monthly_goal.goal_actions 
+      @monthly_actions = @monthly_goal.goal_actions
     else
       @monthly_actions = [{
         content: "none",

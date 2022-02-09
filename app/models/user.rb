@@ -54,9 +54,9 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.build_goal.save
-      url = URI.parse("#{auth.info.image}")  #imageのURL
+      url = URI.parse(auth.info.image.to_s) # imageのURL
       if auth.image.present?
-        avatar = url.open 
+        avatar = url.open
         user.avatar.attach(io: avatar, filename: "user_avatar.jpg")
       end
     end
