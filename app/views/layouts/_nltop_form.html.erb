@@ -1,4 +1,4 @@
-<div class="card  border-0 mb-0 h-613 bg-form">
+<div class="card  border-0 mb-0 form-h bg-form">
   <div class="card-header bg-transparent pb-4">
     <div class="text-muted text-center mt-2 mb-3"><small>SNSアカウントでログイン</small></div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -66,10 +66,10 @@
 </div>
 
 <div class="row mt-3">
-  <div class="col-6">
+  <div class="col-8">
     <%= link_to "パスワードをお忘れですか？", new_user_password_path, class: 'text-light' %>
   </div>
-  <div class="col-6 text-right">
+  <div class="col-4 text-right">
     <%= link_to "新規登録", new_user_registration_path, class: 'text-light' %>
   </div>
 </div>

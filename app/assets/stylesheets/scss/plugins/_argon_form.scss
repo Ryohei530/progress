@@ -112,3 +112,26 @@ input-group>.form-control:not(:first-child) {
     width: 1rem;
   } 
 }
+
+@media (max-width: 499.98px) {
+  .input-group {
+    &-text {
+      font-size: 2.875rem;
+    }
+  }
+  .form-control {
+    height: calc(1.5em + 2.95rem + 5px);
+  }
+  .custom-control {
+    .custom-label{ 
+      &::before {
+        top: 0.65rem;
+        width: 1.4rem;
+        height: 1.4rem;
+      } 
+    }
+    span {
+      margin-left: 10px;
+    }
+  }
+}
