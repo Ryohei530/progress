@@ -312,3 +312,25 @@
     padding: 1.375rem 3.75rem;
   }
 }
+
+@media (max-width: 499.98px) { 
+  .nltop {
+    &-tit {
+      font-size: 5.8em;
+    }
+    &-bg {
+      height: 1080px;
+      top: -1068px;
+    }
+    .lead {
+      font-size: 1.55em;
+    }
+    .tbtn {
+      font-size: 1.9em;
+      padding: 3.375rem 3.75rem;
+      &-wrap {
+        margin: 4rem 0 0 2rem 0;
+      }
+    }
+  }
+}

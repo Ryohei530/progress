@@ -27,7 +27,7 @@
   margin-left: .75em;
 }
 
-.h-613 {
+.form-h {
   height: 613px;
 }
 
@@ -82,5 +82,16 @@
     &-header {
       border-bottom: 1px solid rgba(0, 0, 0, 0.125);  
     }
+  }
+}
+
+
+@media (max-width: 499.98px) { 
+  .btn-icon {
+    font-size: 1.775rem;
+    padding: 1.275rem 1.55rem;
+  }
+  .form-h {
+    height: 933px;
   }
 }

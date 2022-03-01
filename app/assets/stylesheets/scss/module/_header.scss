@@ -30,3 +30,17 @@
     }
   }
 }
+
+@media (max-width: 499.98px) { 
+  .header {
+    height: 112px;
+    &-inner {
+      ul {
+        font-size: 1.8rem;
+      }
+      .nav-item {
+        margin: 0 12px;
+      }
+    }
+  }
+}

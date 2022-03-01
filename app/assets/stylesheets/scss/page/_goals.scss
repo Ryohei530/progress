@@ -112,4 +112,28 @@
   padding: 0 200px;
 }
 
-
+@media (max-width: 499.98px) { 
+  .goals {
+    &-txt{
+      font-size: 2.8em;
+    }
+    .card {
+      font-size: 1.9em;
+      &-wrap {
+        font-size: 1.3em;
+      }
+      &-avatar {
+        img {
+          width: 100px;
+        }
+      }
+      &-content{
+        .aim{
+          &-tit{
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+}

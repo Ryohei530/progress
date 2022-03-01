@@ -91,3 +91,36 @@
     padding: 0;
   }
 }
+
+@include media-breakpoint-down(sm) {
+  .menu {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 499.98px) { 
+ .menu {
+    ul {
+      border-top: 1px solid white;
+    }
+    a {
+      font-size: 2.4rem;
+      padding: 3rem 1rem 3rem 3rem;
+      border-bottom: 1px solid white;
+    }
+  }
+  .hamburger_btn {
+    .line {
+      &_01 {
+      top: 45px;
+    }
+    &_02 {
+      top: 45px + 10px;
+    }
+    &_03 {
+      top: 45px + 20px;
+    }
+    }
+  }
+}

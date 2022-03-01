@@ -91,3 +91,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #ff3300;
   text: #FFF;
 }
+
+@media (max-width: 499.98px) { 
+ .btn {
+   font-size: 1.7rem;
+ } 
+}
